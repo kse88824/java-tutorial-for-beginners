@@ -472,8 +472,8 @@ $1 ==> 86400
 
 **평가된 수식의 결과는 연산자의 실행 문맥에 따라 달라진다**. 여기서 문맥은 그것에 전달된 피연산자에 의해 결정된다.
 프로그래밍에 일반적으로 사용되는 숫자의 종류는 정수 (1,2,3,...)나 부동 소수점 (1.1,2.3,56.7889 등)이다.
-이러한 값들은 자바에서 서로 다른 **타입**으로 표현된다. 정수는 흔히 ```int```형이고, 부동 소수점은 기본적으로 ```double```형이다.
-수식 ```5/2```에서 ```5```와 ```2```는 ```int```형이기 때문에 결과 또한 ```int```형으로 표현된다.
+이러한 값들은 자바에서 서로 다른 **타입**으로 표현됩니다. 정수는 흔히 ```int```형이고, 부동 소수점은 기본적으로 ```double```형입니다.
+수식 ```5/2```에서 ```5```와 ```2```는 ```int```형이기 때문에 결과 또한 ```int```형으로 표현됩니다.
 
 부동 소수점 숫자를 사용해보자.
 
@@ -493,7 +493,7 @@ $1 ==> 86400
 
 ```
 
-```int```형과 ```double```형 중에서, ```double```형이 더 *넓은 타입*으로 간주된다. 두가지 타입 간에 연산을 수행할 때는 더 넓은 타입으로 결과를 표시한다. 
+```int```형과 ```double```형 중에서, ```double```형이 더 *넓은 타입*으로 간주됩니다. 두가지 타입 간에 연산을 수행할 때는 더 넓은 타입으로 결과를 표시합니다. 
 
 
 
@@ -515,21 +515,21 @@ $1 ==> 86400
 
 결과를 보고 놀랐습니까?  여러분은 아마 5 + 5 * 6 에서  10 * 6 을 계산하는 것. 즉, 60을 예상했을 것이다. 그러나 ```35```가 나왔다! 
 
-> 우리는 영어 왼쪽에서 오른쪽으로 쓰고, 이 습관을 계산에도 적용한다.
+> 우리는 영어 왼쪽에서 오른쪽으로 쓰고, 이 습관을 계산에도 적용합니다.
 
 _여러 연산자 식에서 하위수식의 평가 순서는 **연산자 우선 순위**에 따라 달라진다._
 
-연산자 우선 순위에 대한 기본 규칙은 사실 매우 간단하다(조금 후에 다른 규칙을 살펴보겠다).
+연산자 우선 순위에 대한 기본 규칙은 사실 매우 간단합니다.(조금 후에 다른 규칙을 살펴보자).
 
- {```*```, ```/```, ```%```} 이 연산자 모음은 {```+```, ```-```} 연산자 모음보다 높은 우선 순위를 가지고 있다 .
+ {```*```, ```/```, ```%```} 이 연산자 모음은 {```+```, ```-```} 연산자 모음보다 높은 우선 순위를 가지고 있습니다 .
 
-``5 + 5 * 6"이라는 수식에서 5*6을 먼저 계산한다. 따라서 5 + 5 * 6은 5 + 30이 된다. 즉, 결과는 35이다.
+``5 + 5 * 6"이라는 수식에서 5*6을 먼저 계산합니다. 따라서 5 + 5 * 6은 5 + 30이 된다. 즉, 결과는 35이다.
 
-``5 - 2 * 2"와 ``5 - 2 / 2"는 같은 규칙을 따라 계산한다.
+``5 - 2 * 2"와 ``5 - 2 / 2"는 같은 규칙을 따라 계산합니다.
 
 #### 명확한 코드를 위해 괄호 사용하기
 
-자바는 수식의 일부를 묶기 위해 **괄호**라고 불리는 ```(```와 ```)```를 제공한다. 
+자바는 수식의 일부를 묶기 위해 **괄호**라고 불리는 ```(```와 ```)```를 제공합니다. 
 
 ```java
 
@@ -541,11 +541,11 @@ _여러 연산자 식에서 하위수식의 평가 순서는 **연산자 우선 
 
 ```
 
-괄호 안에 식을 넣으면 해당 식이 먼저 계산된다.  (5 - 2) * 2 => 3 * 2 => 6.
+괄호 안에 식을 넣으면 해당 식이 먼저 계산됩니다.  (5 - 2) * 2 => 3 * 2 => 6.
  
-괄호는 혼동을 줄이고 오류를 방지하므로 가독성이 향상된다.
+괄호는 혼동을 줄이고 오류를 방지하므로 가독성을 향상시킵니다
 
-옛 속담 ***제때의 바늘 한번이 아홉 바느질을 던다 (호미로 막을 것을 가래로 막는다)*** 를 잘 기억해야 한다. 사소한 경우에도 코드를 쉽게 읽을 수 있도록 괄호를 사용하자.
+옛 속담 ***제때의 바늘 한번이 아홉 바느질을 던다 (호미로 막을 것을 가래로 막는다)*** 를 잘 기억해야 합니다. 사소한 경우에도 코드를 쉽게 읽을 수 있도록 괄호를 사용합시다.
 
 #### 요약
 
@@ -562,13 +562,13 @@ _여러 연산자 식에서 하위수식의 평가 순서는 **연산자 우선 
  
 ### Step 07: 콘솔 출력 소개
 
-We have computed the product of two literals (as in ```5 * 3```) in earlier steps. 
+우리는 이전 단계에서 두개의 리터럴(```5 * 3```)의 산출물을 계산했습니다.
 
-The next step is to print this result in a customized format - ```5 * 3 = 15```.
+다음 단계는 이 결과를 ```5 * 3 = 15```라는 맞춤형 형식으로 출력할 것입니다.
 
-How do we do this?
+어떻게 할까요?
 
-Let try typing it in into JShell
+JShell에 다음과 같이 입력해봅시다.
 
 ```java
 jshell> 5 * 3 = 15
@@ -580,22 +580,21 @@ jshell> 5 * 3 = 15
 |  ^---^
 ```
 
-Hmm! Error.
+음.. 에러가 발생했네요.
 
-How do we print text?
+텍스트를 출력하려면 어떻게 해야 할까요?
 
-Java has a built-in utility method called ```System.out.println()```, that displays text on the console. 
+자바에는 콘솔에 텍스트를 표시하는 ```System.out.println()```이라는 유틸리티 방식이 내장되어 있습니다.
 
 ```java
 jshell> System.out.println(3*4)
 12
 ```
 
-We formed an expression, ```3*4```, and *passed* it to ```System.out.println()```, which is a built-in Java **method**.
+우리는 ```3*4```라는 표현을 만들어  ```System.out.println()```에게 넘겨주었는데, 이것을 자바에 내장된 **메소드**라고 한다.
+```System.out.println(3*4)``` 는 **문장(statement)**의 예시이다. 이것을 **메소드 호출**이라고 부른다.
 
-```System.out.println(3*4)``` is an example of a **statement**. It is a **method call**.
-
-The syntax rules for method calls are quite strict, and all its parts are mandatory.
+메소드 호출에 대한 구문 규칙은 상당히 엄격하며, 그 모든 부분은 의무적이다.
 
 ```java
 jshell> System.out.println3*4)
@@ -622,7 +621,7 @@ jshell> System.out.println 3*4
 
 ```
 
-What if we want to print an entry of the Multiplication Table, as part of our solution to *PMT-Challenge*? In other words, how do we print the exact text ```5 * 2 = 10``` on the console? 
+*PMT-Challenge*에 대한 솔루션의 일부로 곱셈표 항목을 출력하려면 어떻게 할 것인가? 즉, 콘솔에 있는 ``5 * 2 = 10"이라는 정확한 문자를 어떻게 출력할 것인가?
 
 ```java
 
@@ -636,46 +635,47 @@ What if we want to print an entry of the Multiplication Table, as part of our so
 
 ```
 
-You wanted to print ```5 * 2 = 10``` on the console. However, we see that we cannot pass ```5 * 2 = 10``` as an argument to ```System.out.println()```.
+여러분은 콘솔에 ```5 * 2 = 10```를 출력하고 싶다. 하지만, 우리는  ```System.out.println()``` 로 ```5 * 2 = 10``` 를 넘길 수 없다.
 
-```5 * 2 = 10``` is not a single value. It is a piece of text with numeric characters, ```*``` and ```=```. 
+```5 * 2 = 10```는 하나의 값이 아니다. 그것은  ```*``` and ```=```라는 문자들로 이루어져있다. 
 
-In Java, we represent text using ```String```. A ```String literal``` is a sequence of characters, enclosed within **double quotes**: ```"``` and ```"```. 
+자바에서는 ```String```을 사용하여 문자를 표기한다. ```String literal```은 일련의 문자들로 **큰 따옴표**: ```"```와 ```"```로 둘러싸여 있다.
 
 ```java
 	jshell> System.out.println("5 * 2 = 10")
 	| 5 * 2 = 10
 ```
 
-Congratulations! You have now figured out how to display not just numbers on the console, but text as well!
+축하합니다! 여러분은 이제 콘솔에 숫자뿐만 아니라 문자도 표시하는 방법을 알아냈답니다!
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Were introduced to the ```System.out.println()``` method for console output
-* Used this utility to print a single *PMT-Challenge* table entry
+* 콘솔 출력을 위한 ```System.out.println()``` 메소드 사용방법을 알아보았다.
+* 이 유틸리티를 하나의 *PMT-Challenge* 테이블 항목 출력하는데 사용할 수 있다.
 
-### Step 08: Programming Exercise PE-02
 
-Try and solve the following exercises:
+### Step 08: 프로그래밍 실습 PE-02
 
-1. Print ```Hello World``` onto the console.
+다음 실습을 수행해보시오:
 
-2. Print ```5 * 3```, as is.
+1. 콘솔에 ```Hello World``` 출력한다.
 
-3. Print the calculated value of ```5 * 3```.
+2. ```5 * 3```을 그대로 출력한다.
 
-4. Print the number of seconds in a day, using the ```System.out.println``` method.
+3.   5 * 3의 계산 결과를 출력한다.
 
-5. Do a syntax revision for the code that you write for each of the above exercises. In your code, identify the following elements:
-	* Numeric and string literals
-	* Expressions
-	* Operators
-	* Operands
-	* Method calls
+4. ```System.out.println```메소드를 사용하여 하루는 몇 초인지 출력하시오.
 
-### Step 09: Solutions to PE-02
+5.위의 각 실습에 대해 작성하는 코드에 대한 구문 수정을 수행하십시오. 코드에서 다음 요소를 식별하십시오.
+* 숫자 및 문자열 리터럴
+* 수식
+* 연산자
+* 피연산자
+* 메소드 호출
+
+### Step 09:  PE-02의 솔루션
 
 #### Solution 1
 
@@ -713,14 +713,14 @@ Try and solve the following exercises:
 
 ```
 
-### Step 10: Whitespace, Case sensitiveness and Escape Characters
-The term *whitespace* refers to any sequence of continuous space, tab or newline characters.
+### Step 10: White Space: 대소문자 구분 및 공백 문자
+*공백(White space)*은 연속 공백, 탭 또는 줄 바꿈 문자의 순서를 가리킨다.
 
-#### Whitespace
+#### 공백
 
-Let's see a few examples of whitespace in action.
+공백의 몇 가지 예를 보자.
 
-Whitespace affects the output when used in-and-around string literals.
+공백 문자열 리터럴 사용 시 출력에 영향을 미친다.
 
 ```java
 jshell> System.out.println("Hello World")
@@ -732,7 +732,8 @@ HelloWorld
 ```
 
 
-Whitespace is ignored by the compiler when used around numeric expressions. 
+컴파일러는 숫자 수식에 사용된 공백은 무시한다.
+
 ```java
 
 	jshell> System.out.println(24 * 60 * 60)
@@ -743,9 +744,9 @@ Whitespace is ignored by the compiler when used around numeric expressions.
 
 ```
 
-#### Case Sensitive
+#### 대소문자 구분
 
-Java is case sensitive.
+자바는 대소문자를 구분한다.
 
 ```System.out.println()``` involve pre-defined Java elements : the ```System``` **class** name, the ```out``` **variable** name,and the  ```println``` **method** name. All are *case-sensitive*. If any character in these names is used with a different case, you get an error. 
 
