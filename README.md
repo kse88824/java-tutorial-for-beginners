@@ -28,7 +28,7 @@
 * [Chapter 12 - 컬렉션의 이해](#컬렉션의-이해)
 * [Chapter 13 - 제네릭의 이해](#제네릭의-이해)
 * [Chapter 14 - Introduction to Functional Programming](#introduction-to-functional-programming)
-* [Chapter 15 - 스레드와 동시 실행] (#스레드와-동시-실행)
+* [Chapter 15 - 스레드와 동시 실행](#스레드와-동시 실행)
 * [Chapter 16 - 예외처리의 이해](#예외처리의-이해)
 * [Chapter 17 - 파일 입출력](#파일-입출력)
 * [Chapter 18 - 동시 실행 : 더 나아가기](#동시-실행--더-나아가기)
@@ -41,7 +41,9 @@
 
 > '첫 프로그램 짜기가 어려워서' 입니다
 
-초보자의 입장에서 이 전형적인 예제를 한번 보세요 '''Java Hello World Example'''.
+초보자의 입장에서 이 전형적인 예제를 한번 보세요.
+
+'''Java Hello World Example'''
 
 ```java
 package com.in28minutes.firstjavaproject; 
@@ -79,8 +81,8 @@ _여러분, 첫번째 도전을 시작할 준비가 되셨나요? **그렇다구
 저희의 첫번째 *프로그래밍 도전*은 모든 아이들이 수학시간에 하는 것과 같습니다. 바로 곱셈표 읽기입니다.
 ####  *PMT-도전*
 
-1. Compute the multiplication table for ```5```, with entries from ```1``` to ```10```.
-2. Display this table.
+1. ```1``` 부터 ```10```까지 ```5```단 구구단을 계산하시오
+2. 출력하시오.
 
 ```
 5 * 1  =  5
@@ -95,42 +97,45 @@ _여러분, 첫번째 도전을 시작할 준비가 되셨나요? **그렇다구
 5 * 10 = 50
 ```
 
-As part of solving the multiplication table problem, you will be introduced to:
+구구단 문제를 해결하려면 다음과 같은 개념들에 대한 소개가 필요합니다.:
 * **JShell**
-* **Statements**
-* **Expressions**
-* **Variables**
-* **Literals**
-* **Conditionals**
-* **Loops**
-* **Methods** 
+* **문장(Statements)**
+* **수식(Expressions)**
+* **변수**
+* **리터럴(Literal)**
+* **조건문**
+* **반복문**
+* **함수** 
 
-#### Summary
+#### 요약
 
 In this step, we:
-
+이 단계에서, 우리는:
 * Stated our first programming challenge, *PMT-Challenge*
+* 첫번째 도전인 *PMT-Challenge*에 대해 설명하고,
 * Identified basic Java concepts to learn, to solve this challenge
-
-### Step 02: Introducing ```JShell```
+* 이 과제를 해결하기 위해 배울 자바의 기본 개념을 파악할 것입니다.
+### Step 02:  ```JShell``` 소개
 - - - 
 
 ```JShell``` is a programming tool, introduced in Java SE 9. JShell is a **_REPL_** interface. The term **REPL** refers to this:
-
-* **_'R'_** stands for **R**ead; *Read* the input Java code
-* **_'E'_** means **E**val; *Evaluate* the source code
-* **_'P'_** translates to **P**rint; *Print* out the result
-* **_'L'_** indicates **L**oop; *Loop* around, and wait for the next input
+```JShell``` 은 프로그래밍 도구로, Java SE 9에서 소개되었습니다. JShelldms **_REPL_** 인터페이스입니다. **REPL** 의 의미는 다음과 같습니다.
+* **_'R'_**  **R**ead(읽기)의 R; 입력된 자바 코드 *읽기* 
+* **_'E'_**  **E**val(평가)의 E; 소스코드 *평가* 
+* **_'P'_**  **P**rint(출력)의 P; 결과값 *출력* 
+* **_'L'_**  **L**oop(반복문)의 L; *반복*하며 다음 입력을 기다림
 
 How about starting off exploring Java? Are you game?
+자바를 시작해보니 어떤가요? 계속 해볼까요?
+##### Snippet-1: 자바 개발 환경 확인하기
 
-##### Snippet-1: Check the Java programming environment
+첫 25단계의 코드를 실행시키기 위해 [https://tryjshell.org/](https://tryjshell.org/) 혹은 [Install Java 12+](https://github.com/in28minutes/java-a-course-for-beginners/blob/master/00-02-java-eclipse-installation.md#installing-java) 를 사용할 수 있습니다.
+문제가 생겼을 때는 다음 페이지를 확인해 주세요. [troubleshooting section](https://github.com/in28minutes/java-a-course-for-beginners/blob/master/00-02-java-eclipse-installation.md#troubleshooting)
 
-You can use [https://tryjshell.org/](https://tryjshell.org/) to run the code for the first 25 steps. Or you can [Install Java 12+](https://github.com/in28minutes/java-a-course-for-beginners/blob/master/00-02-java-eclipse-installation.md#installing-java). Here's the [troubleshooting section](https://github.com/in28minutes/java-a-course-for-beginners/blob/master/00-02-java-eclipse-installation.md#troubleshooting) if you face problems.
 
-Launch up command prompt or Terminal.
+명령 프롬프트나 터미널을 설치하세요
 
-Let type in ```java -version``` on the terminal and press enter.
+터미널에 ```java -version``` 를 입력하고 엔터를 누르세요.
 
 ```
 
@@ -142,11 +147,10 @@ Let type in ```java -version``` on the terminal and press enter.
 
 ```
 
-A successful execution displays the version of Java installed your system. You need to have atleast Java 9 to pursue this book.
+성공적으로 실행하면 시스템에 설치된 Java 버전이 표시됩니다. 이 책을 읽으려면 최소한 자바 9가 필요합니다.
+##### Snippet-2: JShell 설치
 
-##### Snippet-2: Launch JShell
-
-You can launch JShell by typing ```jshell``` at your terminal. 
+터미널에 ```jshell``` 을 검색해서 설치 할 수 있습니다. 
 
 ```java
 
@@ -155,14 +159,13 @@ You can launch JShell by typing ```jshell``` at your terminal.
 	|  Welcome to JShell version x.0.1
  	|  For an introduction type: /help intro
 	jshell>
-
+	
 ```
 
-When run, this command displays basic information about the installed ```JShell``` program. A ```jshell``` prompt then appears, which waits for your input.
+실행 시, 이 명령은 설치된 ```JShell```에 대한 기본적인 정보를 표시합니다. 그리고 당신의 입력을 기다리는 ```jshell``` 프롬프트가 나타납니다.
+##### Snippet-3: 내장 명령어를 이용한 JShell 입력 예시
 
-##### Snippet-3: Sample JShell input, using a built-in command
-
-The ```JShell``` command ```/help```, with a parameter ```intro```, gives you basic guidelines on how you use the tool.
+```intro```라는 매개 변수를 가진 ```JSHell```의 명령 ```/help``` 는 이 도구를 사용하는 방법에 대한 기본적인 지침을 제공합니다.
 
 ```java
 
@@ -185,9 +188,9 @@ The ```JShell``` command ```/help```, with a parameter ```intro```, gives you ba
 ```
 
 
-##### Snippet-4: Evaluating an expression
+##### Snippet-4: 수식(Expression) 평가
 
-Type ```3+4``` at the Jshell prompt
+JShell 프롬프트에 ```3+4``` 를 입력하세요
 
 ```java
 
@@ -197,13 +200,12 @@ Type ```3+4``` at the Jshell prompt
 
 ```
 
-This was your first real **REPL** cycle! When you type in  ```3 + 4```, JShell evaluates it and prints the result. 
+이것이 여러분의 진짜 첫번째 **REPL** 사이클입니다! ```3 + 4```를 입력했을 때, JShell은 그것을 계산하고 결과를 출력합니다.
+> Entity ```$1``` 는 결과에 실제로 부여된 변수 이름입니다. 이것은 나중에 알아보도록 합시다. 
 
-> The entity ```$1``` is actually a variable name assigned to the result. We will talk about this later. 
+##### Snippet-5: JShell에서 빠져나오기
 
-##### Snippet-5: Getting out of JShell
-
-The ```/exit``` command terminates the ```JShell``` program, and we are back to the terminal prompt.
+ ```/exit``` 명령어를 입력하면 ```JShell``` 프로그램을 종료하고 터미널 프롬프트로 돌아갑니다.
 
 
 ```java
@@ -216,9 +218,9 @@ The ```/exit``` command terminates the ```JShell``` program, and we are back to 
 ```
 
 
-##### Snippet-6: Again, enter JShell and Exit it!
+##### Snippet-6: 다시 JShell에 들어가고 빠져나와 봅시다!
 
-You can now effortlessly launch, feed code to, and exit from  ```JShell```!
+이제 손쉽게 시작하고, 코드를 작성하고 , ```JShell```을 탈출할 수 있습니다.
 
 ```java
 
@@ -233,16 +235,16 @@ You can now effortlessly launch, feed code to, and exit from  ```JShell```!
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we learned:
+이번 단계에서 우리가 배운 것들은 다음과 같습니다:
 
-* How to launch ```JShell``` from our terminal, and run a few commands on it
-* How to run Java code on the ```JShell``` prompt
+* ```JShell``` 설치하고 명령어 몇가지 실행하기
+* ```JShell``` 프롬프트에서 자바 코드 실행하기
 
-### Step 03: Welcome to Problem Solving
+### Step 03: 문제를 풀어봅시다.
 
-Lets try to break down the *PMT-Challenge* problem to be able to solve it.
+ *PMT-Challenge* 문제를 해결해봅시다.
 
 ```
 5 * 1  =  5
@@ -258,22 +260,21 @@ Lets try to break down the *PMT-Challenge* problem to be able to solve it.
 ```
 
 
-Here is how our draft steps look like
-* Calculate ```5 * 3``` and print result as ```15```
-* Print ```5 * 3 = 15``` (```15``` is result of previous calculation)
-* Do this ten times, once for each table entry (going from ```1``` to ```10```)
+우리의 초안은 다음과 같습니다.
+* ```5 * 3``` 를 계산하고 결과 ```15```를 출력한다.
+* ```5 * 3 = 15``` 출력한다.(```15```는 이전 연산의 결과물)
+* 각 테이블에 대한 연산을 열번 수행한다.( ```1``` 부터 ```10``` 까지)
 
-#### Summary
+#### 요약
 
-In this step, we:
+이 단계에서
 
-* Broke down the *PMT-Challenge* problem into sub-problems
+* *PMT-Challenge* 문제를 sub -problem으로 분해
 
-### Step 04: Introducing Expressions 
+### Step 04: 수식(Expressions) 소개
 
-The first part of solving our *PMT-Challenge* is to calculate the product of ```5``` and another number, say ```3```.
-
-Let's start up jshell and type ```5 X 3```.
+우리의 *PMT-Challenge*를 해결하는 첫 번째 부분은 ``5"와 ``3"이라는 또 다른 숫자를 계산하는 것이다.
+jshell을 시작하고 ```5 X 3```을 입력해보자.
 
 ```java
 
@@ -299,11 +300,9 @@ Let's start up jshell and type ```5 X 3```.
 	| 5 X 3
 	| ^---^
 ```
-You probably look at the symbol 'X' as a multiplier, remembering your school days.
-
-Java does not identify '```X```' as the multiplication operator! Java supports multiplication, but only if you use its *predefined* operator, ```*```.
-
-Let's type in code shown below:
+여러분은 학교에서 배운 것을 생각하면서 부호 'X'를 곱하기 처럼 보고 있을 것이다.
+자바는 곱셈 연산자로 '```X```'를 사용하지 않는다! 자바는 곱셈을 지원하지만, *미리 약속된* ```*``` 연산자 만을 사용해야 한다.
+아래에 표시된 코드를 입력해봅시다:
 
 ```java
 	jshell> 5 * 3
@@ -312,23 +311,21 @@ Let's type in code shown below:
 
 ```
 
-Success!
+성공!
 
-Let's look at some terminology:
-- ```5 * 3 ``` is an expression.
-- ```5``` and ```3``` are operands. They are also called **literals** or constant values.
-- ```*``` is an operator.
+몇가지 용어들을 살펴보자
+- ```5 * 3 ``` 는 수식이다.
+- ```5``` 와 ```3``` 은 피연산자이다. **리터럴** 혹은 상수로도 불린다.
+- ```*``` 는 연산자이다.
 
+자바는 숫자를 다루는 작업을 처리하기 위한 내장 연산자를 더 많이 가지고 있습니다.
+* 덧셈: ```+``` 
+* 뺄셈: ```-```
+* 나눗셈: ```/```
+* 모듈러 연산: ```%``` 
 
-Java also has built-in operators to perform other numerical tasks, such as:
+다음 예제는 연산자들을 어떻게 사용하는지 그 예를 보여줍니다. 
 
-* Addition: ```+``` 
-* Subtraction: ```-```
-* Division: ```/```
-* Modulo arithmetic: ```%``` 
-
-The following examples illustrate how to use them.
- 
 ```java
 
 	jshell> 5 * 10
@@ -343,9 +340,8 @@ The following examples illustrate how to use them.
 
 ```
 
-Your school math memories are still fresh, and the operators don't seem to disappoint either! ```+```, ```-``` and ```/``` are your bread-and-butter operators.
-
-```%``` is the modulo operator, which gives you the remainder when integer division is performed. 
+여러분들은 학교에서 배운 수학을 아직 잘 기억하고 있고,  ```+```, ```-``` 와 ```/``` 는 아주 기본적인 것들이니까요.
+```%``` 는 모듈러 연산으로, 정수의 나눗셈을 수행한 나머지를 결과로 보여줍니다.
 
 ```java
 
@@ -357,11 +353,10 @@ Your school math memories are still fresh, and the operators don't seem to disap
 
 ```
 
-##### Snippet: Complex Expressions, Anyone?
+##### Snippet: 복잡한 수식(Exprssion), 도전해볼까요?
 
-Java allows you to use more than one operator within an expression.
-
-Let's look at some simple expressions with multiple operators.
+자바에서는 수식에서 한 개 이상의 연산자를 사용할 수 있습니다.
+다중 연산자를 이용한 예를 살펴봅시다.
 
 ```java
  
@@ -376,28 +371,27 @@ Let's look at some simple expressions with multiple operators.
 
 ```
 
-Each of above expressions have two operators and three operands.
+위의 각 수식에는 두 개의 연산자와 세 개의 피연산자가 있습니다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
+* 숫자 수식을 구성하는 방법을 알아보았습니다.
+* 연산자가 미리 정의된 기호임을 알아보았습니다.
+* 여러 연산자를 결합하여 더 긴 표현식 구성해보았습니다.
 
-* Learned how to construct numeric expressions
-* Discovered that operators are predefined symbols
-* Combined several operators to form larger expressions
- 
-### Step 05: Programming Exercise PE-1 (With Solutions)
+### Step 05: 프로그래밍 실습 PE-1 (솔루션 포함)
 
-At this stage, your smile tells us that you enjoy evaluating Java expressions. What if we tickle your mind a bit, to make sure it hasn't fallen asleep? 
+이 단계에서, 당신의 미소는 당신이 자바 수식을 평가하는 것을 즐긴다는 것을 말해줄 것입니다. 
 
-Okay, here comes a couple of programming exercises.
+여기 두 개의 프로그래밍 실습 예제가 있습니다.
 
-1. Write an expression to calculate the number of minutes in a day.
-2. Write an expression to calculate the number of seconds in a day.
+1. 하루가 몇 분인지 계산하는 식을 작성하시오.
+2. 하루가 몇 초인지 계산하는 식을 작성하시오.
 
-#### Solution 1
+####  솔루션 1
 
-60 (minutes in an hour) multipled by 24 (hours in a day)
+60 (한 시간은 60분) 과 24를 곱한다  (하루는 24시간)
 
 ```java
 
@@ -405,9 +399,9 @@ Okay, here comes a couple of programming exercises.
 	$1 ==> 1440
 ```
 
-#### Solution 2
+#### 솔루션 2
 
-60 (seconds in a minute) multipled by 60 (minutes in an hour) multipled by 24 (hours in a day)
+60 (1분은 60초)과 60 (한 시간은 60분) 그리고 24를 곱한다. (하루는 24시간)
 
 ```java
 $jshell>60 * 60 * 24
@@ -415,14 +409,14 @@ $jshell>60 * 60 * 24
 $1 ==> 86400
 ```
 
-### Step 06: Operators
+### Step 06: 연산자
 
-Lets look at a few more examples to understand operators.
+연산자를 이해하기 위해 몇 가지 예제들을 더 살펴봅시다.
 
-#### Invalid Operators
+#### 유효하지 않은 연산자
 
-Let's type in ```5 ** 6``` followed by ```5 $ 6``` in JShell
-
+ JShell에 ```5 ** 6```에 이어 ```5 $ 6```를 입력해봅시다.
+ 
 ```java
 	jshell> 5 ** 6
 	| Error:
@@ -452,17 +446,17 @@ Let's type in ```5 ** 6``` followed by ```5 $ 6``` in JShell
 	
 ```
 
-```JShell``` was not impressed with our efforts at all! 
+```JShell``` 은 우리의 노력에 전혀 응답하지 않았다!
 
-Java has a set of grammar rules, called its **syntax**. Code that does not follow these rules throw errors. The compiler informs you by listing the errors, and also provides hints on how you can correct them. 
+자바에는 **syntax**라고 불리는 일련의 문법 규칙이 있습니다. 이 규칙을 따르지 않는 코드는 오류를 발생시킵니다. 컴파일러는 오류를 나열하여 알려주고, 오류를 수정할 수 있는 방법에 대한 힌트도 제공합니다. 
 
-Now, why is an error being thrown?
+그럼, 오류는 왜 발생하는가?
 
-Operators in Java are all predefined, and limited in number.  ```*``` is a valid operator, whereas ```**``` and ```$```  were rejected, with error messages.
+자바에 있는 연산자는 모두 사전에 정의되어 있으며, 수가 제한되어 있다. ``*"는 유효한 연산자인 반면 ``**"와 ``$"는 오류 메시지와 함께 거부당했다.
 
-#### Understanding Result of Expression with Mixed Types
+#### 혼합형 수식의 결과 이해
 
-Let's look at another example:
+또 다른 코드를 살펴봅시다.
 
 ```java
 
@@ -472,26 +466,25 @@ Let's look at another example:
 
 ```
 
-Surprise, Surprise! ```JShell``` seems to evaluate ``` 5 / 2 ``` to ``` 2 ``` instead of ```2.5```. Where did we go wrong?
+놀랍게도 ```JShell```은  ``` 5 / 2 ```를  ```2.5```가 아닌 ``` 2 ```로 계산했다! 어디서 잘못된 걸까?
 
-Read what follows, with the biggest magnifying lens you can find:
+다음 내용을 자세히 살펴보자
 
-**The result of an expression when evaluated, depends on the operator context**. This context is determined by the operands passed to it
+**평가된 수식의 결과는 연산자의 실행 문맥에 따라 달라진다**. 여기서 문맥은 그것에 전달된 피연산자에 의해 결정된다.
+프로그래밍에 일반적으로 사용되는 숫자의 종류는 정수 (1,2,3,...)나 부동 소수점 (1.1,2.3,56.7889 등)이다.
+이러한 값들은 자바에서 서로 다른 **타입**으로 표현된다. 정수는 흔히 ```int```형이고, 부동 소수점은 기본적으로 ```double```형이다.
+수식 ```5/2```에서 ```5```와 ```2```는 ```int```형이기 때문에 결과 또한 ```int```형으로 표현된다.
 
-There are two kinds of numbers typically used in programming : integer (1,2,3,...) and floating-point (1.1,2.3, 56.7889 etc). These values are represented by different **types** in Java. Integers are commonly of type ```int```, and the floating-point numbers are ```double``` by default.
-
-In the expression ```5/2```, both ```5``` and ```2``` are of type ```int```. So, the result is also of type ```int```. 
-
-Let's try with a few floating point numbers: 
+부동 소수점 숫자를 사용해보자.
 
 ```java
 
 	jshell> 5.0 / 2.0
 	$2 ==> 2.5
 ```
-Both ```5.0``` and ```2.0``` are of type ```double```, the result is ```double```. We get a result of ```2.5```, as expected. 
+```5.0``` 와 ```2.0``` 모두 ```double```형이기 때문에, 결과  또한 ```double```형이다. 그렇다면 우리는 ```2.5```를 얻을 수 있을 것 같다.
 
-Let's do a mixed operation - using a floating point number and integer.
+부동 소수점과 정수를 혼합하여 연산을 해보자.
 
 ```java
 	jshell> 5.0 / 2
@@ -500,13 +493,13 @@ Let's do a mixed operation - using a floating point number and integer.
 
 ```
 
-Among the types ```int``` and ```double```, ```double``` is considered to be a *wider type*. When you perform a numeric operation between two types, the result will be of the wider type.
+```int```형과 ```double```형 중에서, ```double```형이 더 *넓은 타입*으로 간주된다. 두가지 타입 간에 연산을 수행할 때는 더 넓은 타입으로 결과를 표시한다. 
 
 
 
-#### Understanding Precedence of Operators
+#### 연산자 우선 순위 이해
 
-Let's look at few complex examples of expressions with more than one operator.
+두 개 이상의 연산자가 있는 수식의 복잡한 예를 몇 가지 살펴보자.
 
 ```java
 
@@ -520,23 +513,23 @@ Let's look at few complex examples of expressions with more than one operator.
 
 ```
 
-Surprised with the results?  You might expect 5 + 5 * 6 evaluate to 10 * 6 i.e. 60. Howeever, we got ```35```! 
+결과를 보고 놀랐습니까?  여러분은 아마 5 + 5 * 6 에서  10 * 6 을 계산하는 것. 즉, 60을 예상했을 것이다. 그러나 ```35```가 나왔다! 
 
-> We write English left-to-right, and carry this habit to calculations as well. 
+> 우리는 영어 왼쪽에서 오른쪽으로 쓰고, 이 습관을 계산에도 적용한다.
 
-_In expressions with multiple operators, the order of sub-expression evaluation depends on **operator precedence**._
+_여러 연산자 식에서 하위수식의 평가 순서는 **연산자 우선 순위**에 따라 달라진다._
 
-The basic rules for operator precedence are actually quite simple (we will look at other rules a little later). 
+연산자 우선 순위에 대한 기본 규칙은 사실 매우 간단하다(조금 후에 다른 규칙을 살펴보겠다).
 
-The operators in the set  {```*```, ```/```, ```%```} have higher precedence than the operators in the set {```+```, ```-```}.
+ {```*```, ```/```, ```%```} 이 연산자 모음은 {```+```, ```-```} 연산자 모음보다 높은 우선 순위를 가지고 있다 .
 
-In the expression ```5 + 5 * 6``` : 5*6 is evaluated first. So, 5 + 5 * 6 becomes 5 + 30 i.e. 35.
+``5 + 5 * 6"이라는 수식에서 5*6을 먼저 계산한다. 따라서 5 + 5 * 6은 5 + 30이 된다. 즉, 결과는 35이다.
 
-```5 - 2 * 2``` and ```5 - 2 / 2``` are evaluated by following the same rules.
+``5 - 2 * 2"와 ``5 - 2 / 2"는 같은 규칙을 따라 계산한다.
 
-#### Use paranthesis for clear code 
+#### 명확한 코드를 위해 괄호 사용하기
 
-Java provides syntax elements, called **parentheses** ```(```   and   ```)```, to group parts of an expression.
+자바는 수식의 일부를 묶기 위해 **괄호**라고 불리는 ```(```와 ```)```를 제공한다. 
 
 ```java
 
@@ -548,22 +541,26 @@ Java provides syntax elements, called **parentheses** ```(```   and   ```)```, t
 
 ```
 
-When you put an expression in parenthesis, it is evaluated first. (5 - 2) * 2 => 3 * 2 => 6.
+괄호 안에 식을 넣으면 해당 식이 먼저 계산된다.  (5 - 2) * 2 => 3 * 2 => 6.
+ 
+괄호는 혼동을 줄이고 오류를 방지하므로 가독성이 향상된다.
 
-Parentheses lead to better readability as they reduce confusion and help avoid errors. 
+옛 속담 ***제때의 바늘 한번이 아홉 바느질을 던다 (호미로 막을 것을 가래로 막는다)*** 를 잘 기억해야 한다. 사소한 경우에도 코드를 쉽게 읽을 수 있도록 괄호를 사용하자.
 
-The old adage **_A stitch in time saves nine_** rings very true here. Use parentheses to make your code easy to read, even when they might not be necessary.
+#### 요약
 
-#### Summary
-
-In this step, we:
+이 단계에서는
 
 * Discovered that operators are all predefined
 * Learned that result of operation depends on operand types
 * Understood what operator precedence means
 * Used parentheses to group parts of an expression
+* 연산자는 모두 사전에 정의되었다는 것을 확인했습니다.
+* 연산 결과는 피연산자의 타입에 따라 결정된다는 것을 알게 되었습니다.
+* 연산자 우선 순위의 의미 이해했습니다.
+* 표현식의 일부를 그룹화하는 데 괄호 사용했습니다.
  
-### Step 07: Introducing Console Output 
+### Step 07: 콘솔 출력 소개
 
 We have computed the product of two literals (as in ```5 * 3```) in earlier steps. 
 
