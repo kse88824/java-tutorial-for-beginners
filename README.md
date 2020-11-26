@@ -1,47 +1,47 @@
 # Java Tutorial For Beginners
+ 
+**"Learning Java In 150 Steps"** 책에 오신것을 환영합니다.
 
-Welcome to this book on **"Learning Java In 150 Steps"**. 
+저는 **Ranga Karanam** 이고, 20년이 넘는 프로그래밍 경력을 가지고 있습니다.
 
-I am **Ranga Karanam**, and I have more than two decades of programming experience. 
+저는 프로그래밍을 사랑합니다. ```in28minutes``` 를 시작할 때 저의 목표 중 하나는 프로그래밍을 쉽게 배우도록 하는 것이었습니다. 저희가 놀라운 강의를 만들 수 있도록 도와주신 전 세계 30만명의 학습자분들께 감사합니다.
 
-I love Programming. One of the aims I had when I started ```in28minutes``` was to make learning programming easy. Thanks for helping us provide amazing courses to 300,000 learners across the world.
+**In28Minutes** 에서는, 저희는 매일 "어떻게 하면 멋진 학습 경험을 만들 수 있을까?"하고 스스로에게 묻습니다. 
 
-At **In28Minutes**, we ask ourselves one question every day: "How do we create awesome learning experiences?" 
+이 책에서는, 여러분은 Java와 함께 **객체** **지향적** 코드를 배우게 될 것이며, 많은 예제들,실습들, 팁들을 접하게 될 것입니다. 저희는 많은 예시를 들고, Java 사용자들을 위해 코드를 쓰는 방법을 알아보려고 노력할 것입니다.
 
-In this book, you will learn to write **object** **oriented** code with Java. You will be exposed to a lot of examples, exercises and tips. We will take up a lot of examples, and try and see how to write code for those in Java. 
-
-Help us improve this guide - **Fork, Pull Requests, Shares and Likes are recommended**!
+본 가이드를 개선하는데 도움을 주시려면 - **Fork, Pull Requests, Shares and Likes 를 추천드립니다**!
 
 ## Table of Contents
 
-* [Chapter 01 - Introduction to Programming with Print-Multiplication-Table](#introduction-to-programming-with-print-multiplication-table)
-* [Chapter 02 - Understanding Methods](#understanding-methods)
-* [Chapter 03 - Understanding the Java Platform](#understanding-the-java-platform)
-* [Chapter 04 - Eclipse](#eclipse)
-* [Chapter 05 - Object Oriented Progamming (OOP)](#object-oriented-progamming-oop)
-* [Chapter 06 - Primitive Data Types](#primitive-data-types)
-* [Chapter 07 - Introducing Conditionals - if, switch and more](#introducing-conditionals---if-switch-and-more)
-* [Chapter 08 - Loops](#loops)
-* [Chapter 09 - Reference Types](#reference-types)
-* [Chapter 10 - Arrays and ArrayList](#arrays-and-arraylist)
-* [Chapter 11 - Object Oriented Programming (*OOP*) - Revisited](#object-oriented-programming-oop---revisited)
-* [Chapter 12 - Introducing Collections](#introducing-collections)
-* [Chapter 13 - Introducing Generics](#introducing-generics)
+* [Chapter 01 - 프로그래밍 소개와 Print-Multiplication-Table](#프로그래밍-소개와-print-multiplication-table)
+* [Chapter 02 - 함수의 이해](#함수의-이해)
+* [Chapter 03 - 자바 플랫폼의 이해](#자바-플랫폼의-이해)
+* [Chapter 04 - 이클립스](#이클립스)
+* [Chapter 05 - 객체 지향 프로그래밍 (OOP)](#객체-지향-프로그래밍-oop)
+* [Chapter 06 - 기본형 타입](#기본형-타입)
+* [Chapter 07 - 조건문 소개 - if, switch and more](#조건문-소개---if-switch-and-more)
+* [Chapter 08 - 반복문](#반복문)
+* [Chapter 09 - 참조형 타입](#참조형-타입)
+* [Chapter 10 - Array와 ArrayList](#array와-arraylist)
+* [Chapter 11 - 객체 지향 프로그래밍 (*OOP*) - 복습](#객체-지향-프로그래밍-oop---복습)
+* [Chapter 12 - 컬렉션의 이해](#컬렉션의-이해)
+* [Chapter 13 - 제네릭의 이해](#제네릭의-이해)
 * [Chapter 14 - Introduction to Functional Programming](#introduction-to-functional-programming)
-* [Chapter 15 - Threads and Concurrency](#threads-and-concurrency)
-* [Chapter 16 - Introduction To Exception handling](#introduction-to-exception-handling)
-* [Chapter 17 - File Operations](#file-operations)
-* [Chapter 18 - Concurrency : Advanced Topics](#concurrency--advanced-topics)
+* [Chapter 15 - 스레드와 동시 실행] (#스레드와-동시-실행)
+* [Chapter 16 - 예외처리의 이해](#예외처리의-이해)
+* [Chapter 17 - 파일 입출력](#파일-입출력)
+* [Chapter 18 - 동시 실행 : 더 나아가기](#동시-실행--더-나아가기)
 
-## Our Approach
+## 우리의 접근법
 
-We did a study on why students give up on programming?
+왜 학생들이 프로그래밍 공부를 포기할까요?
 
-The popular answer was
+가장 흔한 대답은
 
-> Difficulty in writing their first program
+> '첫 프로그램 짜기가 어려워서' 입니다
 
-Put yourselves in the shoes of a beginner and look at this typical ```Java Hello World Example```.
+초보자의 입장에서 이 전형적인 예제를 한번 보세요 '''Java Hello World Example'''.
 
 ```java
 package com.in28minutes.firstjavaproject; 
@@ -53,42 +53,31 @@ public class HelloWorld
 }
 ```
 
-A ```Programming Beginner``` will be overwhelmed by this. I remember how I felt when I saw this almost 20 years back. Stunned.
+프로그래밍 초보자는 이것에 압도당할 것입니다. 저는 거의 20년전에 이것을 봤을 때 어떤 기분이었는지 기억합니다. 망연자실했죠.
 
-Why?
-- There are a number of keywords and concepts - package, public, class, static, void, String[] and a lot more..
-- What if the programmer makes a typo? Will he be able to fix it?
+왜냐구요?
+- 패키지, public, 클래스, static, void, String[] 등 이보다 더 다양한 키워드와 개념들이 있었습니다.
+- 프로그래머가 오타를 낸다면? 고칠 수 있을까요?
 
+**우리는 프로그래밍을 배우기 더 좋은 방법이 있다고 믿습니다.**
 
-**We believe that there has to be a better way to learn programming.**
-
-- Why don't we learn programming step by step? 
-- Why should it not be a lot of fun? 
-- Why don't we solve a lot of problems and learn programming as a result?
-
-This is the approach we took to writing this guide and develop our introductory programming courses for Java and Python. 
-
-> Do you know? The first 3 hours of our Java Course is available [here](https://courses.in28minutes.com/p/java-tutorial-for-beginner-in-250-steps).
+- 왜 프로그래밍을 단계별로 배우지 않을까요?
+- 왜 재미가 없을까요?
+- 많은 예제들을 풀어보면서 프로그래밍을 배운다면?
+이것이 본 가이드를 작성하고 Java와 Python을 위한 프로그래밍 입문 과정을 개발하기 위해 저희가 취한 접근법입니다.
+> 처음 3시간 강의 이용 가능 [링크](https://courses.in28minutes.com/p/java-tutorial-for-beginner-in-250-steps).
 
 
+## 프로그래밍 소개와 Print-Multiplication-Table
 
-## Introduction to Programming with Print-Multiplication-Table
-
-### Step 01: First Challenge : The Print-Multiplication-Table (*PMT-Challenge*)
-
-Learning to program is a lot like learning to ride a bicycle. The first few steps are the most challenging ones. 
-
-Once you use this stepwise approach to solve a few problems, it becomes a habit. 
-
-In this book, we will introduce you to Java programming by taking on a few simple problems to start off. 
-
-> Having fun along the way is what we will aim to do.
- 
-_Are you all geared up, to take on your first programming challenge? **Yes**?  Let's get started then!_
-
-Our first *programming challenge* aims to do, what every kid does in math class: reading out a multiplication table.
-
-#### The *PMT-Challenge*
+### Step 01: 첫번째 도전 : Print-Multiplication-Table (*PMT-도전*)
+프로그래밍을 배우는 것은 자전거 타는 법을 배우는 것과 비슷합니다. 처음 몇 걸음이 가장 어렵죠.
+이러한 순차적 접근법으로 문제를 몇번 풀어보면 습관이 될 거예요.
+이 책에서 처음에는, 간단한 문제들과 함께 자바 프로그래밍을 소개할 것입니다.
+> 과정이 재밌는 것이 저희의 목표입니다.
+_여러분, 첫번째 도전을 시작할 준비가 되셨나요? **그렇다구요?** 시작해봅시다!_
+저희의 첫번째 *프로그래밍 도전*은 모든 아이들이 수학시간에 하는 것과 같습니다. 바로 곱셈표 읽기입니다.
+####  *PMT-도전*
 
 1. Compute the multiplication table for ```5```, with entries from ```1``` to ```10```.
 2. Display this table.
