@@ -8,7 +8,7 @@
 
 **In28Minutes** 에서는, 저희는 매일 "어떻게 하면 멋진 학습 경험을 만들 수 있을까?"하고 스스로에게 묻습니다. 
 
-이 책에서는, 여러분은 Java와 함께 **객체** **지향적** 코드를 배우게 될 것이며, 많은 예제들,실습들, 팁들을 접하게 될 것입니다. 저희는 많은 예시를 들고, Java 사용자들을 위해 코드를 쓰는 방법을 알아보려고 노력할 것입니다.
+이 책에서는, 여러분은 Java와 함께 **객체** **지향** 코드를 배우게 될 것이며, 많은 예제들,실습들, 팁들을 접하게 될 것입니다. 저희는 많은 예시와 함께 Java 사용자들을 위해 코드를 쓰는 방법을 알아보려고 노력할 것입니다.
 
 본 가이드를 개선하는데 도움을 주시려면 - **Fork, Pull Requests, Shares and Likes 를 추천드립니다**!
 
@@ -739,7 +739,7 @@ HelloWorld
 
 자바는 대소문자를 구분한다.
 
-```System.out.println()``` involve pre-defined Java elements : the ```System``` **class** name, the ```out``` **variable** name,and the  ```println``` **method** name. All are *case-sensitive*. If any character in these names is used with a different case, you get an error. 
+```System.out.println()```는 사전에 정의된 자바 요소들을 포함한다 : ```System```은 **클래스** 이름이고,  ```out```은 **변수** 이름이며, ```println```은 **메소드** 이름이다.이들은 모두 *대소문자를 구분*한다. 이 이름에서 어느 하나라도 다른 대소문자가 사용되면 오류가 발생한다.
 
 ```java
 
@@ -767,7 +767,7 @@ HelloWorld
 
 ```
 
- Inside a string literal, the case of characters do not cause errors. The literal will be taken in and printed, as-is.
+문자열 리터럴 안에서 문자의 경우는 오류를 일으키지 않는다. 문자 그대로 받아 출력할 것이다
 
 ```java
 jshell> System.out.println("hello world")
@@ -776,11 +776,11 @@ jshell> System.out.println("HELLO WORLD")
 HELLO WORLD
 ```
 
-#### Escape Characters
-
-An **escape character** is a special symbol, used with another regular symbol to form an **escape sequence**. In Java, the '```\```' (*back-slash*) character plays the role of an escape character. This escape sequence changes the original usage of the symbols.
+#### 특수문자 리터럴
+**특수문자 리터럴**은 다른 정규 기호와 함께 사용되는 특수 기호(이스케이프 시퀀스)이다. 자바에서는 ```\```(*백슬래시*)가 탈출 문자 역할을 한다. 이 이스케이프 시퀀스는 기호의 원래 용도를 바꾼다.
 
 If you want to print the string **delimiter**, the ```"``` character, you need to escape it with a ```\```. Without it, a ```"``` character within a string literal causes an error!
+문자열을 분리할 때 사용되는 기준 문자인 **구분 문자**(delimiter)를 출력하려면 ```\```와 함께 사용해야 한다. 백슬래시가 없으면  ```"```문자가 있는 문자열이 오류를 일으킨다!
 
 ```java
 
@@ -796,7 +796,8 @@ If you want to print the string **delimiter**, the ```"``` character, you need t
 
 ```
 
-The escape sequence ```\n``` inserts a *newline*.
+이스케이프 시퀀스 ```\n```은 *새로운 줄*을 삽입한다.
+
 ```java
 
 jshell> System. out.println("Hello \n World")
@@ -811,7 +812,8 @@ jshell>
 
 ```
 
-The escape sequence ```\t``` inserts a *tab*.
+이스케이프 시퀀스 ```\t```은 *탭*을 삽입한다.
+
 ```java
 
 	jshell> System.out.println("Hello \t World")
@@ -824,7 +826,7 @@ The escape sequence ```\t``` inserts a *tab*.
 
 ```
 
-How do you print a ```\```?
+```\```는 어떻게 출력하는가?
 
 ```
 jshell> System.out.println("Hello \ World")
@@ -833,7 +835,7 @@ jshell> System.out.println("Hello \ World")
 |  System.out.println("Hello \ World")
 ```
 
-You would need to escape it with another ```\```. Printing ```\\``` outputs  the symbol ```\``` to the console.
+또 다른 ```\```와 함께 입력해야 한다. ```\\```를 입력하면 기호 ```\```가 콘솔창에 출력된다.
 
 ```java
 
@@ -845,30 +847,34 @@ You would need to escape it with another ```\```. Printing ```\\``` outputs  the
 ```
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Were introduced to method call syntax, with ```System.out.println()```
-* Discovered the uses of whitespace characters
-* Learned about Java escape sequences 
+* ```System.out.println()```과 함께 메소드 호출 구문을 알아보앗다.
+* 공백 문자의 사용법 발견하였다
+* Java 이스케이프 시퀀스에 대해 알아보았다
 
-### Step 11: More On Method Calls
+### Step 11: 메소드 호출 더 알아보기
 
 Let's look at method calls with a few more examples.
+메소드 호출에 대한 몇가지 예시를 더 살펴보자.
 
-You know how to invoke a method with a single argument, courtesy ```System.out.println(3*4)```. Other scenarios do exist, such as 
+You know how to invoke a method with a single argument, courtesy  Other scenarios do exist, such as 
 * Calling a method without any arguments
 * Calling a method with several arguments
+당신은 ```System.out.println(3*4)```이라는 단 하나의 구문으로 어떻게 메소드를 호출할 수 있는지 알고 있다. 다음과 같은 다른 시나리오가 존재한다.
+* 인수 없이 메소드 호출
+* 여러 인수를 사용하여 메소드 호출
 
-Let's check them out, using the built-in methods in Java ```Math``` class. 
+자바 ```Math``` 클래스에 내장된 방법을 사용하여 그들을 살펴보자.
 
 
-#### Method without parameters
+#### 매개 변수가 없는 메소드
 
-In method calls, parentheses are a necessary part of the syntax. Don't leave them out!
+메소드를 호출할 때, 괄호는 구문에서 꼭 필요하다. 잊지말자!
 
-```Math.random()``` prints a random real number in the range ```[0 .. 1]```, a different one on each call
+```Math.random()``` 는 호출할 때마다 ```[0 , 1]``` 범위 내에서 임의의 숫자 하나를 출력한다. 
 
 ```java
 
@@ -887,9 +893,9 @@ In method calls, parentheses are a necessary part of the syntax. Don't leave the
 ```
 
 
-#### Method with multiple parameters
+#### 여러 개의 매개 변수를 가진 메소드
 
-How do we call ```Math.min``` with two parameters ```23``` and ```45```?
+```23```과 ```45```라는 두개의 매개 변수를 가지고 어떻게 ```Math.min```을 호출할 것인가? 
 
 ```java
 
@@ -906,9 +912,9 @@ How do we call ```Math.min``` with two parameters ```23``` and ```45```?
 	| ---------------^
 ```
 
-While making method calls, the programmer must 
-* Enclose all the parameters within parentheses
-* Separate individual parameters within the list, using the comma symbol '```,```'.
+메소드를 호출할 때, 프로그래머가 반드시 지켜야 할 것들이 있다.
+* 모든 매개 변수는 반드시 괄호 안에 작성해야 한다.
+* 목록 내에서 각각의 파라미터들은 ```,```로 구분한다.
 
 ```java
 	jshell> Math.min(23, 45)
@@ -923,23 +929,23 @@ While making method calls, the programmer must
 
 ```
 
-```Math.min()``` returns the minimum of two given numbers. ```Math.max()``` returns the maximum of two given numbers.
+```Math.min()```은 주어진 두 개의 숫자 중 최솟값을 반환한다. ```Math.max()```는 주어진 두개의 숫자 중 최댓값을 반환한다.
 
+#### 요약
 
-#### Summary
+이번 단계에서는
+* 메소드를 호출할 때, 매개 변수가 0개 혹은 여러개의 매개 변수가 전달되는 방법을 이해했다.
 
-In this step, we:
-* Understood how zero, or multiple parameters are passed during a method call
+### Step 12: 출력 형식 더 알아보기
 
-### Step 12: More Formatted Output
+```System.out.println()```는 최대 한 개의 값을 인자로 받아들일 수 있다. 
 
-```System.out.println()``` can accept one value as an argument at a maximum. 
+계산된 값으로 ``5"의 곱셈표를 표시하려면 숫자와 문자열을 모두 출력하는 방법이 필요하다.
+이를 위해서는 또 다른 내장 메소드 ```System.out.printf()```를 사용할 수 있다.
 
-To display the multiplication table for ```5``` with a calculated value, we need a way to print both numbers and strings. 
+.
+```System.out.printf()```는 *단일* 문자열 인수와 함께 호출될 때, 읽을 수 없는 정보를 출력한다. 현재로서는 이 정보가 내장형 ```java.io.PrintStream```에 관한 정보라는 것만 알면 된다.
 
-For this we would need to use another built-in method ```System.out.printf()```.
-
-When ```System.out.printf()``` is called with a *single* string argument, it prints some illegible information. For now, it suffices to know, that this information is about the built-in type  ```java.io.PrintStream```.
 
 ```java
 	jshell> System.out.printf("5 * 2 = 10")
@@ -948,7 +954,7 @@ When ```System.out.printf()``` is called with a *single* string argument, it pri
 
 ```
 
-The good news is, that if we call the ```println()``` method on this, the illegible stuff disappears.
+다행인 것은 우리가 ```println()"을 호출하면 읽기 어려운 것들이 사라진다는 점이다.
 
 ```java
 
@@ -956,20 +962,23 @@ The good news is, that if we call the ```println()``` method on this, the illegi
 	5 * 2 = 10
 ```
 
-The method ```System.out.printf()``` accepts a variable number of arguments:
-* The first argument specifies the print format. This is a string literal, having zero or more **format specifiers**. A format specifier is a predefined literal (such as ```%d```), that formats data of a particular type (```%d``` formats data of type ```int```).
-* The trailing arguments are expressions,
+```System.out.printf()```라는 메소드는 다음과 같은 다양한 인수들 수용한다.
 
-Lots of theory? Let's break it down.  Let's look at an example.
+* 첫 번째 인수는 출력 형식을 지정한다. 이는 문자열 리터럴이며, **형식 지정자**가 0개 이상 있다. 형식 지정자는 특정 유형의 데이터("%d" 와 같은)를 포맷하는 사전 정의된 문자("%d" 형식 데이터(""int" 형식)이다.
+형식 지정자는 ```%d```가 데이터 타입을 ```int```로 지정하는 것과 같이 특정 유형의 데이터를 포맷하는 리터럴이며, 이 또한 사전에 정의되어 있다.
+* 뒤에 있는 인수는 수식이며,
+
+이론이 너무 많은가? 하나씩 알아보자. 예시를 살펴보자
+
 ```java
 	jshell> System.out.printf("5 * 2 = %d", 5*2).println()
 	5 * 2 = 10
 	jshell>
 
 ```
-```System.out.printf("5 * 2 = %d", 5*2).println()``` gives an output ```5 * 2 = 10```.  ```%d``` is replaced by the calculated value of ```5*2```.
+```System.out.printf("5 * 2 = %d", 5*2).println()``` 는 ```5 * 2 = 10```를 출력한다.  ```%d``` 는```5*2```의 연산 결과의 자리를 대신한다.
 
-Let's play a little more with ```printf```:
+```printf```에 대해 조금만 더 알아보자
 
 ```java
 
@@ -977,26 +986,31 @@ Let's play a little more with ```printf```:
 	5 7 5
 ```
 
-Let's try to display a calculated value. In the example below ```5*7``` is calculated as ```35```.
+연산 결과를 표시해보자. 예시에서 ```5*7```은 ```35```로 계산되었다.
+
 ```java
 	jshell> System.out.printf("%d %d %d", 5, 7, 5*7).println()
 	5 7 35
 ```
 
-Let's use this to print the output in the format that we want to use for multiplication table:
+이를 통해 곱셈표에 사용할 형식으로 내용을 출력해 봅시다.
 
 ```java
 	jshell> System.out.printf("%d * %d = %d", 5, 7, 5*7).println()
 	5 * 7 = 35
 ```
 
-Congratulations. We are able to calculate ```5*7``` and print ```5 * 7 = 35``` successfully.
+축하합니다! 우리는 ```5*7```을 계산하고 ```5 * 7 = 35```를 성공적으로 출력할 수 있게 되었다!
 
-#### Exercise
+#### 실습
 
 1. Print the following output on the console: ```5 + 6 + 7 = 18```. Use three literals ```5```, ```6```, ```7```. Calculate 18 as ```5 + 6 + 7```.
+1. 콘솔에 다음의 결과물을 출력력하시오: 
+ ```5 + 6 + 7 = 18```.
+ ```5```,```6```,```7``` 세 리터럴을 사용하시오.
+ 18을 ```5 + 6 + 7```로 계산하시오
 
-#### Solution
+#### 솔루션
 
 ```java
 
@@ -1006,9 +1020,9 @@ Congratulations. We are able to calculate ```5*7``` and print ```5 * 7 = 35``` s
 
 ```
 
-#### Playing with ```System.out.printf()```
+####  ```System.out.printf()``` 사용해보기
 
-In the example below, there are four format specifiers (```%d```) and only three value arguments ```5, 6, 7```.
+아래의 예시에서는 네 개의 형식 지정자(```%d```)가 있으며 인자는 ```5, 6, 7```세 개이다.
 
 ```java
 
@@ -1020,10 +1034,9 @@ In the example below, there are four format specifiers (```%d```) and only three
 	| at (#52:1)
 ```
 
-In a call to ```System.out.printf()```, if the number of format specifiers exceeds the number of trailing arguments, the Java run-time throws an *exception*.
+```System.out.printf()```를 호출할 때, 형식 지정자의 수가 뒤에 있는 인자의 수를 초과하면 자바 런타임은 *예외*를 던진다.
 
-
-If the number of format specifiers is less than the number of trailing arguments, the compiler simply ignores the excess ones.
+형식 지정자의 수가 인자의 수보다 적으면, 컴파일러는 초과된 인수만 무시한다.
 
 ```java
 
@@ -1033,9 +1046,9 @@ If the number of format specifiers is less than the number of trailing arguments
 
 ```
 
-#### More Format Specifiers
+#### 형식 지정자 더 알아보기
 
-String values can be printed in ```System.out.printf()```, using the format specifier ```%s```.
+문자열은 ```System.out.printf()```를 사용해서 출력할 수 있고, 형식 지정자는 ```%s```를 사용한다.
 
 ```java
 
@@ -1044,7 +1057,8 @@ String values can be printed in ```System.out.printf()```, using the format spec
 
 ```
 
-Earlier, we used %d to print an ```int``` value. You cannot use %d to display floating point values. 
+앞서, 우리는 %d를 이용해 ```int```값을 출력했다. 하지만  %d로는 부동 소수점을 표시할 수 없다.
+
 ```java
 	jshell> System.out.printf("%d + %d + %d", 5.5, 6.5, 7.5).println()
 	| java.util.IllegalFormatConversionException thrown: d != java.lang.Double
@@ -1058,7 +1072,8 @@ Earlier, we used %d to print an ```int``` value. You cannot use %d to display fl
 
 ```
 
-Floating point literals (or expressions) can be formatted using ```%f```.
+부동 소수점 리터럴(혹은 수식)은 ```%f```를 사용하여 형식을 지정할 수 있다.
+
 ```java
 
 	jshell> System.out.printf("%f + %f + %f", 5.5, 6.5, 7.5).println()
@@ -1067,26 +1082,26 @@ Floating point literals (or expressions) can be formatted using ```%f```.
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Discovered how to do formatted output, using ```System.out.printf()```
-* Stressed on the number and sequence of arguments for formatting
-* Explored the built-in format specifiers for primitive types
+* ```System.out.printf()```를 사용하여 형식이 지정된 출력을 표기하는 방법을 알아보았다.
+* 형식을 지정하기 위해서는 인자의 수와 순서가 중요하다. 
+* 기본형 타입을 위해 내장된 형식 지정자에 대해 알아보았다.
 
-### Step 13: Introducing Variables
+### Step 13: 변수에 대한 소개
 
-In the previous steps, we worked out how to print a calculated value as part of our multiplication table.
+이전 단계에서는, 곱셈표의 일부로 계산된 값을 어떻게 출력하는지 알아보았다.
 
 ```java
 	jshell> System.out.printf("%d * %d = %d", 5, 1, 5 * 1).println()
 	5 * 1 = 5
 ```
 
-**How do we print the entire multiplication table?**
+**전제 곱셈표는 어떻게 출력할까?**
 
-We can do something like this.
+다음과 같이 해볼 수 있다.
 
 ```java
 	jshell> System.out.printf("%d * %d = %d", 5, 1, 5 * 1).println()
@@ -1102,14 +1117,13 @@ We can do something like this.
 ```
 
 Too much work. Isn't it?
+일이 너무 많지 않은가?
 
-If you carefully observe the code, these statements are very similar. 
+코드를 유심히 살펴보면, 구문들이 비슷하다는 것을 알 수 있다.
+***무엇이 다른가?*** 매개 변수의 세 번째와 네 번째 숫자가 1부터 4로 변경된다. 
+이렇게 값이 변하는 것을 다르게 표현하면 더 좋지 않을까?
 
-***What's changing?*** The number in the third and fourth parameter slots changes from 1 to 4.
-
-Wouldn't it be great to have something to represent the changing value? 
-
-***Welcome variables.***
+***변수에 대해 알아보자***
 
 ```java
 
@@ -1119,38 +1133,41 @@ Wouldn't it be great to have something to represent the changing value?
 
 ```
 
-#### Terminology and Background
+#### 용어 및 배경지식
 
-In the statement ```int number = 10```,  
-* ```number``` is a **variable**. 
-* The literal ```number``` is the variable **name**.
-* The Java *keyword* ```int``` specifies the **type** of ```number```.
-* The literal ```10``` provided ```number``` with an **initial value**. 
-* This entire statement is a **variable definition**.
+ ```int number = 10```라는 구문에서,  
+* ```number```은 **변수** 이다. 
+* 리터럴인 ```number``` 는 변수의 **이름**이다.
+* 자바의 *키워드*인 ```int``` 는  ```number```의 **타입**을 지정한다.
+* 리터럴 ```10``` 은 ```number```의 **초깃 값**을 제공한다. 
+* 이 구문은  **변수 선언**이다.
 
-The effects of this variable definition are:
-* A specific location in the computer's memory is reserved for ```number```.
-* This location can now hold data of type ```int```.
-* The value ```10``` is stored here.
+이 변수 선언이 미치는 영향은 다음과 같다:
+* 컴퓨터 메모리의 특정 위치는 ```number```로 지정되었다.
+* 이 위치는 이제 ```int```형 타입의 데이터가 저장될 수 있다.
+* ```10```이라는 값은 이곳에 저장된다.
 
-You can change the value of number variable:
+숫자 변수의 값을 변경할 수 있다:
+
 ```java
 
 	jshell> number = 11
 	number ==> 11
 ```
 
-Above statement is called  variable **assignment**. 
+위와 같은 구문을 변수**할당**이라고 한다. 
 
-An assignment causes the value stored in the memory location to change. In this case, ```10``` is replaced with the value ```11```.
+할당으로 인해 메모리의 해당 위치에 저장된 값이 변경된다. 이 경우에는, ```10```은 ```11```로 대체된다.
 
-You can look up the value of number variable.
+number 변수의 값을 확인해보자.
+
 ```java
 	jshell> number
 	number ==> 11
 ```
 
-You can change the value of a variable multiple times.
+변수의 값을 여러 번 변경할 수 있다.
+
 ```
 	jshell> number = 12
 	number ==> 12
@@ -1159,7 +1176,7 @@ You can change the value of a variable multiple times.
 
 ```
 
-Let's create another variable:
+또 다른 변수를 생성해보자.
 	
 ```java
 
@@ -1173,11 +1190,10 @@ Let's create another variable:
 
 ```
 
-The statement ```int number2 = 100``` defines a *distinct* variable ```number2```. 
+```int number2 = 100```이라는 구문은 변수```number2```를 *명확히* 정의하고 있다.
 
-***How do we use variables to simplify and improve the solution to *PMT-Challenge*?*** 
-
-Let's take a look.
+*** 어떻게 하면 변수를 사용해 *PMT-Challenge*를 더 간단하게 개선시킬 수 있을까?*** 
+어디 한번 보자
 
 ```java
 
@@ -1185,7 +1201,8 @@ Let's take a look.
 	5 * 4 = 20
 ```
 
-Let's define a variable ```i```, and initialize it to ```1```.
+변수 ```i```를 정의하고 이 값을 ```1```로 초기화한다.
+
 ```java
 	jshell>int i = 1
 	i ==> 1
@@ -1195,15 +1212,16 @@ Let's define a variable ```i```, and initialize it to ```1```.
 	$1 ==> 5
 ```
 
-Let's update the multiplication table printf to use the variable i.
+곱셈표를 출력할 때, 변수 i를 사용하도록 개선해보자.
+
 ```java
 	jshell> System.out.printf("%d * %d = %d", 5, i, 5*i).println()
 	5 * 1 = 5
 ```
 
-***How do we print ```5 * 2 = 10```?***
+***```5 * 2 = 10```는 어떻게 출력할 것인가?***
 
-We update ```i``` to ```2``` and execute the same code as before. 
+```i```를 ```2```로 업데이트하고 이전과 같은 코드를 실행해본다.
 
 ```java
 
@@ -1217,9 +1235,11 @@ We update ```i``` to ```2``` and execute the same code as before.
 
 ```
 
-You can update the value of ```i``` to any number. 
 
-The previous statement would print the corresponding multiple with 5.
+```i```를 어떤 숫자로도 업데이트할 수 있다.
+
+이전 구문은 배수를 5로 하여 출력할 것이다.
+
 
 ```java
 
@@ -1235,26 +1255,27 @@ The previous statement would print the corresponding multiple with 5.
 
 ```
 
-By varying the value of ```i```, we are able to print different multiples of 5 with the same statement.
+```i```값을 다양화해서, 우리는 같은 구문으로 5의 서로 다른 곱들을 출력할 수 있다.
+변수라는 중대한 발견을 한 것을 축하한다! 
 
-Congratulations! You made a major discovery. Variables.
+#### 요약
 
-#### Summary
+이번 단계에서는
 
-In this step, we:
 
-* Understood the need for variables
-* Observed what different parts of a variable definition mean
-* Seen what goes on behind-the-scenes when a variable is defined
+* 변수의 필요성에 대해 이해했다.
+* 변수 선언의 각 부분이 무엇을 의미하는지 살펴보았다.
+* 변수가 선언될 때, 뒷부분에서는 무슨 일이 일어나는지 알아보았다.
 
-### Step 14: Programming Exercise PE-03 (With solution)
+### Step 14: 프로그래밍 실습 PE-03 (솔루션 포함)
 
-1. Create three integer variables ```a```, ```b``` and ```c```. 
-	* Write a statement to print the sum of these three variables.
-	* Change the value of ```a```, and then print this sum.
-	* Then again, change the value of ```b``` and print this sum.
 
-#### Solution to PE-03
+1. ```a```, ```b```, ```c```라는 세 개의 정수형 변수를 생성한다.
+	* 이 세 개의 변수들의 합을 출력하는 구문을 작성하시오.
+	* ```a```의 값을 변경한 후, 이들의 합을 출력하시오.
+	* 다시 ```b```의 값을 변경한 후, 이들의 합을 출력하시오.
+
+#### PE-03 솔루션
 
 ```java 
 
@@ -1278,9 +1299,9 @@ In this step, we:
 	
 ```
 
-### Step 15: Using Variables
+### Step 15: 변수의 사용
 
-Variables should be declared before use.
+변수는 사용되기 전에 선언되어야 한다.
 
 ```java
 
@@ -1293,10 +1314,13 @@ Variables should be declared before use.
 ```
 
 Java is a **strongly typed** programming language. This means two things:
-* Every variable in a program must be declared, with a type.
-* Values assigned to a variable should be:
-	* same type as the variable's type, or
-	* **compatible** with the variable's type
+자바는 **강력한 형식**(strongly typed)언어이다. 이는 두가지를 의미한다:
+
+* 프로그램 내의 모든 변수들은 타입과 함께 선언되어야 한다.
+* 변수에 할당된 값은 다음과 같아야 한다:
+	* 변수의 타입과 같은 타입이거나
+	* **호환이 가능한** 변수 타입이어야 한다.
+
 
 ```java
 
@@ -1309,13 +1333,12 @@ Java is a **strongly typed** programming language. This means two things:
 
 ```
 
-The variable ```number``` is an integer, mathematically a  number. The constant ```5.5``` is a number as well. 
-
-Why does it result in error?
+변수 ```number```는 정수이고 수학적으로 '숫자'이다. 상수 ```5.5```또한 마찬가지이다.
+그런데 왜 결과에 에러가 발생할까?
 	
 ```5.5``` is a floating-point number of type ```double```. We are trying to store a ```double``` inside a memory slot meant for ```int```.
-
-Let's consider another example:
+```5.5```는 부동 소수점으로 ```double```타입이다. 우리가 ```int```형을 가지는 메모리 공간에 ```double```형을 저장하려고 했기 때문이다.
+또 다른 예시를 살펴보자:
 
 ```java
 
@@ -1327,18 +1350,18 @@ Let's consider another example:
 	jshell>
 
 ```
-```number``` is an ```int``` variable, and we are trying to store a ```String``` value ```"Hello World"```. ***Not allowed.***
+```number``은 ```int```형 변수이고, ```String```변수인 ```"Hello World"```를 저장해보려 했다. ***실패했다.***
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Observed how declaring a variable is important
-* Understood the compatibility rules for basic Java types  
+* 변수를 선언하는 방법이 중요하다는 것을 알았다.
+* 기본 자바 자료형의 호환성 규칙에 대해 이해했다. 
 
-### Step 16: Variables: Behind-The-Scenes
+### Step 16: 변수: Behind-The-Scenes
 
-Giving a value to a variable, during its declaration, is called its initialization. 
+변수의 선언 중에 변수에 값을 부여하는 것을 초기화라고 한다.
 
 ```java
 
@@ -1348,9 +1371,8 @@ Giving a value to a variable, during its declaration, is called its initializati
 
 ```
 
-The statement ```int number = 5``` combines a declaration and the initialization of ```number```.
-
-The next statement ```int number2 =  number``` is a little different. 
+```int number = 5```는 ```number```에 대한 선언과 초기화가 결합되어 있다.
+다음 구문 ```int number2 = number```은 약간 다르다.
 
 ```java
 
@@ -1362,13 +1384,14 @@ The next statement ```int number2 =  number``` is a little different.
 
 ```
 
-The initial value for ```number2``` is another variable, which is previously defined (```number```). 
+```number2```의 초기 값은 또 다른 변수로, 이전에 정의했던 ```number```이다.
 
-Here's what goes on behind the scenes with ```int number2 = number```:
-* A memory slot is allocated for ```number2``` with size of ```int```.
-* Value stored in ```number```'s slot is copied to ```number2```'s slot.
+```int nubmer2 =number```의 이면에 무슨 일이 일어나는지 알아보자:
+* ```int```형 크기를 가진 메모리 공간 ```number2```가 할당된다.
+* ```number```의 공간에 저장된 값을 ```number2```의 공간으로 복사된다.
 
-In example below, ```a = 100```, ```c = a + b```, ``` a = c``` are called ```assignments```.
+
+예를 들면  ```a = 100```, ```c = a + b```, ``` a = c``` 를 ```할당```이라고 한다.
 
 ```java
 
@@ -1390,12 +1413,13 @@ In example below, ```a = 100```, ```c = a + b```, ``` a = c``` are called ```ass
 
 ```
 
-Variable **assignment** is allowed to happen in multiple ways:
-* From a literal value, to a variable, having compatible types. The statement ```a = 100``` is one such example.
-* From a variable to another variable, of compatible types.The statement ```a = c``` illustrates this case.
-* From a variable expression to a variable. This expression can be formed with  variables and literals of compatible types, and is evaluated before the assignment. The statement ```c = a + b```below is an example of this.
 
-An assignment to a constant literal is **not allowed**. 
+변수 **할당**은 여러 가지 방법으로 발생할 수 있다:
+* 리터럴 값에서 변수에 이르기까지, 호환되는 타입이 있다. ```a = c```가 그 예시이다.
+* 변수 식에서 변수로. 이 수식은 호환되는 타입의 변수 및 리터럴로 구성할 수 있으며, 할당 전에 평가된다. "c = a + b"가 그 예다.
+
+상수 리터럴에 대한 할당은 **허용되지 않는다.**
+
 ```java
 
 	jshell> 20 = var
@@ -1410,28 +1434,28 @@ An assignment to a constant literal is **not allowed**.
 
 ```
  
-#### Summary
+#### 요약
 
-In this step, we discussed how to provide variables with initial values and the basics of assigment.
+이 단계에서는, 초기 값을 갖는 변수를 제공하는 방법과 할당의 기본 사항에 대해 논의하였다.
 
-### Step 17: Naming Variables 
+### Step 17: 변수 이름 짓기
 
-The syntax rules for variable definition are quite strict. Do we have any freedom with the way we name variables? The answer is "yes", to some extent. 
+변수 정의에 대한 구문 규칙은 상당히 엄격하다. 변수 이름을 붙이는 방식이 자유로운가? 대답은 어느 정도 '그렇다'이다.
 
-### Variable Name Rules
+### 변수 명명 규칙
 
-Here are the Java rules for variable names, in a nutshell:
+변수 이름에 대한 Java 규칙은 간단히 설명하자면 다음과 같다:
 
-A variable name can be a sequence, in any order, of
-* Letters [```A-Z, a-z```]
-* Numerical digits [```0-9```]
-* The special characters '```$```' ("dollar") and '```_```' ("underscore")
+변수의 이름은 다음 세 가지를 어떤 순서로도 쓸 수 있다.
+* 글자 [```A-Z, a-z```]
+* 숫자 [```0-9```]
+* 특수 기호 '```$```' ("dollar") 와 '```_```' ("underscore")
 
-With the following exceptions:
-* The name cannot start with a numerical digit [```0-9```]
-* The name must not match with a predefined Java **keyword**
+다음과 같은 예외 사항:
+* 이름은 숫자 [```0-9```]로 시작할 수 없다.
+* 이름은 사전에 정의된 자바 **키워드**와 같을 수 없다.
 
-Let's now see what kinds of errors the compiler throws if you violate these naming rules.
+이제 이러한 명명 규칙을 위반할 경우 컴파일러가 어떤 오류를 발생시키는지 봅시다.
 
 ***Error : Using a invalid character ```-```***
 
@@ -1475,7 +1499,7 @@ Let's now see what kinds of errors the compiler throws if you violate these nami
 
 ***Error : Using a keyword as the name of variable***
 
-In Java, certain special words are called ```keywords```. For example, some of the data types we looked at - ```int```, ```double```. These ```keywords``` cannot be used as variable names.
+자바에서는 몇몇 특정한 단어를 ```키워드```라고 부른다. 예를 들어 우리가 살펴본 데이터 타입 중 일부인 ```int```와 ```double```이다. 이들 ```키워드```는 변수 이름으로 사용할 수 없다.
 
 ```java
 
@@ -1498,11 +1522,12 @@ In Java, certain special words are called ```keywords```. For example, some of t
 
 ```
 
-### Variable Naming Conventions
+### 변수 이름 지정 규칙
 
-Good programmers write readable code. Giving proper names to your variables makes your code easy to read. 
+훌륭한 프로그래머들은 읽기 쉬운 코드를 쓴다. 변수에 적절한 이름을 지정하면 코드를 쉽게 읽을 수 있다.
 
-In a football scorecard application, using a name ```s``` for a score variable is vague. Something like ```score``` carries more meaning, and is preferred.
+예를 들어, 축구 스코어 카드 어플리케이션에 ```s```를 점수를 뜻하는 변수로 사용하는 것은 모호하다. ```score```처럼 조금 더 많은 의미를 내포하는 것이 좋다.
+
 ```java
 
 	jshell> int s
@@ -1513,9 +1538,11 @@ In a football scorecard application, using a name ```s``` for a score variable i
 
 ```
 
-> The Java community, with its wealth of experience, *suggests* that programmers follow some **naming conventions**. Above examples is one of these. Violation of these rules does not result in compilation errors. That's why, these are called **conventions**.
 
-In Java, another convention is to use **CamelCase** when we have multiple words in variable name.
+> 풍부한 경험을 가진 자바 커뮤니티는 프로그래머들이 **이름 지정 규칙**을 따를 것을 *제안한다*. 위의 예는 이것들 중 하나이다. 이러한 규칙을 위반해도 컴파일이 발생하지 않는다.
+
+자바에서 또 다른 규칙은, 변수 이름에 여러 개의 단어가 들어갈 때 **카멜 케이스(CamelCase)**를 사용하는 것이다. 
+
 ```java 
  
 	jshell> int noOfGoals
@@ -1523,19 +1550,19 @@ In Java, another convention is to use **CamelCase** when we have multiple words 
 
 ```
 
-```noOfGoals``` is easier to read than ```noofgoals```.
+```noOfGoals``` 이 ```noofgoals```보다 읽기 쉽다.
 
-Both ```noOfGoals``` and ```NoOfGoals``` are equally readable. 
+ ```noOfGoals``` 와 ```NoOfGoals``` 둘 다 읽기 쉽다. 
 
-But in Java, the convention followed is to start variable names with a lower case letter. So, for a variable, ```noOfGoals``` is preferred. 
+그러나 자바에서는 변수 이름은 소문자로 시작하는 것이 규칙이다. 따라서 변수의 이름은 ```noOfGoals```가 좋다.
 
-*** NOT RECOMMENDED*** 
+*** 권장되지 않음*** 
 ```
 	jshell> int NoOfGoals
 	NoOfGoals ==> 0
 ```
 
-Your variable names can be very long. 
+변수의 이름을 매우 길게도 지을 수 있다.
 
 ```java
 
@@ -1546,17 +1573,16 @@ Your variable names can be very long.
 
 ```
 
-However, avoid using very long variable names.
+그러나, 변수 이름을 너무 길게 짓지는 말자.
+***변수에 가능한 가장 짧고, 의미 있고, 읽기 쉬운 이름을 사용하자***
 
-***Use the shortest meaningful and readable name possible for your variables.***
+#### 요약
 
-#### Summary
+이번 단계에서는
 
-In this step, we:
-
-* Explored the Java language rules for variable names
-* Understood that there are conventions to guide us
-* Looked at a popular variable naming conventions
+* 자바의 변수 이름 규칙에 대해 알아보았다.
+* 우리를 안내하는 규칙이 있다는 것을 이해했다.
+* 널리 사용되는 변수 이름 규칙을 살펴보았다.
 
 ### Step 18: Introducing Primitive Types
 
