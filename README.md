@@ -28,7 +28,7 @@
 * [Chapter 12 - 컬렉션의 이해](#컬렉션의-이해)
 * [Chapter 13 - 제네릭의 이해](#제네릭의-이해)
 * [Chapter 14 - Introduction to Functional Programming](#introduction-to-functional-programming)
-* [Chapter 15 - 스레드와 동시 실행](#스레드와-동시 실행)
+* [Chapter 15 - 스레드와 동시 실행](#스레드와-동시-실행)
 * [Chapter 16 - 예외처리의 이해](#예외처리의-이해)
 * [Chapter 17 - 파일 입출력](#파일-입출력)
 * [Chapter 18 - 동시 실행 : 더 나아가기](#동시-실행--더-나아가기)
@@ -109,23 +109,18 @@ _여러분, 첫번째 도전을 시작할 준비가 되셨나요? **그렇다구
 
 #### 요약
 
-In this step, we:
 이 단계에서, 우리는:
-* Stated our first programming challenge, *PMT-Challenge*
 * 첫번째 도전인 *PMT-Challenge*에 대해 설명하고,
-* Identified basic Java concepts to learn, to solve this challenge
 * 이 과제를 해결하기 위해 배울 자바의 기본 개념을 파악할 것입니다.
 ### Step 02:  ```JShell``` 소개
 - - - 
 
-```JShell``` is a programming tool, introduced in Java SE 9. JShell is a **_REPL_** interface. The term **REPL** refers to this:
 ```JShell``` 은 프로그래밍 도구로, Java SE 9에서 소개되었습니다. JShelldms **_REPL_** 인터페이스입니다. **REPL** 의 의미는 다음과 같습니다.
 * **_'R'_**  **R**ead(읽기)의 R; 입력된 자바 코드 *읽기* 
 * **_'E'_**  **E**val(평가)의 E; 소스코드 *평가* 
 * **_'P'_**  **P**rint(출력)의 P; 결과값 *출력* 
 * **_'L'_**  **L**oop(반복문)의 L; *반복*하며 다음 입력을 기다림
 
-How about starting off exploring Java? Are you game?
 자바를 시작해보니 어떤가요? 계속 해볼까요?
 ##### Snippet-1: 자바 개발 환경 확인하기
 
@@ -551,10 +546,6 @@ _여러 연산자 식에서 하위수식의 평가 순서는 **연산자 우선 
 
 이 단계에서는
 
-* Discovered that operators are all predefined
-* Learned that result of operation depends on operand types
-* Understood what operator precedence means
-* Used parentheses to group parts of an expression
 * 연산자는 모두 사전에 정의되었다는 것을 확인했습니다.
 * 연산 결과는 피연산자의 타입에 따라 결정된다는 것을 알게 되었습니다.
 * 연산자 우선 순위의 의미 이해했습니다.
