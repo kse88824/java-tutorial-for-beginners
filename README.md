@@ -1584,32 +1584,36 @@ Java is a **strongly typed** programming language. This means two things:
 * 우리를 안내하는 규칙이 있다는 것을 이해했다.
 * 널리 사용되는 변수 이름 규칙을 살펴보았다.
 
-### Step 18: Introducing Primitive Types
+### Step 18: 기본형 타입 소개
 
 The table below lists the **primitive types** in Java.
+아래의 표는 자바의 **기본형 타입**이 나열되어 있다.
 
-| Type of Values | Java Primitive Type | Size (in bits) | Range of Values | Example |
+
+| 값의 타입 | Java의 기본형 타입 | 크기 (in bits) | 범위 | 예시 |
 | :---: | :---: |:---: |:---: |:---:|
-| Integral Values |byte|8|```-128``` to ```127```|```byte b = 5;```|
-| Integral Values |short|16|```-32,768``` to ```32,767```|```short s = 128;```|
-| Integral Values |int|32|```-2,147,483,648``` to ```2,147,483,647```|```int i = 40000;```|
-| Integral Values |long|64|```-9,223,372,036,854,775,808``` to ```9,223,372,036,854,775,807```|```long l = 2222222222;```|
-|Floating-Point Values| float| 32 | approximately ±3.40282347E+38F. NOT very precise (avoid for financial/scientific math)|```float f = 4.0f;```|
-|Floating-Point Values|double|64| approximately ±1.79769313486231570E+308. NOT very precise, but better than float (also avoid for financial/scientific  math)|```double d = 67.0;```|
-|Character Values|char|16|```'\u0000``` to ```'\uffff```|```char c = 'A';```|
-|Boolean Values| boolean|1| ```true``` or ```false```|```boolean isTrue = false;```|
+| 정수 |byte|8|```-128``` ~ ```127```|```byte b = 5;```|
+| 정수 |short|16|```-32,768``` ~ ```32,767```|```short s = 128;```|
+| 정수 |int|32|```-2,147,483,648``` ~ ```2,147,483,647```|```int i = 40000;```|
+| 정수 |long|64|```-9,223,372,036,854,775,808``` ~ ```9,223,372,036,854,775,807```|```long l = 2222222222;```|
+| 부동 소수점 | float| 32 | 대략 ±3.40282347E+38F. 정확하지 않음(재정/과학 수학은 피하기 위해)||```float f = 4.0f;```|
+| 부동 소수점 |double|64| 대략  ±1.79769313486231570E+308. 정확하지 않음(재정/과학 수학은 피하기 위해)||```double d = 67.0;```|
+| 문자 |char|16|```'\u0000``` ~ ```'\uffff```|```char c = 'A';```|
+|부울형| boolean|1| ```true``` ~ ```false```|```boolean isTrue = false;```|
 
-Let's now look at how we create data of these types, and store them in memory.
+이제 이러한 타입의 데이터를 어떻게 생성하여 메모리에 저장하는지 살펴봅시다.
 
-We choose type for data, based on:
-* The type of data we want to store
-* The range of values we would want to store
 
-> Note: In the above examples, we used semi-colon ```;``` character at the end. This is the Java **statement separator**, which is not mandatory in ```JShell``` for single statements. However, it is a must when you use *code editors* and *IDE*'s, to write Java code.
+다음을 기반으로 데이터 타입을 선택하십시오:
+* 저장할 데이터 타입
+* 저장할 값의 범위
 
-#### Integer Types
 
-The only difference among the integer types is their storage capacity.
+> 참고: 위의 예시에서, 우리는 문자의 끝에 세미콜른 ```;```을 사용했다. 이것은 자바의 *구문 구분 기호* 이며, 단일 문장에 대해서는 '''JShell'''에서 필수 사항이 아니다.
+
+#### 정수 타입
+
+정수 타입들의 유일한 차이점은 저장 용량이다.
 
 ```java
 
@@ -1625,9 +1629,9 @@ The only difference among the integer types is their storage capacity.
 
 ```
 
-#### Floating Value Types
+#### 부동 소수점 타입
 
-```double``` is the default type for floating type values with size 64 bits. 
+```double```은 64 비트 크기의 부동 소수점 기본 타입이다.
 
 ```
 	jshell> double d = 67.0
@@ -1635,6 +1639,7 @@ The only difference among the integer types is their storage capacity.
 ```
 
 ```float``` occupies 32 bits. ```float``` literals need to have a suffix '```f```' (as in ```4.0f```).
+```float```는 32비트를 차지한다. ```float```리터럴은 '```f```'라는 접미사가 필요하다 (예를 들어 ```4.0f```).
 
 ```
 
@@ -1642,7 +1647,8 @@ The only difference among the integer types is their storage capacity.
 	f ==> 4.0
 ```
 
-If this suffix ```f``` is omitted, a floating-point  number is assumed to be a ```double```. You cannot store a 64 bit value into 32 bits.
+이 접미사 ```f```를 생략하면, 부동 소수점 숫자는 ```double```로 가정한다. 32비트에는 64비트의 값을 저장할 수 없다.
+
 ```java
 	jshell> float f2 = 4.0
 	| Error:
@@ -1652,15 +1658,16 @@ If this suffix ```f``` is omitted, a floating-point  number is assumed to be a `
 
 ```
 
-You can store ```float``` value in ```double```. Remember, both types store similar kind of values and a ```float``` value is only 32 bits where as ```double``` has 64 bits.
+```float```값을 ```double```로 저장할 수 있다. 두 타입 모두 비슷한 값을 저장하지만 ```float```의 크기는 32비트이고 ```double```은 64비트임을 기억하자.
+
 ```
 	jshell> double d2 = 67.0f
 	d2 ==> 67.0
 ```
 
-#### Character Type
+#### 문자 타입
 
-The character type ```char``` can store a single character symbol. The symbol must be enclosed within a pair of single quotes, ```'``` and ```'```.
+문자 타입 ```char```은 단일 문자 기호를 저장할 수 있다. 이 기호는 한 쌍의 작은 따옴표, ```'```와 ```'```로 묶여야 한다.
 
 ```java
 
@@ -1668,7 +1675,8 @@ The character type ```char``` can store a single character symbol. The symbol mu
 	c ==> 'A'
 ```
 
-Following are a few char declaration errors: Not using single quotes and trying to store multiple characters.
+다음은 몇 가지 char 선언 오류이다: 작은 따옴표를 사용하지 않고 여러 문자를 저장하려고 시도함.
+
 ```
 	jshell> char ch = A
 	| Error:
@@ -1685,9 +1693,11 @@ Following are a few char declaration errors: Not using single quotes and trying 
 
 ```
 
-#### Boolean Type
+#### 부울 타입
 
-The concept of a ```boolean``` type is rooted in mathematical logic. The data type can store two possible values, ```true``` and ```false```. Both are case-sensitive labels, but  not enclosed in  quotes. 
+
+```boolean```타입의 개념은 수학적 논리에 근간을 두고 있다. 이 데이터 타입은 ```true```나 ```false```라는 두 개의 값을 저장 가능하다. 둘 다 대소문자를 구분하는 레이블이지만 따옴표로 묶지 않는다.
+
 
 ```java
 
@@ -1711,24 +1721,26 @@ The concept of a ```boolean``` type is rooted in mathematical logic. The data ty
 
 ```
 
-```boolean``` data are mostly used in expressions used to form logical conditions in your code. We will talk more about this - when we explore Java conditionals.
+```boolean```데이터는 코드의 논리적인 조건을 형성하는 데 사용되는 수식에 주로 사용된다. 자바의 조건문에 대해 더 많이 이야기 할 때 더 알아보자.
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Looked at the primitive data types provided in Java
-* Understood the categories into which these types are divided
-* Saw what kind of data can be stored in each primitive type
 
-### Step 19: Choosing A Data Type
+* 자바에서 제공하는 기본형 데이터 타입을 알아보았다.
+* 타입들이 분류되는 범주를 이해하였다.
+* 각 기본형 타입별로 저장할 수 있는 데이터의 종류에 대해 알아보았다.
 
-How do we choose the data type for a variable? Let's look at a few examples.
+### Step 19: 데이터 타입 선택
 
-#### Example 1 : Goals in a Football match
+변수에 대한 데이터 타입을 선택하는 방법의 몇 가지 예를 보자.
 
-Consider a sports broadcaster that writes a program to track football scores. In a football game there are two teams playing. A game is generally 90 minutes long, with extra time pushing it to 120 minutes at the most. Practically speaking, the scorelines are never huge. From a practical standpoint, the number of goals scored in a match would never exceed 7200 (the number of seconds in 120 minutes). Playing it a bit safe, a ```short``` data type would be enough to store the score of each side (though a ```byte``` would be more than enough).
+#### Example 1 : 축구 경기의 골
+
+
+축구 점수를 추적하는 프로그램을 쓰는 스포츠 방송사를 생각해보자. 축구 경기에서 두 팀이 경기하고 있다. 경기는 일반적으로 90분이며, 추가 시간은 최대 120분 이다. 사실, 최종 점수는 그렇게 크지 않다. 현실적인 관점에서 볼 때 한 경기에서 득점한 골 수는 결코 7200개(120분의 초 수)를 넘지 않는다. 조금 더 신중하게 생각해보면, ```short```타입이면 각 팀의 점수를 저장하기에 충분할 것이다.(한```byte```여도 충분하긴 하지만)
 
 ```java
 
@@ -1740,9 +1752,9 @@ Consider a sports broadcaster that writes a program to track football scores. In
 
 ```
 
-#### Example 2 : How do we store population of the world?
+#### Example 2 : 세계 인구를 어떻게 저장하지?
 
-We know that the global count of humans is well over 7 billion now, so the only integer data type that can store it is a ```long```.
+우리는 현재 전 세계 인간의 수가 70억 명을 훨씬 넘어섰다는 것을 알고 있기 때문에 이를 저장할 수 있는 정수 데이터 타입은 ```long```뿐이다.
 
 ```java
 
@@ -1752,9 +1764,9 @@ We know that the global count of humans is well over 7 billion now, so the only 
 
 ```
 
-#### Example 3 : How do we store average rainfall in a month?
+#### Example 3 : 한 달 평균 강우량을 어떻게 저장할까?
 
-Rainfall is usually measured in millimeters (*mm*), and we know computing an average over 30 days is very likely to yield a floating-point number. Hence we can use a ```float```, or for more accuracy, a ```double``` to store that average.
+강우량은 보통 밀리미터로 측정된다.(*mm*), 평균 30일 이상 계산하면 부동 소수점이 될 가능성이 높다는 걸 알 수 있다. 따라서, ```float```를 사용하거나, 정확성을 높이기 위해 ```double```을 사용할 수도 있다.
 
 ```java
 
@@ -1765,11 +1777,10 @@ Rainfall is usually measured in millimeters (*mm*), and we know computing an ave
 	jshell>
 
 ```
-#### Example 4 : Grades of a Student
+#### Example 4 : 학생의 성적
 
-Classroom grades in high school are generally A, B, C , .... 
-
-For a program that generates a grade report, a ```char``` type would be the best bet.
+고등학교의 성적은 일반적으로 A, B, C , ...이다.
+성적표를 작성하는 프로그램이라면 ```char``` 타입이 최선의 선택이 될 것이다.
 
 ```java
 
@@ -1787,9 +1798,9 @@ For a program that generates a grade report, a ```char``` type would be the best
 
 ```
 
-#### Example 5 : Is a Number Odd or Even?
+#### Example 5 : 숫자가 홀수인가 짝수인가?
 
-A ```boolean isNumEven``` is a good bet, with a default initial value of ```false```. It can be changed to ```true``` if the number turns out to be even.    
+'boolean isNumEven'은 기본 초기 값이 'false'인 좋은 베팅이다. 짝수로 판명되면 'true'로 바꿀 수 있다.
 
 ```java
 
@@ -1801,20 +1812,22 @@ A ```boolean isNumEven``` is a good bet, with a default initial value of ```fals
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Understood how to think while choosing a data type
-* Explored cases for integer, floating-point, character and boolean data
 
-### Step 20: The Assignment Operator ```=```
+* 데이터 타입을 선택하면서 사고하는 방법 이해했다
+* 정수, 부동 소수점, 문자 및 부울 데이터에 대한 사례 탐색했다.
 
-We were first exposed to the assignment operator while discussing variable assignment. 
+### Step 20: 할당 연산자 ```=```
 
-We are allowed to use expressions to assign values to variables, using code such as ```c = a + b```. 
 
-Let's look at a few additional ways assignment can be done.
+우리는 변수 할당을 알아보던 중 할당 연산자를 접했다.
+
+```c = a + b```와 같은 코드를 사용하여 수식을 사용하여 변수에 값을 할당할 수 있다.
+
+할당을 수행할 수 있는 몇 가지 추가적인 방법을 살펴봅시다.
 
 ```java
 
@@ -1828,7 +1841,8 @@ Let's look at a few additional ways assignment can be done.
 
 ```
 
-Let's consider the following example:
+다음 예제를 살펴봅시다:
+
 ```java
 	jshell> i = i * 2
 	i ==> 30
@@ -1836,13 +1850,10 @@ Let's consider the following example:
 
 ```
 
-The same variable ```i``` appears on both the right-hand-side (*RHS*) and left-hand-side (*LHS*). How would that make any sense? 
-
-The expression on the *RHS* is *independently* evaluated first. The value we get is next copied into the memory slot of the *LHS* variable.
-
-Using the logic above, the assignment  ```i = i * 2``` actually updates the value of ```i``` (initially ```15```) to ```30``` (doubles it). 
-
-Java also does the right thing when it encounters the puzzling statement  ```i = i + i```, where ```i``` is all over the place! The code doubles the value of ```i```, and this reflects on the ```JShell``` output. 
+똑같은 변수 ```i```가 우측(*RHS*)과 좌측(*LHS*)에 모두 나타난다. 이게 가능한가?
+먼저, *RHS*에 있는 수식이 *독립적으로* 평가된다. 그렇게 얻은 값은 *LHS*변수의 메모리 공간에 복사된다.
+위의 논리를 이용하여, ```i = i * 2```라는 할당은 실제로 ```i```(초기에는 ```15```) 의 값을 ```30```(두 배로 증가)으로 갱신한다
+자바 역시 ```i = i + i```라는 헷갈리는 구문과 마주쳤을 때 옳은 일을 한다, 여기서 ```i```가 사방에 널려 있다! 코드는 ```i```의 값을 두 배로 하고, 이는 ```JShell```에서의 출력에 반영한다.
 
 ```java
 
@@ -1850,16 +1861,16 @@ Java also does the right thing when it encounters the puzzling statement  ```i =
 	i ==> 60
 ```
 
-The next example is self explanatory.
+다음의 예는 자명하다.
 
 ```
 	jshell> i = i - i
 	i ==> 0
 ```
 
-#### Variable Increment and Decrement
+#### 변수의 증가와 감소
 
-We have already seen increment by assignment:
+우리는 이미 할당에 따른 증가를 보았다.
 
 ```java
 
@@ -1875,7 +1886,7 @@ We have already seen increment by assignment:
 
 ```
 
-Conversely, the statement ```i = i - 1``` is called a variable **decrement**. This can also be done repeatedly, and ```i``` changes  value every time.
+반대로 ```i = i - 1```은 변수의 **감소**라고 한다. 이 또한 반복해서 수행될 수 있으며, ```i```의 값은 매번 변한다.
 
 
 ```java
@@ -1890,24 +1901,24 @@ Conversely, the statement ```i = i - 1``` is called a variable **decrement**. Th
 	
 ```
 
-#### Summary 
+#### 요약 
 
-In this step, we:
+이번 단계에서는
 
 * Looked at the assignment operator ```=``` in a more formal way
 * Looked at heavily used scenarios for assignment, such as increment and decrement
 
-### Step 21: Assignment Puzzles, and *PMT-Challenge* revisited
+### Step 21: 할당 Puzzle과  *PMT-Challenge* 복습
 
-Now that we understand how to define, assign to, and use variables in expressions, it's time to push the boundaries a bit. The following examples explore how we could play around with variables in our code.
 
-##### Snippet-1 : Pre- and Post- Increment and Decrement
+이제 우리는 표현에서 변수를 정의하고 할당하고 사용하는 방법을 이해했으므로, 이제는 조금 더 밀어붙일 때가 되었다. 다음 예들은 우리가 코드에서 변수를 가지고 놀 수 있는 방법을 탐구한다.
 
-There are two short-hand versions for increment. ```number++``` denotes *post-increment*. Conversely, ```++number``` means **pre-increment**.
+##### Snippet-1 : 사전 및 사후의 증분과 감소
 
-Operator ```++``` can be applied only to variables of integer types, which are ```byte```, ```short```, ```int``` and ```long```.
+증분을 하기 위한 두 가지 약칭이 있다. ```number++```는 *사후-증분*을 의미한다. 반대로, ```++number```은 **사전-증분**을 의미한다.
+연산자 ```++```은  ```byte```, ```short```, ```int``` 그리고 ```long```과 같은 정수형 타입 변수에 적용될 수 있다.
 
-```number++``` is equivalent to the statement ```number = number + 1```
+```number++``` 은 ```number = number + 1```구문과 같은 의미이다.
 
 ```java
 
@@ -1925,7 +1936,7 @@ Operator ```++``` can be applied only to variables of integer types, which are `
 
 ```
 
-```number--``` is *post-decrement*. On the other hand, ```--number``` is **pre-decrement**.
+```number--``` 은 *사후-감소*를, 반면에 ```--number``` 는 **사전-감소**를 의미한다.
 
 ```java
 
@@ -1941,15 +1952,15 @@ Operator ```++``` can be applied only to variables of integer types, which are `
 
 ```
 
-***What is the difference between prefix and postfix vesions?***
+***사전과 사후의 차이점은 무엇인가?***
 
-Although both prefix and postfix versions achieve the same visible result in above examples, there is a slight difference. We will explore this later.
+사전 수정 버전과 사후 수정 버전 모두 위의 예에서 동일한  결과를 얻지만 약간의 차이가 있다. 이는 나중에 알아볼 것이다.
 
-##### Snippet-2 : Compound Assignment Operators
+##### Snippet-2 : 복합적인 할당 연산자들
 
-The compound assignment operator combines the ```=``` with a numeric operator. 
+복합적인 할당 연산자는 ```=```과 숫자 연산자가 결합한 것이다.
 
-```i += 2``` : Add ```2``` to the current value of ```i```
+```i += 2``` : ```i```의 최신 값에 ```2```를 더하라.
 
 ```java
 
@@ -1964,7 +1975,7 @@ The compound assignment operator combines the ```=``` with a numeric operator.
 ```
 
 
-```i -= 1``` : Subtract ```1``` from the current value of ```i```
+```i -= 1``` :  ```i```의 최신 값에서 ```1```를 빼라.
 
 ```java
 
@@ -1979,7 +1990,7 @@ The compound assignment operator combines the ```=``` with a numeric operator.
 ```
 
 
-```i *= 4``` : Multiply ```i``` with ```4```, and store the result back into ```i```
+```i *= 4``` :  ```i```와 ```4```를 곱하고 그 결과를 다시 ```i```에 저장하라.
 
 ```java
 
@@ -1991,7 +2002,7 @@ The compound assignment operator combines the ```=``` with a numeric operator.
 
 ```
 
-```i /= 4``` : Divide ```i``` by ```4```, and store the result back into ```i```
+```i /= 4``` :  ```i``` 를 ```4```로 나누고 그 결과를 다시 ```i```에 저장하라.
 
 ```java
 
@@ -2003,7 +2014,7 @@ The compound assignment operator combines the ```=``` with a numeric operator.
 
 ```
 
-```i %= 2``` : Divide ```i``` by ```2```, and store the **remainder** back into ```i```
+```i %= 2``` :  ```i```를 ```2```로 나누고 **나머지**를 다시 ```i```에 저장하라.
 
 ```java
 
@@ -2014,50 +2025,52 @@ The compound assignment operator combines the ```=``` with a numeric operator.
 	jshell>
 
 ```
-#### Summary
+#### 요약
 
-In the step, we:
+이번 단계에서는
 
-* Looked at the built-in Java increment and decrement operators
-* Explored the side-effects of prefix and postfix versions of these operators
-* Seen the advantages of compound assignment
+* 내장된 Java 증분 및 감소 연산자 살펴보았다.
+* 이러한 운영자의 사전 및 사후 수정 버전의 부작용에 대해 살펴보았다.
+* 복합 할당의 이점 확인하였다.
 
-### Step 22: Some ```JShell``` Usage Tips 
+### Step 22: ```JShell``` 사용 팁
 
-* Shortcuts
-	1. Toggling to limits of current prompt entry
-		* '```Ctrl+a```' : to start of line
-		* '```Ctrl+e```' : to end of line
-	2. Moving up and down history of completed prompt inputs 
-		* *up-arrow* key : move back in time
-		* *down-arrow* key : move forward in time
-	3. Reverse-keyword-search
-		* Search for a term, in reverse order of JShell prompt inputs history : input '```Ctrl+r```'
-		* Scrolling within matches (in reverse order of history) : repeatedly input '```Ctrl+r```'
-* ```/exit``` : resets and exits the JShell session, clearing all stored variables values.
-* JShell internal variables : ```$1```, ```$2```, and so on.
+* 단축키
+	1. 현재 프롬프트의 시작/끝 이동.
+		* '```Ctrl+a```' : 줄의 시작부터
+		* '```Ctrl+e```' : 줄의 마지막부터
+	2. 완료된 프롬프트 입력의 기록 위/아래 이동
+		* *위쪽 화살표* key : 시간을 거슬러 올라감
+		* *아래 화살표* key : 시간을 앞당김
+	3. 역키워드 검색
+		* JShell 프롬프트 입력 히스토리의 역순으로 용어 검색 :  '```Ctrl+r```' 입력
+		* 일치 항목 내에서 스크롤(히스토리의 역순으로):  '```Ctrl+r```' 반복 입력
+* ```/exit``` :JShell 세션을 재설정 및 종료하고 저장된 변수 값을 모두 삭제한다.
+* JShell 내부 변수 : ```$1```, ```$2``` 등
 	* When expressions involving literals and/or previously declared variables are entered as-is, without assignment, those expressions are still evaluated. The result is stored in such an internal variable, and is available for use until the JShell session is reset.
-* Variable Declaration rules relaxation
-	1. Single Java statements need not be terminated with the separator '```;```'.
-	2. If multiple statements are entered on a single line at the prompt, successive statements must be separated by the '```;```'. However, the trailing '```;```' can still be omitted.
+	* 리터럴,또는 이전에 선언된 변수를 포함하는 수식을 할당 없이 그대로 입력해도 해당 수식은 여전히 연산 가능하다. 결과는 그러한 내부 변수에 저장되며, JShell 세션이 재설정될 때까지 사용할 수 있다.
+* 변수 선언 규칙 완화
+	1. 단일 자바 구문을 구분 기호 '```;```'로 종료할 필요는 없음.
+	2. 프롬프트에서 한 줄에 여러 개의 구문을 입력할 때, 연속된 문장은 ';'로 구분해야 한다. 그러나 후행 ';'는 여전히 생략할 수 있다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Explored some useful keyboard shortcuts for ```JShell``` commands
-* Understood the idea behind ```JShell``` internal variables
-* Observed how ```JShell``` reduces typing effort, by relaxing some coding rules
+* Explored some useful keyboard shortcuts for ```JShell``` 명령어의 유용한 단축키를 몇 가지 알아보았다.
+* ```JShell``` 내부 변수 이면을 이해했다.
+* ```JShell```은 일부 코딩 규칙을 완화해, 코드 작성의 수고를 던다.
 
-### Step 23: Introducing Conditionals - the ```if```
+### Step 23: 조건문 ```if``` 소개
 
-The *PMT-Challenge* needs us to print a total of 10 table entries. The  ```for``` **loop** is a suitable iteration mechanism to get this done. The word *loop* means exactly what the English dictionary says. 
 
-*As ```i``` varies from ```1``` through ```10```, do some stuff involving ```i```*
+*PMT-Challenge*는 총 10개의 테이블 항목을 출력해야 한다. ```for```문은 이 작업을 수행하기 위한 적절한 반복 메커니즘이다. *loop*라는 단어는 영어 사전이 말하는 그대로를 의미한다.
 
-For the *PMT-Challenge*, ```do some stuff``` would be the call to ```System.out.printf()```.
+* ```i``` 는```1``` 부터 ```10``` 다양하기 때문에, ```i```와 관련된 일을 수행한다.*
 
-The way a ```for``` loop is structured is:
+*PMT-Challenge*에서 무언가를 하는 것은 ```System.out.printf()```를 호출할 수 있다.
+
+```for``` 문의 구조는 다음과 같다:
 
 ```java
 
@@ -2068,25 +2081,24 @@ The way a ```for``` loop is structured is:
 
 ```
 
-Here's how above code runs
-1. Execute ```initialization``` code. 
-2. If ```condition``` evaluates to true, execute ```statements```. Else, go out of loop.
-3. Execute ```update```
-4. Repeat 2 and 3
+위 코드의 동작 방법:
+1.  ```초기문``` 을 실행한다. 
+2.  ```조건식``` 평가 결과 참이면, ```작업문```을 수행한다. 그렇지 않으면 루프를 벗어난다.
+3. ```업데이트```를 실행한다.
+4. 2번과 3번을 반복한다.
 
-***Does it sound complex?*** Let's break it down.
+***복잡해 보이는가?*** 쪼개서 살펴보자.
 
-Let's start with understanding what ```condition``` is all about.
+우선 ```조건식```에 대해 전부 이해해보자.
 
-#### Logical Operators
+#### 논리 연산자
 
-```condition``` represents a logical value(a ```true``` or  a ```false```). 
+```조건식``` 은 논리 결과를 나타난다.( ```참``` 혹은 ```거짓```). 
 
-Turns out Java has a class of **logical operators**, which can be used with operands within **logical expressions**, evaluating to a ```boolean``` value. 
+자바는 **논리 수식**을 피연산자로 사용하는 **논리 연산자**가 있고, 이는 ```boolean```값을 평가한다.
+아마 여러분은 학교에서 ```=```기호를 숫자를 비교하기 위해 사용했을 것이다.
 
-While in school, you probably used the ```=``` symbol to compare numbers. 
-
-***The world of Java is a little different.***  ```=``` is assignment operator. ```==``` is the comparison operator. 
+***자바의 세계에서는 조금 다르다.***  ```=```는 할당 연산자이다. ```==``` 가 비교 연산자이다.
 
 ```java
 
@@ -2099,7 +2111,8 @@ While in school, you probably used the ```=``` symbol to compare numbers.
 
 ```
 
-These are other comparison operators as well, such as ```<``` and ```>```. 
+ ```<``` 와 ```>``` 등 다른 비교 연산자도 있다. 
+ 
 ```java
 
 	jshell> i < 5
@@ -2109,7 +2122,7 @@ These are other comparison operators as well, such as ```<``` and ```>```.
 
 ```
 
-```<=``` and ```>=``` are simple extensions.
+```<=```와 ```>=```는 단순한 확장이다.
 
 ```java
 
@@ -2123,28 +2136,28 @@ These are other comparison operators as well, such as ```<``` and ```>```.
 
 ```
 
-#### Conditionals: The "if" Statement 
+#### 조건문: "if"문 
 
-We would want to execute specific lines of code only when a condition is true. 
+우리는 조건이 참일 때만 특정한 코드 라인을 실행하기를 원할 것이다.
 
-Enter ```if``` statement.
+```if``` 문을 보자.
 
-An ```if``` statement is structured this way:
+하나의 ```if``` 은 다음과 같이 구성된다:
 
 ```java
 
-	if (condition) {
-		statement;
+	if (조건식) {
+	      작업문;
 	}
 
 ```
 
-```statement``` is executed only if ```condition``` evaluates to ```true```.
+```작업문```은 ```조건식```이 ```참```인 경우만 실행된다.
 
 
-Typically, all the code that we write is executed always. 
+일반적으로 우리가 쓰는 모든 코드는 항상 실행된다.
 
-In the example below, ```i is less than 5``` is always printed.  
+아래 예시의 ```i is less than 5```도 항상 출력된다.
 
 ```java
 
@@ -2154,7 +2167,7 @@ In the example below, ```i is less than 5``` is always printed.
 	i is less than 5
 ```
 
-Using the ```if``` statement, we can control the execution of ```System.out.println("i is less than 5");```.
+```if```문을 사용하면, ```System.out.println("i is less than 5");```의 실행을 제어할 수 있다.
 
 ```java
 
@@ -2163,10 +2176,10 @@ Using the ```if``` statement, we can control the execution of ```System.out.prin
 	jshell> 
 ```
 
-The condition ```i < 5``` will evaluate to ```false```, since ```i``` is currently ```10```. Nothing is printed to console.
+ ```i```의 값이 ```10```이기 때문에 조건문 ```i < 5```이 ```거짓```이 되어 콘솔 창에 아무것도 출력되지 않는다.
 
 
-Let's change ```i``` to ```4``` and execute the ```if``` condition.
+```if``` 문을 실행하기 위해```i``` 를 ```4```로 바꿔보자.
 
 ```java
 
@@ -2179,14 +2192,14 @@ Let's change ```i``` to ```4``` and execute the ```if``` condition.
 
 ```
 
-```i is less than 5``` is printed to console.
+```i is less than 5```는 콘솔 창에 출력된다.
 
-By controlling the value stored in the variable ```i```, we are able to control whether the statement  ```System.out.println("i is less than 5");``` actually runs. 
+저장된 변수 ```i```값을 조절하여```System.out.println("i is less than 5");``` 구문의 실제 실행 여부를 제어할 수 있다.
 
-***Hurrah! We just achieved *conditional execution*!***
+***만세! 이제 우리는 *조건문 수행*을 달성했다!***
 
 
-Just as we can compare a variable with a literal, it is possible to compare the values of two variables. The same set of comparison operators, namely ```==```, ```<```, ```>```, ```<=``` and ```>=``` can be used.  
+변수를 리터럴과 비교할 수 있듯이 두 변수의 값을 비교할 수도 있다. 동일한 집합의 비교 연산자, 즉 ```==```, ```<```, ```>```, ```<=``` 그리고 ```>=``` 도 사용될 수 있다.
 
 ```java
 
@@ -2207,13 +2220,13 @@ Just as we can compare a variable with a literal, it is possible to compare the 
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는,
 
-* Understood the need for a conditionals
-* Were introduced to the concept of logical expressions, and conditional operators
-* Explored usage of the Java ```if``` statement
+* 조건문의 필요성에 대해 이해했다.
+* 논리적 표현식 및 조건부 연산자의 개념을 도입하였다.
+* 자바에서의 ```if```문의 사용을 알아보았다.
 
 ### Step 24: Programming Exercise PE-04 
 - - - 
