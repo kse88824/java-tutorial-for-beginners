@@ -3462,11 +3462,11 @@ What started off giving you a headache, will probably keep you in her good books
 * 메소드 오버로딩에 대한 이해를 활용하여 자체적으로 메소드를 정의했다.
 
 
-### Step 10: Returning From A Method
+### Step 10: 메소드로부터의 반환
 
-A method can also be coded to return the result of its computation. Such a result is called a  **return value**. 
+메소드는 계산 결과를 반환하도록 코딩될 수도 있다. 이러한 결과를 **반환 값**이라고 한다.
 
-A lot of built-in Java methods have return values, the most notable we have seen being ```Math.min()``` and ```Math.max()```. 
+많은 자바 내장 메소드들은 반환 값을 가지고 있다. 우리가 가장 주목할 만한 것은  ```Math.min()``` 과 ```Math.max()```이다. 
 
 ```java
 	jshell> Math.max(15, 25)
@@ -3476,13 +3476,13 @@ A lot of built-in Java methods have return values, the most notable we have seen
 
 ```
 
-```Math.max()``` does return a value, which is stored in the ```JShell``` variable ```$1```.
+```Math.max()``` 는  ```JShell```의 변수 ```$1```에 저장된 값을 반환한다.
 
-A return mechanism is quite important, as it provides you the flexibility of:
-* Sharing computed results with other code and methods
-* Improving the breaking down of a problem, into sub-problems
+반환 메커니즘은 다음과 같은 유연성을 제공하기 때문에 매우 중요하다.
+* 계산된 결과를 다른 코드 및 메소드와 공유
+* 문제 해결을 위해 하위 문제로 분할
 
-The next example explains how you can collect a method's return value.
+다음 예시에서는 메소드의 반환 값을 수집하는 방법을 설명한다.
 
 ```java
 	jshell> int max = Math.max(15, 25)
@@ -3493,9 +3493,9 @@ The next example explains how you can collect a method's return value.
 
 ```
 
-We are storing the return value in a variable ```int max```.
- 
-We could define our own method that returns a value, in a similar manner. In the method  ```sumOfTwoNumbers``` above, instead of displaying ```sum``` at once, we could ```return``` it to the calling-code. 
+변수 ```int max```에 반환 값을 저장한다.
+
+우리는 비슷한 방식으로 값을 반환하는 메소드를 직접 작성할 수 있다. 위의  ```sumOfTwoNumbers```메소드에서 ```sum```을 보여주지 않고 호출한 코드로 ```반환```한다.
 
 ```java
 
@@ -3508,9 +3508,11 @@ We could define our own method that returns a value, in a similar manner. In the
 	$2 => 11
 ```
 
-The statement ```return sum;``` is called a **return statement**.
+```return sum;```이라는 구문은 **반환문**이라고 한다.
 
-When the code ```sum = sumOfTwoNumbers(1, 10)``` is run, ```sum``` collects the result returned by ```sumOfTwoNumbers()```. You could now print ```sum``` on the console, store it in another variable, or even invoke a different method by passing it as an argument!
+```sum = sumOfTwoNumbers(1, 10)``` 코드가 실행될 때, ```sum```은 ```sumOfTwoNumbers()```에서 반환된 결과를 취합한다. 이제 콘솔에 ```sum```을 출력하거나, 다른 변수에 저장하거나, 
+심지어 다른 메소드를 호출할 때 이를 인자로 넘겨줄 수도 있다!
+
 
 ```
 	jshell> sum = sumOfTwoNumbers(1, 10)
@@ -3520,23 +3522,27 @@ When the code ```sum = sumOfTwoNumbers(1, 10)``` is run, ```sum``` collects the 
 	jshell>
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
-* Understood the need for a return mechanism with methods
-* Explored the syntax for a return statement
-* Wrote our own method ```sumOfTwoNumbers()``` with a return value, and saw how it became more flexible
+이번 단계에서는
 
-### Step 11: Exercise-Set PE-04 (With Solutions)
+* 메소드를 이용한 반환 메커니즘의 필요성을 이해했다.
+* 반환문을 알아보았다
+* 반환 값을 가지는 ```sumOfTwoNumbers()```메소드를 직접 작성하고 어떻게 하면 더 유연해지는지 알아보았다.
 
-Let's now try a few exercises on methods that return values.
 
-#### Exercises
+### Step 11: 실습 모음 PE-04 (솔루션 포함)
 
-1. Write a method that returns the sum of three integers.
-2. Write a method that takes as input two integers representing two angles of a triangle, and computes the third angle. *Hint: The sum of the three angles of a triangle is 180 degrees*. 
+이제 반환 값을 가지는 메소드에 대해 몇 가지 실습을 해보자
 
-#### Solution-01
+#### 실습
+
+1. 세 개의 정수의 합을 반환하는 메소드를 작성하시오.
+2. 삼각형의 두 각도를 의미하는 두 정수를 입력받는 메소드를 작성하고, 세 번째 각도를 계산한다.
+*힌트: 삼각형의 세 각의 합은 180도이다.*
+
+
+#### 솔루션-01
 
 ```java
 
@@ -3549,7 +3555,7 @@ Let's now try a few exercises on methods that return values.
 
 ```
 
-#### Solution-02
+#### 솔루션-02
 
 ```java
 
@@ -3562,63 +3568,65 @@ Let's now try a few exercises on methods that return values.
 	
 ```
 
-### Step 12: Java Methods, A Review
+### Step 12: 자바 메소드 복습
 In this section, we introduced you to the concept of methods in Java.
-* We understood that methods are routines that perform a unit of computation. They group a set of statements together into a block, and need to be run by being invoked, through a method call. 
-* We can define methods that accept no arguments, a single argument and multiple arguments.
-* A method can also be defined to return results of its computation, and this makes it your program more flexible.
+이번 섹션에서는 자바의 메소드의 개념에 대해 소개했다.
+* 우리는 메소드가 계산 단위 하나를 수행하는 루틴이라는 것을 이해했다. 이들은 일련의 구문을 하나의 블록으로 그룹화하며, 메소드 호출을 통해 호출되어 실행되어야 한다.
+* 인수가 없거나 한 개 이거나, 여러 개인 메소드를 정의할 수 있다.
+* 메소드는 내부의 연산 결과를 반환하도록 정의할 수도 있다. 이는 프로그램을 더 유연하게 만들어준다.
 
-## Understanding the Java Platform
 
-JShell is amazing to start with the basics of Java programming. It abstracts all complexities behind writing, compiling and running Java code.
+## 자바 플랫폼의 이해
 
-What's happening behind the screens? Let's find out.
+JShell은 자바 프로그래밍의 기초부터 시작한다는 점이 놀랍ㄴ다. 이는 자바 코드의 작성, 컴파일, 실행 뒤에 숨겨진 모든 복잡성을 추상화한다.
 
-### Step 01: The Java Platform - An Introduction
+화면 뒤에서는 무슨 일이 일어날까? 지금부터 알아보자.
 
-A computer only understands binary code, which are sequences of ```0```’s and ```1```’s (called **bits**).  All instructions to a computer should be converted to ```0```’s and ```1```’s before execution.
+### Step 01: 자바 플랫폼 - 소개
 
-***When we wrote our code in JShell, how was it converted to binary code?***
 
-We write our programs in a high-level language, such as Java, as it is easier to learn, remember and maintain. 
+컴퓨터는 비트라고 불리는 ```0```과 ```1```의 연속적인 이진 코드만 이해한다. 모든 명령은 실행 전에 ```0```과 ```1```들로 전환되어야 한다.
+***JShell에서 코드를 작성할때, 이를 어떻게 이진코드로 전환하는가?***
 
-Who converts it to binary code?
+우리는 학습, 기억, 유지관리가 용이하기 때문에 자바와 같은 고급 언어로 프로그램을 작성한다.
+누가 이것을 이진 코드로 변환하는가?
 
-Typically, **Compiler** is a program which understands the syntax of your programming language and converts it into binary code.
+일반적으로 **Compiler**는 프로그래밍 언어의 구문을 이해하고 이진 코드로 변환하는 프로그램이다.
+자바 디자이너들은 그것이 플랫폼에 독립적이기를 원했다. 코드를 한 번 컴파일하여 아무 곳에서나 실행하십시오.
+그러나 운영 체제마다 명령 모음이 다르다. 즉, 이진 코드가 다르다.
 
-Java designers wanted it to be Platform independent. Compile the code once and run it anywhere.
+자바는 다음과 같은 흥미로운 솔루션을 제공한다:
+\- 모든 자바 컴파일러는 소스 코드를 **바이트 코드**라고 불리는 **중간 표현**으로 번역한다.
+- 자바 프로그램(**바이트 코드**)을 실행시키기 위해서는 ***JVM***(자바 가상 기계)가 필요하다
+	- ***JVM***은 **바이트 코드**를 이해하고 실행시킨다.
+	- 운영체제마다 서로 다른 JVM이 존재한다. 윈도우 JVM은 **바이트 코드**를 윈도우에서 실행 가능한 명령어로 변환한다. 리눅스 JVM은 **바이트 코드**를 리눅스에서 실행 가능한 명령어로 변환한다.
+\
 
-However, different Operating Systems have different instruction sets - different binary code. 
+자바 컴파일러는 자바 소스 코드를 **바이트 코드**로 번역하고, 이는 컴퓨터의 **.class**파일로 저장된다.
 
-Java provides an interesting solution:
-- All Java compilers translate source code to an **intermediate representation** ( **bytecode** ). 
-- To run Java programs (**bytecode**), you need a ***JVM*** (Java Virtual Machine). 
-	- ***JVM*** understands **bytecode** and runs it. 
-	- There are different JVM's for different operating systems. Windows JVM converts **bytecode** into Windows executable instructions. Linux JVM converts **bytecode** into Linux executable instructions. 
+#### 요약
 
-The Java compiler translates Java source code to **bytecode**, which is stored as a **.class** file on the computer.
+이번 단계에서는
 
-#### Summary
+* 소스 코드 변환 시, 자바 컴파일러의 역할에 대해 이해했다.
+* 바이트 코드와 같은 중간 표현(IR)의 필요성에 대해 인지했다.
+* (컴파일러 + 자바 가상 기계 + 운영체제) 조합이 소스 코드 이식성을 보장하는 방법 이해했다.
 
-In this step, we:
 
-* Understood the role of the Java compiler in translating source code
-* Realized the need for an Intermediate Representation (IR) such as bytecode
-* Understood how the (Compiler + JVM + OS) combination ensure source code portability
+### Step 02: 자바의 ```클래스``` 작성
 
-### Step 02: Creating a Java ```class```
+먼저, `클래스`의 개념에 대해 이해해보자.
 
-First, let's understand the concept of a `class`.
+다음 예시를 살펴보아라:
 
-Let's consider an example: 
+**국가**는 *개념*이다. **인도**, **미국**, 그리고 **네덜란드** 는 **국가**의 *예시* 혹은 *인스턴스(사례)*이다.
 
-A **Country** is a *concept*. **India**, **USA** and **Netherlands** are *examples* or *instances* of **Country**.
+마찬가지로, `클래스`는 하나의 템플릿이다. `객체`는 `클래스`의 `인스턴스`이다. 
 
-Similarly, a `class` is a template. `Objects` are `instances` of a `class`.
+객체 지향 프로그래밍에 관한 섹션에서 `클래스`와 `객체`에 대해 더 많이 논의해 볼 것이다.
 
-We will discuss more about `class` and `object` in the section on Object Oriented Programming.
+클래스를 만드는 구문과 클래스의 객체는 매우 간단하다.
 
-The syntax to create a class, and its objects, is very simple.
 
 ```java
 
@@ -3627,17 +3635,21 @@ The syntax to create a class, and its objects, is very simple.
 	created class Country
 ```
 
-Let's create an instance of the class:
+클래스의 인스턴스를 생성해보자:
+
+
 ```java
 	jshell> Country india = new Country();
 	india ==> Country@6e06451e
 ```
 
-The syntax is simple - `ClassName objectName = new ClassName()`.
+구문은 간단하다 - `ClassName objectName = new ClassName()`.
 
-```india``` is an object of type ```Country```, and is stored in memory at a location indicated by ```6e06451e```.
+```india``` 는 ```Country```타입의 객체이며, ```6e06451e``` 로 표시된 메모리 공간에 저장된다. 
 
-Let's create a few more instances of the class:
+
+클래스의 객체를 몇 개 더 생성해보자:
+
 ```java
 	jshell> Country usa = new Country();
 	usa ==> Country@6e1567f1
@@ -3647,13 +3659,13 @@ Let's create a few more instances of the class:
 
 ```
 
- ```india```, ```usa``` and ```netherlands``` are all different objects of type ```Country```. 
+ ```india```, ```usa``` 와 ```netherlands``` 는 ```Country```타입의 서로 다른 객체들이다. 
 
- We actually left the contents of the ```class``` ```Country``` bare. 
+우리는 아직 ```클래스```와 ```Country```의 내용은 살펴보지 않았다.
 
- A ```class``` does often include both data (member variables) and method definitions. More on this at a relevant time.
+```클래스```는 모든 데이터 (멤버 변수)와 메소드 정의를 포함하기도 한다. 이에 대해서는 적절한 시기에 알아보자.
 
-Let's consider another example:
+또 다른 예시가 있다:
 
 ```java
 
@@ -3669,22 +3681,23 @@ Let's consider another example:
 
 ```
 
-We can also create a ```class``` for a different concept, like a ```Planet```. 
+우리는 ```Planet```이라는 ```클래스```를 위한 또 다른 개념을 만들었다.
 
-```Planet``` is now a different template. ```planet```, ```earth``` and ```venus``` are instances of `Planet` class. 
+```Planet```은 또 다른 템플릿이다. ```planet```, ```earth``` 그리고 ```venus```는 `Planet`클래스의 객체이다.
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Saw how ```class``` creation actually creates a new type
-* Understood how to create instances of classes - objects
+이번 단계에서는
 
-### Step 03: Adding A Method To A ```class``` 
+* ```클래스```의 창조가 어떻게 새로운 타입을 만들어내는지 확인했다.
+* 클래스의 인스턴스 (객체) 생성 방법에 대해 이해했다.
 
-A method defined within a ```class```, denotes an action than can be performed on objects of that ```class```.
+### Step 03: ```클래스``` 에 메소드 추가하기
 
-Let's define a method inside ```Planet``` - to ```revolve()```!
+```클래스```내에 정의한 메소드는 ```클래스```객체에 대해 수행할 수 있는 것보다  더 많은 동작을 의미한다.
+
+```Planet``` 메소드 안에 ```revolve()```를 정의해보자!
 
 ```java
 
@@ -3698,12 +3711,15 @@ Let's define a method inside ```Planet``` - to ```revolve()```!
 	update replaced variable earth, reset to null
 	update replaced variable venus, reset to null
 ```
-Syntax of `revolve()` is similar to other methods we've created before. 
+`revolve()` 구문은 이전에 우리가 만들어 보았던 다른 메소드들과 비슷하다. 
 
-> The ```class``` template got updated as a result of adding new method.
-> Earlier instances ```planet```,```earth``` and ```venus``` got reset to ```null``` as they are based on the old template
+> 새로운 메소드를 추가한 결과, ```클래스``` 템플릿이 업데이트 되었다.
+> 이전 사례인 ```planet```,```earth``` 그리고 ```venus```는 ```이전 템플릿을 기반으로 하기 때문에 ```null```로 재설정되었다.
 
-Let's re-instantiate a few objects.
+\
+
+몇몇 객체를 다시 생각해보자.
+
 
 ```java
 	jshell> Planet earth = new Planet();
@@ -3714,7 +3730,7 @@ Let's re-instantiate a few objects.
 
 ```
 
-How do we call the ```revolve``` method?
+ ```revolve``` 메소드를 어떻게 호출하는가?
 
 ```java
 
@@ -3731,26 +3747,26 @@ How do we call the ```revolve``` method?
 
 ```
 
-Our attempt to perform ```revolve()``` did not work with the syntax ```Planet.revolve()``` as it is not a static method (more on that in a later section). 
+```revolve()```가 정적 메소드가 아니기 때문에 이를 수행하기 위한 우리의 시도는 ```Planet.revolve()``` 구문에서는 통하지 않았다. (뒷부분에 더 자세히 설명)
+```earth.revolve()```를 통해 ```revolve()```를 호출하는 시도는 성공했다. ```earth```가 ```Planet```타입의 객체이기 때문이다. 
 
-Invoking ```revolve()``` through syntax such as ```earth.revolve()``` succeeds, because ```earth``` is an object of type ```Planet```. 
+#### 요약
 
-#### Summary
+이번 단계에서는
 
-In this step, we:
+* 기존 ```클래스```에 메소드를 추가하는 방법을 배웠다.
+* ```클래스```의 객체에서 이를 어떻게 호출하는지 발견했다.
 
-* Learned how to add a method definition to an existing ```class```
-* Discovered how to invoke it, on objects of the ```class```
 
-### Step 04: Writing and Running Java Code in separate Source Files
+### Step 04: 별도의 소스 파일에서 Java 코드 쓰기 및 실행
 
-So far, we have enjoyed creating classes and defining methods within them, all with our friendly neighborhood ```JShell```. 
+지금까지 우리는 친근한 이웃인 ```JShell```과 함께 클래스를 만들고 그 안에서 메소드를 정의하는 것을 즐겼다.
 
-```JShell``` kind of spoiled us kids, by relaxing some Java syntax rules, invoking the compiler on our behalf, and also running the code like room service.
+```JSHell```은 일부 자바 구문 규칙을 완화시키고 우리를 대신하여 컴파일러를 호출하며 룸서비스처럼 코드를 실행함으로써 우리 아이들을 버릇없게 했다.
 
-The time has come for us frog princes to outgrow the proverbial well. Yes, you're right! Time to start writing code in a proper code editor, and smell the greener grass on that side.
+개구리 왕자들이 속담에 나오는 우물에서 벗어날 때가 왔다. 그래, 네 말이 맞아! 적절한 코드 편집기에서 코드를 쓰기 시작하고, 더 넓은 세상으로 나아갈 시간이다.
 
-Let's start with creating a new source code file - 'Planet.java'. Choose any folder on your hard-disk and create the file shown below:
+먼저 새 소스 코드 파일 'Planet.java'를 만드는 것으로 시작합시다. 하드 디스크의 폴더를 선택하고 아래와 같은 파일을 만드십시오:
 
 _**Planet.java**_
 
@@ -3764,13 +3780,13 @@ _**Planet.java**_
 
 ```
 
-> You can get the code that we wrote earlier in JShell for ```Planet``` by running the command ```/list Planet```, and copying the code. 
+>  ```/list Planet```이라는 명령어를 실행하고 복사하면 JShell에서 이미 작성한 ```Planet```코드를 얻을 수 있다.
+> 지금은 원하는 텍스트 편집기를 아무거나 사용할 수 있다.
 
-> You can use any text editor of your choice, for now. 
+소스 파일의 이름은 가지고 있는 ```클래스```이름과 일치해야 한다. 여기서는 우리는 파일 이름을 `Planet.java`로 지어야 한다.
 
-The source file name must match the ```class``` name it contains. Here, we must name the file `Planet.java`.
+다음 단계는 이 코드를 컴파일 하는 것이다. (2단계). 이를 위해 ```JShell```을 종료하고 시스템 터미널 또는 명령 프롬프트를 다시 실행하십시오. 자, 이제, 어떤 효과가 있는지 봅시다!
 
-The next course of action would be to compile this code (Stage 2). For that, exit out of ```JShell```, and run back to your system terminal or command prompt. Now, see what plays out!
 
 ```java
 
@@ -3778,7 +3794,7 @@ The next course of action would be to compile this code (Stage 2). For that, exi
 	|  Goodbye
 ```
 
-```cd``` to the folder where you have created the file `Planet.java`
+ `Planet.java` 파일을 만든 폴더에 ```cd```하여라.
 
 ```
 	in28minutes$> cd in28Minutes/git/JavaForBeginners/
@@ -3786,7 +3802,8 @@ The next course of action would be to compile this code (Stage 2). For that, exi
 	Planet.java
 ```
 
-Check Java version.
+자바 버전을 클릭하여라.
+
 ```
 	command-prompt> java -version
 	java version "x.0.1"
@@ -3794,7 +3811,7 @@ Check Java version.
 	Java HotSpot(TM) 64-bit Server VM (build x.0.1+11, mixed mode)
 ```
 
-You can compile java code using ```javac Planet.java```. You can see that a new file is created `Planet.class`. This contains your `bytecode`.
+```javac Planet.java```를 사용해서 자바 코드를 컴파일 할 수 있다. 이제 `바이트 코드`를 포함하고 있는 `Planet.class`라는 이름으로 만들어진 새로운 파일을 볼 수 있다. 
 
 ```
 	command-prompt> javac Planet.java
@@ -3802,7 +3819,7 @@ You can compile java code using ```javac Planet.java```. You can see that a new 
 	Planet.class         Planet.java_
 ```
 
-You can run the class using command `java Planet`.
+`java Planet` 명령어를 사용해 클래스를 실행할 수 있다..
 
 ```java
 	command-prompt> java Planet
@@ -3812,16 +3829,17 @@ You can run the class using command `java Planet`.
 	command-prompt>	
 ```
 
-Why is there an error? Let's discuss that in the next step.
+왜 에러가 발생하는가? 다음 단계에서 논의해보자.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Ventured out of ```JShell``` into unexplored territory, to write source code
-* Learned how to invoke the compiler to compile source files, from the terminal
+* 'JShell'에서 미개척 영역으로 과감하게 전환하여 소스 코드 작성해보았다.
+* 터미널에서 컴파일러를 호출하여 소스 파일을 컴파일하는 방법 알아보았다.
 
-### Step 05: Introducing ```main()```, And Running Bytecode
+
+### Step 05: ```main()```소개와 바이트 코드 실행
 
 In the previous step, we compiled **_Planet.java_**. In this step, let's run the bytecode generated, which lies inside **_Planet.class_**.
 
