@@ -8,7 +8,7 @@
 
 **In28Minutes** 에서는, 저희는 매일 "어떻게 하면 멋진 학습 경험을 만들 수 있을까?"하고 스스로에게 묻습니다. 
 
-이 책에서는, 여러분은 Java와 함께 **객체** **지향** 코드를 배우게 될 것이며, 많은 예제들,실습들, 팁들을 접하게 될 것입니다. 저희는 많은 예시와 함께 Java 사용자들을 위해 코드를 쓰는 방법을 알아보려고 노력할 것입니다.
+이 책에서는, 여러분은 Java와 함께 **객체** **지향적** 코드를 배우게 될 것이며, 많은 예제들,실습들, 팁들을 접하게 될 것입니다. 저희는 많은 예시와 함께 Java 사용자들을 위해 코드를 쓰는 방법을 알아보려고 노력할 것입니다.
 
 본 가이드를 개선하는데 도움을 주시려면 - **Fork, Pull Requests, Shares and Likes 를 추천드립니다**!
 
@@ -2084,7 +2084,7 @@ The table below lists the **primitive types** in Java.
 위 코드의 동작 방법:
 1.  ```초기문``` 을 실행한다. 
 2.  ```조건식``` 평가 결과 참이면, ```작업문```을 수행한다. 그렇지 않으면 루프를 벗어난다.
-3. ```업데이트```를 실행한다.
+3. ```반복 후 작업문```을 실행한다.
 4. 2번과 3번을 반복한다.
 
 ***복잡해 보이는가?*** 쪼개서 살펴보자.
@@ -2228,18 +2228,20 @@ The table below lists the **primitive types** in Java.
 * 논리적 표현식 및 조건부 연산자의 개념을 도입하였다.
 * 자바에서의 ```if```문의 사용을 알아보았다.
 
-### Step 24: Programming Exercise PE-04 
+### Step 24: 프로그래밍 실습 PE-04 
 - - - 
 
-1. Create four integer variables ```a```, ```b```, ```c``` and ```d```. Write an ```if``` statement to print if the sum of ```a``` and ```b``` is greater than the sum of ```c``` and ```d```.
-2. Store three numerical values as proposed angles of a triangle in integer variables ```angle1```, ```angle2``` and ```angle3```. Create an ```if``` statement to state whether these three angles together can form a triangle.
 
-	_Hint: A triangle is a closed geometric figure with three angles, whose sum must  exactly equal ```180 degrees```._
-3. Have a variable store an integer. Create an ```if``` statement to find out if it's an even number.
+1. ```a```, ```b```, ```c``` 그리고 ````d````라는 네 개의 정수형 변수를 생성한 후, ```a```와 ```b```의 합을 ```c```와 ```d```의 합보다 큰 경우에만 출력하는 ```if문```을 작성하시오.
 
-	_Hint: Use operator ```%```._
+2. 삼각형의 각도를 저장하는 세 개의 정수형 변수 ```angle1```, ```angle2``` 그리고 ```angle3```을 저장하여라. 세 각도가 삼각형을 그릴 수 있는지 여부를 나타내는 ```if문```을 작성하시오.
+	_힌트: 삼각형은 세 개의 각도로 이루어져있고, 그 합은 정확히 ```180도```이어야만 한다._
+	
+3. 변수가 하나의 정수를 저장하도록 하여라. 해당 변수가 짝수인지 알아내는 ```if문``` 작성하시오.
+	
+	_힌트: ```%``` 연산자를 사용하자._
 
-### Step 25: Solution to PE-04
+### Step 25:  PE-04 솔루션
 
 #### Solution 1
 
@@ -2302,13 +2304,13 @@ The table below lists the **primitive types** in Java.
 	jshell>
 ```
 
-### Step 26:  ```if``` Statement again
+### Step 26:  ```if문``` 더 알아보기
 
-Let's look at a few more examples of if statements.
+if문의 몇 가지 예를 더 살펴보자.
 
 ##### Snippet-1 
 
-Here's a basic example of conditional execution.
+여기 조건부 실행의 기본적인 예가 있다.
 
 ```java
 
@@ -2319,7 +2321,8 @@ Here's a basic example of conditional execution.
 	i is odd
 ```
 
-Let's add two statements to the second line.
+두 번째 라인에 두 개의 구문을 추가해보자.
+
 ```java
 	jshell> if (i == 5)
 	   ...> System.out.println("i is odd"); System.out.println("i is prime");
@@ -2329,9 +2332,9 @@ Let's add two statements to the second line.
 	jshell>
 
 ``` 
-Both text messages are printed out.
+두 문자 메시지 모두 출력되었다.
 
-Let's change value of ```i``` to ```6``` and execute again.
+```i```의 값을 ```6```으로 바꾸고 다시 실행해보자.
 
 ```java
 
@@ -2345,22 +2348,21 @@ Let's change value of ```i``` to ```6``` and execute again.
 
 ```
 
-```i is prime``` is printed to console. Why? 
+```i is prime```이 콘솔 창에 출력되었다. 왜일까?
 
-Why is this statement executed when the condition is ```false```?
+왜 조건문이 ```false```인데도 실행되었을까?
 
+기본적으로 ```if문```은 바로 다음에 오는 문장에만 구속력을 가진다.
 
-The ```if``` statement, by default, binds only to the next statement. 
+그렇기 때문에 무조건적으로 실행되는 ```System.out.println("i is prime");```를 제어하지 않는다.
 
-It does not control the execution of ```System.out.println("i is prime");```, which in fact runs unconditionally, always.
+두 개 구문을 조건부 실행할 수 있는 방법이 있을까? 두 개보다 더 많다면?
 
-Is there a way we can ensure conditional execution of a two statements? And more than two? 
- 
-##### Snippet-2 : ```if``` with statement blocks
+##### Snippet-2 : 블록으로 묶은 ```if문``` 
 
-We seem to have pulled a rabbit out of the hat here, haven't we! The rabbit lies in the  pair of *braces* : '```{```' and '```}```'. 
+마치 마술과 같은 묘안이 있다! 이 마술은 '```{```' 와 '```}```'라는 *braces*의 한 쌍에 있다.  
 
-They are used to group a sequence of statements together, into a **block**. Depending on the condition value (```true``` or ```false```), either all the statements in this block are run, or none at all. 
+이들은 일련의 구문을 **블록**으로 그룹화하는 데 사용된다. 조건문의 결과 (```참``` 또는 ```거짓```)에 따라서 이 블록의 모든 구문이 실행되거나 아예 실행되지 않는다.
 
 ```java
 
@@ -2384,7 +2386,7 @@ They are used to group a sequence of statements together, into a **block**. Depe
 
 ```
 
-It is considered good programming practice to *always* use blocks in an ```if``` conditional. Here is an example:
+```if문```에서 *항상* 블록을 사용하는 것은 좋은 프로그래밍 습관이다. 여기 예시가 있다:
 
 ```java
 
@@ -2394,23 +2396,25 @@ It is considered good programming practice to *always* use blocks in an ```if```
 
 ```
 	
-A block can also consist of a single statement! This improves readability of code.
+블록은 또한 하나의 구문으로도 구성될 수 있다! 이는 코드의 가독성을 향상시킨다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Saw the importance of using statement blocks with ```if``` conditionals
-* Understood how control flow can be made more readable
+* ```if문```에서 블록을 사용의 중요성을 알아보았다.
+* 제어 흐름을 보다 쉽게 읽을 수 있는 방법 이해했다.
 
-### Step 27: Introducing Loops: The ```for``` Statement 
 
-The *PMT-Challenge* needs us to print a total of 10 table entries. The  ```for``` **loop** is a suitable iteration mechanism to get this done. 
+### Step 27: 반복문 소개:  ```for문``` 
 
-The word *loop* means exactly what the English dictionary says. 
-*As ```i``` varies from ```1``` through ```10```, do some stuff involving ```i```*
+ *PMT-Challenge*는 총 10개의 테이블 항목을 출력해야 한다. ```for``` **loop**은 이 작업을 수행하기 적절한 반복 메커니즘이다.
+ 
+*loop*이라는 단어는 영어 사전이 말하는 그대로를 의미한다.
 
-```for``` loop is built this way:
+* ```i``` 는```1``` 부터 ```10``` 다양하기 때문에, ```i```와 관련된 일을 수행한다.*
+
+```for문```은 다음과 같이 구성된다:
 
 ```java
 
@@ -2421,19 +2425,19 @@ The word *loop* means exactly what the English dictionary says.
 
 ```
 
-***Here's how above code runs:***
-1. Execute ```initialization``` code. 
-2. If ```condition``` evaluates to true, execute ```statements```. Else, go out of loop.
-3. Execute ```update```
-4. Repeat 2 and 3
+***위 코드 실행 방법:***
+1. ```초기문```을 실행한다. 
+2. ```조건식``` 평가 결과 참이면, ```작업문```을 수행한다. 그렇지 않으면 루프를 벗어난다.
+3. ```반복 후 작업문```을 실행한다.
+4. 2번과 3번을 반복한다.
 
-We've already seen these components in isolation:
+이러한 구성 요소를 분리해보자:
 
-* _initialization_ : ```int i = 1```
-* _condition_ : ```i <= 10```
-* _update_ : ```i++```
+* _초기문_ : ```int i = 1```
+* _조건식_ : ```i <= 10```
+* _반복 후 작업문_ : ```i++```
 
-Let's now put them together to get the bigger picture. Here is how it might look:
+이제 더 큰 그림을 그리기 위해 그들을 함께 모읍시다. 다음과 같이 보일 수 있다:
 
 ```java
 
@@ -2443,11 +2447,11 @@ Let's now put them together to get the bigger picture. Here is how it might look
 
 ```
 
-This loop, when executed, prints the message "Hello World" on a separate line, for a total of ```10``` times. 
+이 반복문은 실행될 때, 각 줄에 "Hello World"라는 메시지를 총 ```10번```출력한다.
 
-##### Snippet-1 : *PMT-Challenge* Solution
+##### Snippet-1 : *PMT-Challenge* 솔루션
 
-We need to replace the "Hello World" message with the console print of a table entry. This print is controlled by ```i``` taking values from ```1``` through ```10```.
+우리는 "Hello World" 메시지를 테이블 항목을 콘솔에 출력하는 것으로 바꿔야 한다. 이 출력은 ```1```부터 ```10```의 값을 가지는 ```i```에 의해 제어된다.
 
 ```java
 
@@ -2469,40 +2473,39 @@ We need to replace the "Hello World" message with the console print of a table e
 
 ```
 
-##### Snippet-1 Explained 
+##### Snippet-1 설명
 
-1. The first step is the initialization: ```i = 1```. 
-2. After this, the statement ```System.out.printf("%d * %d = %d", 5, i, 5*i).println();```  is executed once. 
-3. Then, the update occurs: ```i++```.
-4. Immediately after, the condition ```i<=10``` is evaluated. It returns ```true```. Progress happens. Since it is a ```for``` *loop*, the statement is executed again.
-5. Thereafter, this sequence is executed until ```i``` gets a value of ```11``` (due to successive updates).
-6. The moment ```i``` reaches ```11```, , the condition becomes ```false```. The looping within the ```for``` terminates.
+1. 첫 단계는 초기문이다: ```i = 1```. 
+2. 이 후, ```System.out.printf("%d * %d = %d", 5, i, 5*i).println();``` 라는 구문이 한번 실행된다.
+3. 그러면 반복 후 작업이 실행된다: ```i++```.
+4. 그 후 바로 조건식  ```i<=10```이 평가된다. ```참```값을 반환한다. 진전을 보인다. ```for문```이기 때문에 작업문이 한번 더 반복된다.
+5. 이 후, 연속적인 반복 후 작업으로 ```i```값이 ```11```이 될 때 까지 이 시퀀스가 실행된다.
+6. ```i```값이 ```11```이 되는 순간, 조건식은 ```거짓```이 된다. ```for문```내의 루프는 종료된다.
+이제, ```1```부터 ```10```에 대한 5의 곱셈표가 표시되었다!
 
-Meanwhile, the Multiplication Table for ```5```, for entries ```1``` through ```10``` has been displayed! 
+자, 진짜 멋지지 않은가? 대단하다!
+이 정도의 단계까지 왔다고 스스로를 토닥여주자. 이 멋지고 강력하기까지 한 기술 (*반복문*)은 거의 모든 자바 프로그램을 작성할 때 사용된다.
 
-Now, wasn't that really elegant? It sure was! 
+#### 요약
 
-Let's pat ourselves on the back for having reached this stage of learning. This elegant, yet powerful technique (*loops*) is used in almost every Java program that's written. 
+이번 단계에서는
 
-#### Summary
+* ```for문```과 같은 반복문이 왜 필요한지 알아보았다.
+* ```for문```의 메커니즘에 대해 이해했다.
+* 반복을 위해 ```for문```을 사용하여  *PMT-Challenge*를 해결하였다.
 
-In this step, we:
 
-* Observed why we need a looping construct, such as the ```for```
-* Understood the mechanism of a ```for``` loop
-* Used a ```for``` loop in iteration, to solve our *PMT-Challenge*
+### Step 28: 프로그래밍 실습 PE-05
 
-### Step 28: Programming Exercise PE-05
+1. 이제 ```7```이라는 숫자에 대한 곱셈표 출력을 위해 전과정을 반복해 보아라. 기존 세션을 사용하고 있다면 새로운 ```JShell```세션으로 시작하시오.
+2. ```6```과 ```10```에 대한 곱셈표를 출력하기 위해 마지막 솔루션을 사용하시오.
+3. ```1```부터 ```10```까지의 정수를 출력하시오.
+4. ```10```부터 ```1```까지의 정수를 출력하시오.
+5. ```1```부터 ```10```까지의 정수의 제곱을 출력하시오.
+6. 첫 짝수 ```10```개의 제곱을 출력하시오
+7. 첫 홀수 ```10```개의 제곱을 출력하시오
 
-1. Repeat the entire process at arriving at the Multiplication Table Print problem, now for the number ```7```. Start with a fresh ```JShell``` session, if you're still using an existing one for quite some time (Rinse, and repeat!).
-2. Use the final solution to print Multiplication Tables for ```6``` and ```10```.
-3. Print the integers from ```1``` to ```10```.
-4. Print the integers from ```10``` to ```1```.
-5. Print the squares of the integers from ```1``` to ```10```.
-6. Print the squares of the first ```10``` even integers.
-7. Print the squares of the first ```10``` odd integers.
-
-### Step 29: Solution to PE-05
+### Step 29:  PE-05 솔루션
 
 #### Solution 2
 
@@ -2564,7 +2567,8 @@ In this step, we:
 
 #### Solution 4
 
-This is the first time we are using ```i--```. Isn't this interesting?
+
+```i--```의 첫 번째 사용이다. 흥미롭지 않은가?
 
 ```java
 
@@ -2606,7 +2610,8 @@ This is the first time we are using ```i--```. Isn't this interesting?
 
 #### Solution 6
 
-```update``` of a for loop can do a lot of things. Here, we are using ```i += 2```.
+for문의 ```반복 후 작업```으로 여러 가지 일을 할 수 있다. 여기서 우리는 ```i += 2```를 사용했다.
+
 
 ```java
 
@@ -2646,9 +2651,9 @@ This is the first time we are using ```i--```. Isn't this interesting?
 
 ```
 
-### Step 30: Puzzling You With ```for``` 
+### Step 30: 어려운  ```for문``` 살펴보기
 
-In the conceptual form of the ```for``` construct:
+```for문```의 개념적 구조는 다음과 같다:
 
 ```java
 
@@ -2661,11 +2666,13 @@ In the conceptual form of the ```for``` construct:
 
 ```
   
-It may surprise you that each one of *initialization*, *condition*, *updation* and *statements block* is **optional**. They can all be left out individually, in combination, or all altogether!! Let's examine a few interesting cases in code.
 
-1. Empty initialization, Empty Statement
+*초기문(initialization)*, *조건(condition)*, *반복 후 작업(updation)* 이 **선택적**인 것을 보고 놀랄 것이다. 그것들은 모두 개별적으로, 조합으로, 아니면 전부 다 제외될 수 있다!! 몇 가지 흥미로운 사례들을 코드로 살펴보자. 
 
-Increments the control variable in quick succession until the condition evaluates to false.
+1.  비어있는 초기문과 작업문
+
+조건이 거짓으로 평가될 때까지 연속적으로 제어 변수를 증가시킨다.
+
 ```java
 
 	jshell> int i = 1
@@ -2677,9 +2684,9 @@ Increments the control variable in quick succession until the condition evaluate
 
 ```
 
-2. Multiple initializations, Empty Statement
+2.  여러 개의 초기문과 비어있는 작업문
 
-You can have multiple statements in ```initialization``` and ```update``` separated by ```,```.
+```초기문```과 ```작업 후 반복문```은 ```,```로 분리해서 여러 개를 사용할 수 있다.
 
 ```java
 
@@ -2695,7 +2702,7 @@ You can have multiple statements in ```initialization``` and ```update``` separa
 ```
 
 
-In the example below, i is incremented and j is decremented.
+아래의 예시에서, i는 증가하고 j는 감소한다.
 
 ```java
 
@@ -2708,11 +2715,12 @@ In the example below, i is incremented and j is decremented.
 
 ```
 
-3. Infinite Loop
+3. 무한 반복
 
-An infinite loop is one where the *condition* is left *empty*. An empty condition always evaluates to ```true```. Since a ```for``` loop only terminates when the condition becomes ```false```, such a loop this never terminates. 
 
-It can only be terminated externally with a keyboard interrupt (```CTRL + c```).
+무한 반복이란 *조건*이 비어있는 상태를 말한다. 조건이 비어있으면 항상 ```참```으로 평가 된다. ```for문```은 조건이 ```거짓```인 경우에만 종료되기 때문에, 그러한 루프는 절대 종료되지 않는다.
+
+이는 예외적으로 ``CTRL + c``` 키를 사용하여 종료 시킬 수 있다.
 
 ```java
 
@@ -2724,9 +2732,10 @@ It can only be terminated externally with a keyboard interrupt (```CTRL + c```).
 ```
 
 
-4. Statement Block in for
+4. for문에서의 블록
 
-As in case of the ```if``` conditional statement, we can have statement blocks in ```for``` loops as well. As before, we enclose the statement set between braces ('```{```' and '```}```'). The statements are executed repeatedly, in the same order as they appear in the block.
+
+```if문```에서 처럼, ```for문```도 구문에 블록을 가질 수 있다. 이전처럼, 괄호 '```{```'와 '```}```'의 사이에 있는 구문들을 묶을 수 있다. 이 구문들은 블록에 나타나는 순서와 같이 반복적으로 실행된다. 
 
 ```java
 
@@ -2748,92 +2757,98 @@ As in case of the ```if``` conditional statement, we can have statement blocks i
 ```
 
 
-#### Summary
+#### 요약
 
-In this step, we saw that all components of a ```for``` loop are optional:
-* *initialization*
-* *condition*
-* *updation*
-* *statement block*
-
-### Step 31: A Review Of Basic Concepts
-Before we go further, let's quickly get a Big Picture of what we are doing here!
-
-A **computer** is a *machine* that does a job for you and me. It is can be used to run tasks that we find complicated, time-consuming, or even boring! For instance, a laptop can play music from a CD, videos from the web, or fire a print job. 
-
-We have mobile phones around us, which are mini versions of computers. Then there are others, ranging from blood-sugar monitors to weather-forecast systems. Computers surround us, wherever we go!
-
-Any computer is made up of two basic layers: 
-
-* The **hardware**: Consists of all the *electronic* and *mechanical* parts of the computer, including the *electronic circuits*.
-* The **software**: Describes the *instructions* fed into the computer, which are stored and run on its *hardware*.
-
-If the human body were a computer,
-
-* Its *hardware* would consist of the various organs (such as limbs, blood and heart)
-* Its *software* would be the signals from the nervous system, which drive these organs.
-
-**Computer programming** involves writing software instructions to run tasks on a computer. The user who gives these instructions is called the **programmer**. Often, computer programming  involves solving challenging, and very interesting problems.
+이번 단계에서는, 우리는 ```for문```의 구성요소들이 선택적이란는 것을 알았습니다:
+* *초기문*
+* *조건*
+* *반복 후 작업*
+* *작업문*
 
 
-In the previous steps, we introduced you to the basic Java language concepts and constructs.
+### Step 31: 기본 개념 복습
 
-We solved a programming challenge, the *PMT-Challenge* using basic Java constructs.
+더 나아가기 전에, 우리가 여기서 무엇을 배웠는지 빠르게 생각해보자!
 
-We used JShell REPL to learn the following concepts, Step by-step:
-* Expressions, Operators and Statements
-* Variables and Formatted Output
-* Conditionals and Loops
 
-At each step, we applied fresh knowledge to enhance our solution to the *PMT-Challenge*
+**컴퓨터**는 우리를 위한 작업을 하는 *기계*이다. 그것은 우리가 복잡하고, 시간이 많이 걸리거나 심지어 지루하다고 생각하는 작업들을 실행시키는 데 사용될 수 있다! 예를 들면 랩탑 컴퓨터는 CD안의 음악, 웹의 동영상을 재생하거나 인쇄 작업을 시작할 수 있다.
 
-Hope you liked the journey thus far. Next sections delve deeper into Java features, using the same Step by-step approach. We will catch up again soon, hopefully!
+우리는 우리 주위에 작은 버전의 컴퓨터인 휴대폰을 가지고 있다. 그리고 혈당 측정기에서 일기예보 시스템 등 다른 것들도 있다. 우리가 가는 곳마다 컴퓨터가 우리를 에워싸고 있다!
 
-## Understanding Methods
+모든 컴퓨터는 두 개의 기본 계층으로 구성된다:
 
-Feeling good about where you are right now? You just created an elegant, yet powerful solution to the *PMT-Challenge*, using:
+* **하드웨어**: *전자 회로*를 포함한 컴퓨터의 모든 *전자* 및 *기계* 부품으로 구성된다.
+* **소프트웨어**: *하드웨어*에서 실행되고 저장되는 *명령*을 기술한다.
 
-* Operators, variables and expressions
-* Built-in formatted output
-* Conditionals for control-flow, and 
-* Iteration through loops
+
+만일 인체가 컴퓨터라면,
+* *하드웨어*는 여러가지 장기로 이루어져 있을 것이다.(사지, 혈액, 심장 등)
+* *소프트웨어*는 신경계로부터의 신호일 것이며, 이는 이 장기를 움직이는 것이다.
+
+
+
+.
+**컴퓨터 프로그래밍***은 컴퓨터에서 작업을 실행하기 위한 소프트웨어 명령을 작성하는 것을 포함한다. 이러한 명령을 제공하는 사용자를 **프로그래머**라고 한다. 종종, 컴퓨터 프로그래밍은 도전적이고 매우 흥미로운 문제들을 해결하는 것을 포함한다.
+
+앞의 단계에서는 자바 언어의 기본 개념과 구성을 소개하였다.
+우리는 기본적인 자바 구조를 사용하여 *PMT-Challenge*라는 프로그래밍 과제를 해결했다.
+
+JShell REPL을 사용하여 다음과 같은 개념들을 차근차근 배웠다:
+* 수식, 연산자 ,구문
+* 변수와 출력 형식
+* 조건문과 반복문
+
+각 단계마다 *PMT-Challenge*에 새로운 지식을 적용하여 솔루션을 강화하였따.
+
+지금까지의 여정이 마음에 들었기를 바란다. 다음 섹션에서는 동일한 Step by-step 접근 방식을 사용하여 Java 기능에 대해 자세히 알아볼 것이다. 우리가 또 한번 따라잡을 수 있기를 바란다!
+
+
+## 메소드 이해
+
+지금까지 배운 것들이 마음에 드는가? *PMT-Challenge*를 위한 우아하면서도 강력한 솔루션을 개발하여 다음과 같은 이점을 얻었다:
+
+* 연산자, 변수, 수식
+* 내장되어 있는 출력 형식
+* 흐름 제어 조건
+* 루프를 통한 반복문
  
-And guess what we ended up with? A good-looking display of a Multiplication Table! There's a good chance people in your circles want to see it, use it and maybe share it among their friends. 
 
-However, some might be unhappy that it works only for ```5```, and not for ```8``` and ```7```. Maybe it would, but then they would need to type in those lines of code again. This might disappoint them, and your new found popularity would slide downhill. 
+그리고 우리가 결국 무엇으로 끝났는지 알아맞춰봐라. 바로 곱셈표 출력! 주변 사람들이 그걸 보고 싶어하고, 사용하고, 그리고 아마 친구들과 공유하고 싶어할지도 모른다.
 
-Surely a more elegant solution exists, a pattern waiting to unravel itself.
+그러나 일부에서는 ```8```도 ```7```도 아닌 ```5```에만 적용되는 것에 불만을 가질 수도 있다. 그러면 그들은 그 코드들을 다시 입력해야 할 것이다. 이것은 그들을 실망시킬 수 있다.
+확실히 더 우아한 해결책이 존재하는데, 그것은 스스로 풀기를 기다리는 패턴이다.
 
-Exist it does, and the mechanism to use it lies with Java **methods**. A ```method``` is a feature that allows you to group together a set of statements, and give it a name. This name represents the *functionality* of that set, which can be re-used when necessary.
+자바에는 이를 위해 **메소드**를 사용하는 메커니즘이 존재한다. ```메소드```란 일련의 구문들을 그룹화하여 이름을 붙일 수 있는 기능이다. 이 이름은 해당 집합의 *기능*을 나타내며, 필요할 때 다시 사용할 수 있다. 
 
-A method is essentially a *routine* that performs a certain task, and can do it any number of times it is asked to. It may also return a result for the task it performs. The syntax for a ***method definition*** is along these lines:
+
+메소드는 본질적으로 특정 작업을 수행하는 *루틴*이며, 요청된 횟수만큼 수행할 수 있다. 또한 수행하는 작업에 대한 결과를 반환할 수도 있다. ***메소드 정의*** 구문은 다음과 같다:
 
 ```
-ReturnType   methodName () {
-  method-body
+반환형   메소드 이름 () {
+  메소드 바디
 }
 
 ```
 
-Where 
+ 
 
-* ```methodName``` is the name of the routine
-* ```method-body``` is the set of statements
-* a pair of braces ```{``` and ```}``` enclose ```method-body```
-* ```ReturnType``` is the type of ```methodName```'s return value
+* ```메소드 이름``` 은 루틴의 이름이다.
+* ```메소드 바디``` 는 구문의 집합이다.
+* 한 쌍의 ```{``` 와 ```}``` 괄호는 ```메소드 바디```를 하나로 묶는다.
+* ```반환형```은 ```메소드 이름```의 반환 값의 타입이다.
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Examined the need for labeling code, and its reuse
-* Learned that a Java method fits the bill
-* Saw how a method definition looks like, conceptually
+* 라벨링 코드의 필요성 및 재사용 여부를 조사했다
+* Java 메서드가 성능에 적합하다는 것을 알게 되었다.
+* 메소드 정의가 어떻게 구성되어 있는지 개념적으로 확인했다.
 
-### Step 01 : Defining A Simple Method
+### Step 01 : 간단한 메소드 정의
 
-We will start off, by writing a simple method that prints "```Hello World```" twice on your screen.
+"```Hello World```"를 화면에 두 번 출력하는 간단한 메소드를 작성해보자.
 
 ```java
 
@@ -2845,18 +2860,19 @@ We will start off, by writing a simple method that prints "```Hello World```" tw
 
 ```
 
-A little bit of theory:
-* Above code for the method is called **method definition**. 
-* ```void``` indicates that the method does not return any computed result - We will examine return values from methods, a little later.
 
-***When the code ran, it didn't exactly welcome us twice, did it?*** All we got was a boring message from ```JShell```, mumbling ```created method sayHelloWorldTwice()```. 
+약간의 이론은 다음과 같다:
+* 위와 같은 메소드를 위한 코드를 **메소드 정의**라고 한다.
+* ```void```는 해당 메소드가 연산 결과를 반환하지 않음을 의미한다. 메소드의 반환 값에 대해서는 조금 후에 알아보자.
 
-That's because defining a method ***does NOT*** execute its statement body.
+***코드가 실행 되었을 때, 우리를 두번이나 반겨주지는 않았지?*** 우리가 받은 것은 ```created method sayHelloWorldTwice()```를 중얼거리는 지루한 메시지 뿐이다.
 
-Since the statement block is not stand-alone anymore, its functionality needs to be **invoked**. This is done by writing a **method call**. 
+이는 메소드를 정의하는 것이 메소드 바디를 실행하는 것이 ***아니기 때문이다.***
 
-Let's look at a few examples for **method calls**.
- 
+메소드 바디가 더 이상 독립적인 구문이 아니기 때문에, 이는 기능적으로 **호출**되어야 한다. 이는 **메소드 호출**을 통해 이루어진다.
+
+**메소드 호출**에 대해서 몇 가지 예시를 살펴보자.
+
 ```java
 
 	jshell> sayHelloWorldTwice
@@ -2872,28 +2888,31 @@ Let's look at a few examples for **method calls**.
 	
 ``` 
 
-All that we had to do was to add parantheses to name of the method.
+All that we had to do was to add parantheses to name of the metho
+메소드 이름 뒤에 괄호만 추가하면 된다.
 
-> The trailing '```;```' can be left out in ```JShell```, and is another example of syntax rules being relaxed.
+> 뒤에있는 '```;```'는 ```JShell```에서는 생략될 수 있다. 이는 구문 규칙을 완화하는 또 다른 예시이다.
 
-> Method names need to follow the same rules as variable names.
+> 메소드 이름은 변수 이름을 지을 때와 같은 규칙을 따른다.
 
-#### Summary
 
-In this step we:
 
-* Got our hands dirty coding our first method
-* Learned that defining and invoking methods are two different steps
+#### 요약
 
-### Step 02: Exercise-Set PE-01
+이번 단계에서는
 
-Let's now reinforce our basic understanding of methods, by trying out a few exercises.
+* 직접 첫 번째 메소드를 코딩해 보았다.
+* 메소드의 정의와 호출이 서로 다른 단계임을 배웠다.
+
+
+### Step 02: PE-01 실습
+
+이제 몇 가지 실습을 해봄으로써 방법에 대한 기본적인 이해를 강화합시다.
 
 #### Exercise Set -5
 
-1. Write and execute a method named ```sayHelloWorldThrice``` to print ```Hello World``` thrice.
-
-2. Write and execute a method that prints the following four statements:
+1. ```Hello World```를 세 번 출력하는 ```sayHelloWorld``` 메소드를 작성하시오.
+2. 아래 네 개의 구문을 출력하는 메소드를 작성하시오.
 	
 	```I've created my first variable```
 
@@ -2903,9 +2922,9 @@ Let's now reinforce our basic understanding of methods, by trying out a few exer
 	
 	```I'm excited to learn Java```	
 
-#### Solutions to PE-01
+#### PE-01 솔루션
 
-#### Solution-1
+#### 솔루션 -1
 
 ```java
 
@@ -2923,7 +2942,7 @@ Let's now reinforce our basic understanding of methods, by trying out a few exer
 
 ```
  
-#### Solution-2
+#### 솔루션 -2
 
 ```java
  
@@ -2943,9 +2962,9 @@ Let's now reinforce our basic understanding of methods, by trying out a few exer
 
 ```
 
-### Step 03: Editing A Method Definition (```Jshell``` Tips)
+### Step 03: 메소드 정의 수정하기 (```Jshell``` Tips)
 
-##### Snippet-01: Editing sayHelloWorldTwice()
+##### Snippet-01: sayHelloWorldTwice() 수정
 
 ```java
 
@@ -2956,7 +2975,8 @@ Let's now reinforce our basic understanding of methods, by trying out a few exer
 	| created method sayHelloWorldTwice()
 ```
 
-The ```/methods``` command lists out the methods defined in the current session. 
+```/methods``` 명령어는 현재 세션에 정의된 메소드를 나열한다.
+ 
 ```
 	jshell> /methods
 	| void sayHelloWorldTwice()
@@ -2964,7 +2984,7 @@ The ```/methods``` command lists out the methods defined in the current session.
 
 ```
 
-The ```/list``` command lists the code of the specified method.
+ ```/list```명령어는 지정된 메소드의 코드를 나열한다.
 
 ```java
 
@@ -2978,7 +2998,7 @@ The ```/list``` command lists the code of the specified method.
 ```
 
 
-The ```/edit``` command allows you to modify the method definition, in a separate editor window.
+```/edit``` 명령어를 사용하면 별도의 편집기 창에서 메소드 정의를 수정할 수 있다.
 
 ```java
 
@@ -2991,7 +3011,7 @@ The ```/edit``` command allows you to modify the method definition, in a separat
 
 ```
 
-The ```/save``` method takes a file name as a parameter. When run, it saves the session method definitions to a file.
+ ```/save``` 메소드는 파일 이름을 매개 변수로 사용한다. 실행 시 세션 메소드 정의를 파일에 저장한다.
 
 ```java
 	
@@ -3003,26 +3023,29 @@ in28minutes$>
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we explored a few ```JShell``` tips that make life easier for you while defining methods
+이번 단계에서는, 메소드를 정의할 때 더 편리하게 해주는 ```JShell```팁을 몇 가지 알아보았다.
 
-### Step 04: Methods with Arguments
 
-We wrote the method ```sayHelloWorldTwice``` to say ```Hello World``` twice. In the programming exercise, we wanted to print ```Hello World``` thrice and we wrote a new method  ```sayHelloWorldThrice```. 
+### Step 04: 인수가 있는 메소드
 
-Imagine you're in the Java classroom, where your teacher wants to test your Java skills by saying: 
-_"I want you to print_ ***```Hello World```*** _an arbitrary number of times"_.
+우리는 ```Hello World```를 두 번 출력하기 위해 ```sayHelloWorldTwice```메소드를 작성하였다. 프로그래밍 실습에서는,  ```Hello World```를 세 번 출력하기 위해 ```sayHelloWorldThrice```라는 새로운 메소드를 작성하였다.
 
-Now, that probably would test your patience as well!
+여러분이 Java 수업에 있다고 상상해 보십시오. 그 교실에서 선생님은 다음과 같이 말하면서 Java 사용 능력을 시험하고 싶어합니다:
+_"***```Hello World```***를 임의의 횟수만큼 출력하고 싶다면 어떻게 해야 할까요?"_.
 
-How to write a method to print ```Hello World``` an arbitrary number of times? 
+자, 그러면 여러분의 인내심을 시험해 볼 수 있을 거다!
 
-The thing to note is the word "arbitrary", which means the method body should have no clue! This number has to come from outside the method, which can only happen with a method call. 
+```Hello World```를 임의의 횟수만큼 출력하는 메소드를 어떻게 작성할까?
 
-External input to a method is given as a **method argument**, or *parameter*. 
 
-To support arguments during a call, the concept of a method needs to be tweaked to:
+
+주목해야 할 것은 "임의"라는 단어인데, 이것은 메소드의 본체가 아무런 실마리도 갖지 말아야 한다는 것을 의미한다! 이 숫자는 메소드 호출이 있어야만 가능한 메소드 외부에서 나와야 한다.
+
+메소드에 대한 외부의 입력은 **인수** 혹은 *매개변수*로 주어진다.
+
+호출 중에 인수를 지원하려면 메소드의 개념을 다음과 같이 수정해야 한다.
 
 ```java
 
@@ -3034,15 +3057,15 @@ To support arguments during a call, the concept of a method needs to be tweaked 
 
 ``` 
 
-The only addition to the concept of a method, is the phrase
+메소드 개념에 유일하게 추가된 것은 다음 구절이다:
 
 ```ArgType argName``` 
 
-within the parentheses. ```argName``` represents the argument, and ```ArgType``` is its type. The next example should clear the air for you.
+괄호 안의 ```argName```은 인수를 나타내고, ```ArgType```은 인수의 타입이다. 다음 예제가 이해를 도울 것이다.
 
-##### Snippet-01: Method with an argument: Definition
+##### Snippet-01: 인수가 있는 메소드: 정의
 
-Let's look at a method definition using an argument ```numOfTimes```.
+ ```numOfTimes```라는 인수를 사용하는 메소드 정의를 보자.
 
 ```java
 
@@ -3051,7 +3074,8 @@ Let's look at a method definition using an argument ```numOfTimes```.
 	| created method sayHelloWorld(int)
 ```
 
-Let's try to call the method.
+메소드를 호출해보자.
+
 ```java
 	jshell> sayHelloWorld()
 	| Error:
@@ -3066,13 +3090,13 @@ Let's try to call the method.
 
 ```
 
-Method call must include the same number and types of arguments, that it is defined to have. ```sayHelloWorld()``` is an error because ```sayHelloWorld``` is defined to accept one parameter. ```sayHelloWorld(1)``` works.
+메소드 호출은 정의된 것과 동일한 수의 인수와 타입을 포함해야 한다.  ```sayHelloWorld```가 한 개의 매개변수를 가지는 것으로 정의되었기 때문에 ```sayHelloWorld()```는 에러가 발생하고 ```sayHelloWorld(1)```는 동작한다.
 
-However, the method does not do anything. Isn't it sad?
+그러나 이 메소드는 아무 것도 하지 않는다. 슬프지 않은가?
 
-##### Snippet-02 : Passing and accessing a parameter
+##### Snippet-02 : 매개변수 전달 및 접근
 
-The next example will show you how method body code can access arguments passed during a call. Not only that, the argument values can be used during computations.
+다음 예제는 본문 코드가 호출 중에 전달된 인수에 접근하는 방법을 보여 준다. 뿐만 아니라, 인수 값은 계산 중에 사용할 수 있다.
 
 ```java
 
@@ -3082,9 +3106,9 @@ void sayHelloWorld(int numOfTimes) {
 
 ```
 
-`System.out.println(numOfTimes)` prints the value of argument passed.
+`System.out.println(numOfTimes)` 은 전달된 인수의 값을 출력한다.
 
-A method can be invoked many times within a program, and each time different values could be passed to it. The following example will illustrate this fact.
+하나의 메소드는 프로그램 내에서 여러 번 호출 될 수 있고, 매 번 다른 값을 전달 받을 수도 있다. 다음 예제가 이 사실을 보여준다.
 
 ```java
 
@@ -3100,11 +3124,11 @@ A method can be invoked many times within a program, and each time different val
 
 ```
 
-##### Snippet-03: More complex method
+##### Snippet-03: 더 복잡한 메소드
 
-Code inside a method can be any valid Java code! For instance, you could write code for iteration, such as a ```for``` loop.
+메소드 내의 코드는 어디든 유효한 Java 코드가 될 수 있다! 예를 들어 ```for문```과 같은 반복문 코드를 작성할 수 있다.
 
-Let's look at an example:
+다음 예시를 보자:
 
 ```java
 
@@ -3116,9 +3140,9 @@ Let's look at an example:
 
 ```
 
-In the above example, we printed ```numOfTimes``` a total of ```numOfTimes``` for each method call. 
- 
-We print ```2``` two times and ```4``` four times.
+ 위의 예시에서, 우리는 각 메소드가 호출 될 때마다  ```numOfTimes```만큼 출력했다.
+
+```2```를 두 번, ```4```를 네 번 출력한다.
 
 ```java
 
@@ -3136,7 +3160,7 @@ We print ```2``` two times and ```4``` four times.
 
 ##### Snippet-4 : Saying "Hello World", Again and again...
 
-We wanted to print "Hello World" multiple times. Let's update the method:
+우리는 "Hello World"를 여러 번 출력하고 싶었다. 메소드를 다음과 같이 수정해보자:
 
 ```java
 	void sayHelloWorld(int numOfTimes) {
@@ -3146,7 +3170,7 @@ We wanted to print "Hello World" multiple times. Let's update the method:
 	}
 ```
 
-Isn't this cool?
+멋지지 않은가?
 
 ```java
 	jshell> sayHelloWorld(1)
@@ -3163,16 +3187,17 @@ Isn't this cool?
 
 ```
 
-You can now proudly demonstrate this code to your Java instructor. Your program can print "Hello World" an arbitrary number of times! 
+이제 이 코드를 Java 강사에게 자랑스럽게 증명할 수 있다. 여러분의 프로그램은 임의의 횟수만큼 "Hello World"를 출력할 수 있다!
 
 What started off giving you a headache, will probably keep you in her good books, for the rest of your course!
 
-Armed with this confidence booster, let's now see how Java treats mistakes you may make. 
+이렇게 자신감 강화로 무장한 여러분이 자바에서 저지르는 실수를 살펴봅시다.
 .
   
-##### Snippet-5 : Parameter type mismatch
+##### Snippet-5 : 매개변수 타입 불일치
 
-Java is a strongly typed language, with strict rules laid out for type compatibility. We saw that with variables, and how they play out with expressions and assignments. The same type compatibility rules are enforced by the compiler, when it needs to match the arguments from method calls with method definition.
+
+자바 언어는 형식 호환성을 위해 규정된 엄격한 규칙을 가진 강력한 형식의 언어다. 우리는 변수를 가지고, 그리고 그들의 수식과 할당을 어떻게 다루는지를 보았다. 메소드 호출의 인수를 메소드 정의와 일치시켜야 할 때 컴파일러에 의해 동일한 유형의 호환성 규칙이 적용된다
 
 ```java
 
@@ -3190,22 +3215,23 @@ Java is a strongly typed language, with strict rules laid out for type compatibi
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는:
 
-* Understood why Java supports method arguments, and how we may use them
-* Observed how method arguments lead to convenience and reuse
-* Decided to abide by type compatibility for actual arguments
 
-### Step 05: Exercise Set PE-02 (With Solutions)
+* Java가 메소드의 인수를 지원하는 이유와 이를 사용하는 방법을 이해했다
+* 메소드의 인수가 편리성과 재사용으로 이어지는 방법을 관찰했다
+* 실제 인수에 대한 형식 호환성을 준수하기로 결정했다.
 
-#### Exercises
+### Step 05:  PE-02 실습 모음 (솔루션 포함)
 
-1. Write a method ```printNumbers(int n)``` that prints all successive integers from ```1``` to ```n```.
-2. Write a method ```printSquaresOfNumbers(int n)``` that prints the squares of all successive integers from ```1``` to ```n```.
+#### 실습
 
-#### Solution-01
+1. ```1``` 부터 ```n```에 이르는 모든 연속된 정수를 출력하는 ```printNumbers(int n)``` 메소드를 작성하시오.
+2. ```1``` 부터 ```n```까지 모든 연속된 정수의 제곱을 출력하는  ```printSquaresOfNumbers(int n)``` 메소드를 작성하시오.
+
+#### 솔루션-01
 
 ```java
 
@@ -3220,7 +3246,7 @@ In this step, we:
 
 **jshell>**
 
-#### Solution 2
+#### 솔루션 2
 
 ```java
 
@@ -3234,17 +3260,17 @@ In this step, we:
 
 ```
 
-### Step 07: *PMT-Challenge* Revisited (And Some Puzzles)
+### Step 07: *PMT-Challenge* 복습 (그리고 복잡한 것들..)
 
-A method, in its own right, provides an elegant way to name and reuse a code block. In addition, its behavior can be controlled with parameters. 
+메소드는 그 자체로 코드 블록의 이름을 지정하고 재사용할 수 있는 우아한 방법을 제공한다. 게다가, 그것의 수행은 매개변수로 제어될 수 있다.
 
-Can we top-up the existing solution to the *PMT-Challenge*, with even more elegance? You're right, we're talking about:
-1. Writing a method to print the multiplication table for 5.
-2. Using this method to print the multiplication table for any number.
+*PMT-Challenge*의 기존 솔루션을 더욱 우아하게 보충할 수 있을까? 그래, 지금 우리가 말하는 건:
+1. 5의 곱셈표 인쇄 방법 작성
+2. 이 메소드를 사용하여 임의의 숫자에 대한 곱셈표를 출력한다.
 
-Want to take a look? Dive right in.
+한번 볼래? 바로 시작해보자.
 
-Here's what we did earlier:
+우리가 앞서 한 일은 다음과 같다:
 
 ```java
 
@@ -3264,7 +3290,8 @@ Here's what we did earlier:
 
 ```
 
-Let's wrap this in a method:
+
+이 문제를 하나의 메소드로 포장해보자.
 
 ```java
 
@@ -3276,7 +3303,7 @@ Let's wrap this in a method:
 
 ```
 
-You can call it to print 5 table.
+여러분은 5의 곱셈표를 출력하기 위해 이를 호출하기만 하면 된다.
 
 ```java
 
@@ -3295,19 +3322,19 @@ You can call it to print 5 table.
 	
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Revisited the *PMT-Challenge* solution we had earlier
-* Enclosed its logic within a method definition, ```printMultiplicationTable()```
-* Haven't fully explored its power yet!
+* 앞서 본  *PMT-Challenge* 솔루션을 다시 살펴보았다.
+*  ```printMultiplicationTable()```의 메소드 정의에 이 논리를 적용하였다.
+* 아직 이 힘을 충분히 탐구하지 못했다!
 
-### Step 08: Methods With Arguments, And Overloading
+### Step 08: 인수가 있는 메소드와 오버로딩(Overloading)
 
-The real power of a definition such as ```printMultiplicationTable()``` is when we arm it with arguments. Not verbal arguments, but "value" ones. That's right! 
+```printMultiplicationTable()```와 같은 정의의 진정한 힘은 이를 인수로 무장했을 때 나온다. 그냥 인수가 아니라 진짜 "값" 말이다!
 
-We will modify ```printMultiplicationTable()``` to have it accept a parameter, which would make it more flexible. 
+우리는 ```printMultiplicationTable()```를 수정해 보다 더 유연하게 매개변수를 받아들이도록 할 것이다.
 
 ```java
 	void printMultiplicationTable(int number) {
@@ -3317,7 +3344,7 @@ We will modify ```printMultiplicationTable()``` to have it accept a parameter, w
 	}
 ```
 
-We can now print the multiplication table of any number, by calling the method ```printMultiplicationTable(number)```.
+우리는 이제 ```printMultiplicationTable(number)```메소드를 호출함으로써 어떤 숫자든 곱셈표를 출력할 수 있다.
 
 ```java
 
@@ -3336,13 +3363,14 @@ We can now print the multiplication table of any number, by calling the method `
 	
 ```
 
- Nothing new to explain here. We have only combined stuff you have been learning so far, most recently adding the flavor of methods to the existing  code. 
+여기서 새롭게 설명한 것은 없다. 우리는 그저 이미 배웠던 것들을 조합했을 뿐인데 기존 코드에 메소드의 멋짐을 더했다.
 
- Soak in the power, simplicity and elegance of this program, folks!
+여러분, 이 프로그램의 힘, 단순함, 우아함에 흠뻑 빠져보십시오!
 
-#### Overloaded Methods
 
-It turns out we can call both versions of the method, `printMultiplicationTable()` and `printMultiplicationTable(5)` : 
+#### 오버로딩된 메소드
+
+`printMultiplicationTable()` and `printMultiplicationTable(5)` 라는 두 가지 버전의 메소드를 호출할 수 있음을 알았다. 
 
 ```java
 
@@ -3361,7 +3389,7 @@ It turns out we can call both versions of the method, `printMultiplicationTable(
 
 ```
 
- and 
+ 그리고 
 
 ```java
 
@@ -3380,25 +3408,24 @@ It turns out we can call both versions of the method, `printMultiplicationTable(
 
 ```
 
-You can have multiple methods with same name but different number of parameters. This is called ***method overloading***. 
+이름은 같지만 매개 변수 수는 다른 여러 메소드를 가질 수 있다. 이것을 ***메소드 오버로딩***이라고 한다.
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Enhanced the logic of ```printMultiplicationTable()``` by passing arguments
-* Added flexibility to the *PMT-Challenge* solution 
-* Were introduced to the concept of method overloading
+이번 단계에서는 
 
-### Step 09:  Methods With Multiple Arguments
+* 인수를 전달함으로써 ```printMultiplicationTable()```의 논리를 강화시켰다.
+* Added flexibility to the *PMT-Challenge* 솔루션에 유연성을 더했다.
+* 메소드 오버로딩 개념을 소개했다.
 
-It is possible, and pretty useful, to define methods that accept more than one argument. 
+### Step 09:  여러 개의 인수를 가진 메소드
 
-We have already seen how to call two in-built Java methods, ```Math.max``` and ```Math.min```, which accept 2 arguments each. 
+한 개 이상의 인수를 갖는 메소드를 정의하는 것은 가능하고 꽤 유용하다.
+우리는 이미 각각 두 개의 인수를 갖는 자바의 내장 메소드 ```Math.max``` 와 ```Math.min```를 어떻게 호출하는지 알아보았다.
+이제 우리 스스로도 그러한 메소드을 하나 써보면서 우리의 이해를 증진시킬 시간이다.
 
-Time now to enrich our understanding, by writing one such method ourselves as well. 
-
-A method ```void sum(int, int)``` that computes the sum of two integers, and prints their output.
+ ```void sum(int, int)```두 정수의 합을 계산하고 결과를 출력하는 메소드이다.
 
 ```java 
 
@@ -3413,7 +3440,8 @@ A method ```void sum(int, int)``` that computes the sum of two integers, and pri
 
 ```
 
-A method ```void sum(int, int, int)``` that computes the sum of three integers, and prints their output.
+ ```void sum(int, int, int)``` 는 세 정수의 합을 계산하고 결과를 출력하는 메소드이다.
+
 ```java
 
 	jshell> void sum(int firstNum, int secondNum, int thirdNum) {
@@ -3425,13 +3453,14 @@ A method ```void sum(int, int, int)``` that computes the sum of three integers, 
 	30
 ```
 
-There are overloaded methods. They have same name ```sum``` and have different number of arguments. 
+```sum```이라는 이름은 같고 인수의 수는 다르다. 이를 오버로딩된 메소드라고 한다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Used our understanding of method overloading to define our own methods
+* 메소드 오버로딩에 대한 이해를 활용하여 자체적으로 메소드를 정의했다.
+
 
 ### Step 10: Returning From A Method
 
