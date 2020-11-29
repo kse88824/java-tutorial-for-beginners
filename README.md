@@ -4259,6 +4259,7 @@ TODO - 수정 필요
 	* "Run as --> Java Application" 는 소스 코드를 컴파일하고 실행하기 위한 옵션
 		* 옵션은 main() 메소드를 가진 클래스에 한하여 사용 가능.
 
+
 #### 디버그 모드에서 Eclipse 사용
 
 곱셈표 프로그램 실행은 단계별로 할 수 있다. 즉, 전체 응용 프로그램이 한 번에 실행되지 않고 최종 출력을 콘솔에 인쇄하는 것이다. 우리는 Eclipse IDE를 이용하여 그것의 실행을 제어함으로써 그것의 흐름을 몇 단계로 지연시킬 수 있다. 이것은 **디버그 모드**라고 불리는 Eclipse의 특별한 모드에서 가능하다.
@@ -4276,34 +4277,33 @@ TODO - 수정 필요
 .	
 
 * Eclipse IDE는 디버그 모드(디버그 모드 실행의 다양한 단계에서 IDE의 스냅샷 제공)에서 프로그램 실행을 제어하기 위해 프로그래머에게 매우 사용자 친화적이고 직관적인 인터페이스를 제공한다.
-	* Setting and Removing a Break-point (also Toggling)
-	* Stepping over a method call, or into and out of a method body (during a method call)
+	
 	* 중단점 설정 및 제거(토글링)
 	* 메소드 호출이나 메소드 본체 내부/외부를 넘어 다님.(메소드를 호출하는 동안)
 		* ```int print()``` 와 ```int print(int)``` 그리고 ```int print(int,int,int)``` 를 넘나드는 것은 흥미롭지만, ```System.out.printf```에 들어가는 것은 여러분을 놀라게 할 수 있다! 그래서, 당신은 그것을 넘어서는 것이 좋을지도 모른다.
 	* For nested method calls, examine the method call **Stack Trace** (Call child, call parent relationship)
 	* 중첩된 메소드를 호출하는 경우, **스택 추적(Stack Trace)*** 메소드를 검사하십시오(부모,자식 관계를 호출)
-		* 예시 : ```int print()```, ```int print(int)``` and ```int print(int,int,int)``` method call chain of ```class MultiplicationTable```.
-	* Viewing and Modifying current state of data variables, at a break point
-	* Stepping through from one statement to another in the source code
-		* As we step through, observe the view displaying changes in data variable values
-		* Example of ```for``` loop control variable ```i```, inside method ```int print(int,int,int)``` of ```class MultiplicationTable```
-		* Observe that execution exits from the ```for``` loop when the condition ```i<=10``` is no longer ```true```.
-	* Re-executing a line of code
-	* Skipping execution of all statements till next break-point
-	* Ignoring all remaining breakpoints, resume execution of code till completion
+		* 예시 :  ```class MultiplicationTable```에서의 ```int print()```, ```int print(int)``` 와 ```int print(int,int,int)``` 메소드의 콜 체인.
+	* 중단점에서 데이터 변수의 현재 상태 보기 및 수정
+	* 소스 코드에서 한 구문에서 다른 구문으로 이동
+		* 단계를 진행하면서 데이터 변수 값의 변화를 표시하는 뷰를 관찰하십시오.
+		* 예를 들어 ```for문```의 제어 변수 ```i```가 ```class MultiplicationTable```의  ```int print(int,int,int)``` 메소드 내에 있을 때
+		*  ```i<=10```이라는 조건이 더 이상 ```참```이 아닐 때 ```for문```에서 빠져나가는 것을 관찰하시오.
+	* 해당 라인의 코드를 재실행
+	* 다음 중단점까지 모든 코드 건너뛰기
+	* 나머지 중단점 무시, 완료될 때까지 코드 실행 재개
+	
+### Eclipse IDE 키보드 바로가기
 
-### Eclipse IDE Keyboard Shortcuts
+* 코드 텍스트 편집기 바로 가기
+* 새 프로젝트/클래스 작성 바로 가기
+* 클래스 검색
 
-* Code Text Editor Shortcuts
-* New Project/Class Creation Shortcuts
-* Search for a Class
+### JShell과 IDE의 차이점
+ 
+방금 선언되었지만 초기화 없이 사용된 변수는 IDE에서 컴파일 오류를 플래그로 표시할 것이다! 그러나 JShell에서는 그렇지 않다. 일반 소프트웨어에서는 선언 시점에서의 변수 초기화(이미 알고 있는 바와 같이 "정의"라고 함)가 필수적이다
 
-### Differences between JShell and IDE
-
-Variables just declared, but used without an initialization, will flag a compilation  error in an IDE! But not so, it seems, in JShell. In regular software, variable initialization at point of declaration (called a "defintion", as we already know) is mandatory. 
-
-##### Snippet-1 : JShell redefines variables on demand
+##### Snippet-1 : JShell은 언제든지 변수를 재정의 한다. 
 
 ```java
 
@@ -4318,7 +4318,7 @@ Variables just declared, but used without an initialization, will flag a compila
 ```
 
 
-When the following code (similar to the one given to JShell) is compiled manually or by IDEs such as Eclipse, it will flag errors! 
+다음 코드(JShell에 제공된 코드와 유사)를 수동으로 컴파일하거나 Eclipse와 같은 IDE에 의해 컴파일하면 오류가 플래그 표시됨!
 
 ```java
 
@@ -4335,13 +4335,13 @@ When the following code (similar to the one given to JShell) is compiled manuall
 
 ```
 
-That is because Java source code is governed by strict **Scope Rules**.
+그것은 자바 소스 코드가 엄격한 **범위 규칙(Scope Rule)** 에 의해 관리되기 때문이다.
 
 
 
-Let's have another look at where we have reached with our solution, to the *PMT-Challenge* problem. Only now, let's change the code arrangement.
+*PMT-Challenge* 문제에 대한 솔루션을 통해 어떤 결과를 얻었는지 다시 한 번 살펴봅시다. 이제 코드 배열을 바꿔보자.
 
-##### Snippet-01: Revisited - The *PMT-Challenge*
+##### Snippet-01: 복습 - The *PMT-Challenge*
 
 **_MultiplicationTable.java_**
 
@@ -4397,22 +4397,22 @@ _5 * 10 = 50_
 
 ##### Snippet-01 Explained
 
-* We have now split the code into two source files: 
-	* **_MultiplicationTable.java_**: Houses the ```MultiplicationTable``` ```class``` definition, with some methods we need.
-	* **_MultiplicationRunner.java_**: Acts as the client of the ```MultiplicationTable``` ```class```, to invoke its functionality. It defines a ```main()``` method, that instantiates a ```MultiplicationTable```object, and invokes its ```print()``` method.
-* After this code was rearranged, we still got it to work!
+* 이제 코드를 두 개의 소스 파일로 나누었다: 
+	* **_MultiplicationTable.java_**: ```MultiplicationTable``` ```class```  정의에 필요한 몇 가지 메소드가 포함되어 있다.
+	* **_MultiplicationRunner.java_**: ```MultiplicationTable``` ```class```의 기능을 호출하기 위한 클라이언트로써 동작하며, ```MultiplicationTable```의 객체를 인스턴스화 하고, ```print()``` 메소드를 호출하는 ```main()```메소드를 정의하고 있다.
+* 이 코드가 재배열된 후에도 여전히 작동하게 되었다!
 
-#### Print-Multiplication-Table: Enhancements
+#### Print-Multiplication-Table: 강화
 
-* We now want to enhance our current solution to this challenge, even though we've come a long way. **"Once you get the whiff of success, sky is the limit!"**. Here is the changes we need:
-	* Pass the number whose table needs to be printed, as an argument
-	* Pass the (continuous) range of numbers, whose index entries in the table are to be printed. (For example, printing the table entries for ```6```, with entries for indexes between ```15``` to ```30```).
+* 이제 우리는 먼 길을 왔음에도 불구하고 이 도전에 대한 현재의 해결책을 개선하고자 한다. **"한번 성공의 냄새를 맡게 되면, 하늘이 한계다!"**. 필요한 변화는 다음과 같다.:
+	* 표를 출력해야 하는 숫자를 인수로 전달하시오.
+	* 표에서 인덱스 항목이 출력될 (연속) 범위의 숫자를 전달하십시오. (예를 들어, ```15```에서 ```30``` 사이의 인덱스 항목이 ```6```의 표로 인쇄된다.)
 
-One way to achieve all this, would involve overloading the ```print()``` method. The next example is one such attempt.
+이 모든 것을 이루기 위한 한 가지 방법은 ```print()``` 메소드에 오버로드를 호출할 것이다. 다음 예는 그러한 시도 중 하나이다
 
-##### Snippet-02: print() overloaded
+##### Snippet-02: 오버로딩된 print() 
 
-Overloading ```print()``` works for us, and we now support three ways in which to display  any table:
+```print()````를 오버로딩하는 것은 우리에게 효과가 있으며, 이제 우리는 어떤 테이블도 표시할 수 있는 세 가지 방법을 지원한다.
 
 ```java
 
@@ -4424,7 +4424,7 @@ Overloading ```print()``` works for us, and we now support three ways in which t
 
 ```	
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5 * 1 = 5_
 
@@ -4446,7 +4446,7 @@ _5 * 9 = 45_
 
 _5 * 10 = 50_
 
-The default table for ```5```, with entries fixed within ```1``` to ```10```. 
+```1```부터 ```10```까지 항목이 고정되어 있는 ```5```의 기본 표이다.
 
 ```java
 
@@ -4458,7 +4458,7 @@ The default table for ```5```, with entries fixed within ```1``` to ```10```.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _8 * 1 = 8_
 
@@ -4480,7 +4480,7 @@ _8 * 9 = 72_
 
 _8 * 10 = 80_
 
-Printing a table for any number, but with entries fixed between ```1``` and ```1```.
+아무 숫자의 표를 출력하지만 ```1```과 ``10``` 사이에 기입이 고정되어 있다.
 
 ```java
 
@@ -4514,9 +4514,9 @@ _6 * 19 = 114_
 
 _6 * 20 = 120_
 
-Displaying a table for any number, with entries for any range
+임의의 숫자에 대한 표 표시한다(모든 범위에 대한 항목 포함)
 
-The full code:
+전체 코드:
 
 **_MultiplicationTable.java_**
 
@@ -4566,9 +4566,9 @@ The full code:
 
 #### Issue: Code Duplication In Print-Multiplication-Table
 
-There is an issue with the code for ```class MultiplicationTable```. In the final print format, what if we are asked to replace the multiplication symbol '```*```' with an '```X```', so that school kids like it better? Since there are three calls to ```System.out.printf()```, one in each ```print()``` version, we make three changes.
+```class MultiplicationTable``` 코드에 문제가 하나 있다. 최종 출력 형식에서 곱셈 기호 '```*```'를 '```X```'로 대체하여 학교 아이들이 더 좋아하게 하면 어떨까? ```print()``` 의 각 버전에 세 번의  ```System.out.printf()```호출이 있기 때문에, 우리는 세 번의 변경이 필요하다.
 
-##### Snippet-3: Code Duplication
+##### Snippet-3: 코드 중복
 
 **_MultiplicationTable.java_**
 
@@ -4598,7 +4598,7 @@ There is an issue with the code for ```class MultiplicationTable```. In the fina
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5 X 1 = 5_
 
@@ -4660,24 +4660,25 @@ _6 X 19 = 114_
 
 _6 X 20 = 120_
 
-##### Snippet-3 Explained
+##### Snippet-3 설명
 
-* Humans make mistakes. The programmer missed out on changing the format symbol in the code for ```void print(int, int)```, but we don't recommend punishment. He could be overworked, or could only be the maintainer of code someone else wrote years ago! The point is not to blame human flaws (there are many), but to show how code duplication causes errors. This issue arises frequently with overloaded methods, point blank. 
-* Instead of trying to change human nature, can we change our software? Let's have a closer look at ```print()```:
-	* The method ```void print()``` prints the multiplication table for ```5``` only, in the default range ```1``` to ```10```.
-	* The method ```void print(int)``` outputs the table for any number, but only in the fixed range from ```1``` to ```10```.
-	* The method ```void print(int,int,int)``` displays the table for any number, in any range of entries.
+* 인간은 실수를 한다. 프로그래머가  ```void print(int, int)```코드의 형식 기호를 변경하는 것을 놓쳤지만, 우리는 처벌을 권하지 않는다. 그는 피곤했을 수도 있고, 몇 년 전에 다른 사람이 쓴 코드를 혼자 유지하고 있었을 수도 있다!! 요점은 인간의 결함을 탓하는 것이 아니라(많다) 코드 중복이 어떻게 오류를 일으키는지 보여주는 것이다. 이 문제는 오버로딩된 메소드에서 자주 발생한다.
+
+* 인간의 본성을 바꾸려고 하는 대신에, 우리는 소프트웨어를 바꿀 수 있을까? ```print()```을 자세히 살펴보자:
+	* ```void print()``` 메소드는 기본 범위 ```1```부터```10```까지의  ```5```의 곱셈표를 출력한다.
+	* ```void print(int)``` 메소드는 어떤 숫자로도 곱셈표를 출력하지만 ```1```에서 ```10```까지의 일정한 범위에서만 산출된다.
+	* ```void print(int,int,int)``` 메소드는 어떤 숫자로든, 모든 범위에서 곱셈표를 출력한다.
 	
-#### A Solution: Code Reuse
+#### A Solution: 코드 재사용
 
-There is something huge we observe in the previous example. All overloaded versions of ```print()``` have nearly the same code!
+앞의 예시에서 우리가 관찰할 수 있는 것이 있다. ```print()```의 모든 오버로딩된 버전은 거의 동일한 코드를 가지고 있다!
 
-* ```print(int)``` has wider usage potential than ```print()```. The latter is a special case, as it prints only the for  ```5```.  We can achieve what ```print()``` does, by passing a **fixed** parameter value of ```5``` to ```print(int)```. It's simple: invoke ```print(int)``` within ```print()```, by passing ```5``` to it.
-* The point to note is, that **a more specialized function can be implemented-in-terms-of a more general function**. 
+* ```print(int)``` 는 ```print()```보다 사용 잠재력이 넓다. 후자는 특별한 경우로 ```5```만을 출력하고 있다. 우리는 ```print(int)```에 ```5```라는 **고정된**매개변수 값을 전달하여 ```print()```가 하는 일을 수행할 수 있다. 간단한 예를 보자: ```5```를 전달하여 ```print()```내에 ```print(int)```를 호출해보자.
+*  주목해야 할 점은 **좀 더 전문화된 기능이 보다 일반적인 기능의 범위 내에서 구현될 수 있다는 것이다**.
 
-Let's now reorganize this part of the code.
+이제 코드의 이 부분을 재구성해 봅시다.
 
-##### Snippet-4: Code Reuse
+##### Snippet-4: 코드 재사용
 
 **_MultiplicationTable.java_**
 
@@ -4711,7 +4712,7 @@ Let's now reorganize this part of the code.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5 * 1 = 5_
 
@@ -4753,9 +4754,9 @@ _8 * 9 = 72_
 
 _8 * 10 = 80_
 
-##### Snippet-4 Explained
+##### Snippet-4 설명
 
-When we call a method inside another, the method call statement is replaced by its body (with actual arguments replacing the formal ones). In the new definition of ```int print()``` above, the code executed during the call will be:
+우리가 다른 내부에서 어떤 메소드를 호출할 때, 해당 메소드 호출 구문은 본체로 대체된다.(실제 인자로 형식 인자도 대체함). ```int print()```의 새로운 정의에서, 호출 중 실행되는 코드는 다음과 같다: 
 
 ```java
 
@@ -4765,11 +4766,11 @@ When we call a method inside another, the method call statement is replaced by i
 
 ```
 
-#### Extending Code Reuse
+#### 코드 재사용 확장
 
-* The method ```int print(int,int,int)``` is a more general version of ```int print(int)```. We can achieve what the latter computes, by passing **fixed** range of indexes, namely  ```1``` and ```10```, as arguments to the former. have look into he code that follows.
+* ```int print(int,int,int)``` 메소드는 ```int print(int)```보다 일반적인 버전이다. 우리는 전자에 대한 인수로 ```1```부터 ```10```까지의 일련의 **고정된** 인덱스를 전달함으로써 후자의 계산을 달성할 수 있었다. 다음의 코드를 살펴보자.
 
-##### Snippet-5 : Extending code reuse
+##### Snippet-5 : 코드 재사용 확장
 
 **_MultiplicationTable.java_**
 
@@ -4803,7 +4804,7 @@ When we call a method inside another, the method call statement is replaced by i
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _8 * 1 = 8_
 
@@ -4845,11 +4846,11 @@ _6 * 19 = 114_
 
 _6 * 20 = 120_
 
-##### Snippet-5 Explained
+##### Snippet-5 설명
 
-* This example merely extended what we did in the previous example. We will will take this extension one level further now! Yes, you guessed right. We will implement ```print()``` in terms of ```print(int,int,int)```.
+* 이 예시는 이전 단계에서 수행한 작업을 확장했을 뿐이다. 이제 우리는 다음 단계까지 나아갈 것이다! 그래, 우리는 ```print(int,int,int)```안에서 ```print()``` 를 구현할 것이다.
 
-##### Snippet-6 : Extending code reuse (contd.)
+##### Snippet-6 : 코드 재사용 확장 (contd.)
 
 **_MultiplicationTable.java_**
 
@@ -4885,7 +4886,7 @@ _6 * 20 = 120_
 ```
 
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5 * 1 = 5_
 
@@ -4927,13 +4928,13 @@ _6 * 19 = 114_
 
 _6 * 20 = 120_
 
-##### Snippet-6 Explained
+##### Snippet-6 설명
 
-*  By extending the same logic of code reuse, the method ```int print(int,int,int)``` can be used to implement the logic of ```int print()```. Just pass in a number parameter ```5```, as well as the fixed range parameters ```1``` and ```10```, in a call to the former. ```int print()``` is thus **implemented-in-terms-of** ```int print(int,int,int)```.
+*  코드 재사용의 동일한 논리를 확장함으로써,  ```int print(int,int,int)``` 메소드는 ```int print()```의 논리를 구현하는데 사용될 수 있다. 그저 매개변수인 숫자```5```와 고정된 범위 매변수 ```1```과 ```10```을 전자를 호출할 때 전달하십시오. 따라서 ```int print()``` 는 ```int print(int,int,int)```에 **구현된다**.
 
-* Our new version of ```class MultiplicationTable``` looks like this:
+* 우리의 새로운 버전의```class MultiplicationTable```는 다음과 같다:
 
-##### Snippet-7: Extending Code Reuse (Contd.)
+##### Snippet-7: 코드 재사용 확장 (Contd.)
 
 **_MultiplicationTable.java_**
 
@@ -4959,7 +4960,7 @@ _6 * 20 = 120_
 
 ```
 
-* The logic of the ```class MutliplicationRunner``` does not change at all:
+* ```class MutliplicationRunner``` 의 논리는 전혀 변하지 않는다:
 
 **_MultiplicationRunner.java:_**
 
@@ -4978,7 +4979,7 @@ _6 * 20 = 120_
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5 * 1 = 5_
 
@@ -5040,11 +5041,11 @@ _6 * 19 = 114_
 
 _6 * 20 = 120_
 
-##### Snippet-7 Explained
+##### Snippet-7 설명
 
-Neat, isn't it! To make our program school kid friendly, we just need to change one character in the code, take a peek below.
+깔끔하지? 우리 프로그램 학교 아이들을 친근하게 만들려면 코드에서 한 글자만 바꾸면 돼, 아래를 살짝 들여다보자.
 
-##### Snippet-8 : Extending Code Reuse (Contd.)
+##### Snippet-8 : 코드 재사용 확장 (Contd.)
 
 **_MultiplicationTable.java:_**
 
@@ -5070,7 +5071,7 @@ Neat, isn't it! To make our program school kid friendly, we just need to change 
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5 X 1 = 5_
 
@@ -5132,48 +5133,48 @@ _6 X 19 = 114_
 
 _6 X 20 = 120_
 
-##### Snippet-8 Explained
+##### Snippet-8 설명
 
-Software Development is an iterative process. The best code that we want to write does not happen at one go. It starts off at a certain level, and can always be improved. More importantly, such improvements needs to be remembered, to be applied again at different points in the same program, and across programs. This process is called **Code Refactoring**. Thought we'd keep you posted.
+소프트웨어 개발은 반복적인 과정이다. 우리가 쓰고 싶은 최고의 코드는 단번에 만들어지지 않는다. 그것은 일정 수준에서 시작되며, 항상 개선될 수 있다. 더 중요한 것은 이러한 개선사항을 기억해야 하며, 동일한 프로그램의 서로 다른 지점에서 그리고 프로그램 간에 다시 적용되어야 한다. 이 과정을 **코드 리팩토링**이라고 한다. 계속해서 살펴보자.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Explored how to reorganize the code for *PMT-Challenge* into a ```class```
-* Understood that overloading works the same way for ```class``` methods
-* Observed that code reuse is possible across overloaded versions of a ```class``` method
+* *PMT-Challenge*의 코드를 ```클래스```로 재편하는 방법에 대해 알아보았다.
+* 오버로딩이 ```클래스``` 메소드와 동일한 메소드로 작용한다는 것을 이해했다.
+* 오버로딩된 버전의 ```클래스```메소드에서 코드 재사용이 가능하다는 점에 주목했다.
 
-## Object Oriented Progamming (OOP)
+## 객체 지향 프로그래밍 (OOP)
 
-How do you design great Object Oriented Programs?
+훌륭한 객체 지향 프로그램은 어떻게 설계할까?
 
-Let's find out
+알아보자.
 
-Recommended Videos:
+권장 비디오:
 - Object Oriented Progamming - Part 1 - https://www.youtube.com/watch?v=NOD802rMMCw
 - Object Oriented Progamming - Part 2 - https://www.youtube.com/watch?v=i6EztA-F8UI
 
-### Step 01: Object Oriented Progamming (OOP) - Basic Terminology
+### Step 01: 객체 지향 프로그래밍 (OOP) - 기본 용어
 
-Let's consider a few examples before we get to Object Oriented Progamming.
+객체 지향 프로그래밍에 대해 알아보기 전에 몇 가지 예를 들어보자.
 
-Humans think in a step by step process.
+인간은 점진적인 과정을 생각한다.
 
-Let's say I've to take a flight from London to New York. This is how I would think:
+내가 런던에서 뉴욕으로 가는 비행기를 타야 한다고 가정해 보자. 내 생각은 이렇다.
 
-- Take a cab to London Airport
-- Check in
-- Pass Security
-- Board the flight
-- Wish the Hostess
-- Take Off
-- Cruise
-- Land
-- Get off the plane
-- Take a cab to ..
+- 런던 공항으로 가는 택시 타기
+- 체크인
+- 보안 검색대 통과
+- 비행기 탑승
+- 승무원 만남
+- 이륙
+- 비행
+- 착륙
+- 비행기에서 내리기
+- 택시를 타고 ..
 
-Procedural programming is just a reflection of this thought process. A procedural program for above process would look something like this:
+절차적 프로그래밍은 이러한 사고 과정을 반영하는 것에 불과하다. 위의 프로세스에 대한 절차적 프로그램은 다음과 같이 보일 것이다.
 
 ```java
 takeACabToLondonAirport();
@@ -5188,11 +5189,11 @@ getOffPlane();
 //...
 ```
 
-Object Oriented Programming (OOP) brings in a new thought process around this. 
+객체 지향 프로그래밍(OOP)은 이것을 중심으로 새로운 사고 과정을 가져온다.
 
-How about thinking in terms of the different Actors? How about storing data related to each actor right beside itself? How about giving them some responsiblity and let them do their own actions?
+다른 배우들의 관점에서 생각해보는 건 어때? 각 배우와 관련된 데이터를 바로 옆에 저장하는 것은 어떨까? 그들에게 책임을 주고 그들 자신의 행동을 하게 하는 것은 어떨까?
 
-Here's how our program would look like when we think in terms of different actors and give them data and responsibilities
+서로 다른 배우의 관점에서 생각하고 데이터와 책임을 줄 때 우리의 프로그램이 어떤 모습일지 소개한다.
 
 ```java
 
@@ -5208,21 +5209,23 @@ Here's how our program would look like when we think in terms of different actor
     	welcome()
 ```
 
-Do not worry about the implementation details. Focus on the difference in approaches.
+구현 세부 정보에 대해 걱정하지 마십시오. 접근 방식의 차이에 초점을 맞추십시오.
 
-We have **encapsulated** data and methods into these entities, which are now called **objects**. We have defined object boundaries, and what it can (and cannot) do. 
+이러한 독립체들에 **캡슐화된** 데이터와 메소드를 가지고 있으며, 이제 이것을 **객체**라고 부른다. 우리는 객체의 경계와 그것이 할 수 있는 것(그리고 할 수 없는 것)을 정의했다.
 
-An object has
-* **State** : Its data
-* **Behavior** : Its operations
+하나의 객체는
+* **상태** : 데이터
+* **행동** : 연산
+을 가지고 있다.
 
-The ```position``` of an ```Airplane``` can change over time. The operations that can be performed on an ```Airplane``` include ```takeOff()```, ```land()``` and ```cruiseMode()```. Each of these actions can change its ```position```. Therefore, an object's behavior can affects its own state.
+```Airplane```의 ```position```은 시간이 지나면서 바뀔 수 있다. ```Airplane```에서 할 수 있는 연산으로는 ```takeOff()```,```land()```,그리고 ```cruiseMode()```를 포함한다.
+이러한 행동 하나하나가 ```position```을 바꿀 수 있다. 그러므로, 어떤 객체의 행동은 그 객체의 상태에 영향을 미친다.
 
-It's now time to introduce you to some core **OOP** terms, which will make our future discussions easier.
+이제 향후 논의를 더 쉽게 할 수 있는 핵심적인 **OOP** 용어들을 소개할 때 입니다.
 
-#### OOP Terminology 
+#### OOP 용어
 
-Let's visit and enhance  the ```Planet``` example we had written a few sections ago. This time, let's also explore the conceptual angle.
+몇 절 전에 썼던 ```Planet```예제를 강화시켜보자. 이번에는 개념도 같이 살펴보자.
 
 **_Planet_**
 
@@ -5237,35 +5240,35 @@ Let's visit and enhance  the ```Planet``` example we had written a few sections 
 
 ```
 
-Let's look at some **OOP** terminology.
+몇 가지 **OOP** 용어 예시가 있다.
 
-A **class** is a template. An **object** is an instance of a class. In above example, `Planet` is a class. `earth` and `venus` are objects.
-* ```name```, ```location``` and ```distanceFromSun``` compose object state.
-* ```rotate()``` and ```revolve()``` define object's behavior.
+* **class** 는 하나의 템플릿이다. **object**는 클래스의 인스턴스이다. 위의 예제에서, `Planet`은 클래스이고 `earth`와 `venus` 는 객체이다.
+* ```name```, ```location``` 과```distanceFromSun```는 객체의 상태를 구성한다.
+* ```rotate()```와 ```revolve()``` 객체의 행동을 정의한다.
 
-**Fields** are the elements that make up the object state. Object behavior is implemented through **Methods**.
+**필드**는 객체 상태를 구성하는 요소들이다. 객체 동작은 **메소드**를 통해 구현된다.
 
-Each Planet has its own state:
+각 planet이 가진 상태는 다음과 같다:
 * ```name```: "Earth", "Venus"
-* ```location``` : Each has its own orbit
-* ```distanceFromSun``` : They are at unique, different distances from the sun
+* ```location``` : 각자 자기 궤도를 가짐
+* ```distanceFromSun``` : sun으로부터 서로 다른 유일무이한 거리상에 있음.
 
-Each has its own unique behavior:
-* ```rotate()``` : They rotate at different rates (and in fact, different directions!)
-* ```revolve()``` : They revolve round the sun in different orbits, at different speeds
+각각은 고유한 행동을 가지고 있다
+* ```rotate()``` : 그들은 다른 속도로 회전한다 (사실, 다른 방향!)
+* ```revolve()``` : 그들은 다른 궤도로, 다른 속도로 태양 주위를 돈다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Understood how OOP is different from Prodedural Programming
-* Learned about a few basic OOP terms
+* OOP가 절차적 프로그래밍과 어떻게 다른지 이해했다.
+* 몇 가지 기본적인 OOP 용어에 대해 알아보았다.
 
-### Step 02: Programming Exercise PE-01
+### Step 02: 프로그래밍 실습 PE-01
 
-#### Exercises
+#### 실습
 
-In each of the following systems, identify the basic entities involved, and organize them using object oriented terminology:
+다음 각 시스템에서 관련된 기본 실체를 식별하고 객체 지향 용어를 사용하여 구성한다.
 
 1. Online Shopping System
 2. Person
@@ -5306,13 +5309,12 @@ In each of the following systems, identify the basic entities involved, and orga
 
 ```
 
-### Step 03: Creating ```MotorBike``` ```class``` 
+### Step 03: ```MotorBike``` ```class``` 생성
 
-In this series of examples, we want to model your pet mode of transport, a motorbike. We want to create motorbike objects and play around with them.
-
-We will start with two java files: 
-* **_MotorBike.java_**, which contains the ```MotorBike``` ```class``` definition. This ```class``` will encapsulate our motorbike state and behavior 
-* **_MotorBikeRunner.java_**, with ```class MotorBikeRunner``` holding a ```main``` method, our program's entry point
+이 일련의 예에서 우리는 당신의 운송수단인 오토바이를 모형화하고자 한다. 우리는 오토바이 객체를 만들어 가지고 놀고 싶다.
+자바 파일 두 개로 시작하겠다: 
+* **_MotorBike.java_**, ```MotorBike``` ```class``` 정의를 포함하고 있다. 이 ```class``` 가 우리 오토바이의 상태와 행동을 캡슐화할 것이다. 
+* **_MotorBikeRunner.java_**, ```class MotorBikeRunner```에서 프로그램의 시작점인 ```main``` 메소드를 포함하고 있음.
 
 ##### Snippet-1: MotorBike Class
 
@@ -5347,36 +5349,36 @@ We will start with two java files:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Bike started!_
 
 _Bike started!_
 
-##### Snippet-1 Explained
+##### Snippet-1 설명
 
-We started off creating a simple `MotorBike` class with a `start` method. We created a couple of instances and invoked the `start` method on them.
+우리는 `start`메소드로 간단한 `MotorBike` 클래스를 만들기 시작했다. 우리는 몇 가지 객체를  만들어 그들에게 `start`메소드를 부여했다.
 
-We created two classes because we believe in `Seperation of Concerns`: 
-- `MotorBike` class is responsible for all its data and behavior.
-- `MotorBikeRunner` class is responsible for running MotorBike examples.
+우리는 `Separation of Concern`을 위해 두 클래스를 만들었다:
+- `MotorBike`클래스는 그의 모든 데이터와 행동을 책임진다.
+- `MotorBikeRunner`클래스는 오토바이 예제들의 실행을 담당한다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Defined a ```MotorBike``` ```class``` allowing us to further explore *OOP* concepts in the next steps
+* 다음 단계에서 *OOP* 개념을 추가 탐색할 수 있도록 ```MotorBike``` ```class```를 정의했다.
 
-### Step 04:  Programming Exercise OO-PE-02
+### Step 04:  프로그래밍 실습 OO-PE-02
 
-#### Exercises
+#### 실습
 
-1. Write a small Java program to create a ```Book``` ```class```, and then create instances to represent the following book titles:
+1. 작은 자바 프로그램을 작성하여 ```Book``` ```class```를 만든 후, 책 제목을 대표할 객체들을 다음과 같이 만드시오:
 	* "The Art Of Computer Programming"
 	* "Effective Java"
 	* "Clean Code"
 
-#### Solution
+#### 솔루션
 
 **_Book.java_**
 
@@ -5416,7 +5418,7 @@ In this step, we:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _The Art Of Computer Programming_
 
@@ -5424,15 +5426,16 @@ _Effective Java_
 	
 _Clean Code_
 
-### Step 05: ```MotorBike``` -  Representing State
+### Step 05: ```MotorBike``` -  상태 표시
 
 An object encapsulates both *state* and *behavior*. 
+하나의 객체는 *상태*와 *행동*이 둘 다 캡슐화되어 있다.
 
-*State* defines "the condition of the object at a given time". *State* is represented by **member variables**. 
+*상태*는 "특정 시간에 객체의 상태"를 정의하고, *행동*은 **멤버 변수**로 표시된다.
 
-In the ```MotorBike``` example, if we need a ```speed``` attribute for each ```MotorBike```, here is how we would include it.
+```MotorBike```의 예시에서, 각 ```MotorBike```에 대해 ```speed```속성이 필요하다면, 여기 포함시켜보자.
 
-##### Snippet-1 : MotorBike with state variable speed
+##### Snippet-1 : 상태 변수 speed를 포함한 MotorBike
 
 **_MotorBike.java_**
 
@@ -5472,17 +5475,17 @@ In the ```MotorBike``` example, if we need a ```speed``` attribute for each ```M
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Bike started!_
 
 _Bike started!_
 
-##### Snippet-4 Explained
+##### Snippet-4 설명
 
-```int speed;``` within ```MotorBike```, defines a member variable. 
+```MotorBike```내의 ```int speed;```는 멤버 변수를 정의한다.
 
-It can be accessed within objects such as ```ducati``` and ```honda```, by qualifying it with the object name (```ducati``` or ```honda```).
+```ducati```와 ```honda```와 같이 객체 내의 이름으로 접근할 수도 있다.
 
 ```
 ducati.speed = 100;
@@ -5490,19 +5493,19 @@ honda.speed = 80;
 
 ```
 
-```ducati``` has its own value for ```speed```, and so does ```honda```. These values are independent of each other. Changing one does not affect the other.
+```ducati``` 는```speed```라는 고유한 값을 가지고 있고, ```honda```도 마찬가지이다. 이 값들은 각각 독립적이다. 하나를 변경한다고 나머지 다른 하나에 영향을 주지 않는다.
 
 #### Classroom Exercise CE-OO-01
 
-1. Update the ```Book``` ```class``` created previously to include a member variable named ```noOfCopies```, and demonstrate how it can be set and updated independently for each of the three titles specified earlier.
+1. 이전에 만든 ```Book``` ```Class```를 업데이트하여 ```noOfCopies```라는 멤버 변수를 포함시키고, 앞에서 지정한 세 개의 제목에 대해 어떻게 독립적으로 설정 및 업데이트할 수 있는지 보이시오.
 
-#### Solution
+#### 솔루션
 
 TODO
 
-### Step 07: ```MotorBike``` - get() and set() methods
+### Step 07: ```MotorBike``` - get() , set() 메소드
 
-In the previous step. we were merrily modifying the ```speed``` attribute within the ```ducati``` and ```honda``` objects directly, from within the ```main()``` program. 
+이전 단계에서, 우리는 즐겁게 ```ducati```와 ```honda```객체 내에 있는 ```speed```속성과 ```main()```프로그램 내에서 직접 수정하고 있었다.
 
 ```java
 	public class MotorBikeRunner {
@@ -5514,13 +5517,13 @@ In the previous step. we were merrily modifying the ```speed``` attribute within
 	}
 ```
 
-This did work fine, but it breaks the fundamental principle of encapsulation in **OOP**. 
+이것은 잘 작동했지만, **OOP** 캡슐화의 기본 원리를 깨트린다.
 
-*"A method of one object, should not be allowed to directly access the state of another object. To do so, such an object should only be allowed to invoke methods on the target object*".
+*"한 객체의 메소드는 다른 객체의 상태에 직접 접근하도록 허용해서는 안 된다. 그렇게 하는 것은 오직 대상 객체에서만 메소드를 호출할 수 있도록 허용되어야 한다"
 
-In other words, a member variable should not be directly accessible from methods declared outside its ```class```.
+즉, 멤버 변수는 ```class```의 외부에 선언된 메소드에는 직접 접근할 수 없어야 한다.
 
-##### Snippet-3 : MotorBike class with private attributes
+##### Snippet-3 : private 속성을 가진 MotorBike
 
 **_MotorBike.java_**
 
@@ -5565,44 +5568,44 @@ In other words, a member variable should not be directly accessible from methods
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Bike started!_
 
 _Bike started!_
 
-##### Snippet-3 Explained
+##### Snippet-3 설명
 
-By declaring ```speed``` as ```private```, we provide ```MotorBike``` with something called **access control**. Java keywords such as ```public``` and ```private``` are called **access modifiers**. They control what external objects can access within a given object.
+```speed```를 ```private```으로 선언하여, ```MotorBike```에 **접근 제어**라는 것을 제공하고 있다. Java keywords such as ```public``` and ```private``` 와 같은 자바 키워드는**접근 지정자**라고 불린다. 이들은 외부의 객체가 대상이 되는 객체에 접근하는 것을 통제한다.
 
-Let's look at ```this.speed = speed;``` in the body of method ```setSpeed()```:
-*  An member variable always belongs to a specific instance of that ```class```.
-*  A method argument behaves just like a local variable inside that method.
-*  To differentiate between the two,  ```this``` is used. The expression ```this.speed``` refers to the member variable ```speed``` of a ```Motorbike``` object. ```setSpeed()``` would be invoked on that very object.  
+```setSpeed()```메소드 내의  ```this.speed = speed;``` 를 보자:
+* 멤버 변수는 항상 특정한 ```class```의 인스턴스에 속한다.
+* 메소드의 인수는 해당 메소드 내의 지역 변수처럼 동작한다.
+* 이 둘을 구분하기 위해, ```this```를 사용한다.```this.speed```라는 표현은 ```MotorBike```객체의 ```speed```라는 멤버 변수를 가리킨다. 바로 이를 위해 ```setSpeed()```가 호출된다.
 
-Code written earlier within ```MotorBikeRunner```, such as ```ducati.speed = 100;``` would now result in errors! The correct way to access and modify ```speed``` is to invoke appropriate methods such as  ```setSpeed()```, on ```MotorBike``` objects.
+일찍이 ```MotorBikeRunner```에 쓰여진 ```ducati.speed = 100;````이라는 표현은 이제 오류를 발생시킬 것이다! ```speed```에 접근하고 이를 수정하는 올바른 방법은 ```MotorBike```객체에 ```setSpeed()```와 같은 적절한 메소드를 동원하는 것이다.
 
 #### Classroom Exercise CE-OO-02
 
-1. Update the ```class``` ```Book``` to make sure it no longer breaks Encapsulation principles.
+1. ```class``` ```Book``` 이 더 이상 캡슐화 원칙을 어기지 않도록 업데이트한다.
 
-#### Solution
+#### 솔루션
 
 TODO
 
-#### Summary
+#### 요약
 
-In this step, we:
-* Learned about the need for access control to implement encapsulation
-* Observed that Java provides access modifiers (such as ```public``` and ```private```) for such control 
-* Understood the need for ```get()``` and ```set()``` methods to access object data
+이번 단계에서는:
+* 캡슐화를 구현하기 위해 접근 제어의 필요성에 대해 알아보았다.
+* Java가 이러한 통제를 위해 접근 지정자(```public```,```private```같은)를 제공하는 것을 관찰했다.
+* 객체의 데이터에 접근하기 위한 ```get()```과 ```set()```메소드의 필요성에 대해 이해했다.
 
 - - - 
-### Step 08: Accessing Object State
+### Step 08: 객체 상태에 접근
+ 
+캡슐화는 다른 객체의 직접적인 접근으로부터 객체의 상태를 보호하기 위해 필요하다. 우리는 ```speed```를 ```private```으로 선언하여 ```MotorBike```의 객체를 보호할 수 있었다. ```private```의 ```speed```선언으로, *get*조차 접근하지 못하게 된 경직된 상황이 되었다. 이 문제를 어떻게 해결해야 할까? 이번에도 답은 ```speed```를 읽을 수 있는 메소드를 제공하는 것에 있다.
 
-Encapsulation is needed to protect an object's state from direct access by other objects. We were able to protect the state of ```MotorBike``` objects by declaring ```speed``` to be ```private```. We have created a sort of rigid situation here, since the ```private``` declaration of ```speed``` forbids even a *get* access. How do we address this issue? Again, the answer is to provide a method for reading the current ```speed```.
-
-##### Snippet-4 : ```getSpeed()``` of ```MotorBike```
+##### Snippet-4 : ```MotorBike```의  ```getSpeed()```
 
 **_MotorBike.java_**
 
@@ -5642,7 +5645,7 @@ Encapsulation is needed to protect an object's state from direct access by other
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Bike started!_
 
@@ -5652,9 +5655,9 @@ _Current Ducati Speed is : 100_
 
 _Current Honda Speed is : 80_
 
-##### Snippet-4 Explained
+##### Snippet-4 설명
 
-Defining a method such as ```getSpeed()``` allows us to access the current```speed``` of a ```MotorBike``` object.
+```getSpeed()```와 같은 메소드를 정의하여 하나의 ```MotorBike``` 객체의 ```speed```에 접근하는 것을 허용한다.
 
 ```
 		int getSpeed() {
@@ -5663,20 +5666,21 @@ Defining a method such as ```getSpeed()``` allows us to access the current```spe
 ```
 
 
-> Eclipse has a very handy feature. When the state elements (member variables) of a class have been defined, it can generate default get() and set() methods for each of them. You would want to use this regularly, to save on time and typing effort. `Right click on class > Generate Source > Generate Getters and Setters`
 
-#### Summary
+> 이클립스는 매우 편리한 기능을 가지고 있다. 클래스의 상태 요소(멤버 변수)가 정의되면 각 클래스에 대해 기본 get(), set()메솓를 생성하고 설정할 수 있다. 시간 절약과 타이핑 노력을 줄이기 위해 정기적으로 이것을 사용하고 싶을 것이다.`class 우클릭 > Generate Source > Generate Getters and Setters`
 
-In this step, we:
+#### 요약
 
-* Understood how access control forces us to provide ```get()``` methods as well
-* Explored a few Eclispe tips to generate ```get()``` and ```set()``` versions for each ```class``` attribute  
+이번 단계에서는:
 
-### Step 10: Default Object State
+* 접근 제어가 어떻게 우리에게 ```get()```메소드를 제공하도록 하는지 이해했다.
+* 각 ```class```속성에 대한 ```get()```과 ```set()```버전을 만들기 위한 몇 가지 Eclipse 팁을 살펴보았다.
 
-What happens if a data element inside an object is not initialized with a value?
+### Step 10: 기본 객체 내 상태
 
-##### Snippet-5 : Default Initialization of Object State
+객체 내부의 데이터 요소가 값으로 초기화되지 않으면 어떤 일이 일어나는가?
+
+##### Snippet-5 : 객체 내 상태의 기본 초기화
 
 **_MotorBike.java_**
 
@@ -5699,30 +5703,29 @@ What happens if a data element inside an object is not initialized with a value?
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 **_Current Honda Speed is : 0_**
 
-##### Snippet-6 Explained
+##### Snippet-6 설명
 
-When we instantiate an object, all its state elements are always initialized, to the default values of their types. Inside ```MotorBike```, ```speed``` is declared to be an ```int```, and so is initialized to ```0```. This happens even before any method of ```MotorBike``` is called, including ```start()```.
+우리가 객체를 인스턴스화할 때, 객체의 모든 상태 요소는 항상 그 타입의 기본값으로 초기화된다. ```MotorBike```내부에서는 ```speed```가 ```int```로 선언되어 ```0```으로 초기화된다. 이는 심지어 ```start()```를 비롯한 ```MotorBike```의 어떤 메소드도 호출하기도 전에 일어난다.
 
-You can see that `honda.getSpeed()` printed `0` even though we did not explictly initialize it.
+우리가 명시적으로 초기화하지 않았는데도 `honda.getspeed()`가 0으로 출력된 것을 볼 수 있다.
 
-Default 
 
-#### Summary
+#### 요약
 
-In this step, we:
-* Learnt that default values are assigned to object member variables.
+이번 단계에서는
+* 객체의 멤버 변수에는 기본 값이 할당된 다는 것을 배웠다.
 
-### Step 10: Encapsulation: Its Advantages
+### Step 10: 캡슐화: 이점
 
-At the heart of encapsulation, is the need to protect object's state. From whom? Other objects. 
+캡슐화의 중심에는 객체의 상태를 보호할 필요가 있다. 누구한테서? 다른 객체로부터.
 
-Let's look at an example to understand Encapsulation better.
+캡슐화를 더 잘 이해하기 위한 예를 보자.
 
-##### Snippet-7 : Advantage of Encapsulation
+##### Snippet-7 : 캡슐화의 이점
 
 **_MotorBike.java_**
 
@@ -5766,7 +5769,7 @@ Let's look at an example to understand Encapsulation better.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Bike started!_
 
@@ -5774,11 +5777,11 @@ _Bike started!_
 
 ##### Snippet-01 Explained
 
-For a motorbike, ```-100``` might be an invalid speed. Currently, we do not have any validation. Having a method ```setSpeed``` allows us to add validation. 
-
+오토바이에 ```-100```은 잘못된 속도일 수 있다. 현재 우리는 어떠한 검증도 받지 않았다. ```setSpeed```라는 메소드를 갖게 되면 우리는 타당성 검증을 추가할 있게된다.
 Let's see how to do that.
+어떻게 하는지 보자.
 
-##### Snippet-02 : Speed Validity Check
+##### Snippet-02 : 속도의 타당성 검사
 
 **_MotorBike.java_**
 
@@ -5805,30 +5808,33 @@ Let's see how to do that.
 //Same as before
 ```
 
-The output of this snippet is:
+snippet의 출력은 다음과 같다:
 
 _Bike started!_
 
 **_Current Ducati Speed is : 0_**
 
-##### Snippet-8 Explained
+##### Snippet-8 설명
 
-```setSpeed()``` checks `if(speed > 0)` and does not update speed for negative values. 
+```setSpeed()```는 if(speed > 0)을 체크하고 음의 값으로 속도를 업데이트하지 않는다.
 
+> `setSpeed`메소드의 호출자가 성공했다고 가정하기 떄문에 완벽한 해결책은 아니다. 이상적으로 검증 오류를 나타내는 예외를 적용해야 한다. 예외에 대해서는 나중에 이야기하겠다.
 > This is not perfect solution because the caller of the `setSpeed` method assumes that he was successful. Ideally, we should throw an Exception indicating validation error. We will talk about Exceptions later.
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Explored the first advantage of encapsulation - A provision for adding data validation
-* Highlighted how such validation can be done, using the ```Motorbike``` example
+이번 단계에서는
+* 캡슐화의 첫 번째 이점에 대해 알아보았다. - 데이터 검증을 추가하기 위한 공급
+* ```MotorBike``` 예제를 사용하여 그러한 검증이 어떻게 이루어질 수 있는지 강조하였다.
 
-### Step 11: Encapsulation - Advantages (Code Reuse)
 
-We've understood quite a few things about encapsulation under *OOP*.
+### Step 11: 캡슐화 - 이점 (코드 재사용)
 
-Suppose at different points of time, we want to increase the speeds of both Honda and Ducati bikes by a fixed amount, say ```100 mph```. The logic would be simple, right? Fetch the current ```speed``` of each bike, increment that fetched value by ```100```, and then set the new value back into that bike's ```speed```. The following example puts the above logic into action.
+우리는 *OOP*의 캡슐화에 대해 꽤 많은 것을 이해했다.
+
+```100 mph```이라고 말하는 혼다와 두카티 오토바이의 속도를 모두 일정한 양만큼 높이고 싶다고 가정해보자. 논리는 간단하겠지? 각 오토바이의 현행 ```speed```를 ```100```만큼 끌어올린 다음 새로운 값을 그 오토바이의 ```speed```로 다시 설정한다. 다음의 예는 이 논리를 실행에 옮긴다.
+
 
 ##### Snippet-1 : Bulky Speed Increment code 
 
@@ -5884,13 +5890,14 @@ _Earlier Honda Speed is : 0_
 
 **_Later Honda Speed is : 100_**
 
-##### Snippet-1 Explained
+##### Snippet-1 설명
 
-Notice the repeated code within ```MotorBikeRunner```? The code for updating the ```speed``` of ```ducati```, is almost the same as that for ```honda```. Remember at the start of this book, we said something like this:
+```MotorBikeRunner```의 반복된 코드를 주목해보겠는가? ```ducati```의 ```speed```를 갱신하는 코드는 ```honda```의 코드와 거의 같다. 이 책의 첫머리에서 우리는 다음과 같은 말을 한 것을 기억하라:
 
-*"The goal of any computer program is to make a task easier, less cumbersome and more elegant for the programmer."*
+*"모든 컴퓨터 프로그램의 목표는 프로그래머를 위해 작업을 더 쉽고, 덜 번거롭고, 더 우아하게 만드는 것이다."*
 
-*OOP* achieves all thus through encapsulation! The idea is to *encapsulate* repeated logic within a method, and pass object-specific information to it as arguments. The next example shows you one way of doing it.
+*OOP*는 캡슐화를 통해 모든 것을 달성한다! 그 아이디어는 메소드 내에서 반복된 논리를 *캡슐화*하고, 그것에 객체별 정보를 인수로 전달하는 것이다. 다음 예는 그것을 하는 한 가지 방법을 보여준다.
+
 
 ##### Snippet-2 : Speed Increase through Code Encapsulation
 
