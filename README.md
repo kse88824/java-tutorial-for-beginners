@@ -2,7 +2,7 @@
  
 **"Learning Java In 150 Steps"** 책에 오신것을 환영합니다.
 
-저는 **Ranga Karanam** 이고, 20년이 넘는 프로그래밍 경력을 가지고 있습니다.
+저는 **Ranga Karanam** 이고, 20년 이상의 프로그래밍 경력을 가지고 있습니다.
 
 저는 프로그래밍을 사랑합니다. ```in28minutes``` 를 시작할 때 저의 목표 중 하나는 프로그래밍을 쉽게 배울 수 있도록 하는 것이었습니다. 저희가 놀라운 강의를 만들 수 있도록 도와주신 전 세계 30만명의 학습자분들께 감사합니다.
 
@@ -4168,119 +4168,122 @@ JShell에서는 필요하지 않지만 별도의 Java 소스 파일을 작성할
 이번 단계에서는:
 * 언어 기능에 대해 배우는 가장 좋은 방법은 작업 코드를 가지고 노는 것이라는 것을 알게 되었다.
 * ```JShell```은 일부 구문 규칙을 완화하면서 코딩을 단순화한다는 것을 관찰하였다.
-* 코드 편집기에서 Java 코드를 개발하는 것이 힘을 주는 느낌이라는 결론을 내렸다!
+* 코드 편집기에서 Java 코드를 개발하는 것이 힘을 얻는 느낌이라는 결론을 내렸다!
 
-### Step 07: The JVM, JRE And JDK
+### Step 07: JVM, JRE 그리고 JDK
 
-What are *JVM*, *JRE* and the *JDK*? 
+*JVM*, *JRE* 그리고 *JDK* 란 무엇일까? 
 
-Apart from the fact that all start with a '*J*', there are important differences in what they contain, and what they do. 
+모든 것이 '*J*'로 시작한다는 사실과는 별개로, 그들이 무엇을 포함하는지, 무엇을 하는지에 중요한 차이가 있다.
 
-The following list gives you a bird's eye view of things.
+다음 목록은 이들을 조감해 준다.
 
-The **JVM** runs your program bytecode.
+**JVM**은 프로그램의 바이트 코드를 실행시킨다.
+
+**JRE** = **JVM** + **라이브러리들** + **기타 구성 요소**
+
+* *라이브러리들* 은 사용자가 생성하는 모든 프로그램 내에서 사용할 수 있으며, 자바에서 기본으로 제공하는 유틸리티이다.  ```System.out.println()``` 는 그러한 유틸리티 중 하나인```java.lang``` 라이브러리 내의 메소드이다.
+* *기타 구성 요소* 는 디버깅 및 코드 프로파일링 도구 포함한다.(메모리 관리 및 성능용)
 
 
-**JRE** = **JVM** + **Libraries** + **Other Components**
+**JDK** = **JRE** + **컴파일러** + **디버거**
 
-* *Libraries* are built-in Java utilities that can be used within any program you create. ```System.out.println()``` was a method in ```java.lang```, one such utility.
-* *Other Components* include tools for debugging and code profiling (for memory management and performance).
+* *JDK* 는 **Java Development Kit**를 의미한다. 이것은 당신의 Java 프로그램을 컴파일러로 컴파일하고 실행(*JRE* 사용)하는데 필요한 묶음의 머리글자이다.
 
+이 구조를 기억하는 흥미로운 방법은 다음과 같다.:
 
-**JDK** = **JRE** + **Compilers** + **Debuggers**
+* **JDK** 는 자바 프로그램의 **컴파일과 실행**에 필요.
 
-* *JDK* refers to the **Java Development Kit**. It's an acronym for the bundle needed  to compile (with the compiler) and run (with the *JRE* bundle) your Java program.
+* **JRE** 는 자바 프로그램의 **실행**에 필요.
 
-An interesting way to remember this organization is:
+* **JVM**는 자바 프로그램으로부터 생성되는 **바이트 코드 실행**에 필요
 
-* **JDK** is needed to **Compile and Run** Java programs
+몇 가지 시나리오를 확인하여 이해도를 테스트해 봅시다.
 
-* **JRE** is needed to **Run** Java Programs
+**Scenario 1**: 다른 운영체제를 사용하는 친구에게 *Planet.class*파일을 주었다. 그가 그 파일을 실행하려면 무엇이 필요한가?
+먼저 운영 체제에 **JRE**를 설치하여라. 터미널에서 *java Planet*을 사용하여 실행해보자. 그는 이미 바이트코드를 가지고 있기 때문에 *javac*는 실행할 필요가 없다.
 
-* **JVM** is needed to **Run Bytecode** generated from Java programs
+**Scenario 2**: 친구에게 *Planet.java*의 소스 파일을 주었다. 그가 그 파일을 실행하려면 무엇이 필요한가?
+호환되는 버전의 *JDK*를 설치하십시오. *javac Planet.java*를 사용하여 코드를 컴파일하십시오. 터미널에서 *java Planet*을 실행하십시오.
 
-Let's check a couple of scenarios to test your understanding.
+요약하면
 
-**Scenario 1**: You give *Planet.class* file to a friend using a different operating system. What does he need to do to run it? 
+* **응용 프로그램 개발자** _가 필요한 것_ **==> JDK**
 
-First, install **JRE** for his operating system. Run using *java Planet* on the terminal. He does not need to run  *javac*, as he already has the bytecode. 
+* **응용 프로그램 사용자** _가 필요한 것_ **==> JRE**
 
-**Scenario 2**: You gave your friend the source file *Planet.java*. What does he need to do to run it? 
+#### 요약
 
-Install *JDK* of a compatible version. Compile code using *javac Planet.java*. Run *java Planet* on his terminal.
+이번 단계에서는
 
-In summary
-
-* **Application Developers** _need_ **==> JDK**
-
-* **Application Users** _need_ **==> JRE**
-
-#### Summary
-
-In this step, we:
-* Understood the differences in the scope-of-work done by the JVM, JRE and JDK
-* Realized how each of them could be invoked by different terminal commands, such as *javac* and *java*.
+* JVM, JRE 그리고 JDK에서 수행되는 작업의 범위와 그 차이를 이해했다.
+* 각 명령어가 *javac* 및 *java*와 같은 서로 다른 터미널 명령에 의해 호출될 수 있는 방법을 실현했다.
 
 ## Eclipse
 
-TODO - Need Revision 
+TODO - 수정 필요 
 
-### Introducing Java Software Development with Eclipse
+### TODO - Need Revision 
 
-* Features of the Eclipse IDE (Integrated Development Environment)
-	* Installation & Configuration
-	* Workspace Creation & Configuration
-	* Project Creation & Organization
-		* JRE Version Selection and Included Libraries 
+### Eclipse를 사용한 자바 소프트웨어 개발 소개
+
+*  Eclipse IDE(통합 개발 환경)의 특징
+	* 설치 및 구성
+	* 작업영역 작성 및 구성
+	* 프로젝트 생성 및 조직
+		* JRE 버전 선택 및 포함된 라이브러리
 		* Eclipse Java Perspectives
-		* Source Files Organization into Folders
-		* Packages?
-	* IDE User Interface Description
+		* 소스 파일을 폴더 내에 구성
+		* 패키지?
+	* IDE 사용자 인터페이스 설명
 		* Perspective
 		* Views
-		* Console Content and Display Options
+		* 콘솔 콘텐츠 및 디스플레이 옵션
 
-* Creating a new Java ```class``` in Eclipse (And related source file)
-	* Package name
-		* A Java solution to solving a problem could be composed of several application components. It is considered good programming arctice to identify a class for each distinct component. Package is the Java way to organize classes in source code.
-		* Analogy: Eatables in a Refrigerator (Freezer, Chill-Tray, Vegetable-Tray, Bottle-Rack)
-	* Public method stub : can be used to create a default ```public static void main(String[] args)``` signature
-	* (Include Snapshots)
-		* Class creation pop-up, with selected options
-		* Default generated source code in editor window
+* Eclipse에서 새로운 자바 ```class```(와 관련 소스 파일) 생성하기 
+	* 패키지 이름
+		* 문제 해결을 위한 Java 솔루션은 여러 응용 프로그램의 구성요소로 구성될 수 있다. 각 구별되는 구성요소에 대한 클래스를 식별하는 것은 좋은 프로그래밍 요소로 간주된다. 패키지는 소스 코드로 클래스를 구성하는 자바 방식이다.
+		* 비유: 냉장고에 있는 식기류(냉장고, 냉각선, 야채선, 보틀랙)
+	* Public 메소드 stub : 기본 ```public static void main(String[] args)```를 만드는 데 사용할 수 있다.
+	* (스냅샷 포함)
+		* 선택한 옵션이 있는 클래스 만들기 팝업
+		* 편집기 창에서 기본 생성된 소스 코드
+		
+	* 생성된 소스 코드를 필요에 맞게 사용자 정의
+		* 구문 강조 표시
+			* 키워드
+			* 기본형 타입
+			* 상수 리터럴: 숫자, 문자열
+		* 코드 입력 시 자동 제안 기능
 
-	* Customizing the generated source code to our needs
-		* Syntax Highlighting
-			* Keywords
-			* Built-in Types
-			* Constant literals: numbers, strings
-		* Auto-suggest feature of eclipse as code is being typed in
+	* "Run as --> Java Application" 는 소스 코드를 컴파일하고 실행하기 위한 옵션
+		* 옵션은 main() 메소드를 가진 클래스에 한하여 사용 가능.
 
-	* The "Run as --> Java Application" Option to compile-and-run the source code
-		* Option is avaibale only for classes that have a main() method
+#### 디버그 모드에서 Eclipse 사용
 
+곱셈표 프로그램 실행은 단계별로 할 수 있다. 즉, 전체 응용 프로그램이 한 번에 실행되지 않고 최종 출력을 콘솔에 인쇄하는 것이다. 우리는 Eclipse IDE를 이용하여 그것의 실행을 제어함으로써 그것의 흐름을 몇 단계로 지연시킬 수 있다. 이것은 **디버그 모드**라고 불리는 Eclipse의 특별한 모드에서 가능하다.
 
-#### Using Eclipse in Debug Mode
+이 과정을 **디버깅**이라고 하는데, 이 모드는 단순히 무슨 일이 일어나는지 보는 재미뿐만 아니라 소프트웨어 **버그**를 탐지하고 수정하는 데도 많이 사용되기 때문이다. 버그는 작성 중인 프로그램의 결함으로 인해 잘못된 실행으로 이어진다. 버그를 제거하는 과정을 디버깅이라고 한다. 인간은 인간이기 때문에 프로그래밍 오류는 자연스러운 것이며, IDE의 디버그 모드는 프로그래머에게 황금과 같은 가치가 있다. Eclipse가 Java 애플리케이션의 디버깅을 촉진하는 방법은 다음과 같다.
 
-Execution of the Multiplication Table Program can be done Step by-step. That is, the entire application dies not execute at one go, printing the final output onto the console. We can stall its flow at several steps, by taking control of its execution using the Eclipse IDE. This is possible in a special mode of Eclipse, called **Debug Mode**. 
+* 응용 프로그램을 디버깅하기 전에 **중단점**을 몇 개 설정해야 한다. 중단점은 디버그 모드에서 실행이 일시 중단되고 제어권이 프로그래머에게 전달되기 전에 프로그램의 출처에 있는 문장이다.
+* 일시 중단된 프로그램에 있는 데이터의 전반적인 상태는 특정 중단점에서 프로그래머가 이용할 수 있다. 프로그램에 하나 이상의 중단점을 명시하게 되며, 실행이 중단되었을 때 다음과 같은 가능한 조치 목록을 수행할 수 있다:
+	* 데이터 변수 읽기 및 수정
+	* 프로그램 실행 재개
+	* 현재 구문 재실행
+	* 다음 중단점까지 모든 구문 건너뛰기
 
-The process is called **Debugging**, because this mode is heavily used not just to have fun seeing what happens, but also to detect and fix software **bugs**. A bug is a defect in the program being written, that leads to its incorrect execution. The process of removing bugs is called debugging. Humans being humans, programming errors are but natural, and a debug mode in the IDE is worth its wight in gold to the programmer. Here is how Eclipse facilitates debugging of Java applications.
+	기타 등등.
+.	
 
-* Prior to debugging application, we need to set few **Break-Points**. A Break-Point is a statement in the source of the program, before which execution under debug mode is suspended, and control is passed to the programmer.
-* The overall state of the data in the suspended program is available to the programmer at that particular break-point. He/she gets to specify one or more break-points in the program, and when the execution is suspended, a list of possible actions can be performed, including: 
-	* Reading & modifying data variables 
-	* Resuming program execution 
-	* Re-executing current statement
-	* Skipping all statements till the next break-point
-	
-	and others.
-
-* The Eclipse IDE provides a very user-friendly and intuitive interface to the programmer for controlling execution of a program in Debug Mode (Provide Snapshots of IDE at various stages of Debug Mode execution).
+* Eclipse IDE는 디버그 모드(디버그 모드 실행의 다양한 단계에서 IDE의 스냅샷 제공)에서 프로그램 실행을 제어하기 위해 프로그래머에게 매우 사용자 친화적이고 직관적인 인터페이스를 제공한다.
 	* Setting and Removing a Break-point (also Toggling)
 	* Stepping over a method call, or into and out of a method body (during a method call)
-		* Stepping into ```int print()``` and ```int print(int)``` and ```int print(int,int,int)``` gives us interesting infromation, but stepping into ```System.out.printf``` can freak you out! So, you may want to step over it. 
+	* 중단점 설정 및 제거(토글링)
+	* 메소드 호출이나 메소드 본체 내부/외부를 넘어 다님.(메소드를 호출하는 동안)
+		* ```int print()``` 와 ```int print(int)``` 그리고 ```int print(int,int,int)``` 를 넘나드는 것은 흥미롭지만, ```System.out.printf```에 들어가는 것은 여러분을 놀라게 할 수 있다! 그래서, 당신은 그것을 넘어서는 것이 좋을지도 모른다.
 	* For nested method calls, examine the method call **Stack Trace** (Call child, call parent relationship)
-		* Example : ```int print()```, ```int print(int)``` and ```int print(int,int,int)``` method call chain of ```class MultiplicationTable```.
+	* 중첩된 메소드를 호출하는 경우, **스택 추적(Stack Trace)*** 메소드를 검사하십시오(부모,자식 관계를 호출)
+		* 예시 : ```int print()```, ```int print(int)``` and ```int print(int,int,int)``` method call chain of ```class MultiplicationTable```.
 	* Viewing and Modifying current state of data variables, at a break point
 	* Stepping through from one statement to another in the source code
 		* As we step through, observe the view displaying changes in data variable values
@@ -15211,788 +15214,4 @@ We have defined a method ```MyCustomList<T>.get``` whose return type is generic 
 
 We saw above that we could use ```MyCustomList<T>``` to be instantiated into data structures for storing ```String```s as well as for ```Integer```s. 
 
-What if we wanted to to use ```MyCustomList<T>``` purely for storing numeric values?
-
-##### Snippet-3 : Generic Type Restrictions
-
-**_MyCustomList.java_**
-
-```java
-
-	package com.in28minutes.generics;
-
-	public class MyCustomList<T extends Number> {
-		ArrayList<T> list = new ArrayList<>();
-		
-		public void addElement(T element) {
-			list.add(element);
-		}
-
-		public void removeElement(T element) {
-			list.remove(element);
-		}
-
-		public String toString() {
-			return list.toString();
-		}
-
-		public T get(int index) {
-			return list.get(index);
-		}
-	}
-
-```
-
-**_GenericsRunner.java_**
-
-```java
-
-	package com.in28minutes.generics;
-	import com.in28minutes.generics.MyCustomList;
-
-	public class GenericsRunner {
-		public static void main(String[] args) {
-			//MyCustomList<String> list = new MyCustomList<>();
-			MyCustomList<Long> list1 = new MyCustomList<>();
-			list1.addElement(5l);
-			list1.addElement(7l);
-			Long long = list1.get(0);			
-			System.out.println(long);
-
-			MyCustomList<Integer> list2 = new MyCustomList<>();
-			list2.addElement(Integer.valueOf(5));
-			list2.addElement(Integer.valueOf(9));
-			Integer num = list2.get(1);
-			System.out.println(num);
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_5_
-
-_9_
-
-When we specify `T extends Number` as the type, we can use all the methods in the API of ```class``` ```Number``` are available for use. 
-
-#### Generic Methods
-We can create generic methods as well. Let's look at a few examples:
-
-##### Snippet-4 : Generic Method
-
-**_GenericsRunner.java_**
-
-```java
-
-	package com.in28minutes.generics;
-	import com.in28minutes.generics.MyCustomList;
-
-	public class GenericsRunner {
-		static <X> X doSomething(X value) {
-			return value;
-		}
-
-		static <X extends List> void duplicate(X list) {
-			list.add(list);
-		}
-
-		public static void main(String[] args) {
-			String text = doSomething("Hello");
-			Integer value = doSomething(Integer.valueOf(7));
-			ArrayList<String> list = doSomething(new ArrayList<String>(List.of("A", "B", C")));
-			duplicate(list);
-			System.out.println(list);			
-			LinkedList<Integer> list2 = doSomething(new LinkedList<String>(List.of(1, 2, 3)));
-			duplicate(list2);
-			System.out.println(list2);
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_[A, B, C, A, B, C]_
-
-_[1, 2, 3, 1, 2, 3]_
-
-#### Generics And Wild-Cards 
-
-You can use wild card with generics too - `? extends Number`
-
-##### Snippet-5
-
-**_GenericsRunner.java_**
-
-```java
-
-	package com.in28minutes.generics;
-	import com.in28minutes.generics.MyCustomList;
-
-	public class GenericsRunner {
-		static double sumOfNumberList(List<? extends Number> numbers) {
-			double sum = 0.0;			
-			for(Number number:numbers) {
-				sum += number;
-			}
-			return sum;
-		}
-
-		public static void main(String[] args) {
-			System.out.println(sumOfNumberList(List.of(1, 2, 3, 4, 5)));
-			System.out.println(sumOfNumberList(List.of(1.1, 2.1, 3.1, 4.1, 5.1)));
-			System.out.println(sumOfNumberList(List.of(1l, 2l, 3l, 4l, 5l)));
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_15.0_
-
-_15.5_
-
-_15.0_
-
-##### Snippet-5 Explained
-The symbol ```?``` in the definition of the method ```static double sumOfNumberList(List<? extends Number> numbers)``` is the **wild-card** symbol. It denotes the fact that in order to be a valid argument to ```sumOfNumberList```, ```numbers``` can be a ```List``` of any elements, so long as all of them are of type sub-classed from ```Number```. 
-* This includes ```Integer```, ```Long```, ```Short```, ```Byte```, ```Float``` and ```Double```. 
-* It also includes their primitive type counterparts, since they can be converted implicitly to their Wrapper class counterparts. 
-* Of course, all these elements of ```List``` ```numbers``` need to be of a homogeneous type.
-
-#### Restricted Heterogeneous Lists
-
-The generic wildcard we saw in the previous section is referred to as a **Upper-Bounded Wild-Card**. It can be used to specify homogeneous types with a restriction. There is another category of wild-cards called **Lower-Bounded Wild-Card**, which can be used with create **Heterogeneous** types of elements , within the restriction. Here is an example.
-
-##### Snippet-6 : More wild-cards
-
-**_GenericsRunner.java_**
-
-```java
-
-	package com.in28minutes.generics;
-	import com.in28minutes.generics.MyCustomList;
-
-	public class GenericsRunner {
-		static void addAFewNumbers(List<? super Number> numbers) {
-			numbers.add(1);
-			numbers.add(1l);
-			numbers.add(1.0);			
-			numbers.add(1.0l);
-		}
-
-		public static void main(String[] args) {
-			List<Number> numberList = new ArrayList<>();
-			addAFewNumbers(numberList);
-			System.out.println(numberList);
-		}
-	}
-
-```
-
-
-**_Console Output_**
-
-_[1, 1, 1.0. 1.0]_
-
-## Introduction to Functional Programming
-
-What's all the fuss around Functional Programming about?
-
-Let's find out.
-
-Functional Programming Videos
-- Part 1 - https://www.youtube.com/watch?v=aFCNPHfvqEU 
-- Part 2 - https://www.youtube.com/watch?v=5Xw1_IREXQs
-
-### Step 01: Introducing Functional Programming
-
-Let's look at a typical program to loop around a list and print its content.
-
-##### Snippet-01 : OOP List Traversal 
-
-**_FunctionalProgrammingRunner.java_**
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	import java.util.List;
-
-	public class FunctionalProgrammingRunner {
-		public static void main(String[] args) {
-			List<String> list = List.of("Apple", "Banana", "Cat", "Dog");
-			for(String str:list) {
-				System.out.println(str);
-			}
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_Apple_
-
-_Banana_
-
-_Cat_
-
-_Dog_
-
-##### Snippet-01 Explained
-
-Above approach focuses on the **how**.
-
-We looped around the list, accessed individual elements of a ```List``` and did  ```System.out.println()``` to print each element. 
-
-Functional Programming allows us to focus on the **what**.
-
-##### Snippet-02 : ```printBasic()``` And ```printFunctional()``` 
-
-**_FunctionalProgrammingRunner.java_**
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	import java.util.List;
-
-	public class FunctionalProgrammingRunner {
-		public static void main(String[] args) {
-			List<String> list = List.of("Apple", "Banana", "Cat", "Dog");
-			//printBasic(list);
-			printFunctional(list);
-		}
-
-		public static void printBasic(List<String> list) {
-			for(String str:list) {
-				System.out.println(str);
-			}
-		}
-
-		public static void printFunctional(List<String> list) {
-			list.stream().forEach(
-									element -> System.out.println(element)
-								 );									
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_Apple_
-
-_Banana_Cat_
-
-_Dog_
-
-##### Snippet-02 Explained
-
-`list.stream().forEach(element -> System.out.println(element))` - for each element in list stream, print it.
-
-```element -> System.out.println(element)``` is called a **lambda expression**.
-
-### Step 02: Looping Through A ```List```
-
-In the previous step , we use this snippet of code - `list.stream().forEach(element -> System.out.println(element))`
-
-We are **"Passing a function as a method argument"**. 
-
-Let's use JShell to explore this further.
-
-Let's try to print a list of numbers. 
-
-##### Snippet-01 : Loop Using FP
-
-```java
-
-	jshell> List<Integer> list = List.of(1, 4, 7, 9);
-	list ==> [1, 4, 7, 9]
-	jshell> list.stream().forEach(elem -> System.out.println(elem));
-	1
-	4
-	7
-	9
-	jshell>
-	
-```
-
-##### Snippet-01 Explained
-
-`elem -> System.out.println(elem)` is a lambda expression. For each element in list stream, execute the lambda expression.
-### Step 03:  Filtering Results
-
-A ```Stream``` is a sequence of values. The ```filter()``` method can be used to filter the ```Stream``` elements based on some logic.
-  
-##### Snippet-01 : Using ```filter()```
-
-`printBasicWithFiltering` shows the usual approach of filtering.  `printFPWithFiltering` shows the functional approach.
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	import java.util.List;
-
-	public class FunctionalProgrammingRunner {
-		public static void main(String[] args) {
-			List<String> list = List.of("Apple", "Bat", "Cat", "Dog");
-			//printBasicWithFiltering(list);
-			printFPWithFiltering(list);
-		}
-
-		public static void printBasicWithFiltering(List<String> list) {
-			for(String str:list) {
-				if(str.endsWith("at")) {
-					System.out.println(str);
-				}
-			}
-		}
-
-		public static void printFPWithFiltering(List<String> list) {
-			list.stream()
-				.filter(elem -> elem.endsWith("at"))
-				.forEach(element -> System.out.println(element));
-
-		}	
-	}
-
-```
-
-
-**_Console Output_**
-
-_Bat_
-
-_Cat_
-
-
-##### Snippet-02 : Printing even/odd numbers
-
-Let's look at how to filter numbers.
-
-```java
-
-	jshell> List<Integer> list = List.of(1, 4, 7, 9);
-	list ==> [1, 4, 7, 9]
-	jshell> list.stream().forEach(elem -> System.out.println(elem));
-	1
-	4
-	7
-	9
-	jshell> list.stream().filter(num -> num%2 == 1).forEach(elem -> System.out.println(elem));
-	1
-	7
-	9
-	jshell> list.stream().filter(num -> num%2 == 0).forEach(elem -> System.out.println(elem));
-	4
-	jshell>
-
-```
-
-##### Snippet-02 Explained
-
-Typically, these are the conditions we write
-* ```num``` is odd : ```if(num % 2 == 1) { /*  */ }```
-* ```num``` is even : ```if(num % 2 == 0){ /*  */ }```
-
-In the above example, we are using lambda expression to define the same conditions. 
-* ```num``` is odd: ```num -> num%2 == 1```
-* ```num``` is even: ```num -> num%2 == 0```
-
-### Step 05: Streams - Aggregated Results
-Sometimes we want to aggregate data into a single result. For example, we might want to add all the numbers between ```1``` and ```10```. Or we may want to calculate the average maximum temperature in our city over a month's time. 
-
-
-##### Snippet-01 : Sum Of A Sequence
-
-Let's look at how to use `reduce` method to calculation the sum.
-**_FPNumberRunner.java_**
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	import java.util.List;
-
-	public class FPNumberRunner {
-		public static void main(String[] args) {
-			List<Integer> numbers = List.of(4, 6, 8, 13, 3, 15);
-			//System.out.println(printBasicSum(numbers));
-			int sum = numbers.stream()
-							 .reduce( 
-									 0,
-									 (num1, num2) -> num1 + num2
-									);
-			System.out.println(sum);
-		}
-
-		void printBasicSum(List<Integer> numbers) {
-			int sum=0;
-			for(int num:numbers) {
-				sum += num;
-			}		
-			System.out.println(sum);
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_49_
-
-##### Snippet-01 Explained
-
-The ```reduce()``` method acts on a pair of elements at a time. The *initial-value* is  ```0```. The lambda expression `(num1, num2) -> num1 + num2` is executed on the elements of the list, a pair at a time.
- 
-#### Classroom Exercise CE-01
-
-1. Given the list ```(4, 6, 8, 13, 3, 15)```, compute:
-	* The sum of even numbers in the list.
-	* The sum of odd numbers in the list.
-
-#### Solution To CE-01
-
-**_FPNumberRunner.java_**
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	import java.util.List;
-
-	public class FPNumberRunner {
-		public static void main(String[] args) {
-			List<Integer> numbers = List.of(4, 6, 8, 13, 3, 15);
-			printFPEvenSum(numbers);			
-			printFPOddSum(numbers);
-		}
-
-		void printFPEvenSum(List<Integer> numbers) {
-			int sum = numbers.stream()
-							 .filter(elem -> elem %2 == 0)
-							 .reduce(0, (num1, num2) -> num1 + num2);
-			System.out.println("Even Numbers Sum: " + sum);
-		}
-
-		void printFPOddSum(List<Integer> numbers) {
-			int sum = numbers.stream()
-							 .filter(elem -> elem %2 == 1)
-							 .reduce(0, (num1, num2) -> num1 + num2);
-			System.out.println("Odd Numbers Sum: " + sum);
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_Even Numbers Sum: 18_
-
-_Odd Numbers Sum: 31_
-
-### Step 06: Functional Programming v Structured Programming
-
-Let's have a re-look at the **_FPNumberRunner.java_** program from the previous step. We wrote two variants of the same task that computed the sum of a list of numbers:
-
-* ```basicSum()```: that used the traditional approach
-* ```fpSum()``: which followed the *FP* scheme of things
-
-Let's use them as benchmarks, to illustrate the core differences between *SP* and *FP*. 
-
-1. **Structured Programming** (**SP**)
-
-```java
-
-	public int basicSum(List<Integer> numbers) {
-		int sum=0;
-		for(int num:numbers) {
-			sum += num;
-		}
-		return sum;
-	}
-
-```
-
-2. **Functional Programming** (**FP**)
-
-```java
-
-	public int  fpSum(List<Integer> numbers) {
-		int sum = numbers.stream()
-						 .reduce(0, (num1, num2) -> num1 + num2);
-		return sum;
-	}
-
-```
-
-How are these different?
-* **Mutations** (changes to program data):
-	1. *SP*: Within ```basicSum()```, the variable ```sum``` (a sort of worker variable) is initialized to ```0```, and undergoes *mutations* across iterations of the ```for``` loop. 
-	2. *FP*: We just set up an initial value for ```reduce()``` to work with. We don't have any mutation.
-
-* The **what** and **how** of computation:
-	1. *SP*: We specify both *what* to do, and *how* to do it. The code loops through the list elements using a ```for```, while also updating the aggregate value in ```sum```.
-	2. *FP*: We are focused on *what* to do, and very little on the *how* part. ```reduce()``` takes care of what numbers from the *stream* to add up, and you don't bother about how to select them from the *stream*. 
-
-
-### Step 07: Some FP Terminology 
-
-Let's look at some *FP* terminology a little more formally.
-
-
-#### Lambda Expression
-
-
-```java
-
-	(num1, num2) -> num1 + num2
-
-```
-
-is equivalent of this method
-
-```java
-
-	int basicSum(int num1, int num2) {	
-		return num1 + num2;
-	}
-
-``` 
-
-A lambda expression can have multiple lines of Java code as well:
-
-```java
-
-	(num1, num2) -> {
-		System.out.println(num1 + " " + num2);
-		return num1 + num2;
-	}
-
-```
-
-Why take our word for all this? Let's put this code into an IDE, and then run it, to see for ourselves.
-
-##### Snippet-01 : Lambda Expression
-
-**_FPNumberRunner.java_**
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	import java.util.List;
-
-	public class FPNumberRunner {
-		public static void main(String[] args) {
-			List<Integer> numbers = List.of(4, 6, 8, 13, 3, 15);
-			System.out.println(numbers);
-			printFPSum(numbers);
-		}
-
-		void printFPSum(List<Integer> numbers) {
-			int sum = numbers.stream()
-							 .reduce(0,
-									 (num1, num2) -> {
-														System.out.println(num1 + " " + num2);
-														return num1 + num2;
-													 }
-			System.out.println("Even Numbers Sum: " + sum);		
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_[4, 6, 8, 13, 3, 15]_
-
-_0 4_
-
-_4 6_
-
-_10 8_
-
-_18 13_
-
-_31 3_
-
-_34 15_
-
-_49_
-
-
-
-#### Stream
-
-A Stream is a sequence of elements. You can perform different kinds of operations on a stream. 
-* **Intermediate Operations**: An operation that *takes a stream* - for example, applies a lambda expression - and produces *another stream* of elements as its result.
-* **Terminal Operations**: A stream operation that takes a stream - for example, applies a lambda expression -  and returns a single result (A single primitive-value/object, or a single collection-of-objects). ```reduce()``` and ```forEach()``` are a couple of such operations.
-
-### Step 08: Intermediate Stream Operations
-
-Output of an intermediate stream operation is another stream. 
-
-The most popular intermediate stream operations are: 
-* ```sorted()```
-* ```distinct()```
-* ```filter()```
-* ```map()```
-
-In this step, let's check them out one by one.
-
-##### Snippet-01 : ```sorted()``` and other operations
-
-```java
-
-	jshell> List<Integer> numbers = List.of(3, 5, 8, 213, 45, 4, 7);
-	numbers ==> [3, 5, 8, 213, 45, 4, 7]
-	jshell> numbers.stream().sorted().forEach(elem -> System.out.println(elem));
-	3
-	4
-	5
-	7
-	8
-	45
-	213
-	jshell> List<Integer> numbers = List.of(3, 5, 3, 213, 45, 5, 7);
-	numbers ==> [3, 5, 3, 213, 45, 5, 7]
-	jshell> numbers.stream().distinct().forEach(elem -> System.out.println(elem));
-	3
-	5
-	213
-	45
-	7
-	jshell> numbers.stream().distinct().sorted().forEach(elem -> System.out.println(elem));
-	
-	3
-	5
-	7
-	45
-	213
-	jshell> numbers.stream().distinct().map(num -> num*num).forEach(elem -> System.out.println(elem));
-	9
-	25
-	45369
-	2025
-	49
-	jshell>
-
-```
-
-##### Snippet-01 Explained
-
-* ```sorted()``` preserves the elements of the consumed stream in the result, but also puts them in natural sorted order (Increasing order for numbers, alphabetical order for strings).
-* ```distinct()``` returns a stream retaining only the unique elements of the input stream. This method maintains the relative order of retained elements.
-* You can chain together more than one intermediate operation, such as ```sorted()``` followed by ```distinct()``` above. Such code is sometimes called a *pipeline*.
-*  ```map()``` : Applies a lambda expression to compute new results from the input stream elements. It then returns a stream of these results as output. In our example, ```map()``` takes each element in the ```Stream``` object created by ```number.stream()``,` to its square value.
-
-
-### Step 09: Programming Exercise FP-PE-01
-
-#### Exercises
-
-1. Write a program to print the squares of the first 10 positive integers.
-2. Create a list of the character strings "Apple", "Banana" and "Cat". Print all of them in lower-case.
-3. Create a list of the character strings "Apple", "Banana" and "Cat". Print the length of each string.
-
-#### Solutions To FP-PE-01
-
-**_FPNumberRunner.java_**
-
-```java
-
-	package com.in28minutes.functionalprogramming;
-	public class FPNumberRunner {
-		public static void printFPSquares() {
-			IntStream.range(1, 11).
-					  map(num -> num*num).
-					  forEach(elem -> System.out.println(elem));
-		}
-
-		public static void printLowerCases(List<String> list) {
-		}
-
-		public static void printLengths(List<String> list) {
-			list.stream()
-				.map(s -> s.length())
-				.forEach(elem -> System.out.println(elem);
-		}
-
-		public static void main(String[] args) {
-			printFPSquares();
-			List<String> list = List.of("Apple", "Banana", "Cat");
-			printLowerCases(list);		
-			printLengths(list);
-		}
-	}
-
-```
-
-**_Console Output_**
-
-_1_
-
-_4_
-
-_9_
-
-_16_
-
-_25_
-
-_36_
-
-_49_
-
-_64_
-
-_81_
-
-_100_
-
-_apple_
-
-_banana_
-
-_cat_
-
-_5_
-
-_6_
-
-_3_
-
-#### Solution Explained
-
-* The ```map()``` method accepts a lambda expression.
-
-### Step 10:  Terminal Operations
-
-A terminal operation returns a single result (A single object/data-unit, or a single collection). It does not return an output stream.
-
-Commonly used instances of this are:
-
-* ```reduce()```
-* ```max()``` and ```min()```
-
-```java
-
-	jshell> IntStream.range(1, 11).reduce(0, (n1, n2) -> n1 + n2);
-	$1 ==> 55
-```
-
-```max()``` expects a lambda expression providing a ```Comparator<T>``` implementation.  ```Integer.compare(n1,n2)``` is an implementation of the ```Comparator<T>``` interface for comparing integers. 
-
-What if there are no numbers in the Stream? What should be returned? As a Java programmer, we grew up to hate `null`. You don't want to return `null` back.
-
-The ```Optional``` type provides an alternative: 
-* You can query an ```Optional``` object to check if it contains a valid result, by invoking ```isPresent()``` on it. 
-* You can get that result by calling ```get()``` on the same object.
-
-
-```java
-
-	jshell> List.of(23, 12, 34, 53).stream().max();
-	| Error:
-	| method max() in interface java.util.stream.Stream
+What if we wanted to to use ```MyCustomList<T>``` purely for
