@@ -15,9 +15,9 @@
 ## Table of Contents
 
 * [Chapter 01 - 프로그래밍 소개와 Print-Multiplication-Table](#프로그래밍-소개와-print-multiplication-table)
-* [Chapter 02 - 함수의 이해](#함수의-이해)
+* [Chapter 02 - 메소드 이해](#메소드-이해)
 * [Chapter 03 - 자바 플랫폼의 이해](#자바-플랫폼의-이해)
-* [Chapter 04 - 이클립스](#이클립스)
+* [Chapter 04 - Eclipse](#Eclipse)
 * [Chapter 05 - 객체 지향 프로그래밍 (OOP)](#객체-지향-프로그래밍-oop)
 * [Chapter 06 - 기본형 타입](#기본형-타입)
 * [Chapter 07 - 조건문 소개 - if, switch and more](#조건문-소개---if-switch-and-more)
