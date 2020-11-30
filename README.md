@@ -5899,7 +5899,8 @@ _Earlier Honda Speed is : 0_
 *OOP*는 캡슐화를 통해 모든 것을 달성한다! 그 아이디어는 메소드 내에서 반복된 논리를 *캡슐화*하고, 그것에 객체별 정보를 인수로 전달하는 것이다. 다음 예는 그것을 하는 한 가지 방법을 보여준다.
 
 
-##### Snippet-2 : Speed Increase through Code Encapsulation
+##### Snippet-2 : 코드 캡슐화를 통한 속도 증가
+
 
 **_MotorBike.java_**
 
@@ -5959,13 +5960,13 @@ _Earlier Honda Speed is : 0_
 
 **_Later Honda Speed is : 100_**
 
-##### Snippet-2 Explained
+##### Snippet-2 설명
 
-The method ```increaseSpeed()``` has been added to ```MotorBike```. It can be invoked on the ```ducati``` and ```honda``` objects.
+```MotorBike```에 ```increaseSpeed()```메소드가 추가되었다. 그것은 ```ducati```와 ```honda```에서 호출될 수 있다.
 
-Let's now add a feature to ```MotorBike```, by which ```speed``` can be decreased.
+이제 ```MotorBike```의 속도를 줄일 수 있는 부분을 추가해보자.
 
-##### Snippet-3 : Speed Increase And Decrease through Code Encapsulation
+##### Snippet-3 : 코드 캡슐화를 통한 속도 증가 및 감소
 
 **_MotorBike.java_**
 
@@ -6035,13 +6036,14 @@ _Earlier Honda Speed is : 0_
 
 **_Final Honda Speed is : -150_**
 
-##### Snippet-3 Explained
+##### Snippet-3 설명
 
-The method ```decreaseSpeed()``` has been added to ```MotorBike```. It can be invoked on the ```ducati``` and ```honda``` objects inside the ```main()``` method of ```MotorBikeRunner```.
+```MotorBike```에 ```decreaseSpeed()```메소드가 추가되었다. 그것은 ```MotorBike```의 ```main()```메소드 안에 있는 ```ducati```와 ```honda``` 객체에서 호출될 수 있다.
 
-On of the things you can observe again is ***Negative Speed Values***. Our validation needs to be improved.
+여러분이 다시 관찰할 수 있는 것 중 하나는 *** 음수 속도 값**이다. 우리의 검증은 개선되어야 한다.
 
-##### Snippet-4 : Validation across methods, repeated!
+##### Snippet-4 : 여러 메소드에 걸친 검증, 반복!
+
 
 **_MotorBike.java_**
 
@@ -6090,15 +6092,15 @@ _Later Honda Speed is : 50_
 
 **_Final Honda Speed is : 50_**
 
-##### Snippet-4 Explained
+##### Snippet-4 설명
 
-We have achieved data validation, because attempts to decrease the ```speed``` of ```ducati``` and ```honda``` below ```0``` are now ignored. 
+우리는 ```ducati```와 ```honda```의 ```speed```를 ```0```이하로 낮추려는 시도가 지금은 무시되고 있기 때문에 유효성 검증에 성공했다.
 
-But this has come at a cost,  which is *code bloat*.
+그러나 이것은 *코드 비대화*라는 대가를 치렀다.
 
-How do we reduce duplication?
+코드의 중복을 어떻게 줄일 것인가?
 
-##### Snippet-5: Validation by code reuse
+##### Snippet-5: 코드 재사용을 통한 유효성 검증
 
 **_MotorBike.java_**
 
@@ -6151,30 +6153,31 @@ _Later Honda Speed is : 50_
 
 **_Final Honda Speed is : 50_**
 
-##### Snippet-5 Explained
+##### Snippet-5 설명
 
-The idea behind this solution is, that an *update* is the same as a ```set()``` operation. Since ```setSpeed()``` already has a validation check, it can be called inside both ```increaseSpeed()``` and ```decreaseSpeed()``` with appropriate parameters. 
+이 해결책의 이면에 있는 생각은 *업데이트*가 ```set()```의 연산과 같다는 것이다. ```setSpeed()```는 이미 유효성을 검사했기 때문에 ```increaseSpeed()```와 ```decreaseSpeed()``` 둘 다 적절한 매개변수를 가지고 내부에서 호출할 수 있다.
 
-In this way, the validation logic would be reused across update methods.
+이러한 방식으로 거증 논리는 메소드를 업데이트하는 방법으로 재사용될 것이다.
 
-> Be always careful. Duplication of logic makes your code difficult to maintain.
+> 항상 조심하라. 논리의 중복은 여러분의 코드를 유지하기 어렵게 만든다.
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Started exploring the next advantage of encapsulation - code reuse
-* Mapped this understanding to the ```MotorBike``` example, building on data validation  
+이번 단계에서는
 
-### Step 12: Programming Exercise PE-OO-03
+* 캡슐화의 두 번째 이점인 코드 재사용을 살펴보기 시작했다.
+* 이러한 이해를 ```MotorBike```의 사례에 연관지어 유효성 검증에 대해 알아보았다.
 
-#### Exercises
+### Step 12: 프로그래밍 실습 PE-OO-03
 
-1. Use an encapsulation technique to write methods for the ```Book``` ```class```, that
-	* Increase the number of books
-	* Decrease the number of books
+#### 실습
 
-#### Solution
+1. 캡슐화 기법을 사용하여 ```Book``` ```class```를 위한 메소드를 작성하시오.
+	* 도서의 수 증가
+	* 도서의 수 감소
+
+#### 솔루션
 
 **_BookRunner.java_**
 
@@ -6245,7 +6248,7 @@ In this step, we:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _The Art Of Computer Programming_
 
@@ -6259,14 +6262,14 @@ _5_
 
 _5_
 
-### Step 13: Introducing Constructors   
+### Step 13: 생성자 소개
 
-When we create Ducati and Honda motorbikes, we may want to configure them with some start speeds. 
+우리가 두카티와 혼다 모터바이크를 만들 때, 우리는 그들을 약간의 시작 속도가 있는 것으로 구성하기를 원할지도 모른다.
 
-Suppose our whim is that a Ducati bike starts with 100 mph, and a Honda with 200 mph. 
+우리의 변덕이 두카티 오토바이는 100mph로 시작하고 혼다는 200mph로 출발한다고 가정해보자.
 
 
-##### Snippet-1: MotorBike Constructor
+##### Snippet-1: MotorBike 생성자
 
 **_MotorBike.java_**
 
@@ -6318,31 +6321,31 @@ _Earlier Ducati Speed is : 100_
 
 _Earlier Honda Speed is : 200_
 
-##### Snippet-1 Explained
+##### Snippet-1 설명
 
-We defined a single-argument constructor for ```MotorBike```, whosw definition looks like this:
+우리는 ```MotorBike```에 인자가 하나인 생성자를 정의했는데, 그 정의는 다음과 같다.
 
-```public MotorBike(int speed){ /* Constructor Code Goes Here  */ }```
+```public MotorBike(int speed){ /* 생성자 코드는 여기에 작성  */ }```
 
-The constructor is a method, whose name is the same as the ```class``` name. All Java rules for a method apply to constructors as well. Constructor cannot be directly called. 
+생성자는 ```class```와 이름이 같은 메소드이다. 메소드에 대한 모든 Java 규칙은 생성자에게도 적용된다. 생성자를 직접 호출할 수는 없다.
 
-A constructor is always invoked when a ```class``` object is created, using the ```new``` keyword. A constructor for a ```class``` could accept zero, one or more than one arguments. Let's next write some full-blooded code for a ```MotorBike``` constructor.
+생성자는 ```새로운```키워드를 사용하여 ```class```객체가 생성될 때, 항상 호출된다. ```class```를 위한 생성자는 0개 혹은 하나 이상의 인자를 받아들일 수 있다. 다음에는 ```MotorBike```생성자를 위한 완전한 코드를 써보자.
 
 
-#### Summary
+#### 요약
 
-In this step, we were introduced to the concept of a ```class``` constructor
+이번 단계에서는, ```class```생성자라는 개념을 알게 되었다.
 
-### Programming Exercise PE-OO-04, And More On Constructors
+### Programming Exercise PE-OO-04, 생성자 더 알아보기
 
-#### Exercises
+#### 실습
 
-1. Rewrite the ```Book``` ```class``` solution by using a constructor, which accepts an integer argument specifying the initial number of copies to be published:
-	* "The Art Of Computer Programming" : 100 copies
-	* "Effective Java" : 75 copies
-	* "Clean Code" : 60 copies
+1. ```Book``` ```class```의 솔루션을 생성자를 사용하여 재작성 하십시오. 이 생성자는 최초 발행 부스를 명시하는 정수 인수를 받는다:
+	* "The Art Of Computer Programming" : 100부
+	* "Effective Java" : 75부
+	* "Clean Code" : 60부
 
-#### Solution To PE-OO-04
+####  PE-OO-04 솔루션
 
 **_BookRunner.java_**
 
@@ -6399,7 +6402,7 @@ In this step, we were introduced to the concept of a ```class``` constructor
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _The Art Of Computer Programming_
 
@@ -6413,19 +6416,20 @@ _Clean Code_
 
 _60_
 
-#### More on Constructors
+#### 생성자에 대한 더 많은 정보
 
-We enjoyed defining the ```MotorBike``` ```class``` and checking out the behavior of its instances, ```ducati``` and ```honda```. 
+우리는 ```MotorBike``` ```class```를 정의하고 ```ducati```와 ```honda```라는 그 인스턴스의 행동을 확인했다.
 
-When we started off , we created instances of `MotorBike` classes using:
+처음 시작했을 때, 우리는 다음과 같이 ```MotorBike```의 클래스의 인스턴스를 만들었다:
 
 ```MotorBike ducati = new MotorBike();```
 
-Did you notice something familiar? Doesn't the expression ```new MotorBike()``` look like a constructor call? 
+뭔가 낯익은 것을 눈치챘나? ```new MotorBike()```라는 수식은 생성자 호출처럼 보이지 않는가?
 
-As it turns out, it is a constructor call on ```MotorBike```! 
+알고보니 ```MotorBike```에 대한 생성자 호출이다!
 
-When we define a ```class``` in Java (even a seemingly empty one), some behind-the-scene magic happens. Consider one such ```class``` ```Cart```:
+우리가 자바에서 ```class```(비어 있는것 처럼 보이는)를 정의하면, 이면에서는 마술이 일어난다. 그런 ```class``` ```Cart```를 생각해보자:
+
 
 ```java
 
@@ -6435,7 +6439,7 @@ When we define a ```class``` in Java (even a seemingly empty one), some behind-t
 
 ```
 
-This ```class``` has neither state, nor behavior. When we try to create instances of this "empty" ```class```:
+이 ```class```는 상태도 행동도 없다. 우리가 이러한 "비어있는" ```class```의 인스턴스를 만들려고 할 때:
 
 ```java
 
@@ -6447,9 +6451,10 @@ This ```class``` has neither state, nor behavior. When we try to create instance
 
 ```
 
-The code seems to compile, execute and get initialized quite smoothly! What happens is, that the compiler silently generates a **default constructor** for ```Cart```. 
+이 코드는 꽤 순조롭게 컴파일, 실행, 초기화 되는 것 같다! 결국 컴파일러가 ```Cart```를 위한 ```기본 생성자```를 조용히 만들어 낸다는 것이다.
 
-A default constructor is one that accepts no arguments. It is as if the ```Cart``` ```class``` were defined this way:
+기본 생성자는 어떤 인수도 허용하지 않는 생성자이다. 마치 ```Cart``` ```class```를 이렇게 정의한 것과 같다.
+
 
 ```java
 
@@ -6460,11 +6465,11 @@ A default constructor is one that accepts no arguments. It is as if the ```Cart`
 
 ```
 
-A constructor may also have overloaded definitions. 
+생성자도 오버로딩된 정의를 가질 수 있다.
 
-Let's now try to create ```MotorBike``` instances with default initialization, just as we did with ```Cart```.
+이제 ```Cart```와 마찬가지로 기본 초기화로 ```MotorBike```의 인스턴스를 만들어보자.
 
-##### Snippet-2 : Default Motorbike Construction?
+##### Snippet-2 : MotorBike의 기본 생성자?
 
 **_MotorBike.java_**
 
@@ -6500,19 +6505,20 @@ Let's now try to create ```MotorBike``` instances with default initialization, j
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
-**_Compiler Error_**
+**_컴파일 에러_**
 
-##### Snippet-2 Explained
+##### Snippet-2 설명
 
-The compiler flags an error with **_MotorBikeRunner.java_**! `MotorBike yamaha = new MotorBike();` is failing compilation. Why?
+컴파일러는 **_MotorBikeRunner.java_**로 오류를 표시한다! `MotorBike yamaha = new MotorBike();` 는 컴파일에 실패했다. 왜일까?
 
-No default constructor is generated here! If you provide any constructor definition in a class, the compiler will not add a default constructor. **Do them all yourself, if you don’t like what I do for you!** is what it yells back.
+여기서 기본 생성자가 생성되지 않았다! 클래스에 생성자 정의를 하나라도 제공하면 컴파일러는 기본 생성자를 추가하지 않는다. **다 너를 위한거야. 마음에 안들면 전부 네가 해!**라고 외치는 것이다.
 
-If you need the default constructor, you can explicitly add it.
+기본 생성자가 필요한 경우 명시적으로 추가할 수 있다.
 
-##### Snippet-3 : Programmer-defined default constructor
+
+##### Snippet-3 : 프로그래머가 정의한 기본 생성자
 
 **_MotorBike.java_**
 
@@ -6559,52 +6565,54 @@ The output of this snippet is:
 
 **_Earlier Yamaha Speed is : 5_**
 
-##### Snippet-3 Explained
+##### Snippet-3 설명
 
-We defined a zero-argument constructor ```MotorBike()```, to enable default object initialization. But what are we doing in its body with the statement ```this(5);```? 
+인수가 없는 생성자 ```MotorBike()```를 정의하여 기본 객체 초기화가 가능하도록 했다. 그런데 ```this(5);```라는 구문으로 그 내부에서 우리가 무엇을 하고 있는 것일까?
 
-We have called the constructor ```MotorBike(int)```, qualified with the ```this``` keyword, within ```Motorbike()```. 
+우리는 ```MotorBike()```내에서 ```this```라는 키워드를 가진 생성자를 ```MotorBike(int)```로 호출했다.
 
-## Primitive Data Types
 
-Earlier, we looked at basic Java types (including ```int```, ```double``` and ```boolean```), and got a little familiar with them.
+## 기본형 타입
 
-We used literal values, declared variables and formed expressions using them. 
+이에 앞서 우리는 기본적인 자바 타입(```int```,```double```,```boolean```등)을 살펴본 후 조금 익숙해졌다.
 
-Java **primitive types** include:
-* Integer Types
+우리는 리터럴 값, 선언된 변수, 그리고 그것들을 사용하여 수식을 만들었다. 
+
+자바 **기본형 타입** 은 다음과 같은 것들을 포함한다:
+* 정수형
 	* ```byte```
 	* ```short```
 	* ```int```
 	* ```long```
-* Floating-Point Types
+* 부동 소수점형
 	* ```float```
 	* ```double```
-* Character Type
+* 문자형
 	* ```char```
-* Logical Type
+* 논리형
 	* ```boolean```
 
-In this section, let's play with each of these types to understand them further.
+이 섹션에서는 이러한 타입들을 더 자세히 파악해 봅시다.
 
-### Step 01: The Integer Types
 
-Integers are not much of a mystery, are they? They've been part of us since our school days, and we normally prefer them over other numbers (they scare us less!). 
+### Step 01: 정수형
 
-Java supports them with ease, and we have coded quite a few examples using them, already. 
+정수는 그다지 미스터리는 아니지? 이들은 학창시절부터 우리의 일부였고, 우리는 보통 다른 숫자보다 그들을 더 선호한다.(덜 무섭거든!)
 
-Java also has a **wrapper class** corresponding to each of them, which make their primitive versions more versatile. The wrapper classes we are talking about are:
+자바는 그들을 쉽게 지원하고, 우리는 이미 그것들을 사용하여 꽤 많은 예시들을 코딩했다.
 
-* ```Byte```: for ```byte```
-* ```Short```: matching ```short```
-* ```Integer``` corresponding to ```int```
-* ```Long```: about ```long```
+자바에도 각각에 해당하는 **래퍼 클래스(Wrapper class)**가 잇어 기초 버전이 더욱 다용도로 사용할 수 있다. 우리가 말하는 래퍼 클래스는 다음과 같다:
 
-Let's see how we can work with them.
+* ```Byte```: ```byte```용
+* ```Short```: ```short```와 일치
+* ```Integer``` ```int```에 해당
+* ```Long```: ```long```과 같음
 
-##### Snippet-01 : Integer Sizes
+우리가 어떻게 그들을 사용할지 한 번 봅시다.
 
-Look at all the information these tiny classes hold for you! As they say, **_"fore-warned is fore-armed"_**. Depending on the data (range and size) your program handles, you decide which types to use, to store them.
+##### Snippet-01 : 정수의 크기
+
+이 작은 클래스들이 여러분을 위해 가지고 있는 모든 정보를 보라! 그들이 말하듯이, **_"예고된 것은 미리 무장되어 있다"_** 프로그램이 다루는 데이터(범위 및 크기)에 따라 사용할 타입을 결정하고 저장할 수 있다.
 
 ```java
 
@@ -6639,15 +6647,15 @@ Look at all the information these tiny classes hold for you! As they say, **_"fo
 
 ```
 
-#### Integer Type Conversions
+#### 정수형 변환
 
-Problems will (and should) arise if we attempt to store large data into smaller bins. The compiler warns the programmer about such issues by flagging errors. However, if the programmer is aware of the risks and intends to go ahead, **explicit casts** are her tools to push the code through.
+우리가 큰 데이터를 작은 공간에 저장하려고 하면 문제가 발생할 것이다. 컴파일러는 오류를 플래그로 표시하여 프로그래머에게 그러한 문제에 대해 경고한다. 그러나 프로그래머가 위험을 알고 있고 이를 계속 진행하고자 한다면 **명시적 캐스트**는 코드를 밀어넣기 위한 프로그래머의 도구이다.
 
-Operations in the other direction (storing a smaller data value in a larger bin), is a piece of cake for the compiler. Such a conversion is called an **implicit cast**.
+반대 상황(큰 공간에 작은 데이터 값을 저장)에서의 연산은 컴파일러에게는 아주 쉽다. 이러한 변환을 **묵시적 캐스트**라고 한다.
 
-##### Snippet-02 : Integer Type Conversions 
+##### Snippet-02 : 정수형 변환 
 
-Attempting to store a ```long``` value into an ```int``` variable will give us a compiler error. However, you can use an explicit cast, such as ```i = (int) l;```.
+```long```의 값을 ```int```변수에 저장하려고 하는 것은 우리에게 컴파일러 오류를 줄 것이다. 그러나 ```i = (int) l;''' 과 같은 명시적 캐스팅을 사용할 수 있다.
 
 ```java
 
@@ -6668,37 +6676,37 @@ Attempting to store a ```long``` value into an ```int``` variable will give us a
 	
 ```
 
-**_The compiler is not responsible for the type-safety of this statement. The onus is on me, the programmer._**
+**_컴파일러는 이 문장의 형식 안정성에 대한 책임이 없다. 그 책임은 프로그래머인 나에게 있다._**
 
-Remember our earlier statement on possible incorrect program behavior? As you can see, a different value got stored in ```i```.
+잘못된 프로그램 동작 가능성에 대한 이전의 구문을 기억하는가? 보다시피 ```i```에 다른 값이 저장되었다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계는
 
-* Explored the wrapper classes present for the primitive integer types
-* Understood the different capacities and data ranges of these types
-* Examined how to use explicit and implicit casts
+* 기초 정수형 타입에 대해 존재하는 래퍼 클래스를 탐색했다.
+* 이러한 타입의 다양한 용량 및 데이터 범위에 대해 이해했다.
+* 명시적 및 묵시적 캐스팅 사용 방법에 대해 살펴보았다.
 
-### Step 02: Integer Representations, And Other Puzzles
+### Step 02: 정수 표현 및 기타 문제
 
-In a decimal system, the allowed digits are ```0``` through ```9```. When a value of ```10``` is encountered, the number of digits increases by 1, and its representation is "```10```".
+십진법에서 허용된 숫자는 ```0``` 부터 ```9```이다. ```10```이라는 값이 나오면 숫자가 1개씩 늘어나며 "```10```"으로 표현된다.
 
-Those familiar with number systems would know that decimal is not the only system that computers understand. 
+숫자 체계에 익숙한 사람들을 소수만이 컴퓨터가 이해하는 시스템이 아니라는 것을 알 것이다.
 
-Other number systems that the Java language supports are **Octal** (Base-8) and **Hexadecimal** (Base-16). 
+자바 언어가 지원하는 다른 숫자 체계는 **8진법**과 **16진법**이 있다.
 
-In an Octal system, the allowed digits are ```0``` through ```7```, and a value ```8``` is represented by "```010```". The leading ```0``` is added only to distinguish the octal format from the decimal one. 
+8진법 체계에서 허용되는 숫자는 ```0```부터 ```7```까지 이며, ```8```은 "```010```"으로 표현된다. 맨 앞의 ```0```은 ```10```진법과 소수점 형식을 구분하기 위해서 추가된 것이다.
 
-In a Hexadecimal system, the allowed digits are ```0``` through ```9```, followed by ```a``` through ```f``` (or ```A``` through ```F```). A value of ```16``` is represented by "```0x10```". Here, a leading ```0x``` is added to help the compiler recognize Hexa decimal representation.
+16진법 체계에서 허용되는 숫자는 ```0```부터 ```9```이고 그 다음이 ```a``부터 ```f``` (혹은 ```A```부터 ```F```)이다. ```16```의 값은 "```0x10```"으로 표현된다. 앞의 ```0x```는 컴파일러가 16진법임을 인식하게 하기위해 추가되었다.
 
-Let's see how Java supports these three number systems.
+자바에서 이 세 가지 숫자 체계를 어떻게 지원하는지 보자.
 
-##### Snippet-01 : Storing Octal and Hexadecimal in Integer types
+##### Snippet-01 : 정수형으로 8진법 및 16진법 저장
 
-There are no number-system specific integer types in Java! The same ```int``` type is used to store decimal, octal and hexadecimal values. 
+자바에는 각 숫자 체계별 정수형이 없다! 10진법,8진법,16진법 값을 저장하는 데에는 같은 ```int```형이 사용된다.
 
-If we adhere to to number system conventions about valid digits and understand the compiler hints, we get no surprises.
+유효한 숫자에 대한 숫자 체계 규칙을 준수하고 컴파일러가 주는 힌트를 이해한다면 어려울 것이 없다.
 
 ```java
 
@@ -6719,12 +6727,11 @@ If we adhere to to number system conventions about valid digits and understand t
 
 ```
 
-##### Snippet-02 : More Integer Type-casting
+##### Snippet-02 : 정수 타입 캐스팅 더 알아보기
 
-There are two kinds of assignments:
-* Literal-to-variable assignment: With ```short s = 123456;```, the data is clearly out of range (this is known at compile-time). The compiler flags an error.
-* Variable-to-variable assignment:  Consider ```sh = in;```. The value stored in ```int in``` at that stage was ```4567```, which is well within the range of the ```short``` type. The compiler chooses not to take chances and flags an error. This can again be preempted with a explicit cast `sh = (short) in`.
-
+할당에는 두 종류가 있다:
+* 리터럴에서 변수 할당: ```short s = 123456;``` 에서 이 데이터는 분명히 범위를 벗어났다.(컴파일 타임에 알 수 있다) 컴파일러가 오류를 표시한다.
+* 변수에서 변수 할당: ```sh =in;```에서, ```int in```에 저장된 가치는 ```4567```로, ```short``` 타입의 범위 내에 충분히 있다. 컴파일러는 모험을 하지 않기로 선택하고 오류를 표시한다. 이는 또 `sh = (short) in`으로 명시적으로 캐스팅할 수 있다.
 
 ```java
 
@@ -6755,20 +6762,21 @@ There are two kinds of assignments:
 
 ```
 
-#### Built-In Operators For Integer Types
+#### 정수형에 대한 기본형 연산자
 
-We already had a glimpse of arithmetic operators for the integer types:
+우리는 이미 다음과 같은 정수 유형의 산술 연산자를 엿볼 수 있었다:
+
 * ```+```
 * ```-```
 * ```*```
 * ```/```
 * ```%```
-* ```++``` (both prefix and post-fix increment)
-* ```--``` (both prefix and post-fix increment)
+* ```++``` (사전,사후 증가 둘 다)
+* ```--``` (사전,사후 감소 둘 다)
 
-The increment and decrement operators are an interesting case, as they are actually short-hands for multiple statements. When we use their prefix and post-fix versions, we need to look out for side-effects.
+증감 연산자는 실제로 복잡한 구문을 하기에는 부족하기 때문에 때문에 흥미로운 사례다. 우리가 그들의 사전,사후 연산 버전을 사용할 때, 우리는 부작용에 대해 주의해야 한다.
 
-##### Snippet-03 : Increment & Decrement Operators
+##### Snippet-03 : 증감 연산자
 
 With post-fix increment, such as in ```int j = i++;```, the increment takes place *after* the assignment is done. ```j``` gets the value before increment.
 ```java
