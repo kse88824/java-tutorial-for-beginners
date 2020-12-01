@@ -14435,7 +14435,9 @@ The ```HashSet.add()``` operation returns a ```false``` value, indicating that i
 	hashSet ==> [Apple, Cat, Banana]
 ```
 
+
 Note that when the ```hashSet``` was constructed using the ```set```, the order of the elements got permuted/changed. Also originally, when we created the ```set``` from the ```Set.of()``` method, the order printed was different from the order of initialization. This confirms the fact that a ```Set``` collection does not give any importance to element order, and therefore, does not support positional access. Hence, the compiler error on call to ```hashSet.add(int, String)```.
+
 
 ```java
 	jshell> hashSet.add(2, "Apple");
@@ -14549,6 +14551,7 @@ In a ```TreeSet```, elements are stored in sorted order.
 
 ```
 #### Exercise Set
+
 - - - 
 1. Create a ```List`` of characters, such as:
 
@@ -14557,6 +14560,7 @@ In a ```TreeSet```, elements are stored in sorted order.
 * Write a procedure to list out the unique characters in this list
 * Write a procedure to list out these unique characters in sorted order
 * Write a procedure to list out these unique characters in the order in which they were present in the original list 
+
 #### Solution
 
 **_SetRunner.java_**
@@ -15229,4 +15233,3061 @@ We have defined a method ```MyCustomList<T>.get``` whose return type is generic 
 
 We saw above that we could use ```MyCustomList<T>``` to be instantiated into data structures for storing ```String```s as well as for ```Integer```s. 
 
-What if we wanted to to use ```MyCustomList<T>``` purely for
+What if we wanted to to use ```MyCustomList<T>``` purely for storing numeric values?	
+##### Snippet-3 : Generic Type Restrictions	
+**_MyCustomList.java_**	
+```java	
+	package com.in28minutes.generics;	
+	public class MyCustomList<T extends Number> {	
+		ArrayList<T> list = new ArrayList<>();	
+			
+		public void addElement(T element) {	
+			list.add(element);	
+		}	
+		public void removeElement(T element) {	
+			list.remove(element);	
+		}	
+		public String toString() {	
+			return list.toString();	
+		}	
+		public T get(int index) {	
+			return list.get(index);	
+		}	
+	}	
+```	
+**_GenericsRunner.java_**	
+```java	
+	package com.in28minutes.generics;	
+	import com.in28minutes.generics.MyCustomList;	
+	public class GenericsRunner {	
+		public static void main(String[] args) {	
+			//MyCustomList<String> list = new MyCustomList<>();	
+			MyCustomList<Long> list1 = new MyCustomList<>();	
+			list1.addElement(5l);	
+			list1.addElement(7l);	
+			Long long = list1.get(0);				
+			System.out.println(long);	
+			MyCustomList<Integer> list2 = new MyCustomList<>();	
+			list2.addElement(Integer.valueOf(5));	
+			list2.addElement(Integer.valueOf(9));	
+			Integer num = list2.get(1);	
+			System.out.println(num);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_5_	
+_9_	
+When we specify `T extends Number` as the type, we can use all the methods in the API of ```class``` ```Number``` are available for use. 	
+#### Generic Methods	
+We can create generic methods as well. Let's look at a few examples:	
+##### Snippet-4 : Generic Method	
+**_GenericsRunner.java_**	
+```java	
+	package com.in28minutes.generics;	
+	import com.in28minutes.generics.MyCustomList;	
+	public class GenericsRunner {	
+		static <X> X doSomething(X value) {	
+			return value;	
+		}	
+		static <X extends List> void duplicate(X list) {	
+			list.add(list);	
+		}	
+		public static void main(String[] args) {	
+			String text = doSomething("Hello");	
+			Integer value = doSomething(Integer.valueOf(7));	
+			ArrayList<String> list = doSomething(new ArrayList<String>(List.of("A", "B", C")));	
+			duplicate(list);	
+			System.out.println(list);				
+			LinkedList<Integer> list2 = doSomething(new LinkedList<String>(List.of(1, 2, 3)));	
+			duplicate(list2);	
+			System.out.println(list2);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_[A, B, C, A, B, C]_	
+_[1, 2, 3, 1, 2, 3]_	
+#### Generics And Wild-Cards 	
+You can use wild card with generics too - `? extends Number`	
+##### Snippet-5	
+**_GenericsRunner.java_**	
+```java	
+	package com.in28minutes.generics;	
+	import com.in28minutes.generics.MyCustomList;	
+	public class GenericsRunner {	
+		static double sumOfNumberList(List<? extends Number> numbers) {	
+			double sum = 0.0;				
+			for(Number number:numbers) {	
+				sum += number;	
+			}	
+			return sum;	
+		}	
+		public static void main(String[] args) {	
+			System.out.println(sumOfNumberList(List.of(1, 2, 3, 4, 5)));	
+			System.out.println(sumOfNumberList(List.of(1.1, 2.1, 3.1, 4.1, 5.1)));	
+			System.out.println(sumOfNumberList(List.of(1l, 2l, 3l, 4l, 5l)));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_15.0_	
+_15.5_	
+_15.0_	
+##### Snippet-5 Explained	
+The symbol ```?``` in the definition of the method ```static double sumOfNumberList(List<? extends Number> numbers)``` is the **wild-card** symbol. It denotes the fact that in order to be a valid argument to ```sumOfNumberList```, ```numbers``` can be a ```List``` of any elements, so long as all of them are of type sub-classed from ```Number```. 	
+* This includes ```Integer```, ```Long```, ```Short```, ```Byte```, ```Float``` and ```Double```. 	
+* It also includes their primitive type counterparts, since they can be converted implicitly to their Wrapper class counterparts. 	
+* Of course, all these elements of ```List``` ```numbers``` need to be of a homogeneous type.	
+#### Restricted Heterogeneous Lists	
+The generic wildcard we saw in the previous section is referred to as a **Upper-Bounded Wild-Card**. It can be used to specify homogeneous types with a restriction. There is another category of wild-cards called **Lower-Bounded Wild-Card**, which can be used with create **Heterogeneous** types of elements , within the restriction. Here is an example.	
+##### Snippet-6 : More wild-cards	
+**_GenericsRunner.java_**	
+```java	
+	package com.in28minutes.generics;	
+	import com.in28minutes.generics.MyCustomList;	
+	public class GenericsRunner {	
+		static void addAFewNumbers(List<? super Number> numbers) {	
+			numbers.add(1);	
+			numbers.add(1l);	
+			numbers.add(1.0);				
+			numbers.add(1.0l);	
+		}	
+		public static void main(String[] args) {	
+			List<Number> numberList = new ArrayList<>();	
+			addAFewNumbers(numberList);	
+			System.out.println(numberList);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_[1, 1, 1.0. 1.0]_	
+## Introduction to Functional Programming	
+What's all the fuss around Functional Programming about?	
+Let's find out.	
+Functional Programming Videos	
+- Part 1 - https://www.youtube.com/watch?v=aFCNPHfvqEU 	
+- Part 2 - https://www.youtube.com/watch?v=5Xw1_IREXQs	
+### Step 01: Introducing Functional Programming	
+Let's look at a typical program to loop around a list and print its content.	
+##### Snippet-01 : OOP List Traversal 	
+**_FunctionalProgrammingRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class FunctionalProgrammingRunner {	
+		public static void main(String[] args) {	
+			List<String> list = List.of("Apple", "Banana", "Cat", "Dog");	
+			for(String str:list) {	
+				System.out.println(str);	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Apple_	
+_Banana_	
+_Cat_	
+_Dog_	
+##### Snippet-01 Explained	
+Above approach focuses on the **how**.	
+We looped around the list, accessed individual elements of a ```List``` and did  ```System.out.println()``` to print each element. 	
+Functional Programming allows us to focus on the **what**.	
+##### Snippet-02 : ```printBasic()``` And ```printFunctional()``` 	
+**_FunctionalProgrammingRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class FunctionalProgrammingRunner {	
+		public static void main(String[] args) {	
+			List<String> list = List.of("Apple", "Banana", "Cat", "Dog");	
+			//printBasic(list);	
+			printFunctional(list);	
+		}	
+		public static void printBasic(List<String> list) {	
+			for(String str:list) {	
+				System.out.println(str);	
+			}	
+		}	
+		public static void printFunctional(List<String> list) {	
+			list.stream().forEach(	
+									element -> System.out.println(element)	
+								 );										
+		}	
+	}	
+```	
+**_Console Output_**	
+_Apple_	
+_Banana_Cat_	
+_Dog_	
+##### Snippet-02 Explained	
+`list.stream().forEach(element -> System.out.println(element))` - for each element in list stream, print it.	
+```element -> System.out.println(element)``` is called a **lambda expression**.	
+### Step 02: Looping Through A ```List```	
+In the previous step , we use this snippet of code - `list.stream().forEach(element -> System.out.println(element))`	
+We are **"Passing a function as a method argument"**. 	
+Let's use JShell to explore this further.	
+Let's try to print a list of numbers. 	
+##### Snippet-01 : Loop Using FP	
+```java	
+	jshell> List<Integer> list = List.of(1, 4, 7, 9);	
+	list ==> [1, 4, 7, 9]	
+	jshell> list.stream().forEach(elem -> System.out.println(elem));	
+	1	
+	4	
+	7	
+	9	
+	jshell>	
+		
+```	
+##### Snippet-01 Explained	
+`elem -> System.out.println(elem)` is a lambda expression. For each element in list stream, execute the lambda expression.	
+### Step 03:  Filtering Results	
+A ```Stream``` is a sequence of values. The ```filter()``` method can be used to filter the ```Stream``` elements based on some logic.	
+  	
+##### Snippet-01 : Using ```filter()```	
+`printBasicWithFiltering` shows the usual approach of filtering.  `printFPWithFiltering` shows the functional approach.	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class FunctionalProgrammingRunner {	
+		public static void main(String[] args) {	
+			List<String> list = List.of("Apple", "Bat", "Cat", "Dog");	
+			//printBasicWithFiltering(list);	
+			printFPWithFiltering(list);	
+		}	
+		public static void printBasicWithFiltering(List<String> list) {	
+			for(String str:list) {	
+				if(str.endsWith("at")) {	
+					System.out.println(str);	
+				}	
+			}	
+		}	
+		public static void printFPWithFiltering(List<String> list) {	
+			list.stream()	
+				.filter(elem -> elem.endsWith("at"))	
+				.forEach(element -> System.out.println(element));	
+		}		
+	}	
+```	
+**_Console Output_**	
+_Bat_	
+_Cat_	
+##### Snippet-02 : Printing even/odd numbers	
+Let's look at how to filter numbers.	
+```java	
+	jshell> List<Integer> list = List.of(1, 4, 7, 9);	
+	list ==> [1, 4, 7, 9]	
+	jshell> list.stream().forEach(elem -> System.out.println(elem));	
+	1	
+	4	
+	7	
+	9	
+	jshell> list.stream().filter(num -> num%2 == 1).forEach(elem -> System.out.println(elem));	
+	1	
+	7	
+	9	
+	jshell> list.stream().filter(num -> num%2 == 0).forEach(elem -> System.out.println(elem));	
+	4	
+	jshell>	
+```	
+##### Snippet-02 Explained	
+Typically, these are the conditions we write	
+* ```num``` is odd : ```if(num % 2 == 1) { /*  */ }```	
+* ```num``` is even : ```if(num % 2 == 0){ /*  */ }```	
+In the above example, we are using lambda expression to define the same conditions. 	
+* ```num``` is odd: ```num -> num%2 == 1```	
+* ```num``` is even: ```num -> num%2 == 0```	
+### Step 05: Streams - Aggregated Results	
+Sometimes we want to aggregate data into a single result. For example, we might want to add all the numbers between ```1``` and ```10```. Or we may want to calculate the average maximum temperature in our city over a month's time. 	
+##### Snippet-01 : Sum Of A Sequence	
+Let's look at how to use `reduce` method to calculation the sum.	
+**_FPNumberRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(4, 6, 8, 13, 3, 15);	
+			//System.out.println(printBasicSum(numbers));	
+			int sum = numbers.stream()	
+							 .reduce( 	
+									 0,	
+									 (num1, num2) -> num1 + num2	
+									);	
+			System.out.println(sum);	
+		}	
+		void printBasicSum(List<Integer> numbers) {	
+			int sum=0;	
+			for(int num:numbers) {	
+				sum += num;	
+			}			
+			System.out.println(sum);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_49_	
+##### Snippet-01 Explained	
+The ```reduce()``` method acts on a pair of elements at a time. The *initial-value* is  ```0```. The lambda expression `(num1, num2) -> num1 + num2` is executed on the elements of the list, a pair at a time.	
+ 	
+#### Classroom Exercise CE-01	
+1. Given the list ```(4, 6, 8, 13, 3, 15)```, compute:	
+	* The sum of even numbers in the list.	
+	* The sum of odd numbers in the list.	
+#### Solution To CE-01	
+**_FPNumberRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(4, 6, 8, 13, 3, 15);	
+			printFPEvenSum(numbers);				
+			printFPOddSum(numbers);	
+		}	
+		void printFPEvenSum(List<Integer> numbers) {	
+			int sum = numbers.stream()	
+							 .filter(elem -> elem %2 == 0)	
+							 .reduce(0, (num1, num2) -> num1 + num2);	
+			System.out.println("Even Numbers Sum: " + sum);	
+		}	
+		void printFPOddSum(List<Integer> numbers) {	
+			int sum = numbers.stream()	
+							 .filter(elem -> elem %2 == 1)	
+							 .reduce(0, (num1, num2) -> num1 + num2);	
+			System.out.println("Odd Numbers Sum: " + sum);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Even Numbers Sum: 18_	
+_Odd Numbers Sum: 31_	
+### Step 06: Functional Programming v Structured Programming	
+Let's have a re-look at the **_FPNumberRunner.java_** program from the previous step. We wrote two variants of the same task that computed the sum of a list of numbers:	
+* ```basicSum()```: that used the traditional approach	
+* ```fpSum()``: which followed the *FP* scheme of things	
+Let's use them as benchmarks, to illustrate the core differences between *SP* and *FP*. 	
+1. **Structured Programming** (**SP**)	
+```java	
+	public int basicSum(List<Integer> numbers) {	
+		int sum=0;	
+		for(int num:numbers) {	
+			sum += num;	
+		}	
+		return sum;	
+	}	
+```	
+2. **Functional Programming** (**FP**)	
+```java	
+	public int  fpSum(List<Integer> numbers) {	
+		int sum = numbers.stream()	
+						 .reduce(0, (num1, num2) -> num1 + num2);	
+		return sum;	
+	}	
+```	
+How are these different?	
+* **Mutations** (changes to program data):	
+	1. *SP*: Within ```basicSum()```, the variable ```sum``` (a sort of worker variable) is initialized to ```0```, and undergoes *mutations* across iterations of the ```for``` loop. 	
+	2. *FP*: We just set up an initial value for ```reduce()``` to work with. We don't have any mutation.	
+* The **what** and **how** of computation:	
+	1. *SP*: We specify both *what* to do, and *how* to do it. The code loops through the list elements using a ```for```, while also updating the aggregate value in ```sum```.	
+	2. *FP*: We are focused on *what* to do, and very little on the *how* part. ```reduce()``` takes care of what numbers from the *stream* to add up, and you don't bother about how to select them from the *stream*. 	
+### Step 07: Some FP Terminology 	
+Let's look at some *FP* terminology a little more formally.	
+#### Lambda Expression	
+```java	
+	(num1, num2) -> num1 + num2	
+```	
+is equivalent of this method	
+```java	
+	int basicSum(int num1, int num2) {		
+		return num1 + num2;	
+	}	
+``` 	
+A lambda expression can have multiple lines of Java code as well:	
+```java	
+	(num1, num2) -> {	
+		System.out.println(num1 + " " + num2);	
+		return num1 + num2;	
+	}	
+```	
+Why take our word for all this? Let's put this code into an IDE, and then run it, to see for ourselves.	
+##### Snippet-01 : Lambda Expression	
+**_FPNumberRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(4, 6, 8, 13, 3, 15);	
+			System.out.println(numbers);	
+			printFPSum(numbers);	
+		}	
+		void printFPSum(List<Integer> numbers) {	
+			int sum = numbers.stream()	
+							 .reduce(0,	
+									 (num1, num2) -> {	
+														System.out.println(num1 + " " + num2);	
+														return num1 + num2;	
+													 }	
+			System.out.println("Even Numbers Sum: " + sum);			
+		}	
+	}	
+```	
+**_Console Output_**	
+_[4, 6, 8, 13, 3, 15]_	
+_0 4_	
+_4 6_	
+_10 8_	
+_18 13_	
+_31 3_	
+_34 15_	
+_49_	
+#### Stream	
+A Stream is a sequence of elements. You can perform different kinds of operations on a stream. 	
+* **Intermediate Operations**: An operation that *takes a stream* - for example, applies a lambda expression - and produces *another stream* of elements as its result.	
+* **Terminal Operations**: A stream operation that takes a stream - for example, applies a lambda expression -  and returns a single result (A single primitive-value/object, or a single collection-of-objects). ```reduce()``` and ```forEach()``` are a couple of such operations.	
+### Step 08: Intermediate Stream Operations	
+Output of an intermediate stream operation is another stream. 	
+The most popular intermediate stream operations are: 	
+* ```sorted()```	
+* ```distinct()```	
+* ```filter()```	
+* ```map()```	
+In this step, let's check them out one by one.	
+##### Snippet-01 : ```sorted()``` and other operations	
+```java	
+	jshell> List<Integer> numbers = List.of(3, 5, 8, 213, 45, 4, 7);	
+	numbers ==> [3, 5, 8, 213, 45, 4, 7]	
+	jshell> numbers.stream().sorted().forEach(elem -> System.out.println(elem));	
+	3	
+	4	
+	5	
+	7	
+	8	
+	45	
+	213	
+	jshell> List<Integer> numbers = List.of(3, 5, 3, 213, 45, 5, 7);	
+	numbers ==> [3, 5, 3, 213, 45, 5, 7]	
+	jshell> numbers.stream().distinct().forEach(elem -> System.out.println(elem));	
+	3	
+	5	
+	213	
+	45	
+	7	
+	jshell> numbers.stream().distinct().sorted().forEach(elem -> System.out.println(elem));	
+		
+	3	
+	5	
+	7	
+	45	
+	213	
+	jshell> numbers.stream().distinct().map(num -> num*num).forEach(elem -> System.out.println(elem));	
+	9	
+	25	
+	45369	
+	2025	
+	49	
+	jshell>	
+```	
+##### Snippet-01 Explained	
+* ```sorted()``` preserves the elements of the consumed stream in the result, but also puts them in natural sorted order (Increasing order for numbers, alphabetical order for strings).	
+* ```distinct()``` returns a stream retaining only the unique elements of the input stream. This method maintains the relative order of retained elements.	
+* You can chain together more than one intermediate operation, such as ```sorted()``` followed by ```distinct()``` above. Such code is sometimes called a *pipeline*.	
+*  ```map()``` : Applies a lambda expression to compute new results from the input stream elements. It then returns a stream of these results as output. In our example, ```map()``` takes each element in the ```Stream``` object created by ```number.stream()``,` to its square value.	
+### Step 09: Programming Exercise FP-PE-01	
+#### Exercises	
+1. Write a program to print the squares of the first 10 positive integers.	
+2. Create a list of the character strings "Apple", "Banana" and "Cat". Print all of them in lower-case.	
+3. Create a list of the character strings "Apple", "Banana" and "Cat". Print the length of each string.	
+#### Solutions To FP-PE-01	
+**_FPNumberRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	public class FPNumberRunner {	
+		public static void printFPSquares() {	
+			IntStream.range(1, 11).	
+					  map(num -> num*num).	
+					  forEach(elem -> System.out.println(elem));	
+		}	
+		public static void printLowerCases(List<String> list) {	
+		}	
+		public static void printLengths(List<String> list) {	
+			list.stream()	
+				.map(s -> s.length())	
+				.forEach(elem -> System.out.println(elem);	
+		}	
+		public static void main(String[] args) {	
+			printFPSquares();	
+			List<String> list = List.of("Apple", "Banana", "Cat");	
+			printLowerCases(list);			
+			printLengths(list);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_1_	
+_4_	
+_9_	
+_16_	
+_25_	
+_36_	
+_49_	
+_64_	
+_81_	
+_100_	
+_apple_	
+_banana_	
+_cat_	
+_5_	
+_6_	
+_3_	
+#### Solution Explained	
+* The ```map()``` method accepts a lambda expression.	
+### Step 10:  Terminal Operations	
+A terminal operation returns a single result (A single object/data-unit, or a single collection). It does not return an output stream.	
+Commonly used instances of this are:	
+* ```reduce()```	
+* ```max()``` and ```min()```	
+```java	
+	jshell> IntStream.range(1, 11).reduce(0, (n1, n2) -> n1 + n2);	
+	$1 ==> 55	
+```	
+```max()``` expects a lambda expression providing a ```Comparator<T>``` implementation.  ```Integer.compare(n1,n2)``` is an implementation of the ```Comparator<T>``` interface for comparing integers. 	
+
+What if there are no numbers in the Stream? What should be returned? As a Java programmer, we grew up to hate `null`. You don't want to return `null` back.	
+
+The ```Optional``` type provides an alternative: 	
+
+* You can query an ```Optional``` object to check if it contains a valid result, by invoking ```isPresent()``` on it. 	
+* You can get that result by calling ```get()``` on the same object.	
+
+
+```java	
+	jshell> List.of(23, 12, 34, 53).stream().max();	
+	| Error:	
+	| method max() in interface java.util.stream.Stream<T> cannot be applied to given types
+	| required : java.lang.Comparator<? super java.lang.Integer>	
+	| found : no argument	
+	| List.of(23, 12, 34, 53).stream().max();	
+	|^-----------------------------------^	
+	jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2));	
+	$2 ==> Optional[53]	
+	jshell> $2.isPresent()	
+	$3 ==> true	
+	jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2)).get();	
+	$4 ==> 53	
+	jshell>	
+```	
+- - - 	
+### Step 11: More Stream Operations	
+
+Let's now play around with a few more terminal operations, such as ```min()``` (terminal operation), and ```filter()``` (intermediate operation). 
+
+##### Snippet-01 : min() and max()	
+
+Using ```min()``` is similar to ```max()```.	
+
+```java	
+	jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2)).get()	
+	$1 ==> 53	
+	jshell> List.of(23, 12, 34, 53).stream().min((n1, n2) -> Integer.compare(n1, n2)).get()	
+	$2 ==> 12	
+	jshell>	
+		
+```	
+##### Snippet-02 : Odd and Even Numbers	
+
+```collect()``` method can be called to collect the result of ```filter()``` into a list. `Collectors.toList()` is the utility method used.
+
+```java	
+	jshell> List.of(23, 12, 34, 53).stream().filter(e -> e%2==1).forEach(e -> 	System.out.println(e))	
+	23	
+	53	
+	jshell> List.of(23, 12, 34, 53).stream().filter(e -> e%2==1).collect(Collectors.toList());	
+	$1 ==> [23, 53]	
+	jshell>	
+```	
+
+#### Classroom Exercise FP-CE-02
+
+1. From a list of 23, 12, 34, 53, create a list of the even numbers in it.	
+2. Create a list of squares of the first 10 positive integers.	
+
+#### Solutions To FP-CE-02	
+
+**_FunctionalProgrammingRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(23, 12, 34, 53);	
+			List<Integer> evens = numbers.stream()	
+										 .filter(n -> n%2==0)	
+										 .collect(Collectors.toList());	
+			List<Integer> tenSquares = IntStream.range(1, 11)	
+												.map(n -> n*n)	
+												.boxed()	
+												.collect(Collectors.toList());	
+		}	
+	}	
+```	
+#### Solution Explained	
+* Solution to #1 is straightforward, given that we already know how to use ```filter()```.	
+* Solution #2 uses ```boxed()``` method to convert an ```IntPipeline``` to a ```Stream```. After that, what follows is routine stuff.	
+### Step 12: The ```Optional<T>``` ```class```	
+In an earlier section, we wrote and ran the following code:	
+```java	
+	jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2));	
+	Optional[53]	
+	jshell>	
+```	
+In order to get the result in a form you would appreciate, we modified this code to look like:	
+```java	
+jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2)).get();	
+53	
+jshell>	
+```	
+```max()``` is a stream operation, that needs to consume a stream. It is possible that the input stream is empty. In that case, the maximum value would be ```null```. It is undesirable in *FP* to encounter an exception during a stream operation. It is extremely inelegant if we are asked to handle an exception in an *FP* code pipeline. 	
+The ```Optional<T>``` ```class``` was introduced in Java SE 8, as a lifeline in such situations. It covers the possibility of absence of (or ```null```) result from a terminal stream operation. The following example illustrates how you can query, and access the result from, an ```Optional<T>``` object. 	
+```java	
+	jshell> List.of(23, 45, 67, 12).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) )	
+	$1 ==> Optional[12]	
+	jshell> $1.get()	
+	$2 ==> 12	
+	jshell> $1.isPresent()	
+	$3 ==> true	
+```	
+In case the result is empty, then the value stored in the result is not ```null```, it is ```Optional.empty```.	
+```java	
+	jshell> List.of(23, 45, 67).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) )	
+	$4 ==> Optional.empty	
+	jshell> $4.isPresent()	
+	$5 ==> false	
+	jshell> $4.orElse(0)	
+	$6 ==> 0	
+```	
+You can provide a default value for the result using the method ```orElse()```.	
+```java	
+	jshell> List.of(23, 45, 67).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) ).orElse(0)	
+	$7 ==> 0	
+	jshell> List.of(23, 45, 67, 34).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) ).orElse(0)	
+	$8 ==> 34	
+	jshell>	
+```	
+### Step 13: Functional Interfaces : ```Predicate```	
+When we define a lambda expression , a lot of things happen behind the scenes. 	
+An important concept is a *functional interface*.	
+Let's explain this term using an example. 	
+The following code takes a behind-the-scenes look at ```filter()```.	
+##### Snippet-01: Lambda behind-the-scenes - v1	
+**_LambdaBehindTheScenesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class LambdaBehindTheScenesRunner {	
+		public static void main(String[] args) {	
+			List.of(23, 43, 34, 45).stream()	
+								   .filter(num -> num%2 == 0)	
+								   .forEach(e -> System.out.println(e));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_34_	
+_36_	
+_48_	
+##### Snippet-01 Explained	
+The signature of ```filter()``` reads is `Stream<T> java.util.stream.Stream.filter(Predicate<? super T> predicate)`.  In this case, ```T``` is ```java.lang.Integer```. 	
+```filter()``` accepts an  object implementing the ```Predicate``` interface, as its argument. It returns a stream, consisting of those elements from the input stream, that match this predicate. 	
+Conventionally speaking, a predicate is a logical condition. This predicate is applied to each element, to determine if it should be included in the output stream.	
+The ```Predicate<T>``` ```interface is``` an example of a  *Functional Interface*. This interface has one method ```boolean test(T t)```. 	
+		
+Instead of `num -> num%2 == 0`, let's implement a `EvenNumberPredicate`.	
+```java	
+	@FunctionalInterface	
+	public interface Predicate<? super T> {	
+		boolean test(T t) { /*  */ }	
+			//...	
+		}	
+	}	
+		
+```	
+##### Snippet-02: lambda behind the scenes - v2	
+**_LambdaBehindTheScenesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	import java.util.function.Predicate;	
+	class EvenNumberPredicate implements Predicate<Integer> {	
+		@Override	
+		public boolean test(Integer number) {	
+			return (number%2 == 0);	
+		}	
+	}	
+	public class LambdaBehindTheScenesRunner {	
+		public static void main(String[] args) {	
+			List.of(23, 43, 34, 45, 36, 48).stream()	
+										   .filter(new EvenNumberPredicate())	
+										   .forEach(e -> System.out.println(e));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_34_	
+_36_	
+_48_	
+##### Snippet-02 Explained	
+```EvenNumberPredicate``` implements the ```Predicate<Integer>``` interface, and overrides the ```test()``` method.	
+Something similar to ```EvenNumberPredicate``` is created when we use lambda expressions ```num -> num%2 == 0```.	
+### Step 14: Functional Interfaces : ```Consumer```	
+Let's look at another Functional Interface - ```Consumer<S>```.	
+```forEach()``` on a stream is actually defined as - ```forEach(Consumer<? super S> action)```	
+The ```Consumer<S>``` interface has the following definition:	
+```java	
+	@FunctionalInterface	
+	public interface Consumer<? super S> {	
+		void accept(S s) { /*  */ }		
+		
+		//...	
+		
+	}	
+```	
+The lambda expression used inside ```forEach()``` and other such stream operations, actually represent a `Consumer` implementation. 	
+##### Snippet-01	
+Let's implement a `SysOutConsumer`.	
+**_FunctionalProgrammingRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	import java.util.stream.Stream;	
+	import java.util.function.Consumer;	
+	import java.util.function.Predicate;	
+	class EvenNumberPredicate implements Predicate<Integer> {	
+		@Override	
+		public boolean test(Integer num) {	
+			return num%2 == 0;	
+		}	
+	}	
+	class SysOutConsumer implements Consumer<Integer> {	
+		@Override	
+		public void accept(Integer num) {	
+			System.out.println(num);	
+		}	
+	}	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(23, 12, 34, 45, 36, 48);	
+			//List<Integer> evens = numbers.stream()	
+										   .filter(n -> n%2==0)	
+										   .collect(Collectors.toList());	
+			List<Integer> evensToo = numbers.stream()	
+										    .filter(new EvenNumberPredicate())	
+											.collect(Collectors.toList());	
+			numbers.stream()	
+				   .filter(new EvenNumberPredicate())	
+				   .forEach(new SysOutConsumer());	
+		}	
+	}	
+```	
+**_Console Output_**	
+_12_	
+_34_	
+_36_	
+_48_	
+##### Snippet-01 Explained	
+* The code actually speaks for itself. The steps to customize a ```Consumer<S>``` implementation are quote simple, and straightforward.	
+* The final code that involves both a custom ```Predicate<T>```, and a custom ```Consumer<S>``` is still quite compact and elegant! 	
+### Step 15: More Functional Interfaces	
+Let's now look at what happens behind the scenes, for the stream operation ```map()```. Suppose we wanted to print out the squares of all even numbers in a given list.	
+##### Snippet-01 : ```map()``` Behind The Scenes - v1	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	import java.util.stream.Stream;	
+	import java.util.function.Consumer;	
+	import java.util.function.Predicate;	
+	class EvenNumberPredicate implements Predicate<Integer> {	
+		@Override	
+		public boolean test(Integer num) {	
+			return num%2 == 0;	
+		}	
+	}	
+	class SysOutConsumer implements Consumer<Integer> {	
+		@Override	
+		public void accept(Integer num) {	
+			System.out.println(num);	
+		}	
+	}	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(23, 12, 34, 45, 36, 48);	
+			numbers.stream()			
+				   .filter(new EvenNumberPredicate())	
+				   .map(n -> n*n)	
+				   .forEach(new SysOutPredicate());	
+		}	
+	}	
+```	
+**_Console Output_**	
+_1156_	
+_1296_	
+_2304_	
+##### Snippet-01 Explained 	
+The signature of the ```map()``` intermediate stream operation is :	
+```java	
+	<R> Stream<R> map(Function<?super T, ? extends R> mapper){}	
+```	
+```Function``` is shown below.	
+```java	
+	@FunctionalInterface	
+	public interface Function<T,R> {	
+		R apply(T t);	
+	}	
+```	
+The method ```apply()``` accepts a ```T``` object as argument, and returns another object of type ```R```. In effect, any ```Function``` implementation can map object of one type to another.	
+##### Snippet-02 : ```map()``` Behind The Scenes - v2	
+Let's implement a `NumberSquareMapper`.	
+```java	
+	package com.in28minutes.functionalprogramming;		
+	import java.util.List;	
+	import java.util.stream.Stream;	
+	import java.util.function.Consumer;	
+	import java.util.function.Predicate;	
+	import java.util.function.Function;	
+	class EvenNumberPredicate implements Predicate<Integer> {	
+		@Override	
+		public boolean test(Integer num) {	
+			return num%2 == 0;	
+		}	
+	}	
+	class SysOutConsumer implements Consumer<Integer> {	
+		@Override	
+		public void accept(Integer num) {	
+			System.out.println(num);	
+		}		
+	}	
+	class NumberSquareMapper implements Function<Integer, Integer> {	
+		@Override	
+		public Integer apply(Integer number) {	
+			return number * number;	
+		}		
+	}	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(23, 12, 34, 45, 36, 48);	
+			numbers.stream()	
+				   .filter(num -> num%2 == 0)	
+				   .map(n -> n*n)	
+				   .forEach(e -> System.out.println(e));	
+			numbers.stream()	
+				   .filter(new EvenNumberPredicate())	
+				   .map(new NumberSquareMapper())	
+				   .forEach(new SysOutPredicate());	
+		}	
+	}	
+```	
+**_Console Output_**	
+_1156_	
+_1296_	
+_2304_	
+**_1156_**	
+**_1296_**	
+**_2304_**	
+### Step 16: Introducing Method References	
+What is a method reference?	
+Let's look at an example.	
+##### Snippet-01: Method References - v1	
+**_MethodReferencesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class MethodReferencesRunner {	
+		public static void main(String[] args)	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(s -> s.length())	
+														   .forEach(l -> System.out.println(l));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_3_	
+_3_	
+_3_	
+_3_	
+_8_	
+##### Snippet-02 : Method References - v2 	
+Method references make it easy to create lambda expressions.	
+`l -> System.out.println(l)` can be replaced with `System.out::println`.	
+**_MethodReferencesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class MethodReferencesRunner {	
+		public static void main(String[] args) {	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(s -> s.length())	
+														   .forEach(l -> System.out.println(l));	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(s -> s.length())	
+														   .forEach(System.out::println);	
+		}	
+	}	
+```	
+##### Snippet-03: Method References - v3	
+Let's define a static method `print` and use it using a method reference.	
+`MethodReferencesRunner::print` is same as `l -> MethodReferencesRunner.print(l)`	
+**_MethodReferencesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class MethodReferencesRunner {	
+		public static void print(Integer number) {	
+			System.out.println(number);	
+		}	
+		public static void main(String[] args) {	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(s -> s.length())	
+														   .forEach(l -> MethodReferencesRunner.print(l));	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(s -> s.length())	
+														   .forEach(MethodReferencesRunner::print);	
+		}	
+	}	
+```	
+##### Snippet-04 : Method References - v4	
+Instance method calls can also be replaced with their method references.	
+On a `String`, `String::length` is the same as `s -> s.length()`.	
+**_MethodReferencesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class MethodReferencesRunner {	
+		public static void print(Integer number) {	
+			System.out.println(number);	
+		}	
+		public static void main(String[] args) {	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(s -> s.length())	
+														   .forEach(MethodReferencesRunner::print);	
+			List.of("Ant", "Bat", "Cat", "Dog", "Elephant").stream()	
+														   .map(String::length)	
+														   .forEach(MethodReferencesRunner::print);	
+		}	
+	}	
+```	
+#### Classroom Exercise FP-CE-03	
+1. Using method references, write java functional code to determine the maximum even number,  in a given list of integers.	
+#### Solution To FP-CE-03	
+**_MethodReferencesRunner.java_**	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	public class MethodReferencesRunner {	
+		public static void print(Integer number) {	
+			System.out.println(number);	
+		}	
+		public static void main(String[] args) {	
+			int max = List.of(23, 45, 67, 34).stream()			
+											 .filter(num -> num % 2 == 0)	
+											 .max( (n1, n2) -> Integer.compare(n1, n2) )	
+											 .orElse(0);	
+			System.out.println(max);	
+			int maximum = List.of(23, 45, 67, 34).stream()				
+												 .filter(MethodReferencesRunner::isEven)	
+												 .max(Integer::compare)	
+												 .orElse(0);	
+			System.out.println(maximum);	
+		}	
+		public static booelan isEven(Integer number) {	
+			return (number %2 == 0);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_34_	
+**_34_**	
+#### Summary	
+In this step, we:	
+* Understood what is a method reference	
+* Learned that both built-in, and user defined class methods can be invoked using method references	
+* Observed that method references work for static and non-static methods	
+### Step 17: FP - Functions As First-Class Citizens 	
+Are functions first class citizens in Java?	
+Here are few questions to think about?	
+* Can you pass a function as an argument to a method?	
+* Can you assign a function to a variable?	
+* Can you obtain a function as a return value, from a method invocation?	
+#### Passing function as method argument	
+We looked at several examples of this earlier.	
+In the example below, `num -> num % 2 == 0` is passed to `filter` method.	
+```	
+int max = List.of(23, 45, 67, 34).stream()			
+								 .filter(num -> num % 2 == 0)	
+								 .max( (n1, n2) -> Integer.compare(n1, n2) )	
+								 .orElse(0);	
+```	
+#### Storing functions in reference variables	
+`evenPredicate` and `oddPredicate` represent functions.	
+```java	
+	package com.in28minutes.functionalprogramming;	
+	import java.util.List;	
+	import java.util.function.Predicate;	
+	public class FPNumberRunner {	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(23, 12, 34, 45, 36, 48);	
+			Predicate<? super Integer> evenPredicate = num -> num % 2 == 0;				
+			Predicate<? super Integer> oddPredicate = num -> num % 2 == 1;	
+			numbers.stream()	
+				   .filter(evenPredicate)	
+				   .map(n -> n*n)	
+				   .forEach(e -> System.out.println(e));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_1156_	
+_1296_	
+_2304_	
+#### Returning functions from methods	
+`createEvenPredicate` and `createOddPredicate` are examples of methods returning functions.	
+```java	
+	import java.util.stream.Stream;	
+	import java.util.function.Predicate;	
+	public class FPNumberRunner {	
+		public static Predicate<? super Integer> createEvenPredicate() {	
+			return num -> num%2 == 0;	
+		}	
+		public static Predicate<? super Integer> createOddPredicate() {	
+			return num -> num%2 == 1;	
+		}	
+		public static void main(String[] args) {	
+			List<Integer> numbers = List.of(23, 12, 34, 45, 36, 48);	
+			//Predicate<? super Integer> evenPredicate = num -> num % 2 == 0;	
+			//Predicate<? super Integer> evenPredicate = createEvenPredicate();	
+			numbers.stream()	
+				   //.filter(num -> num%2 == 0)	
+				   //.filter(evenPredicate)	
+				   .map(n -> n*n)	
+				   .forEach(e -> System.out.println(e));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_1156_	
+_1296_	
+_2304_	
+#### Summary	
+In this step, we observed that the following is true for a function:	
+* It can be passed as a method argument	
+* It can be stored in a reference variable	
+* It can be  returned from a method	
+## Threads and Concurrency	
+So far, we've only seen programs that run like a single horse, running round a race course. 	
+However, it often makes sense for a program's *main task* to be split into smaller ones (let's call them *sub-tasks*).  	
+Imagine an ant-colony, where a large number of worker ants toil together, to complete what the Queen Ant tells them to do. Groups of ants that are part of separately tasks, work with a free hand.	
+The concept of **concurrency** in programming is very similar to what an ant colony is in nature. 	
+### Step 01: Concurrent Tasks: Extending ```Thread```	
+In Java, you can run tasks in parallel using threads.  Let's first write a simple program.	
+##### Snippet-1	
+**_ThreadBasicsRunner.java_**	
+```java	
+	public class ThreadBasicsRunner {	
+		public static void main(String[] args) {	
+			//Task1	
+			for(int i=101; i<=199; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\n Task1 Done");	
+			//Task2	
+			for(int i=201; i<=299; i++) {	
+				System.out.print(i + " ");	
+			}	
+		
+			System.out.println("\n Task2 Done");	
+			//Task3	
+			for(int i=301; i<=399; i++) {	
+				System.out.print(i + " ");				
+			}	
+			System.out.println("\n Task3 Done");	
+			System.out.println("Main Done");	
+		}	
+	}	
+```	
+**_Console Output_**	
+_101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199_	
+_Task1 Done_	
+_201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299_	
+_Task2 Done_	
+_301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399_	
+_Task3 Done_	
+_Main Done_	
+##### Snippet-1 Explained	
+As you can see, the execution of all three ```for``` loops (that really are independent tasks) is sequential. This is how all our code so far has been running!	
+### Thread Creation	
+There are two ways in which you can create a thread to represent a sub-task, within a program. They are:	
+* Define your own thread ```class``` to sub-class the **```Thread```** ```class```.	
+* Define your own thread ```class``` to implement the **```Runnable```** ```interface```.	
+In this step, we will focus on the first alternative.	
+##### Snippet-01 : A simple Java thread class	
+**_ThreadBasicsRunner.java_**	
+```java	
+	class Task1 extends Thread {	
+		public void run() {	
+			System.out.println("Task1 Started ");	
+			for(int i=101; i<=199; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask1 Done");	
+		}		
+	}	
+	public class ThreadBasicsRunner {	
+		public static void main(String[] args) {	
+			//Task1	
+			Task1 task1 = new Task1();	
+			task1.start();	
+			//Task2	
+			for(int i=201; i<=299; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask2 Done");	
+			//Task3	
+			for(int i=301; i<=399; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask3 Done");	
+			System.out.println("\nMain Done");	
+		}		
+	}	
+```	
+**_Console Output_**	
+```	
+Task1 Started 	
+201 101 202 102 203 103 204 104 105 205 206 106 207 107 208 108 209 109 210 110 211 111 212 112 213 113 214 114 215 115 216 116 217 218 117 219 118 220 119 221 120 222 121 122 223 123 224 124 225 125 226 126 227 127 228 128 229 129 230 130 231 131 232 132 233 133 234 134 235 135 236 136 237 137 238 138 239 139 240 140 241 141 242 142 243 143 244 144 245 145 246 247 146 248 147 249 148 250 149 251 150 252 151 253 152 254 153 255 154 256 155 257 156 258 157 259 158 260 159 261 160 262 161 263 162 264 163 265 164 266 165 267 166 268 167 269 168 270 169 271 170 272 171 273 172 274 173 275 174 276 175 277 278 279 176 280 177 281 178 179 282 180 181 182 283 183 284 184 285 185 286 186 287 187 288 289 188 290 189 291 190 292 191 293 192 294 193 194 295 195 196 296 197 297 298 299 198 	
+Task2 Done	
+301 199 302 	
+Task1 Done	
+303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 	
+Task3 Done	
+Main Done	
+```	
+##### Snippet-01 Explained	
+We defined a ```Task1``` ```class``` to denote our sub-task, with a ```run()``` method definition. However,  when we create such a thread within our ```main()``` method, we don't seem to be invoking ```run()``` in any way! What's happening here? 	
+A thread can be created and launched, by calling a generic method named ```start()```. method. Calling ```start()``` will invoke the individual thread’s ```run()``` method.	
+From the console output, we see that the output of *Task1* overlaps with those of tasks labeled *Task2* and *Task3*. *Task1* is running in parallel with main which is running (*Task2*, *Task3*).	
+#### Summary	
+In this step, we:	
+* Discovered how to define a thread by sub-classing ```Thread```	
+* Demonstrated how to run a Thread	
+### Step 02: Concurrent Tasks - Implementing Runnable	
+##### Snippet-01 : Implementing Runnable	
+In **Step 01**, we told you that there are two ways a thread could represent a sub-task, in a Java program. One was by sub-classing a ```Thread```, and the other way is to implement ```Runnable```. We saw the first way a short while ago, and it's time now to explore the second. The following example will show you how it's done.	
+**_ThreadBasicsRunner.java_**	
+```java	
+	class Task1 extends Thread {	
+		public void run() {	
+			System.out.println("Task1 Started ");	
+			for(int i=101; i<=199; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask1 Done");	
+		}	
+	}	
+	class Task2 implements Runnable {	
+		@Override	
+		public void run() {	
+			System.out.println("Task2 Started ");	
+			for(int i=201; i<=299; i++) {	
+				System.out.print(i + " ");			
+			}	
+			System.out.println("\nTask2 Done");	
+		}	
+	}	
+	public class ThreadBasicsRunner {	
+		public static void main(String[] args) {	
+			System.out.print("\nTask1 Kicked Off\n");	
+			Task1 task1 = new Task1();	
+			task1.start();	
+			System.out.print("\nTask2 Kicked Off\n");	
+			Task2 task2 = new Task2();	
+			Thread task2Thread = new Thread(task2);	
+			task2Thread.start();	
+			System.out.print("\nTask3 Kicked Off\n");	
+			for(int i=301; i<=399; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask3 Done");	
+			System.out.println("\nMain Done");	
+		}	
+	}	
+```	
+**_Console Output_**	
+```	
+Task1 Kicked Off	
+Task1 Started 	
+101 102 103 104 105 106 107 108 109 110 111 	
+Task2 Kicked Off	
+112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199 	
+Task1 Done	
+Task3 Kicked Off	
+Task2 Started 	
+201 202 203 204 205 206 207 208 209 210 211 212 213 301 214 215 216 217 218 302 219 220 221 222 223 224 225 226 227 228 303 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 304 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 305 287 288 289 290 291 292 293 294 295 296 297 298 299 	
+Task2 Done	
+306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399 	
+Task3 Done	
+Main Done	
+```	
+##### Snippet-01 Explained	
+In this example, we implemented ```Runnable``` by implementing the ```run()``` method from ```Runnable``` interface.	
+To run Task2 which is implementing `Runnable` interface, we used this code. We are using the `Thread` constructor passing an instance of `Task2`.	
+```java	
+Task2 task2 = new Task2();	
+Thread task2Thread = new Thread(task2);	
+task2Thread.start();	
+```	
+You can see from the output that all three tasks are running in parallel.	
+#### Summary	
+In this step, we:	
+* Explored another way to create threads, by implementing the ```Runnable``` ```interface```	
+* Learned to run a thread created using ```Runnable``` ```interface```	
+ 	
+### Step 03: The Thread Life-cycle  	
+A Java Thread goes through a sequence of **states** during its lifetime. The term **life-cycle** is used to describe this fact, and clearly defines what specific state a thread could be in, at various points of time. 	
+Let's consider the following example we explored recently, in _**Step 02**_:	
+```java	
+	class Task1 extends Thread {	
+		public void run() {	
+			for(int i=101; i<=199; i++) {	
+				System.out.print(i + " ");	
+			}	
+		}		
+	}	
+	class Task2 implements Runnable {	
+		@Override	
+		public void run() {	
+			for(int i=201; i<=299; i++) {	
+				System.out.print(i + " ");	
+			}	
+		}	
+	}	
+	public class ThreadBasicsRunner {	
+		public static void main(String[] args) {	
+			Task1 task1 = new Task1();	
+			task1.start();	
+			Task2 task2 = new Task2();	
+			Thread task2Thread = new Thread(task2);	
+			task2Thread.start();	
+			for(int i=301; i<=399; i++) {				
+				System.out.print(i + " ");	
+			}	
+		}	
+	}	
+```	
+Different states of a thread are:	
+* **NEW**: A thread is in this state as soon as it's been created, but its ```start()``` method hasn't yet been invoked.	
+ 	
+	* For *Task1* : After the execution of ```Task1 task1 = new Task1();```	
+	* For *Task2* : After the execution of ```Task2 task2 = new Task2();  task2Thread = new Thread(task2);```	
+* **TERMINATED/DEAD**: When all the statements inside a thread's ```run()``` method have been been completed, that thread is said to have terminated.	
+A thread can be in any one of the remaining three states, after its ```start()``` method has been invoked.	
+ 	
+* **RUNNING**: If the thread is currently running.	
+* **RUNNABLE**: If the thread is not currently running, but is ready to do so at any time.	
+* **BLOCKED/WAITING**: If the thread is not currently running on the processor, but is not ready to execute either. This may be the case if it's waiting for an external resource (such as a user's input) or another thread.	
+#### Summary	
+In this step, we:	
+* Discussed different states of a Thread with an example	
+### Step 04: Thread Priorities	
+Java allows you to *request* the thread scheduler, to change the priority of a thread. The priority of any thread always lies in a fixed range - ```MIN_PRIORITY = 1``` to ```MAX_PRIORITY = 10```.  The default priority that's assigned to any thread, is ```NORM_PRIORITY = 5```. 	
+A request to change this priority is done by invoking the static ```setPriority(int)``` method, available in the ```Thread``` ```class```. This request may or may not be honored in response, so be prepared for that! 	
+### Step 05: Communicating Threads	
+Any program where threads are not explicitly created is a single-threaded application. The thread that we refer to here is the *main thread*, executing the program's ```main()``` method.	
+Sometimes, threads might depend on one another. 	
+Let consider the example from **Step 02**. We want to add a condition - *Task3* should execute only after *Task1* terminates.	
+**_ThreadBasicsRunner.java_**	
+```java	
+	class Task1 extends Thread {	
+		public void run() {	
+			System.out.println("Task1 Started ");	
+			for(int i=101; i<=199; i++) {	
+				System.out.print(i + " ");	
+			}	
+		}	
+	}	
+	class Task2 implements Runnable {	
+		@Override	
+		public void run() {	
+			System.out.println("Task2 Started ");	
+			for(int i=201; i<=299; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask2 Done");	
+		}	
+	}	
+	public class ThreadBasicsRunner {	
+		public static void main(String[] args) {	
+			System.out.print("\nTask1 Kicked Off\n");	
+			Task1 task1 = new Task1();			
+			task1.start();	
+			System.out.print("\nTask2 Kicked Off\n");	
+			Task2 task2 = new Task2();	
+			Thread task2Thread = new Thread(task2);	
+			task2Thread.start();	
+			
+			task1.join();	
+				
+			System.out.print("\nTask3 Kicked Off\n");	
+			for(int i=301; i<=399; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask3 Done");	
+			System.out.println("\nMain Done");	
+		}	
+	}	
+```	
+##### Snippet-5 Explained	
+```task1.join()``` waits until task1 completes. So, the code after ```task1.join()``` will executed only on completion of `task1`.	
+If we want *Task3* to be executed only after both *Task1* and *Task2* are done, the code in ```main()``` needs to look as follows:	
+##### Snippet-6 : Task3 after Task1 and Task2	
+**_ThreadBasicsRunner.java_**	
+```java	
+	public static void main(String[] args) {	
+		System.out.print("\nTask1 Kicked Off\n");	
+		Task1 task1 = new Task1();	
+		task1.start();	
+		System.out.print("\nTask2 Kicked Off\n");	
+		Task2 task2 = new Task2();	
+		Thread task2Thread = new Thread(task2);	
+		task2Thread.start();	
+		task1.join();	
+		task2Thread.join();	
+		System.out.print("\nTask3 Kicked Off\n");	
+		for(int i=301; i<=399; i++) {	
+			System.out.print(i + " ");	
+		}	
+		System.out.println("\nTask3 Done");	
+		System.out.println("\nMain Done");	
+			
+	}	
+```	
+##### Snippet-6 Explained	
+It is important to note that *Task1* and *Task2* are still independent sub-tasks. The thread scheduler is free to interleave their executions. However, *Task3* is kicked off only after both of them terminate.	
+#### Summary	
+In this step, we:	
+* Understood the need for thread communication	
+* Learned that Java provides mechanisms for threads to wait for each other	
+* Observed how the ```join()``` method can be used to sequence thread execution	
+  	
+### Step 07: ```synchronized``` Methods, And ```Thread``` Utilities	
+When a thread gets tired, you can put it to bed. Heck, you can do it even when it's fresh and raring to go! It's under your control, remember? 	
+The ```Thread``` class provides a couple of methods:	
+* ```public static native void sleep(int millis)``` : Calling this method will cause the thread in question, to go into a *blocked* / *waiting* state for **at least** ```millis``` milliseconds.	
+* ```public static native void yield()``` : Request thread scheduler to execute some other thread. The scheduler is free to ignore such requests.	
+##### Snippet-01 : Thread utilities	
+**jshell>** ```Thread.sleep(1000)```	
+**jshell>** ```Thread.sleep(10000)```	
+**jshell>**	
+##### Snippet-7 Explained	
+* ```Thread.sleep(1000)``` causes the ```JShell``` prompt to appear after a delay of *at least* 1 second. This delay is even more visible, when we execute ```Thread.sleep(10000)```.	
+### Step 08: Drawbacks of earlier approaches	
+We saw few of the methods for synchronization in the `Thread` class	
+* ```start()```	
+* ```join()```	
+* ```sleep()```	
+* ```wait()```	
+Above approaches have a few drawbacks:	
+* **No Fine-Grained Control**: Suppose, for instance , we want *Task3* to run after *any one* of *Task1* or *Task2* is done. How do we do it?	
+* **Difficult to maintain**: Imagine managing 5-10 threads with code written in earlier examples. It would become very difficult to maintain. 	
+* **NO Sub-Task Return Mechanism**: With the ```Thread``` ```class``` or the ```Runnable``` ```interface```, there is no way to get the result from a sub-task.	
+### Step 09: Introducing ```ExecutorService```	
+In order to address the serious limitations of the ```Thread``` API, a new ```Executor Service``` was added in **Java SE 5**. 	
+The ```ExecutorService``` is a framework you can use to manage threads in your code, better.  It has built-in ways to:	
+* Create and launch threads more intuitively	
+* Manage thread state and its life-cycle more easily	
+* Synchronize between threads with more control, and	
+* Handle groups of threads neatly	
+The ```ExecutorService``` provides utilities to achieve each one of these. Let's start with thread creation, which the next example takes care of.	
+##### Snippet-01 : Creating a Thread	
+**_ExecutorServiceRunner.java_**	
+```java	
+	import java.util.concurrent.ExecutorService;	
+	import java.util.concurrent.Executors;	
+		
+	class Task1 extends Thread {	
+		public void run() {	
+			System.out.println("Task1 Started ");	
+			for(int i=101; i<=199; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask1 Done");	
+		}	
+	}	
+	class Task2 implements Runnable {	
+		@Override	
+		public void run() {	
+			System.out.println("Task2 Started ");	
+			for(int i=201; i<=299; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask2 Done");	
+		}	
+	}	
+	public class ExecutorServiceRunner {	
+		public static void main(String[] args) {	
+			ExecutorService executorService = Executors.newSingleThreadExecutor();	
+			executorService.execute(new Task1());	
+			executorService.execute(new Thread(new Task2()));	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Task1 Started_	
+_101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199_	
+_Task1 Done_	
+_Task2 Started_	
+_201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299_	
+_Task2 Done_	
+##### Snippet-01 Explained	
+`ExecutorService executorService = Executors.newSingleThreadExecutor()` creates a single threaded executor service. That's why the tasks ran serially, one after the other.	
+##### Snippet-02 : main runs in parallel	
+Let's update the main method to do more things:	
+```java	
+	public class ExecutorServiceRunner {	
+		public static void main(String[] args) {	
+			ExecutorService executorService = Executors.newSingleThreadExecutor();	
+			executorService.execute(new Task1());	
+			executorService.execute(new Thread(new Task2()));	
+			System.out.print("\nTask3 Kicked Off\n");	
+			for(int i=301; i<=399; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask3 Done");	
+			System.out.println("\nMain Done");	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+**_Console Output_**	
+```	
+Task1 Started 	
+101 	
+Task3 Kicked Off	
+102 301 103 302 104 303 105 304 106 305 107 306 108 109 110 111 112 307 113 114 115 116 117 118 119 120 121 122 308 123 309 124 310 125 311 126 312 127 313 128 314 129 315 130 316 131 132 133 317 134 318 135 319 136 137 320 138 321 139 322 140 323 141 324 142 325 143 326 144 145 146 147 327 148 149 328 150 329 151 330 152 331 332 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 333 194 334 195 196 335 197 198 199 336 	
+Task1 Done	
+337 338 Task2 Started 	
+339 201 202 203 204 205 206 207 340 341 208 209 210 211 212 213 214 215 216 217 218 219 220 342 221 222 223 224 225 343 344 226 345 346 227 347 348 228 229 349 230 231 232 350 233 351 352 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 353 249 354 355 250 356 251 357 358 252 359 253 360 254 255 361 256 362 363 257 258 364 259 365 366 260 367 261 262 368 263 264 369 265 370 266 371 267 268 372 269 373 270 374 375 271 376 377 272 378 273 379 274 380 275 381 382 276 277 383 278 384 279 385 386 280 387 281 388 282 283 284 389 285 390 391 286 392 287 393 288 394 395 289 396 290 397 291 398 399 	
+Task3 Done	
+Main Done	
+292 293 294 295 296 297 298 299 	
+Task2 Done	
+```	
+##### Snippet-02 Explained	
+The only order that we see in the resulting chaos is: *Task2* starts execution only after *Task1* is done.	
+Threads managed by `ExecutorService` run in parallel with `main` method.	
+### Step 10: Executor -  Customizing Number Of Threads	
+With the ```ExecutorService```, it is possible to create a *pool* of threads.	
+The following examples will show you how you can create thread pools of varying kinds, and of course, of different sizes. 	
+##### Snippet-03 : Executors for Concurrent threads	
+**_ExecutorServiceRunner.java_**	
+```java	
+	public class ExecutorServiceRunner {	
+		public static void main(String[] args) {	
+			ExecutorService executorService = Executors.newFixedThreadPool(2);	
+			executorService.execute(new Task1());	
+			executorService.execute(new Thread(new Task2()));	
+			System.out.print("\nTask3 Kicked Off\n");	
+			for(int i=301; i<=399; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask3 Done");	
+			System.out.println("\nMain Done");	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+**_Console Output_**	
+```	
+Task1 Started 	
+Task3 Kicked Off	
+301 101 302 303 304 Task2 Started 	
+305 306 102 307 103 201 104 308 105 202 106 309 107 203 108 310 109 110 204 111 311 112 205 113 312 114 206 115 313 116 207 117 314 118 208 119 315 120 209 121 316 122 210 317 211 123 212 318 213 124 125 126 127 128 319 129 320 214 321 130 322 215 323 131 324 216 325 132 326 217 327 133 328 218 329 134 330 219 331 135 332 220 333 136 334 221 335 137 336 222 337 138 338 223 339 139 340 224 341 140 342 225 343 141 344 226 345 142 346 227 347 143 228 348 144 349 229 350 145 351 230 352 146 353 231 354 147 355 232 356 148 357 233 358 149 359 234 360 150 361 235 362 151 363 236 364 237 152 238 365 239 153 240 366 241 242 154 243 367 244 155 245 368 246 156 157 247 369 248 158 249 370 250 159 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 371 267 372 373 374 268 269 160 270 271 375 376 377 378 379 380 381 382 383 161 162 163 164 165 384 166 272 167 168 169 170 171 172 385 173 386 387 273 388 389 174 390 391 274 392 175 393 275 394 176 395 276 396 397 177 398 178 179 277 180 399 181 278 182 183 	
+Task3 Done	
+Main Done	
+184 185 279 280 281 282 283 186 187 284 285 286 188 189 287 288 289 190 191 290 192 291 193 292 194 293 195 196 294 295 296 297 298 299 	
+Task2 Done	
+197 198 199 	
+Task1 Done	
+```	
+##### Snippet-03 Explained	
+We created `ExecutorService` by using `Executors.newFixedThreadPool(2)`. So, 'ExecutorService` uses two parallel threads at a maximum.	
+* *Task1* and *Task2* execute concurrently as part of the ```ExecutorService```, and	
+* The thread running ```main()``` executes concurrently with this thread pool, created by ```ExecutorService```.	
+##### Snippet-04 : All-Executor Task Execution	
+Let's create a simple example to allow to play with 'ExecutorService'.	
+**_ExecutorServiceRunner.java_**	
+```java	
+	import java.util.concurrent.ExecutorService;	
+	import java.util.concurrent.Executors;	
+	class Task extends Thread {	
+		private int number;	
+			
+		public Task(int number) {	
+			this.number = number;	
+		}	
+		public void run() {	
+			System.out.println("Task " + number + " Started");	
+			for(int i=number*100; i<=number*100+99; i++) {	
+				System.out.print(i + " ");	
+			}	
+			System.out.println("\nTask " + number +" Done");	
+		}	
+	}	
+	public class ExecutorServiceRunner {	
+		public static void main(String[] args) {	
+			ExecutorService executorService = Executors.newFixedThreadPool(2);	
+			executorService.execute(new Task(1));	
+			executorService.execute(new Task(2));	
+			executorService.execute(new Task(3));	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+##### Snippet-04 Explained	
+`Executors.newFixedThreadPool(2)` - Two threads in parallel. The thread ```new Task(3)``` is executed only after any one of ```new Task(1)``` and ```new Task(2)``` have completed their execution.	
+##### Snippet-04 : Larger Thread Pool Size	
+```java	
+	public class ExecutorServiceRunner {	
+		public static void main(String[] args) {	
+			ExecutorService executorService = Executors.newFixedThreadPool(3);	
+			executorService.execute(new Task(1));	
+			executorService.execute(new Task(2));	
+			executorService.execute(new Task(3));	
+			executorService.execute(new Task(4));	
+			executorService.execute(new Task(5));	
+			executorService.execute(new Task(6));	
+			executorService.execute(new Task(7));	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+##### Snippet-04 Explained	
+We made the pool larger to 3:	
+* Initially Tasks ```1```, ```2```, ```3``` are added to the ```ExecutorService``` and are started.	
+* As soon as any one of them is terminated, another task from the thread pool is picked up for execution, and so on. A classic case of musical chairs, with regard to the slots available in the ```ExecutorService``` thread pool, is played out here!	
+#### Summary	
+In this step, we:	
+* Explored how one can create pools of threads of the same kind, using the ```ExecutorService```	
+* Noted how one could specify the size of a thread pool	
+### Step 11:  ```ExecutorService```: Returning Values From Tasks	
+##### Snippet-01: Returning a Future Object	
+So far, we have only seen sub-tasks that are largely independent, and which don't return any result to the main program that launched them.	
+To be able to return a value from a Thread, Java provides a ```Callable<T>``` interface.	
+The next example tells you how to implement ```Callable<T>```, and use it with ```ExecutorService```.	
+**_ExecutorServiceRunner.java_**	
+```java	
+	import java.util.concurrent.ExecutorService;	
+	import java.util.concurrent.Executors;	
+	import java.util.concurrent.Callable;	
+	class CallableTask implements Callable<String> {	
+		private String name;	
+		public CallableTask(String name) {	
+			this.name = name;	
+		}	
+		@Override	
+		public String call() throws Exception {	
+			Thread.sleep(1000);	
+			return "Hello " + name;	
+		}	
+	}	
+	public class CallableRunner {	
+		public static void main(String[] args) throws InterruptedException, ExecutionException {	
+			ExecutorService executorService = Executors.newFixedThreadPool(1);	
+			Future<String> welcomeFuture = executorService.submit(new CallableTask("in28Minutes"));	
+			System.out.println("CallableTask in28Minutes Submitted");	
+			String welcomeMessage = welcomeFuture.get();	
+			System.out.println(welcomeMessage);	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+**_Console Output_**	
+_CallableTask in28Minutes Submitted_	
+_Hello in28Minutes_	
+##### Snippet-01 Explained	
+- `class CallableTask implements Callable<String>` - Implement `Callable`. Return type is `String`	
+- `public String call() throws Exception {` - Implement `call` method and return a `String` value back.	
+-  ```executorService.submit(new CallableTask(String))``` adds a callable task to its thread pool. This puts the task thread in a **RUNNABLE** state. Subsequently, the program goes ahead to invoke its ```call()``` method.	
+- `welcomeFuture.get()` - Ensures that the `main` thread waits for the result of the operation. 	
+#### Summary	
+In this step, we:	
+* Understood the need for a mechanism, to create sub-tasks that return values	
+* Discovered that Java has a ```Callable<T>``` interface to do exactly this	
+* Saw that the ```ExecutorService``` is capable of managing ```Callable``` threads	
+### Step 11: Executors - Waiting For Many Callable Tasks To Complete	
+```ExecutorService``` framework also allows you to create a pool of ```Callable``` threads. Not only that, you can collect their return values together.	
+##### Snippet-01 : Waiting for Multiple ```Callable``` Threads 	
+**_MultipleCallableRunner.java_**	
+```java	
+	import java.util.concurrent.ExecutorService;	
+	import java.util.concurrent.Executors;	
+	import java.util.concurrent.Callable;	
+	class CallableTask implements Callable<String> {	
+		private String name;	
+		public CallableTask(String name) {	
+			this.name = name;	
+		}	
+		@Override	
+		public String call() throws Exception {	
+			Thread.sleep(1000);	
+			return "Hello " + name;	
+		}	
+	}	
+	public class MultipleCallableRunner {	
+		public static void main(String[] args) throws InterruptedException, ExecutionException {	
+			ExecutorService executorService = Executors.newFixedThreadPool(1);	
+			List<CallableTask> tasks = List.of(new CallableTask("in28Minutes"),	
+												new CallableTask("Ranga"),	
+												new CallableTask("Adam"));	
+			List<Future<String>> welcomeAll = executorService.invokeAll(tasks);	
+			for(Future<String> welcomeFuture : welcomeAll) {	
+				System.out.println(welcomeFuture.get());	
+			}	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Hello in28Minutes_	
+_Hello Ranga_	
+_Hello Adam_	
+##### Snippet-01 Explained	
+The ```invokeAll()``` method of  ```ExecutorService``` allows for a list of ```Callable``` tasks to be launched in the thread pool. Also, a ```List``` of ```Future``` objects can be used to hold return values, one for each such ```Callable``` thread.	
+The list of return values can be accessed only after **all** the threads are done, and have returned their results. 	
+This can be verified from the console output. all the planned welcome messages are printed in one go, but only after a wait of at least ```3000``` milliseconds has been completed.	
+Let's now see what scenario would pan out with a larger thread pool size. 	
+##### Snippet-02 : List of Callable tasks with larger thread pool	
+```java	
+	public class MultipleCallableRunner {	
+		public static void main(String[] args) throws InterruptedException, ExecutionException {	
+			ExecutorService executorService = Executors.newFixedThreadPool(3);	
+			List<CallableTask> tasks = List.of(new CallableTask("in28Minutes"),	
+												new CallableTask("Ranga"),	
+												new CallableTask("Adam"));	
+			List<Future<String>> welcomeAll = executorService.invokeAll(tasks);	
+			for(Future<String> welcomeFuture : welcomeAll) {	
+				System.out.println(welcomeFuture.get());	
+			}	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Hello in28Minutes_	
+_Hello Ranga_	
+_Hello Adam_	
+##### Snippet-02 Explained	
+The welcome messages all get printed in a batch again, but their collective wait gets shorter. This is because:	
+* The thread pool size is now ```3```, not ```2``` as earlier. This means all the three tasks can be put in the **RUNNABLE** state at once. 	
+* Then, they go into their **BLOCKED** state also almost simultaneously, which means their collective wait time is much less than ```3000``` milliseconds. That's one advantage of a larger thread pool!	
+#### Summary 	
+In this step, we:	
+* Learned that it's possible to collect the return values of a pool of ```Callable``` threads, at one go.	
+* This is done using the ```invokeAll()``` method for their launch, and specifying a ```List``` of ```Future``` objects to hold these results	
+* Changing the thread pool size for such scenarios can change response time dramatically	
+### Step 12:  Executor - Wait Only For The Fastest Task	
+Let's look at how you can wait for any of the three tasks to complete.	
+##### Snippet-01 : Wait only for fastest	
+```java	
+	public class MultipleAnyCallableRunner {	
+		public static void main(String[] args) throws InterruptedException, ExecutionException {	
+			ExecutorService executorService = Executors.newFixedThreadPool(3);	
+			List<CallableTask> tasks = List.of(new CallableTask("in28Minutes"),	
+												new CallableTask("Ranga"),	
+												new CallableTask("Adam"));	
+			String welcomeMessage = executorService.invokeAny(tasks);	
+			System.out.println(welcomeMessage);	
+			executorService.shutdown();	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Hello Ranga_	
+**_Console Output_**	
+_Hello in28Minutes_	
+**_Console Output_**	
+_Hello Ranga_	
+**_Console Output_**	
+_Hello Adam_	
+##### Snippet-01 Explained	
+The method ```invokeAny()``` returns when the first of the sub-tasks is done. Also, the returned value is not a ```Future``` object. It's the return value of the ```call()``` method.	
+We can see that over different executions, the order of console output changes. This is because: 	
+* All three tasks are created together, in a thread pool of size ```3```. 	
+* Therefore, these are independent threads, going into their **RUNNABLE** states almost at once. 	
+#### Summary	
+In this step, we:	
+* Learned that ```ExecutorService``` has a way to return the first result, from a poll of ```Callable``` threads	
+## Introduction To Exception handling	
+Recommended Exception handling Videos	
+- https://www.youtube.com/watch?v=34ttwuxHtAE	
+There are two kinds of errors a programmer faces:	
+* **Compile-time** Errors: Flagged by the compiler when it detects syntax or semantic errors.	
+* **Run-time** Errors: Detected by the run-time environment when executing code	
+Example runtime errors include:	
+* Running out of *heap-memory* for objects, or space for the method *call stack*	
+* Dividing a number by ```0```	
+* Trying to *read* from an *unopened* file	
+Exceptions are *unexpected* conditions; their occurrence does not make a programmer bad (or good, for that matter). It is a programmer's responsibility to be *aware* of potential exceptional conditions in her program, and use a mechanism to *handle* them effectively.	
+Handling an exception generally involves two important aims:	
+1. Provide a useful message to the end user.	
+2. Log enough information to help a programmer identify root cause.	
+### Step 01: Introducing Exceptions	
+In the previous step, we gave you a few instances of exceptions, such as your program running out of memory, or your code trying to divide a number by ```0```. 	
+Want to see a live example of the Java run-time throwing an exception? The next example will satisfy your thirst.	
+##### Snippet-1 : Exception Condition	
+**_ExceptionHandlingRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+		
+	public class ExceptionHandlingRunner {	
+		public static void main(String[] args) {	
+			callMethod();	
+			System.out.println("callMethod Done");			
+		}	
+		static void callMethod() {	
+			String str = null;	
+			int len = str.length();	
+			System.out.println("String Length Done");	
+		}			
+	}		
+```	
+**_Console Output_**	
+**_java.lang.NullPointerException_**	
+_Exception in thread "main" java.lang.NullPointerException_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.callMethod (ExceptionHandlingRunner.java:8)_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.main (ExceptionHandlingRunner.java:4)_	
+##### Snippet-01 Explained	
+A ```java.lang.NullPointerException``` is **thrown** by the Java run-time when we called ```length()``` on the `null` reference.	
+If an exception is not handled in the entire call chain, including `main`, the exception is thrown out and the program terminates. ```System.out.println()``` statements after the exception are never executed. 	
+The runtime prints the **call stack trace** onto the console. 	
+For instance, consider this simple ```class``` ```Test```:	
+```java	
+	public class Test {	
+		public static void main(String[] args) {	
+			callOne();	
+		}	
+		public static void callOne() {	
+			callTwo();	
+		}	
+		public static void callTwo() {	
+			callThree();	
+		}	
+		public static void callThree() {	
+			String name;	
+			System.out.println("This name is %d characters long", name.length());	
+		}	
+	}	
+``` 	
+However, the code name.length() used in ```callThree()``` caused a ```NullPointerException``` to be thrown. However, this is  not handled, and the console coughs up the following display:	
+			
+_Exception in thread "main" java.lang.NullPointerException_	
+_at Test.callThree(Test.java:13)_	
+_at Test.callTwo(Test.java:9)_	
+_at Test.callOne(Test.java:6)_	
+_at Test.main(Test.java:3)_	
+This is nothing but a call trace of the stack, *frozen in time*.	
+#### Summary	
+In this step, we:	
+* Saw a live example of an exception being thrown	
+* Understood how a call trace on the stack appears when a exception occurs	
+* Reinforced this understanding with another example	
+### Step 02: Handling An Exception	
+In Java, exception handling is achieved through a **```try```-```catch```** *block*. 	
+##### Snippet-01 : Handling An Exception	
+**_ExceptionHandlingRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+		
+	public class ExceptionHandlingRunner {	
+		public static void main(String[] args) {	
+			method1();	
+			System.out.println("main() Done");	
+		}	
+			
+		static void method1() {	
+			method2();	
+			System.out.println("method1() done");	
+		}	
+		static void method2() {	
+			try {	
+				String str = null;	
+				int len = str.length();	
+				System.out.println("method2() Done");	
+			} catch (Exception ex) {	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+_method1() Done_	
+_main() Done_	
+##### Snippet-01 Explained	
+We have handled an exception here with a ```try```-```catch``` block. Its syntax resembles this:	
+```java	
+	try {	
+		//< program-logic code block >	
+	} catch (Exception e) {			
+		//< exception-handling code block >	
+	}	
+```	
+The exception (the ```NullPointerException```) still occurs after adding this block, but now it's actually **caught**. Although we did nothing with the caught exception, we did avoid a sudden end of the program.	
+The statements following  ```int len = str.length()``` in `method2` are not executed. 	
+However, all of ```method1()```'s code was run (with the ```"method1 Done"``` message getting printed). ```main()``` method also completed execution successfully.	
+The program thus terminated gracefully. ```method1()``` and ```main()``` are both unaware of the ```NullPointerException``` occurring within ```method2()```.	
+##### Snippet-02: Print Debug Information	
+Let's add `ex.printStackTrace();`.	
+**_ExceptionHandlingRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	public class ExceptionHandlingRunner {	
+		public static void main(String[] args) {	
+			method1();	
+			System.out.println("main() Done");	
+		}	
+		static void method1() {	
+			method2();	
+			System.out.println("method1() done");	
+		}	
+		static void method2() {	
+			try {	
+				String str = null;	
+				int len = str.length();	
+				System.out.println("method2() Done");	
+			} catch (Exception ex) {	
+				ex.printStackTrace();	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+**_java.lang.NullPointerException_**	
+_Exception in thread "main" java.lang.NullPointerException_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method2 (ExceptionHandlingRunner.java:14)_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method1 (ExceptionHandlingRunner.java:8)_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.main (ExceptionHandlingRunner.java:4)_	
+_method1() Done_	
+_main() Done_	
+```printStackTrace()``` is provided by the ```Exception``` ```class```, which every exception inherits from. This method prints the frozen call trace of the program when the exception occurred, but without terminating the program. The code next continues to run.	
+The stack trace provides useful information to you, the programmer,to debug the exception scenario.	
+#### Summary	
+In this step, we:	
+* Were introduced to Java's basic mechanism to handle exceptions, the ```try```-```catch``` block	
+* Saw how a program runs and ends gracefully, when an exception is handled	
+* Observed how the ```printStackTrace``` method gives debug information to the programmer	
+### Step 03: The ```Exception``` Hierarchy 	
+The code in the ```try```-```catch``` block above does not work by black magic. From the call trace, it's clear that this program encounters a ```NullPointerException``` in ```method1()```. What's surprising, is that it was caught by a ```catch``` clause meant for an ```Exception```! The reason this worked is because ```NullPointerException``` **is-a** ```Exception```.	
+You heard right! Java has a hierarchy of exception types, rooted at ```class``` ```Exception```. For instance, 	
+* ```NullPointerException``` **is-a** ```RuntimeException```, and 	
+* ```RuntimeException``` **is-a** ```Exception```. 	
+* So effectively, ```NullPointerException``` **is-a** ```Exception```!	
+Different branches of this inheritance-tree actually denote different exception categories. We'll dwell on this topic a little later.  	
+##### Snippet-01 : Catching NullPointerException	
+Let's add an additional catch for `NullPointerException` in method2.	
+**_ExceptionHandlingRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+		
+	public class ExceptionHandlingRunner {	
+		public static void main(String[] args) {	
+			method1();	
+			System.out.println("main() Done");	
+		}	
+		static void method1() {	
+			method2();	
+			System.out.println("method1() done");			
+		}	
+		static void method2() {	
+			try {	
+				String str = null;	
+				int len = str.length();	
+				System.out.println("method2() Done");	
+			} catch (NullPointerException e) {	
+				System.out.println("NullPointerException");	
+			} catch (Exception ex) {	
+				ex.printStackTrace();	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+**_NullPointerException_**	
+_method1() Done_	
+_main() Done_	
+##### Snippet-01 Explained	
+_Among all the ```catch``` clauses following the ```try```, **one and only one** of them, may get executed. The **first** ```catch``` clause to **match**, **in serial order** after the ```try```, always gets executed. If **none** match, the exception is **not handled**._	
+We placed an additional ```catch``` block within ```method2()```, to handle ```NullPointerException``` . Typically, the most specific exception class is matched. Hence the catch block for `NullPointerException` matches.	
+You need to order the ```catch``` blocks after a ```try```, from more-specific to less-specific matches.   	
+##### Snippet-02 : Catching another exception	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	public class ExceptionHandlingRunner {	
+		public static void main(String[] args) {	
+			method1();	
+			System.out.println("main() Done");	
+		}	
+		static void method1() {	
+			method2();	
+			System.out.println("method1() done");	
+		}	
+		static void method2() {	
+			try {	
+				int[] numbers = {1, 2};	
+				int num = numbers[3];	
+				System.out.println("method2() Done");	
+			} catch (NullPointerException e) {	
+				System.out.println("NullPointerException");	
+			} catch (Exception ex) {	
+				ex.printStackTrace();	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+**_ArrayIndexOutOfBoundsException : 3_**	
+_Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method2 (ExceptionHandlingRunner.java:14)_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method1 (ExceptionHandlingRunner.java:8)_	
+_at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.main (ExceptionHandlingRunner.java:4)_	
+_method1() Done_	
+_main() Done_	
+##### Snippet-02 Explained	
+```ArrayIndexOutOfBoundsException``` **is-a** ```IndexOutOfBoundsException```, which **is-a** ```RuntimeException```, which in turn **is-a** ```Exception```.  	
+```ArrayIndexOutOfBoundsException``` is not a sub class of ```NullPointerException```. Hence, it does not match with the first catch block. ```ArrayIndexOutOfBoundsException``` is a sub class of  ```Exception```. Hence, that ```catch``` block matched, and the statement ```ex.printStackTrace();``` within it ran.	
+If we omit the handler for ```Exception```, the ```ArrayIndexOutOfBoundsException``` is not caught by this ```try```-```catch``` block. Since it is not handled in ```method1()```, or even later in ```main()```, our program would have to stop suddenly. 	
+ 	
+#### Summary	
+In this step, we:	
+* Learned that there is an exception hierarchy in Java, rooted at ```Exception```	
+* Looked at an example that could cause multiple exceptions to occur	
+* Observed how a handler for ```Exception``` could match any exception	
+- - - 	
+### Step 04:  The Need For ```finally```	
+When an exception occurs, the programmer's world can turn upside-down in a matter of moments. If not handled, the program terminates all of a sudden, with no light at the end of the tunnel.	
+##### Snippet-01 : Unreleased Resources	
+**_FinallyRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	import java.util.Scanner;	
+	public class FinallyRunner {	
+		public static void main(String[] args) {	
+			Scanner scanner = new Scanner(System.in);	
+			// ... Program logic, probably using scanner input	
+			int num = numbers[5];	
+			System.out.println("Before scanner close");	
+			scanner.close();	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException_	
+_at com.in28minutes.exceptionhandling.FinallyRunner.main (FinallyRunner.java:8)_	
+##### Snippet-01 Explained	
+This example makes use of `Scanner` object to read from console. Ideally a `Scanner` object should be closed using ```scanner.close();```. 	
+However, in our example, it is not called because a line before it threw an exception. (```int num = numbers[5];``` tries to access the 5th element of a 4-element array). 	
+What this means, is a system resource that has been acquired, is never released. 	
+It's important to ensure that any acquired resource is always released; whether on normal or abrupt termination. Let's see how you do this while handling an exception.	
+##### Snippet-02 : Releasing Resources	
+**_FinallyRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	import java.util.Scanner;	
+	public class FinallyRunner {	
+		public static void main(String[] args) {	
+			Scanner scanner = null;	
+			try {	
+				scanner = new Scanner(System.in);	
+				// ... Program logic, probably using scanner input	
+				int[] numbers = {1, 2, 3, 4};	
+				int num = numbers[5];	
+			} catch (Exception e) {	
+				e.printStackTrace();	
+			} finally {	
+				if(scanner != null) {	
+					System.out.println("Before scanner close");	
+					scanner.close();	
+				}			
+			}	
+			System.out.println("Before exiting main");	
+		}	
+	}	
+```	
+**_Console Output_**	
+**_ArrayIndexOutOfBoundsException_**	
+_Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException_	
+_at com.in28minutes.exceptionhandling.FinallyRunner.main (FinallyRunner.java:10)_	
+_Before scanner close_	
+_Before exiting main_	
+##### Snippet-02 Explained	
+Code in ```finally``` is almost always executed - even when there are exceptions. 	
+We added a null check on `scanner` since ```scanner = new Scanner(System.in);``` could also result in an exception.	
+```java	
+	} finally {	
+		if(scanner != null) {	
+			System.out.println("Before scanner close");	
+			scanner.close();	
+		}	
+	}	
+```	
+#### Summary	
+In this step, we:	
+* Observed how exceptional conditions could result in resource leaks	
+* Learned about the ```finally``` clause in a ```try```-```catch``` block	
+### Step 05: Programming Puzzles -  PP-01	
+#### Puzzle-01	
+* Would the ```finally``` clause be executed if	
+	* The statement ```//str = "Hello";``` remains as-is	
+	* The statement ```//str = "Hello";``` has its comments removed? 	
+```java	
+ 	
+	public static void method3() {	
+		Connection connection = new Connection();	
+		connection.open();	
+		try {	
+			String str = null;	
+			//str = "Hello";	
+			str.toString();	
+			return;			
+		} catch(Exception e) {			
+		} finally {	
+			connection.close();	
+		}	
+	}	
+```	
+* **_Answer_**	
+	* Yes	
+	* Yes	
+#### Puzzle-02	
+* When will code in a ```finally``` clause not get executed?	
+* **_Answer_**	
+	* In case of statements within the same ```finally``` clause, preceding this code, throwing an exception 	
+	* In case of a JVM crash. This can be simulated in some scenarios by calling ```System.exit``` with an appropriate ```int``` argument, within an appropriate ```catch``` clause of the same ```try```-```catch```-```finally``` clause.	
+ 	
+#### Puzzle-03	
+* Will the following code, a ```try```-```finally``` without a ```catch```?	
+```java	
+	public static void method4() {	
+		Connection connection = new Connection();	
+		connection.open();	
+		try {	
+			String str = null;	
+			//str = "Hello";	
+			str.toString();	
+			return;	
+		} finally {	
+			connection.close();	
+		}		
+	}	
+```	
+* **_Answer_** : Yes	
+#### Puzzle-04	
+* Will the following code, a ```try``` without a ```catch``` or a ```finally```?	
+```java	
+	public static void method5() {	
+		Connection connection = new Connection();	
+		connection.open();	
+		try {	
+			String str = null;	
+			//str = "Hello";	
+			str.toString();	
+			return;	
+		}	
+	}	
+```	
+* **_Answer_** : No	
+### Step 06: Handling Exceptions: Do We Have A Choice?	
+Sometimes, in Java you are forced to handle exceptions.	
+##### Snippet-02: Checked Exceptions - v1	
+**_CheckedExceptionRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+		
+	public class CheckedExceptionRunner {	
+		public static void main(String[] args) {	
+			Thread.sleep(2000);	
+		}	
+	}	
+```	
+##### Snippet-02 Explained 	
+**_This program will not compile!_**	
+The reason we get flagged by a compiler error, lies in the signature of the ```sleep()``` method. Here is its definition within the ```Thread``` ```class```:	
+```java	
+	public static native void sleep(long millis) throws InterruptedException {	
+		//...	
+	}	
+```	
+This declaration is a bit different from what you normally expect for a method, isn't it!  It contains a **```throws``` specification**. 	
+When a method `throws` an Exception, the calling method should:	
+* Handle it using ```try```-```catch``` block	
+* Or declare `throws` in its signature	
+Let's use ```try```-```catch``` block to start off.	
+##### Snippet-03: Checked Exceptions - v2	
+**_CheckedExceptionRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	public class CheckedExceptionRunner {	
+		public static void main(String[] args) {	
+			try {	
+				Thread.sleep(2000);	
+			} catch (InterruptedException e) {	
+				e.printStackTrace();	
+			}	
+		}	
+	}	
+```	
+##### Snippet-03 Explained	
+* ```main()```, which is the caller of ```sleep()```, chooses the option of handling ```InterruptedException``` with a ```try```-```catch``` block.	
+#### The ```throws``` keyword	
+```throws``` is used to declare that a method might throw exceptions. This involves a ```throws``` keyword, followed by a list of exception types. 	
+##### Snippet-04 : Method with risky code #1	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	public class CheckedExceptionRunner {	
+		public static void main(String[] args) {	
+			try {	
+				riskyMethod();	
+				Thread.sleep(2000);	
+			} catch (InterruptedException e) {	
+				e.printStackTrace();	
+			}	
+		}	
+		public static void riskyMethod() throws InterruptedException {	
+			Thread.sleep(5000);	
+		}	
+	}	
+```	
+##### Snippet-04 Explained	
+Here, we have removed the ```try```-```catch``` block within ```riskyMethod()```, because we want to follow another way of managing the exception. As an alternative, we added a ```throws``` specification to ```riskyMethod()``` to make the code compile. 	
+We made `main` method handle the exception.	
+#### Summary	
+In this step, we:	
+* Discovered that certain exceptions in Java do not force you to handle them	
+* Learned that all the rest must be managed/handled	
+* Observed that there are two ways to manage those "Checked" exceptions:	
+	* Handling with a ```try```-```catch``` block	
+	* Using a ```throws``` specification 	
+### Step 08: The Java Exception Hierarchy	
+Right at the root (top, we mean), the Java exception hierarchy looks like this:	
+```java	
+	class Error extends Throwable{}	
+	class Exception extends Throwable{}		
+	class InterruptedException extends Exception{}	
+	class RuntimeException extends Exception{}	
+	class NullPointerException extends RuntimeException{}	
+	...	
+```	
+Once an ```Error``` occurs, there is nothing a programmer could do. Examples include: 	
+*  The JVM running out of heap memory space	
+An `Exception` can be handled. There are two types of Exceptions.	
+* ```RuntimeException``` and its sub-classes. These come under the category of **unchecked exceptions**. Another example we've seen is ```NullPointerException```, which inherits from ```RuntimeException```.	
+* All other sub-classes of ```Exception```, excluding the sub-tree rooted at ```RuntimeException```, are called **checked exceptions**. An instance we've encountered is ```InterruptedException```.	
+If a method throws a **checked exception** is called, then either:	
+* The method call must be enclosed in a ```try```-```catch``` block for proper handling, or 	
+* The caller must throw this exception out, to its own caller. Its signature must also be enhanced using a ```throws``` specification. 	
+If an **unchecked exception** is involved, then:	
+*  You have the options of handling with  ```try```-```catch``` block.	
+*  It is not mandatory to handle it.	
+A **checked** exception **must** be handled, whereas as **unchecked** exception **may or may not** be handled.	
+#### Summary	
+In this step, we:	
+* Discovered that within the Java exception hierarchy, there are two categories:	
+	* Checked exceptions	
+	* Unchecked exceptions	
+* There are different strategies to manage these two categories	
+### Step 09: Throwing an Exception	
+So far, we have seen how to handle an exception, that is thrown by a built-in Java method. Now, let's explore how we can alert a user about exceptional conditions in our own code, by **throwing** exceptions. 	
+##### Snippet-01 : Throwing An Exception	
+**_ThrowingExceptionRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	class Amounts {	
+		private String currency;	
+		private int amount;	
+		public Amounts(String currency, int amount) {	
+			super();	
+			this.currency = currency;	
+			this.amount = amount;	
+		}	
+		public void add(Amount that) {	
+			if(!this.currency.equals(that.currency)) {	
+				throw new RuntimeException("Currencies Don't Match");	
+			}	
+			this.amount += that.amount;	
+		}	
+		public Sring toString() {	
+			return amount + " " + currency;	
+		}	
+	}	
+	public class ThrowingExceptionRunner {	
+		public static void main(String[] args) {	
+			Amount amount1 = new Amount("USD", 10);	
+			//Amount amount2 = new Amount("USD", 20);	
+			Amount amount2 = new Amount("EUR", 20);	
+			amount1.add(amount2);	
+			System.out.println(amount1);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_Exception in thread "main" java.lang.RuntimeException:Currencies Don't Match_	
+_at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExceptionRunner.java:26)_	
+##### Snippet-01 Explained	
+Since adding ```10 USD``` and ```20 EUR``` does not make sense in the real world, it's important to tell the user that ```add()``` won't work for different currencies. The most direct way is to throw an exception, which the code ```throw new RuntimeException("Currencies Don't Match");``` does. 	
+This thrown exception object can be handled inside ```main()```. By calling ```printStackTrace()``` on the caught exception reference,  you get debug information like before.	
+##### Snippet-02 : Throwing a Checked Exception	
+`Exception` is a Checked Exception. If a method throws an instance of `Exception` class, it needs to declare it -  `public void add(Amount that) throws Exception {`.	
+**_ThrowingExceptionRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+		
+	class Amounts {	
+		private String currency;	
+		private int amount;	
+		public Amounts(String currency, int amount) {	
+			super();	
+			this.currency = currency;	
+			this.amount = amount;	
+		}	
+		public void add(Amount that) throws Exception {	
+			if(!this.currency.equals(that.currency)) {	
+				throw new Exception("Currencies Don't Match : " + this.currency + " &  that.currency);	
+			}	
+				this.amount += that.amount;	
+		}	
+		public String toString() {	
+			return amount + " " + currency;	
+		}	
+	}	
+	public class ThrowingExceptionRunner {	
+		public static void main(String[] args) {	
+			Amount amount1 = new Amount("USD", 10);	
+			//Amount amount2 = new Amount("USD", 20);	
+			Amount amount2 = new Amount("EUR", 20);	
+		try {	
+				amount1.add(amount2);	
+				System.out.println(amount1);	
+			} catch(Exception e) {	
+				e.printStackTrace();	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+**_java.lang.RuntimeException:Currencies Don't Match : USD & EUR_**	
+_Exception in thread "main" java.lang.RuntimeException:Currencies Don't Match_	
+_at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExceptionRunner.java:26)_	
+```Exception``` is not a ```RuntimeException``` or one of its sub-classes, it is a checked exception. So, it needs to be declared when it is thrown - `public void add(Amount that) throws Exception`. 	
+#### Summary	
+In this step, we:	
+* Learned that it is possible to throw an exception from code inside any method we write	
+* When a method throws checked exception, it should declare it.	
+### Step 10: Throwing A Custom Exception	
+It is also possible for you to throw a custom exception. You can do this by defining your own exception ```class```, only that it must inherit from one of the built-in exception classes. Note that:	
+* If you sub-class a checked exception, your exception also becomes checked.	
+* If you sub-class an unchecked exception, your exception would be unchecked. 	
+##### Snippet-01 : Throw a custom exception	
+**_ThrowingExceptionRunner.java_**	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	class CurrenciesDoNotMatchException extends Exception {	
+		public CurrenciesDoNotMatchException(String msg) {	
+			super(msg);	
+		}	
+	}	
+	class Amounts {	
+		private String currency;	
+		private int amount;	
+		public Amounts(String currency, int amount) {	
+			super();	
+			this.currency = currency;	
+			this.amount = amount;	
+		}	
+		public void add(Amount that) throws Exception {	
+			if(!this.currency.equals(that.currency)) {	
+				throw new CurrenciesDoNotMatchException("Currencies Don't Match : " + this.currency + " & " + that.currency);	
+			}	
+			this.amount += that.amount;	
+		}	
+		public String toString() {	
+			return amount + " " + currency;	
+		}	
+	}	
+	public class ThrowingExceptionRunner {	
+		public static void main(String[] args) {	
+			Amount amount1 = new Amount("USD", 10);	
+			//Amount amount2 = new Amount("USD", 20);	
+			Amount amount2 = new Amount("EUR", 20);	
+			try {	
+				amount1.add(amount2);	
+				System.out.println(amount1);	
+			} catch(Exception e) {	
+				e.printStackTrace();	
+			}	
+		}	
+	}	
+```	
+**_Console Output_**	
+**_com.in28minutes.exceptionhandling.CurrenciesDoNotMatchException : Currencies Don't Match : USD & EUR_**	
+_Exception in thread "main" com.in28minutes.exceptionhandling.CurrenciesDoNotMatchException : Currencies Don't Match : USD & EUR_	
+_at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExceptionRunner.java:26)_	
+##### Snippet-01 Explained	
+The class ```CurrenciesDoNotMatchException``` clearly is a checked exception. Hence, rules that apply for throwing and handling checked applications, apply to it as well.	
+If instead, ```CurrenciesDoNotMatchException``` were to sub-class ```RuntimeException```, it would be an unchecked exception. Adding the ```throws``` specification to the ```add()``` definition would not be needed. Also, no method in the call sequence of ```add()``` is required to handle it.	
+#### Summary	
+In this step, we:	
+* Discovered that Java allows you to define your own custom exception classes	
+* Whether a custom exception is checked or unchecked, depends on which exception it sub-classes.	
+* Saw an example of how to raise and handle a custom exception	
+### Step 11: Introducing ```try```-With-Resources 	
+```try```-with-resources makes managing resource in a ```try```-```catch```-```finally``` block. Let's look at an example.	
+##### Snippet-01: try-with-resources	
+```java	
+	package com.in28minutes.exceptionhandling;	
+	import java.util.Scanner;	
+	public class TryWithResourcesRunner {	
+		public static void main(String[] args) {	
+			try (Scanner scanner = new Scanner(System.in)) {	
+				// ... Program logic, probably using scanner input	
+				int[] numbers = {1, 2, 3, 4};	
+				int num = numbers[5];	
+			}	
+			//scanner.close();	
+		}	
+	}	
+```	
+##### Snippet-01 Explained	
+The ```try```-with-resources version was introduced in Java SE 7. It encloses the resource to be managed within parentheses, along with the ```try``` keyword. 	
+In this case, ```Scanner``` is compatible with such resource management, because it's defined to implement the ```Closeable``` ```interface```. This interface in turn, is a sub-class of the ```abstract class``` ```AutoCloseable```.	
+```Closeable extends AutoCloseable{};```	
+```Scanner implements Closeable{};```	
+ 	
+For ```try```-with-resources, a ```catch``` and/or a ```finally``` clause are not mandatory.	
+Also, the call to ```scanner.close``` is no longer required.	
+#### Summary	
+In this step, we:	
+* Discovered a veriant of the ```try```-```catch```-```finally``` block, called ```try```-with-resources	
+* Saw that it can be used to manage resource cleanly, provided the resource implements the ```AutoCloseable``` ```interface```.	
+### Step 12: Programming Puzzle Set PP_02 	
+#### Puzzle-01	
+* Does the following program handle the exception thrown?	
+```java	
+	try {		
+			AmountAdder.addAmounts(new Amount("RUPEE", 5), new Amount("RUPEE", 5);	
+			String str = null;	
+			str.toString();	
+		} catch(CurrenciesDoNotMatchException ex) {	
+			ex.printStackTrace();	
+		}	
+```	
+* **_Answer : No_**	
+#### Puzzle-01 Explained	
+The exception thrown is a ```NullPointerException```, whereas the one we are trying to catch is a ```CurrenciesDoNotMatchException```. 	
+#### Puzzle-02	
+* Does the following code compile?	
+```java	
+	try {	
+			AmountAdder.addAmounts(new Amount("RUPEE", 5), new Amount("RUPEE", 5);	
+			String str = null;	
+			str.toString();	
+		} catch(Exception e) {	
+			e.printStackTrace();	
+		} catch(CurrenciesDoNotMatchException ex) {	
+			ex.printStackTrace();			
+		}	
+```	
+**_Answer : No_**	
+#### Puzzle-02 explained	
+The order of ```catch``` clauses for exceptions needs to be from less specific to more specific.  ```CurrenciesDoNotMatchException``` is a sub-class of ```Exception```. Hence, error.	
+#### Puzzle-03	
+* Does the following code compile?	
+```java	
+	try {	
+	} catch (IOException | SQLException ex) {	
+		ex.printStackTrace();	
+	}	
+```	
+* **_Answer : Yes_**	
+#### Puzzle-03 Explained	
+This feature was added in Java SE 7.	
+## File Operations	
+We would be aware that any computer has a hard disk, on which information is stored. This information is stored in units called **files**. For ease of access, file are grouped together and organized into **directories**. The operating system has a sub-system called the **file-system**, which  has the responsibility of interfacing system and user programs, with files and directories on disk. 	
+The Java Runtime System also communicates with the native file-system, and makes use of its services to provide a file programming interface to Java programmers. 	
+In this section, we will explore a few basic ways in which programmers can interact with the native file-system, through the platform independent Java file API. 	
+#### Listing Directory Contents	
+When we develop a Java software project in the Eclipse IDE environment, the root folder of the project has several interesting file and sub-folders contained within it. From now on, we use the terms "folder" and "directory" interchangeably, as they have equivalent meanings. 	
+Let's write a simple Java program to list the contents of one such project folder. 	
+##### Snippet-1 : Listing Directory Contents	
+The ```java.nio.file``` system package has a bunch of utility ```class```es and ```interface```s to help us navigate the native file system.	
+**_DirectoryScanRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class DirectoryScanRunner {	
+		public static void main(String[] args) throws IOException {	
+			Files.list((Paths.get(".")).forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_./.classpath_	
+_./.project_	
+_./.DS_Store_	
+_./bin_	
+_./resources_	
+_./src_	
+##### Snippet-1 Explained	
+A ```Path``` ```class``` is the entity used to denote a **pathname** in Java NIO Library. NIO stands for "New I/O", which was introduced in Java SE, replacing the earlier, very awkward File I/O Library. It is no longer new though, but that's another issue! 	
+"```.```" denotes the current directory in the file-system. 	
+The ```Paths.get()``` method returns the path-name of the specified directory in a format that the ```Files.get()``` method understands.	
+The ```Files.get()``` method does a **lazy traversal** of the directory it is provided with, in the sense that:	
+* It lists regular files it encounters.	
+* When faced with directory files, it merely lists them, without recursively traversing them.	
+The contents of the root directory are listed as path-names, with each path-name being relative to the root directory.	
+   	
+##### Snippet-2 : Recursive Directory Traversal	
+We can specify level 2 in `Files.walk(currentDirectory, 2)`. So, folders until level 2 are scanned.	
+**_DirectoryScanRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Path;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class DirectoryScanRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path currentDirectory = Paths.get(".");	
+			//Files.list(currentDirectory).forEach(System.out::println);	
+			Files.walk(currentDirectory, 2).forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_./.classpath_	
+_./.project_	
+_./.DS_Store_	
+_./bin_	
+_./bin/files_	
+_./resources_	
+_./src_	
+_./src/files_	
+##### Snippet-3 : Level-4 Traversal	
+**_DirectoryScanRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;		
+	import java.nio.file.Path;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class DirectoryScanRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path currentDirectory = Paths.get(".");	
+			Files.walk(currentDirectory, 4).forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_./.classpath_	
+_./.project_	
+_./.DS_Store_	
+_./bin_	
+_./bin/files_	
+_./bin/files/DirectoryScanRunner.class_	
+_./resources_	
+_./src_	
+_./src/files_	
+_./src/files/DirectoryScanRunner.java_	
+##### Snippet-4 : Only list .java files during traversal	
+We use a predicate `Files.walk(currentDirectory, 4).filter(predicate)` to filter only Java files.	
+**_DirectoryScanRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Path;	
+	import java.nio.file.Paths;	
+	import java.util.function.Predicate;	
+	import java.io.IOException;	
+	public class DirectoryScanRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path currentDirectory = Paths.get(".");	
+			Predicate<? super Path> predicate = path -> String.valueOf(Path).contains(".java");	
+			//Files.walk(currentDirectory, 4).forEach(System.out::println);	
+			Files.walk(currentDirectory, 4).filter(predicate)	
+										   .forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_./src/files/DirectoryScanRunner.java_	
+##### Snippet-5 : Filtered Traversal with find()	
+We can use a matcher - `Files.find(currentDirectory, 4, matcher)` which is configured to check the path attribute for .java extension - `(path, attributes) -> String.valueOf(path).contains(".java")`	
+**_DirectoryScanRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Path;	
+	import java.nio.file.Paths;	
+	import java.util.function.Predicate;	
+	import java.nio.file.attribute.BasicFileAttributes;	
+	import java.util.function.BiPredicate;	
+	import java.io.IOException;	
+	public class DirectoryScanRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path currentDirectory = Paths.get(".");	
+			//Predicate<? super Path> predicate = path -> String.valueOf(path).contains(".java");	
+			//Files.walk(currentDirectory, 4).filter(predicate).forEach(System.out::println);	
+			BiPredicate<Path, BasicFileAttributes> matcher = 	
+			(path, attributes) -> String.valueOf(path).contains(".java");	
+			Files.find(currentDirectory, 4, matcher);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_./src/files/DirectoryScanRunner.java_	
+##### Snippet-6 : Filtering directories	
+**_DirectoryScanRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Path;	
+	import java.nio.file.Paths;	
+	import java.util.function.Predicate;	
+	import java.nio.file.attribute.BasicFileAttributes;	
+	import java.util.function.BiPredicate;	
+	import java.io.IOException;	
+	public class DirectoryScanRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path currentDirectory = Paths.get(".");	
+			//BiPredicate<Path, BasicFileAttributes> matcher = 	
+			//(path, attributes) -> String.valueOf(path).contains(".java");	
+				
+			BiPredicate<Path, BasicFileAttributes> directoryMatcher = 	
+			(path, attributes) -> attributes.isDirectory();	
+			Files.find(currentDirectory, 4, directoryMatcher);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_./bin_	
+_./bin/files_	
+_./resources/_	
+_./src/_	
+_./src/files_	
+We are making use of a matcher checking `attributes.isDirectory()`.	
+##### Snippet-7 : Reading a File	
+**_./resources/data.txt_**	
+```123.122```	
+```asdfghjkl```	
+```Apple```	
+```Bat```	
+```Cat```	
+**_FileReadRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class FileReadRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path pathFileToRead = Paths.get("./resources/data.txt");	
+			List<String> lines = Files.readAllLines(pathFileToRead);	
+			System.out.println(lines);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_[123.122, asdfghjkl, Apple, Bat, Cat]_	
+`Files.readAllLines(pathFileToRead)` makes it easy to read content of a file to list of String values.	
+##### Snippet-8 : Streamed File Read	
+`Files.readAllLines(pathFileToRead)` makes it easy to read content of a file. However, streaming is a better options when reading large files or when less memory is available.	
+**_./resources/data.txt_**	
+```123.122```	
+```asdfghjkl```	
+```Apple```	
+```Bat```	
+```Cat```	
+**_FileReadRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class FileReadRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path pathFileToRead = Paths.get("./resources/data.txt");	
+			//List<String> lines = Files.readAllLines(pathFileToRead);	
+			//System.out.println(lines);	
+			Files.lines(pathFileToRead).forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_123.122_	
+_asdfghjkl_	
+_Apple_	
+_Bat_	
+_Cat_	
+`Files.lines(pathFileToRead)` returns a stream which can be consumed as needed.	
+##### Snippet-9 : Printing file contents in lower-case	
+We can use `map` function to map to `String::toLowerCase`	
+**_./resources/data.txt_**	
+```	
+123.122	
+asdfghjkl	
+Apple	
+Bat	
+Cat	
+```	
+**_FileReadRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class FileReadRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path pathFileToRead = Paths.get("./resources/data.txt");	
+			//Files.lines(pathFileToRead).forEach(System.out::println);	
+			Files.lines(pathFileToRead)	
+				 .map(String::toLowerCase)	
+				 .forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_123.122_	
+_asdfghjkl_	
+_apple_	
+_bat_	
+_cat_	
+##### Snippet-9 : Filtering file contents	
+You can also filter file content using the `filter` method.	
+**_FileReadRunner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class FileReadRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path pathFileToRead = Paths.get("./resources/data.txt");	
+			//Files.lines(pathFileToRead).forEach(System.out::println);	
+			//Files.lines(pathFileToRead).map(String::toLowerCase).forEach(System.out::println);	
+			Files.lines(pathFileToRead)	
+				 .map(String::toLowerCase)	
+				 .filter(str -> str.contains("a"))	
+				 .forEach(System.out::println);	
+		}	
+	}	
+```	
+**_Console Output_**	
+_asdfghjkl_	
+_apple_	
+_bat_	
+_cat_	
+##### Snippet-10 : Writing to a file	
+`Files.write` can be used to write to a file.	
+**_FileWriteScanner.java_**	
+```java	
+	package com.in28minutes.files;	
+	import java.nio.file.Files;	
+	import java.nio.file.Paths;	
+	import java.io.IOException;	
+	public class FileWriteRunner {	
+		public static void main(String[] args) throws IOException {	
+			Path pathFileToWrite = Paths.get("./resources/file-write.txt");	
+			List<String> list = List.of("Apple", "Boy", "Cat", "Dog", "Elephant");	
+			Files.write(pathFileToWrite, list);	
+		}		
+	}	
+```	
+**_./resources/file-write.txt_**	
+```	
+Apple	
+Boy	
+Cat	
+Dog	
+Elephant	
+```	
+## Concurrency : Advanced Topics	
+Let's create a simple counter.	
+##### Snippet-1: Atomic Operations : Counter	
+**_Counter.java_**	
+```java	
+	package com.in28minutes.concurrency;	
+	public class Counter {	
+		private int i = 0;	
+		public void increment() {	
+			i++;	
+		}	
+		public int getI() {	
+			return i;	
+		}	
+	}	
+```	
+**_ConcurrencyRunner.java_**	
+```java	
+	package com.in28minutes.concurrency;	
+	public class ConcurrencyRunner {	
+		public static void main(String[] args) {	
+			Counter counter = new Counter();	
+			counter.increment();	
+			counter.increment();	
+			counter.increment();				
+			System.out.println(counter.get());	
+		}	
+	}	
+```	
+##### Snippet-1 Explained	
+
+Quite straightforward!	
+
+#### Counter ```increment()``` method is NOT Atomic!	
+
+Let's look at the code. It seemingly involves just one operation.	
+
+```java	
+	public void increment() {	
+		i++;	
+	}	
+```	
+The operation ```i++``` actually involves the following steps:	
+- Step 1. Read the value of ```i``` from memory into the CPU registers	
+- Step 2. Increment the value in the CPU registers	
+- Step 3. Store the incremented value back into the memory location of ```i```	
+```i++``` is not an atomic operation. 	
+
+##### What if `increment` is not atomic?	
+
+Let's take an example of two Threads, ```T1``` and ```T2``` running in ```ConcurrencyRunner``` access a single ```Counter``` object instance. 	
+
+Let's say the threads concurrently invoke the `increment` and `getI`.	
+
+Assume the initial value of ```i``` is ```15```. Let's take a closer look at a possible scenario:	
+-  ```T1``` calls ```increment()``` first, and successfully completes Step 1 of ```i++```. Gets a value of 15.	
+-  The scheduler switches threads to ```T2```.	
+-  ```T2``` calls ```increment()``` first, and successfully completes Step 1 of ```i++```.Gets a value of 15.	
+- The scheduler switches to ```T1```.  ```T1``` resumes execution of ```increment()```, and completes steps 2 and 3 of ```i++```. Completes execution of ```increment()```. Value of ```i``` is over-written with ```16```.	
+- The scheduler switches to ```T2```. In it's CPU register context, i is ```15```, not ```16```. ```T2``` resumes execution of ```increment()```, and completes steps 2 and 3 of ```i++```. Completes execution of ```increment()```.Value of ```i``` in the ```Counter``` instance is over-written with ```16```.	
+
+Ideally, the final value of ```i``` after two ```increment```s should have been ```17```. This would result when the operations run serially one after the other.
+
+This scenario, where the result of a concurrent computation (involving a sequence of operations) depends on the relative order of execution of those operations by the threads involved, is called a **race condition**.	
+
+There is a popular English saying: "There is many a slip, between the cup and the lip". This refers to the fact that anything can happen between the time when we hold a cup of tea in our hands, and the time when we actually get to take a sip of the tea.	
+
+This definitely rings true here. 	
+
+The increment operation is not actually not as smooth as it seems. because it is not atomic, slip-ups can and will often occur. This brings us to the concept of **Thread-Safety**. 	
+
+A method is said to be thread-safe, if it can be run in a concurrent environment (involving several concurrent invocations by independent threads) without *race-conditions*. 	
+#### Revisited : The ```synchronized``` Keyword	
+
+Adding the keyword ```synchronized``` to the signature of a ```class``` method makes it thread safe.	
+
+##### Snippet-2	
+
+**_Counter.java_**	
+```java	
+	package com.in28minutes.concurrency;	
+	public class Counter {	
+		private int i = 0;	
+		synchronized public void increment() {	
+			i++;	
+		}	
+		public int getI() {	
+			return i;	
+		}	
+	}	
+```	
+##### Snippet-2 Explained	
+After adding `synchronized` keyword to the method `increment`, only one thread will be able to execute the method, at a time. Hence, race condition is avoided.	
+##### Snippet-3 : less concurrency	
+`synchronized` keyword make the code thread safe. However, it causes all other threads to wait. This can result in performance issues. Let's look at an example:	
+**_BiCounter.java_**	
+```java	
+	package com.in28minutes.concurrency;	
+	public class BiCounter {	
+		private int i = 0;	
+		private int j = 0;	
+		synchronized public void incrementI() {	
+			i++;	
+		}	
+		synchronized public void incrementJ() {	
+			j++;	
+		}	
+		public int getI() {	
+			return i;	
+		}	
+		public int getJ() {	
+			return j;	
+		}	
+	}	
+```	
+**_ConcurrencyRunner.java_**	
+```java	
+	package com.in28minutes.concurrency;	
+	public class ConcurrencyRunner {	
+		public static void main(String[] args) {	
+			BiCounter counter = new BiCounter();	
+			counter.incrementI();	
+			counter.incrementJ();	
+			counter.incrementI();	
+			System.out.println(counter.get());	
+		}	
+	}	
+```	
+##### Snippet-3 Explained	
+Both ```incrementI()``` and ```incrementJ()``` of ```class``` ```BiCounter``` are ```synchronized```. Therefore, at any given time, at most one thread can execute either of these methods! Which means that, while a thread  ```T1``` is executing ```counter.incrementI()``` within ```ConcurrencyRunner.main()```, another thread ```T2``` **is not allowed to execute** ```counter.incrementJ()```!	
+Just imagine, if there are a total of ```12``` threads wanting to increment ```counter```. When one thread is running, the other ```11``` have to wait! 	
+#### Synchronization With Locks	
+Let's look at another synchronization option - `Locks`	
+##### Snippet-4: BiCounter With Locks	
+
+**_BiCounterWithLocks.java_**	
+
+```java	
+	package com.in28minutes.concurrency;	
+	import java.util.concurrent.locks.ReentrantLock;	
+	public class BiCounterWithLocks {	
+		private int i = 0;	
+		private int j = 0;	
+		private Lock LockForI = new ReentrantLock();	
+		private Lock LockForJ = new ReentrantLock();	
+		public void incrementI() {	
+			lockForI.lock();	
+			i++;	
+			lockForI.unlock();	
+		}	
+		public void incrementJ() {	
+			lockForJ.lock();	
+			j++;	
+			lockForJ.unlock();	
+		}	
+		public int getI() {	
+			return i;	
+		}	
+		public int getJ() {	
+			return j;	
+		}	
+	}	
+```	
+
+##### Snippet-4 Explained	
+
+`i++` and `j++` are the pieces of code to protect. We use two locks lockForI and lockForJ. If a thread wants to execute `i++`, it needs to first get a lock to it - implemented using `lockForI.lock()`. Once it performs the operation, it can release the lock `lockForI.unlock()`. 	
+The ```Lock```s ```lockForI``` and ```lockForJ``` are totally independent of each other. Therefore, a thread ```T2``` can execute ```j++``` within ```incrementJ()```, at the same time that thread ```T1``` is executing ```i++``` within ```incrementI()```.	
+  	
+#### Atomic Classes	
+
+The operation ```i++```, small though it might seem, gave us quite a bit headache! 	
+
+If a seemingly minute operation might need so much worrying about, imagine writing concurrent data structures that manipulate linked lists with multiple link operations! 	
+It would be really nice if someone could take care of these tiny operations for us, otherwise we would have  hard time finding out what code to definitely lock, and what code need not be!	
+
+Java addresses this issue for basic data types, by providing a few classes that are inherently thread-safe. A good example is ```AtomicInteger```, which is a wrapper around the ```int``` primitive type.	
+
+##### Snippet-5 : AtomicInteger	
+
+
+**_BiCounterWithAtomicInteger.java_**
+```java	
+	package com.in28minutes.concurrency;	
+	import java.util.concurrent.atomic.AtomicInteger;	
+	public class BiCounterWithAtomicInteger {	
+		private AtomicInteger i = new AtomicInteger();	
+		private int AtomicInteger = new AtomicInteger();	
+		public void incrementI() {	
+			i.incrementAndGet();	
+		}	
+		public void incrementJ() {	
+			j.incrementAndGet();	
+		}	
+		public int getI() {	
+			return i.get();	
+		}	
+		public int getJ() {	
+			return j.get();	
+		}	
+	}	
+```	
+##### Snippet-5 Explained	
+
+`incrementAndGet` is atomic. So, `BiCounterWithAtomicInteger` does not need to worry about synchronization.
+
+#### Concurrent Collections	
+
+Java gave us a ready-made solution for thread-safe primitive data, with wrappers such as ```AtomicInteger```. The reasons this approach worked for ```int``` were:	
+* Simple, small-sized underlying type	
+* Wide-spread potential usage	
+
+How about collections? 	
+
+Java provides classes like `Vector` (synchronized version of `ArrayList`) which can provide thread safety. But, these inherit the problems with using synchronized. 	
+What are other options?	
+
+
+##### Snippet-6 : Need For ConcurrentMap	
+
+The code within the ```for``` loop does a `get` and then a `put`. It is not thread safe.	
+
+**_MapRunner.java_**	
+```java	
+	package com.in28minutes.collections;	
+	import java.util.HashMap;	
+	public class MapRunner {	
+		public static void main(String[] args) {	
+			String str = "Hello World";	
+			Map<Character, Integer> occurrences = new HashMap<>();	
+			char[] characters = str.toCharArray();	
+			for(char character:characters) {	
+				Integer count = occurrences.get(character);	
+				if(count == null) {	
+					occurrences.put(character, 1);	
+				} else {	
+					occurrences.put(character, count + 1);	
+				}	
+			}	
+		}	
+	}	
+```	
+
+
+Concurrent Collections provide atomic versions of operations such as those encountered above:	
+* If entry does not exist, then create and initialize	
+* If entry exists, then update	
+
+
+#### The ```ConcurrentMap``` ```interface```	
+
+The ```interface``` ```ConcurrentMap``` has methods to implement compound operations. Such operations include:	
+```	
+V putIfAbsent(K key, V value);	
+V computeIfPresent(K key,	
+            BiFunction<? super K, ? super V, ? extends V> remappingFunction)	
+```	
+
+##### Snippet-7 : ConcurrentHashMap Logic - Stage 1	
+
+
+```LongAdder``` provides an atomic `increment` method, which we are making use of to make the code a little more thread safe. However, different threads could be executing ```occurrences.get()``` and ```occurrences.put()``` in parallel. A race condition can still occur.	
+
+
+**_ConcurrentMapRunner.java_**	
+
+```java	
+	package com.in28minutes.concurrency;	
+	import java.util.Map;	
+	import java.util.HashTable;	
+	import java.util.concurrent.atomic.LongAdder;	
+	public class ConcurrentMapRunner {	
+		public static void main(String[] args) {	
+			    String str = "ABCD ABCD ABCD";	
+			    for(char character:str.toCharArray()) {	
+			      LongAdder longAdder = occurances.get(character);	
+			      if(longAdder == null) {	
+			        longAdder = new LongAdder();	
+			      }	
+			      longAdder.increment();	
+			      occurances.put(character, longAdder);	
+			    }	
+		}	
+	}	
+	
+```	
+
+**_Console Output_**	
+
+_[ =2, A=3, B=3, C=3, D=2]_	
+
+
+##### Snippet-8 : ConcurrentHashMap Logic - Stage 2	
+
+We can use the method ```computeIfAbsent()``` from the ```collection``` ```ConcurrentHashMap``` to reduce the code to a single, atomic operation.	
+
+**_ConcurrentMapRunner.java_**	
+
+```java	
+	package com.in28minutes.concurrency;	
+	import java.util.concurrent.ConcurrentMap;	
+	import java.util.concurrent.ConcurrentHashMap;	
+	import java.util.concurrent.atomic.LongAdder;	
+	public class ConcurrentMapRunner {	
+		public static void main(String[] args) {	
+		    ConcurrentMap<Character, LongAdder> occurances = new ConcurrentHashMap<>();	
+		    	
+		    String str = "ABCD ABCD ABCD";	
+		    for(char character:str.toCharArray()) {	
+		      occurances.computeIfAbsent(character, ch -> new LongAdder()).increment();	
+		    }	
+		    	
+		    System.out.println(occurances);	
+	  }	
+	  
+	}	
+```	
+**_Console Output_**	
+
+
+_[ =2, A=3, B=3, C=3, D=2]_	
+
+
+
+#### ```ConcurrentHashMap```	
+
+
+In ```HashTable```, all methods are synchronized. 	
+
+In ```ConcurrentHashMap```, data structure is organized into disjoint regions. Access methods use different ```Locks``` for different regions, reducing performance impact during concurrent access. 	
+
+#### Concurrent Collections : Copy-On-Write Optimization	
+All values in Copy-On-Write collections are stored in an internal immutable (not-changeable) array. A new array is created if there is any modification to the collection.	
+Read operations are not synchronized. Only write operations are synchronized.	
+
+Copy on Write approach is used in scenarios where reads greatly out number write’s on a collection. 	
+
+`CopyOnWriteArrayList` & `CopyOnWriteArraySet` are implementations of this approach. 	
+
+Copy on Write collections are typically used in Subject – Observer scenarios, where the observers very rarely change. Most frequent operations would be iterating around the observers and notifying them.	
+
+##### Snippet-9 : CopyOnWriteArrayList	
+
+**_CopyOnWriteArrayListRunner.java_**	
+```java	
+	package com.in28minutes.concurrency;	
+	import java.util.List;	
+	import java.util.concurrent.CopyOnWriteArrayList;	
+	public class CopyOnWriteArrayListRunner {	
+		public static void main(String[] args) {	
+			List<String> list = new CopyOnWriteArrayList<>();	
+			// Total of 3 threads doing add()'s, maybe in a separate method	
+			list.add("Ant");	
+			list.add("Bat");	
+			list.add("Cat");	
+			//Total of 10000 threads looping on get(), again, in a separate method	
+			for(String element:list) {	
+				System.out.println(element);	
+			}	
+		}	
+	}	
+	
+```	
+
+
+##### Snippet-9 Explained	
+
+```CopyOnWriteArrayList.add()``` method is a ```synchronized``` method. And the copy-on-write algorithm ensures that the copying is performed in a thread-safe manner, after which the write is done on a separate copy, while the ```get()```'s continue on the original array. Once the ```add()``` is done, the collection starts using the new array, and discards the old one. This strategy continues for the lifetime of the program.	
+
+The ```CopyOnWriteArrayList.get``` method is NOT ```synchronized```, since on the array that the reads work, there will be no direct write through an ```add()```.
+
+Copy-On-Write collections should only be used for the specific usage scenarios, viz., very large number of data structure traversals (data element reads only), compared to mutations (data element insertions/deletions/modifications). In this way, high concurrency is achieved for traversals.
