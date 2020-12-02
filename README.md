@@ -6778,7 +6778,8 @@ The output of this snippet is:
 
 ##### Snippet-03 : 증감 연산자
 
-With post-fix increment, such as in ```int j = i++;```, the increment takes place *after* the assignment is done. ```j``` gets the value before increment.
+```int j = i++;```와 같은 사후 증가에서는,  할당 *이후* 증가가 이루어진다. ```j```는 증가하기 전에 값을 얻는다.
+
 ```java
 
 	jshell> int i = 10;
@@ -6789,7 +6790,7 @@ With post-fix increment, such as in ```int j = i++;```, the increment takes plac
 	i ==> 11
 ```
 
-When prefix increment is involved, as with ```int n = ++m;```, the increment is carried out *before* the assignment. ```n``` gets the value after increment.
+```int n = ++m;```과 같은 사전 증가는, 증가가 할당 *이전*에 이루어진다. ```n```은 증가 후 값을 얻는다.
 
 ```java
 	jshell> int m = 10;
@@ -6797,10 +6798,10 @@ When prefix increment is involved, as with ```int n = ++m;```, the increment is 
 	jshell> int n = ++m;
 	n ==> 11
 	jshell> m
-	m ==> 11
+	m ==> 11ㄷ
 ```
 
-With post-fix decrement, as with ```int l = k--;```, the decrement occurs *after* the assignment is done. As far as prefix decrement is concerned, such as in ```int q = --p;```, the decrement is performed *before* the assignment.
+```int l = k--;```와 같이 사후 감소는,  할당이 완료된 *이후* 감소한다. ```int q = --p;```와 같이 사전 감소는 할당 *이전*에 수행된다.
 
 ```java
 	jshell> int k = 10;
@@ -6819,27 +6820,27 @@ With post-fix decrement, as with ```int l = k--;```, the decrement occurs *after
 
 ```
 
-#### Summary:
+#### 요약:
 
-In this step, we:
+이번 단계에서는
 
-* Looked at the number-systems supported in Java for integers
-* Examined how prefix and post-fix versions work for increment and decrement operators
+* 자바에서 지원하는 정수 숫자 체계를 확인했다.
+* 사전 및 사후 증감 연산자가 어떻게 작동하는지 조사했다.
 
 - - -	
 ### Step 03: Classroom Exercise CE-01 (With Solutions)
 
 #### Exercise Set
 
-1. Create a Java ```class``` ```BiNumber``` that stores a pair of integers, and has the following functionality:
+1. 한 쌍의 정수를 저장하고 다음과 같은 기능을 가진 자바 ```class``` ```BiNumber```를 생성하시오
 
-	* Can be created by passing its initial two numbers to store
-	* Must Support Addition and Multiplication operations on the stored integers
-	* An operation to double the values of both numbers
-	* Operations to access each number individually
+	* 초기 2 개의 숫자를 전달하여 저장할 수 있음
+	* 저장된 정수의 덧셈 및 곱셈 작업을 지원해야함
+	* 두 숫자의 값을 두 배로 증가시키는 연산
+	* 각 숫자에 개별적으로 접근하기 위한 연산
+
+요컨대 우리는 러너 클래스의 ```main```메소드로 이와 같은 코드를 작성할 수 있어야 한다.
 	
-In short, we must be able to write code like this in the ```main``` method of  our runner class:
-
 ```java
 
 	BiNumber numbers = new BiNumber(2, 3);
@@ -6919,7 +6920,7 @@ In short, we must be able to write code like this in the ```main``` method of  o
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _5_
 
@@ -6929,17 +6930,17 @@ _4_
 
 _6_
 
-### Step 05: Floating-Point Types
+### Step 05: 부동 소수점형
 
-You would recall there are two types in Java to support floating-point numbers:
-* ```double```: The default type for floating-point literals, with a capacity of 8 bytes
-* ```float```: A narrower, less precise representation for floating-point data. It has a capacity of 4 bytes.
+Java에는 부동 소수점 숫자를 지원하는 두 가지 유형이 있다는 점을 상기할 수 있다:
+* ```double```: 8바이트 용량의 부동 소수점 리터럴에 대한 기본 타입.
+* ```float```: 4바이트 용량의 부동 소수점 데이터에 대해 더 좁은 표현.(덜 정확함)
 
-Let's quickly refresh what we know, with a few code snippets.
+Code Snippet 몇 개로 우리가 알고 잇는 것들을 새롭게 해보자.
 
-##### Snippet-01 : double and float
+##### Snippet-01 : double과 float
 
-Default floating point type in Java is `double`. A ```float``` literal must be accompanied with a trailing ```f``` or ```F```.
+자바의 기본 부동 소수점 타입은 ```double```이다. ```float```리터럴은 ```f```또는 ```F```가 뒤에 붙어야 한다.
 
 
 ```java
@@ -6966,9 +6967,9 @@ Default floating point type in Java is `double`. A ```float``` literal must be a
 
 ```
 
-##### Snippet-02 : Operators for type double
+##### Snippet-02 : double형 연산자
 
-You can use operators `++`, `--` and `%` on double. 
+double형에서는 `++`,`--`와 `%` 연산자를 사용할 수 있다.
 
 ```java
 
@@ -6987,7 +6988,7 @@ jshell> dbl % 5
 dbl ==> 4.567799999999998
 ```
 
-You would need an explicit cast to convert a float to an integer value `int i = (int)f`.
+float형을 정수형으로 변환하려면 `int i = (int)f`와 같은 명시적인 캐스트가 필요하다.
 
 ```java
 	jshell> float f = 34.5678f;
@@ -7004,18 +7005,19 @@ You would need an explicit cast to convert a float to an integer value `int i = 
 	jshell>
 
 ```
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Saw how we create literals and variables of the floating-point types
-* Understood the differences between ```double``` and ```float```
+* 부동 소수점 타입의 변수 및 리터럴을 생성하는 방법을 확인했다.
+* ```double```과 ```float```형의 차이점을 이해했다.
+
 
 ### Step 06: Introducing BigDecimal
 
-Compact though they are, ```double``` and ```float``` are not very precise representations of floating-point numbers. 
+```double```과 ```float```는 비슷하지만 부동 소수점의 정확한 표현은 아니다.
 
-In fact, they are not used in computations that require high degrees for accuracy, such as scientific experiments and financial applications. The next example shows you why.
+사실, 그들은 과학적 실험이나 재정적 응용과 같이 높은 정확도를 요구하는 계산에는 사용되지 않는다. 다음 예는 그 이유를 보여준다.
 
 
 ```java
@@ -7024,14 +7026,13 @@ In fact, they are not used in computations that require high degrees for accurac
 	$1 ==> 68.79129875999999
 ```
 
-The literal expression ```34.56789876 + 34.2234``` should evaluate to ```68.79129876```. Above addition is not really accurate.
+문자 그대로 ```34.56789876 + 34.2234```는 ```68.79129876```으로 평가해야 한다. 위의 덧셈은 정확하지 않다.
 
-This is due to a flaw in floating-point representations, used in the ```double``` and ```float``` types.
+이는 ```double````과 ```float```타입에서 사용되는 부동소수점의 결함 때문이다.
 
-The ```BigDecimal``` class was introduced in Java to tide over these problems.
+이러한 문제를 해결하기 위해 자바에는 ```BigDecimal``` 클래스가 도입되았다.
 
-Accuracy of ```BigDecimal``` representation is retained only when ```String``` literals are used to build it.
-
+```BigDecimal```표현의 정확성은 ```String```의 리터럴을 사용할 때만 유지된다.
 
 
 ```java
@@ -7042,9 +7043,9 @@ Accuracy of ```BigDecimal``` representation is retained only when ```String``` l
 	number2 ==> 34.2234_
 ```
 
-A ```BigDecimal``` type can be used to create only **immutable** objects. The values in an *immutable* object cannot be changed after creation. 
+```BicDecical```타입은 **불가변**객체를 만들 때만 사용될 수 있따. *불가변*객체의 값은 생성 후 변경할 수 없다.
 
-You can see that the value of number1 is not changed on executing `number1.add(number2)`. To get the result of the sum, we create a new variable `sum`.
+`number1.add(number2)`를 실행할 때 number1의 값이 변경되지 않음을 알 수 있다. 합계의 결과를 얻기 위해서는, 새로운 변수 `sum`을 만든다.
 
 ```java
 	jshell> number1.add(number2);
@@ -7055,22 +7056,22 @@ You can see that the value of number1 is not changed on executing `number1.add(n
 	sum ==> 68.79129876
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Learned that ```double``` and ```float``` are not very precise data types
-* Were introduced to the ```BigDecimal``` built-in data type
-* Understood that ```BigDecimal``` is immutable
-* Saw that accuracy is best achieved when you construct ```BigDecimal``` data using string literals 
+* ```double```과 ```float```가 매우 정확한 데이터 타입이 아니라는 것을 알게 되었다.
+* ```BigDecimal```의 내장 데이터 타입 소개했다.
+* ```BigDecimal```은 불변하다는 것을 이해했다.
+* 문자열 리터럴을 사용하여 ```BigDecimal```데이터를 구성할 때 정확도가 가장 우수하다는 점을 확인했다.
 
-### Step 06: BigDecimal Operations
+### Step 06: BigDecimal 연산자
 
-Let's look at a few other operations defined in the ```BigDecimal``` class.
+```BigDecimal```클래스에 정의된 몇 가지 다른 연산자들을 살펴보자. 
 
-##### Snippet-01: Arithmetic Operations
+##### Snippet-01: 산술 연산
 
-All BigDecimal operations support only BigDecimal operands.
+모든 BigDecimal 연산자는 BigDecimal 피연산자만 지원한다.
 
 ```java
 
@@ -7082,7 +7083,7 @@ All BigDecimal operations support only BigDecimal operands.
 	$1 ==> 34.95678
 ```
 
-```BigDecimal``` does not jell well with primitive types.
+```BigDecimal```은 기본형 타입의 데이터와는 잘 어울리지 않는다.
 
 ```java
 	jshell> int i = 5;
@@ -7094,7 +7095,7 @@ All BigDecimal operations support only BigDecimal operands.
 	|_____________^
 ```
 
-We can add, multiple, divide or subtract `BigDecimal` values.
+`BigDecimal` 값을 더하거나, 곱하거나, 나누거나 뺄수도 있다.
 
 ```java
 	jshell> number1.add(new BigDecimal(i));
@@ -7107,22 +7108,23 @@ We can add, multiple, divide or subtract `BigDecimal` values.
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Explored the ```BigDecimal``` methods for doing some basic arithmetic
-* Found that ```BigDecimal``` has constructors accepting most basic Java numeric types
+* 기본적인 산수를 위한 ```BigDecimal``` 메소드 탐구했다
+* ```BigDecimal```에 대부분의 기본 자바 숫자 타입을 수용하는 생성자가 있는 것으로 확인되었다.
 
-### Step 07: Classroom Exercise CE-02
+
+###Step 07: Classroom Exercise CE-02
 
 #### Exercise-Set
 
-Write a Program that does a Simple Interest computation for a Principal amount. Recall that the formula for such a calculation is:
+원금 금액에 대해 단순 이자 계산을 수행하는 프로그램을 작성하십시오. 그러한 계산 공식은 다음과 같다:
 
-`Total amount (TA) = Principal Amount (PA) + ( PA * Simple Interest (SI) Rate * Duration In Years (N))`
+`총액(TA) = 원금 (PA) + ( PA * 단순 이자(SI) 금리 * 년 단위 기간(N))`
 
-In essence, write a ```SimpleInterestCalculator``` ```class``` that can be used in the following manner:
+본질적으로 다음과 같은 방법으로 사용할 수 있는 ```SimpleInterestCalculator`` ```class```를 작성하시오.
 
 ```java
 
@@ -7176,32 +7178,34 @@ In essence, write a ```SimpleInterestCalculator``` ```class``` that can be used 
 
 ```
 
-**_Console Output:_**
+**_콘솔창 출력:_**
 
 _6187.50000_
 
 #### Tip: The ```import``` Statement
 
-The Java ```import``` statement is Required in each source file that uses a ```class``` from another ```package```. Hence, both **_SimpleInterestCalculator.java_** (```class``` definition) and **_SimpleInterestCalculatorRunner.java_** (runner ```class``` definition) need to import ```class``` ```java.math.BigDecimal```.
+자바의 ```import(가져오기)``` 구문은 또 다른 ```package```의 ```class```를 사용하는 각 소스 파일에 필요하다. 따라서 **SimpleInteretCalculator.java_**(```class```정의)와 **SimpleInterestCalculatorRunner.java_**(runnber ```class```정의) 모두 ```class``` ```java.math.BigDecimal```을 가져와야 한다.
 
-```package java.lang.*``` is imported by default. 
+```package java.lang.*```는 기본적으로 가져오게 된다.
 
-The ```.*``` suffix indicates that all classes in the ```package``` ```java.lang``` are being imported.
+뒤에 붙는 ```.*```는 ```package``` ```java.lang```의 모든 클래스를 가져오는 것을 나타낸다.
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Used ```BigDecimal``` values in a stand-alone Java program
-* Learnt how to make use of built-in Java packages, through the ```import``` statement 
+이번 단계는
 
-### Step 08: ```boolean```, Relational and Logical Operators
+* 독립된 자바 프로그램에서 ```BigDecimal```값 사용했다.
+* ```import```구문을 통해 내장된 자바 패키지의 사용 방법을 알아보았다.
 
-The Java ```boolean	``` data type is one that holds only one of two values: ```true``` or ```false```. Both labels are case-sensitive. We have seen examples of built-in comparison operators, such as ```==```, ```!=``` and ```>```, that evaluate expressions to  give us ```boolean``` results. Let us do a quick recap of some of these.
 
-##### Snippet-01 : Relational Operators : Recap
+### Step 08: ```boolean```, 관계 및 논리적 연산자
 
-Relational Operators are used mainly for comparison. They accept operands of non-```boolean``` primitive data types, and return a ```boolean``` value.
+자바 ```boolean```의 데이터 타입은 ```참```과 ```거짓```이라는 두 가지 가치 중 하나만을 담고 있는 것이다. 두 라벨 모두 대소문자를 구분한다. 우리는 ```boolean```의 결과를 주기 위해 수식을 평가하는 ```=```,```!=```,```>```와 같은 내장 비교 연산자의 예를 보아왔다. 이들 중 몇 가지를 간단히 재점검해 보자.
+
+##### Snippet-01 : 관계 연산자 : 재점검
+
+관계 연산자는 주로 비교를 위해 사용된다. 이들은 ```boolean```이 아닌 기본형 타입의 피연산자를 받아들여 ```boolean```값을 반환한다.
 
 ```java
 
@@ -7223,19 +7227,19 @@ Relational Operators are used mainly for comparison. They accept operands of non
 	
 ```
 
-#### Logical Operators
+#### 논리 연산자
 
-Java also has logical operators that are used in expressions. Logical operators expect ```boolean``` operands. Expressions involving these are used for forming ```boolean``` conditions in code, including within  ```if```, ```for``` and ```while``` statements.  The prominent logical operators are:
+자바에는 수식에 사용되는 논리 연산자도 있다. 논리 연산자들은 ```boolean```타입의 피연산자를 기대한다. 이와 관련된 표현들은 ```if```,```for```,과 ```while```의 구문을 포함하여 ```boolean```의 코드 조건을 형성하는 데 사용된다. 유명한 논리 연산자는:
 
-* ```&&``` : logical **AND**
+* ```&&``` : 논리적 **AND**
 * ```||``` : **OR**
 * ```!``` : **NOT**
 
-Let's learn how we use them in our code.
+이제 이들을 우리의 코드에 어떻게 사용하는지 알아보자.
 
-##### Snippet-02 : Logical Operators
+##### Snippet-02 : 논리 연산자
 
-We would want to find if `i` is between `15` and `25`.  An expression `i >= 15 && i <= 25` can be used. Details below.
+우리는 `i`rk `15`와 `25`사이인지 알고싶다. 이는 `i >= 15 && i <= 25`라는 수식을 사용할 수 있다. 자세한 내용은 아래를 참조하십시오.
 
 ```java
 
@@ -7257,7 +7261,7 @@ We would want to find if `i` is between `15` and `25`.  An expression `i >= 15 &
 	$5 ==> false
 ```
 
-An expression with```&&``` evaluates to ```true``` only if **both** its ```boolean``` operands evaluate to ```true```.
+```&&```을 사용한 수식은 ```boolean``` 피연산자가 **모두** ```참```으로 평가해야만 ```참```으로 평가된다.
 
 ```java
 	jshell> true && true
@@ -7272,9 +7276,9 @@ An expression with```&&``` evaluates to ```true``` only if **both** its ```boole
 
 ```
 
-##### Snippet-02 Explained
+##### Snippet-02 설명
 
-The next example helps us visualize truth tables for the prominent logical operators.
+다음 예는 유명한 논리 연산자를 위한 진리표를 시각화하는데 도움이 된다.
 
 ```java
 
@@ -7306,18 +7310,17 @@ The next example helps us visualize truth tables for the prominent logical opera
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* We're introduced to the ```boolean``` primitive type
-* Understood where logical operators are used in Java programs
-* Explored the truth-tables of commonly used logical operators
+* 우리는 ```boolean```의 기본형 타입을 소개받았다.
+* Java 프로그램에서 논리 연산자가 사용되는 위치를 이해했다.
+* 일반적으로 사용되는 논리 연산자의 진리표를 탐색했다.
 
-### Step 09: Short-Circuit Evaluation (With Puzzles)
+### Step 09: 단락 평가
 
-Consider code below. The expression ```j > 15 && i++ > 5``` evaluates to ```false``` as expected. `j>15` is `false` as `j` has a value of `15`. 
-
+아래의 코드를 살펴보십시오. ```j > 15 && i++ > 5```라는 표현은 예상대로 ```거짓```으로 평가된다. `j>15`는 `j` 값이 15이기 때문에 거짓이다.
 
 ```java
 
@@ -7333,19 +7336,19 @@ Consider code below. The expression ```j > 15 && i++ > 5``` evaluates to ```fals
 	i ==> 10
 ```
 
-You can also observe that the value of i remains unchanged `10`.  
+i의 값이 변하지 않고 `10`인 것도 관찰할 수 있다.
 
-Why? Because ```i++ > 5``` was not even evaluated.
-Why? `&&` is lazy. It saw that `j > 15` is false. Irrespective of the result of second expression, the result of this `&&` would be false. So, it does NOT evaluate the second expression.
+왜냐 하면 ```i++ > 5```는 평가조차 받지 않았기 때문이다.
 
-***A more detailed explanation***
+그 이유는 `&&`가 게으르기 때문이다. `j < 5`를 거짓이라고 봤다. 따라서,두 번째 수식의 결과와 상관없이 이 `&&`의 결과는 거짓일 것이다. 그렇기 때문에 두 번째 수식을 평가하지 않는다.
 
-The expression ```j > 15 && i++ > 5``` was scanned from left to right. As the first operand to ```&&``` evaluated to ```false```, the compiler got lazy. `&&` avoids evaluating expressions that don't affect the final result. The optimization has a name: **Short-Circuit Evaluation**, also called **lazy evaluation**.
+***자세한 설명***
 
-
-The logical operator ```&``` is another version of the logical **AND** operation, that does away with lazy evaluation. 
-
-Both operands to ```&``` are always evaluated. 
+```j > 15 && i++ > 5```라는 수식은 왼쪽에서 오른쪽으로 스캔되었다. ```&&```의 첫 피연산자가 ```거짓```이라고 평가하자, 컴파일러는 게을러졌다. `&&`는 최종 결과에 영향을 주지 않는 수식의 연산은 피한다. 이러한 최적화의 이름은 **Short-Circuit Evaluation**으로 **지연 평가**라고도 한다.
+ 
+ 논리 연산자 ```&```는 또 다른 버전의 논리**AND** 연산자로, 지연 평가를 하지 않는다.
+ 
+ ```&```의 두 피연산자는 항상 평가된다.
 
 ```java
 
@@ -7359,33 +7362,35 @@ Both operands to ```&``` are always evaluated.
 
 ```
 
-Similarly, the logical **OR** operator also has two versions: 
-* The ```||``` operator we saw earlier. This exhibits lazy evaluation.
-* The ```|``` operator, without lazy evaluation.
+마찬가지로 논리 **OR** 연산자에도 두 가지 버전이 있다:
+* 앞서 본 ```||```연산자. 이는 지연 평가를 보여준다.
+* 지연 평가가 없는 ```|```연산자.
 
-It is bad programming practice for our code to depend on the compiler's lazy evaluation. It makes code less readable, and can hide difficult-to-fix software bugs. It obviously adds to the code maintenance burden, so don't do it unless you like being in your peers' bad books.        
+컴파일러의 지연 평가에 코드가 의존하는 것은 나쁜 프로그래밍 관행이다. 그것은 코드를 읽기 어렵게 만들고, 고치기 어려운 소프트웨어 버그를 숨길 수 있다. 이는 분명히 코드 유지에 부담을 가중시키므로, 하지 않는게 좋다.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Examined conditions involving logical operators, that had lazy evaluation
-* Observed that the lazy evaluation depends on the operator's truth-table
-* Saw versions of the operators without lazy evaluation
-* Learned that code depending on lazy-evaluation, is less readable 
+* 논리적 연산자를 포함한, 즉 지연 평가가 있는 조건식을 조사했다.
+* 지연 평가는 연산자의 진리표에 따라 결정됨.
+* 지연 평가기 없는 버전의 연산자를 확인했다.
+* 지연 평가에 의존하는 코드는 읽기 어렵다는 것을 알게 됨.
 
-### Step 10: Character Types
+
+### Step 10: 문자형
  
-Earlier, we explored how we could store basic keyboard characters(called **ascii-code** characters), such as:
-* Upper-Case and lower-case letters (A-Z, a-z)
-* Numeric characters (0-9)
-* Punctuation and other special characters (such as ',', '$', '{', etc.)
+앞서, 다음과 같은 기본 키보드 문자(일명 **아스키 코드**문자)를 저장할 수 있는 방법을 살펴보았다.
+* 대문자 및 소문자(A-Z,a-z)
+* 숫자(0-9)
+* 문장 부호 미 기타 특수 문자(',','$','{'등)
 
-Turns out Java supports a much larger family of character encoding sets, called **Unicode**. All Unicode characters can be input to, understood and processed by, as well as output from your code. 
+자바는 **유니코드**라고 하는 훨씬 더 큰 문자 부호화 집합을 지원한다. 모든 유니코드 문자는 코드에 의해 입력,출력 및 이해 처리 될 수 있다.
 
-##### Snippet-01 : Unicode characters
 
-Not all Unicode characters can be input from your keyboard. But Java allows you to  handle their values from your code, if you deal correctly with their format.
+##### Snippet-01 : 유니코드 문자
+
+모든 유니코드 문자를 키보드에서 입력할 수 있는 것은 아니다. 하지만 자바는 당신이 그들의 형식을 올바르게 처리한다면 당신의 코드에서 그 값을 처리할 수 있게 해준다.
 
 ```java 
  
@@ -7395,14 +7400,14 @@ Not all Unicode characters can be input from your keyboard. But Java allows you 
 	c ==> '"'
 ```
 
-Integer values can be stored in ```char``` variables. If the value is within a meaningful range, it also corresponds to the **ascii** value of a keyboard character. 
+정수 값은 ```char```변수에 저장할 수 있다. 값이 유의미한 범위 내에 있으면 키보드 문자의 **아스키**값과도 일치한다.
 
 ```java
 	jshell> char cn = 65;
 	cn ==> 'A'
 ```
 
-Integer arithmetic can be performed on `char` data.
+정수 산술은 `char`데이터에 대해 수행할 수 있다.
 
 ```java
 	jshell> cn++
@@ -7422,29 +7427,29 @@ Integer arithmetic can be performed on `char` data.
 ```
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Were introduced the the ```char``` data type
-* Learned that Unicode takes the character set beyond your keyboard
-* An ascii character is ```char``` value, encoded by an integer value
+* ```char```데이터 타입을 소개했다.
+* 유니코드가 문자 집합을 키보드보다 더 많이 갖는다는 사실을 확인했다.
+* 아스키 문자는 정수 값으로 부호화된 ```char```값이다.
 
 ### Step 11: Programming Exercise PE-02
 
 #### Exercise Set
 
-1. Write a Java class ```MyChar``` that is a special type of ```char```. An object of type ```MyChar``` is created round an input ```char``` data element, and has operations that do the following:
-	* Check if the input character is a:
-		* Numeric Digit
-		* Letter of the Alphabet
-		* Vowel (Either upper-case or lower-case)
-		* Consonant (Either upper-case or lower-case) NOTE: A letter is a consonant if not a vowel
-	* Print all the letters of the Alphabet in
-		* Upper-Case
-		* Lower-Case
-
-In Essence, a runner ```class``` for ```MyChar``` would have its ```main``` method run code similar to:
+1.  특별한 ```char```타입인 ```MyChar```클래스를 작성하시오. ```MyChar```타입의 객체는 ```char```입력 데이터 요소를 중심으로 생성되며, 다음과 같은 작업을 수행한다.
+	* 입력 문자가 다음과 같은지 확인:
+		* 숫자
+		* 알파벳 문자
+		* 모음(대문자 또는 소문자)
+		* 자음(대문자 또는 소문자) 참고: 글자는 모음이 아니면 자음이다.
+	* 알파벳을 모두 다음과 같이 출력
+		* 대문자
+		* 소문자
+		
+본질적으로 ```MyChar```의 러너인 ```class```의 경우 ```main```메소드가 다음과 유사한 코드를 실행하게 될 것이다.
 
 ```java
 
@@ -7501,7 +7506,7 @@ In Essence, a runner ```class``` for ```MyChar``` would have its ```main``` meth
 
 ```
 
-**_Console Output_** :
+**_콘솔창 출력_** :
 
 _false_
 
@@ -7558,7 +7563,7 @@ _false_
 
 ```
 
-**_Console Output_** :
+**_콘솔창 출력_** :
 
 _false_
 
@@ -7648,7 +7653,7 @@ _false_
 
 ```
 
-**_Console Output_** :
+**_콘솔창 출력_** :
 
 _false_
 
@@ -7762,43 +7767,44 @@ Y
 
 Z
 
-### Step 15: The Primitive Types - A Review
+### Step 15: 기본형  타입 -복습
 
-In this section, we built on our knowledge of the primitive Java types. 
+이 절에서는 기본형 자바 타입에 대한 지식을 바탕으로 하였다.
 
-* We first got familiar with built-in wrappers for the integer types, that store useful type information. 
-* Going from the integer to the floating-point types, we examined type compatibility, and how the compiler warns you about common pitfalls. We used explicit casts to force type conversions, and learned that implicit type conversions are quite common.
-* We moved on to the ```BigDecimal``` class, a floating-point type with greater precision and accuracy. 
-* Next in line was ```boolean```, where we built on what we know of logical expressions. We focused on the logical operators, more so on short-circuit evaluation of their expressions. 
-* We saw how dependency on side-effects, and on lazy evaluation, is not a good programming practice.
-* Finally, we got to the ```char``` type, and were pleasantly surprised to know, that the keyboard is not the limit.
+* 우리는 처음에 유용한 타입 정보를 저장하는 정수 타입의 기본 래퍼에 익숙해졌다.
+* 정수에서 부동 소수점 타입으로 전환하여 타입 호환성과 컴파일러가 일반적인 에러에 대해 경고하는 방법을 검토했다. 우리는 형 변환을 강제하기 위해 명시적인 캐스팅을 사용했고, 묵시적 형 변환 또한 꽤 흔하다는 것을 배웠다.
+* 정밀도와 정확도가 높은 부동 소수점 타입인 ```BigDecimal```클래스로 넘어갔다.
+* 그 다음 행은 ```boolean```으로, 우리가 알고 있는 논리적인 표현을 바탕으로 했다. 우리는 논리 연산자에 초점을 맞췄고, 그들의 수식에 대한 단락 평가에 더 집중했다.
+* 지연 평가에 의존하는 것이 좋은 프로그래밍 관행이 아니라는 것과 부작용에 대해 알게 되었다.
+* 마침내 우리는 ```char```타입에 도달했고, 키보드가 한계가 아니라는 것을 알게 되어 놀랐다.
 
-## Introducing Conditionals - if, switch and more
+## 조건문 소개 - if, switch and more
 
-Decision making is a part of our daily lives. Computers do tasks for humans, so even programs need to make decisions. They do this by checking logical conditions, which evaluate to ```boolean``` values. 
+의사결정은 우리의 일상 생활의 일부분이다. 컴퓨터는 인간을 위한 일을 하기 때문에 프로그램도 결정을 내려야 한다. 그들은 ```boolean``` 값으로 평가되는 논리적 조건문을 점검함으로써 다음과 같이 한다.
 
-In the following steps, we will explore the following **conditional** statements:
+다음 단계에서는, 다음 **조건문**을 살펴보십시오.
 
 * ```if```
 * ```if```-```else```
 * ```if```-```else if```-```else```
 * ```switch```  
 
-What better way to master these basics, than using them to solve a programming challenge? 
+이러한 기본을 숙달하기 위해 프로그래밍 과제를 해결하기 데에 사용하는 것보다 더 좋은 방법은 무엇일까?
 
-Here we go!
+자, 갑니다!
 
 #### Programming Challenge : Design A Menu (The *Menu-Challenge*)
 
-* Ask the User for input:
-	* Enter two numbers
-	* Choose the arithmetic to do on those:
-		* Add
-		* Subtract
-		* Multiply
-		* Divide
-* Perform the Operation
-* Publish the Result
+
+* 사용자에게 입력을 요청하는 것:
+	* 두 개의 숫자를 입력하십시오.
+	* 다음 항목에 대해 수행할 산술을 선택하십시오:
+		* 더하기
+		* 빼기
+		* 곱하기
+		* 나누기
+* 작업 수행
+* 결과 게시
 
 ***An example scenario could be:***
 
@@ -7824,21 +7830,21 @@ Enter your choice of operation
 
 The Result Is : 8
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Discussed how input affects the control-flow of a program
-* Listed out the conditionals available with Java
-* Selected a programming challenge to help us learn about conditions
+* 입력 내용이 프로그램의 제어 흐름에 미치는 영향을 설명했다.
+* Java에서 사용할 수 있는 조건문의 목록을 살펴보았다.
+* 조건문에 대해 배우는 데 도움이 되는 프로그래밍 과제를 선택했다.
 
-### Step 01: The ```if``` and ```if```-```else``` Conditionals
+### Step 01: 조건식 ```if``` 와 ```if```-```else```
 
-An ```if``` statement is the most basic way to manage control-flow in a program. A ```boolean``` condition is tested, and if found to be ```true```, some code is executed. Otherwise, that code is not run. 
+```if```구문은 프로그램의 제어 흐름을 관리하기 위한 가장 기본적인 방법이다. ```boolean```의 상태를 검사하고 ```참```으로 판명되면 일부 코드가 실행된다. 그렇지 않으면, 그 코드는 실행되지 않는다.
 
-* "**_Do Something when ```condition``` is ```true```_**"
+* "**_```조건식```이 ```참```일때 무언가 하라_**"
 
-Conceptually, the ```if``` statement looks like this:
+개념적으로, if구문은 다음과 같다:
 
 ```java
 
@@ -7848,11 +7854,11 @@ Conceptually, the ```if``` statement looks like this:
 
 ```
 
-An ```if```-```else``` statement improves over the plain ```if```. We can now choose between executing two pieces of code, depending on what ```condition``` evaluates to.
+```if```-```else```구문이 평이한 ```if```에 비해 개선되었다. 이제 우리는 ```조건문```이 무엇을 평가하느냐에 따라 두 가지 코드 중 하나를 실행할 수 있다.
 
-* "**_Do Something when ```condition``` is ```true```, something else when ```condition``` is ```false```_**"
+* "**_```조건식```이 ```참```일 때는 뭔가 하고, ```조건식```이 ```거짓```일 때는 또 다른 것을 하라_**"
 
-An ```if```-```else``` statement boils down to the following:
+```if```-```else```구문은 다음과 같은 것으로 요약된다.
 
 ```java
 
@@ -7865,15 +7871,15 @@ An ```if```-```else``` statement boils down to the following:
 ```
 
 If ```condition``` is found to be ```true```, the statement block ```<if-body>``` is executed, otherwise ```<else-body>``` is run.
+```조건문```이 ```참```으로 판명되면, 구문 블록 ```<if-body>```가 실행되고, 그렇지 않으면 ```<else-body>```가 실행된다.
 
-Let's now look at a examples that make use of these conditionals.
+이제 이러한 조건문을 활용한 예를 살펴보자.
 
 ##### Snippet-01 : ```if``` behavior
 
-In this example:
-*  we have used compound comparison operators such as ```<=``` and ```>=```, which also evaluate to ```boolean``` values. 
-*  Also used, are logical operators such as ```&&``` and ```||```, which both accept and return values of type ```boolean```.
-
+이 예에서는 다음을 수행하십시오.
+* ```boolean```값을 평가하는 ```<=```, ```>=``` 복합 비교 연산자를 사용한다.
+* 또한 ```boolean```타입의 가치를 수용하고 반환하는 ```&&```과 ```||```와 같은 논리적 연산자도 사용된다.
 
 
 ```java
@@ -7897,7 +7903,7 @@ In this example:
 	   ..>> }
 ```
 
-```if```-```else``` allows us to specify code to execute when a condition is `false`.
+```if```-```else```는 조건식이 `거짓`일 때 실행할 코드를 지정할 수 있다. 
 
 ```java
 	jshell> if(i==3) {
@@ -7941,13 +7947,13 @@ In this example:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _i != 25_
 
 ##### Snippet-03 : chained if-else v2
 
-We would want to test a number for 3 conditions - `value is 24`, `value is 25` or `value is not 24 and 25`. Let's consider the code from the example below.
+우리는 세 가지 조건식 즉, `값은 24`, `값은 25` 또는 `값은 24와 25가 아니다`에 대한 수치를 시험하고 싶다. 아래 예에서 나온 코드를 생각해보자.
 
 **_IfStatementRunner.java_**
 
@@ -7975,33 +7981,34 @@ We would want to test a number for 3 conditions - `value is 24`, `value is 25` o
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _i = 25_
 
 _i != 25 and i != 24_
 
-##### Snippet-03 Explained
+##### Snippet-03 설명
 
-What just happened here? The value of ```i``` is set to ```25``` within the program, so like in the previous example, only **_i = 25_** should have been printed. 
+이게 어떻게 된 걸까? 프로그램 내에서 ```i```의 값은 ```25```로 설정되었기 때문에, 앞의 사례처럼 **_i = 25_** 만 출력되었어야 한다.
 
-Why the extra print?
+나머지 출력은 무엇일까?
 
-We started off trying to check fro 3 possibilities:
-	* ```i``` being equal to ```25```
-	* ```i``` being equal to ```24```
-	* Neither of the above
+우리는 세 가지 가능성을 확인하려 한다:
+	* ```i```는 ```25```와 같다.
+	* ```i```는 ```24```와 같다.
+	* 위의 두 가지 모두 해당되지 않음
 
-We get wrong output, because ```i == 25``` in first ```if``` is independent from ```i == 24``` in the ```if```-```else``` that follows it. 
+```if```의 첫 번째 ```i == 25```는 , 뒤에 나오는 ```if```-```else```의 ```i ==24```와는 독립되어 있기 때문에 우리는 출력값을 잘못 알고 있었다.
 
-Our decision making is not continuous. We need a tighter conditional to deal with more than two alternatives. We will explore this topic in the next step.
+우리의 결론은 아직 명확하지 않다. 세 가지 이상의 대안을 다루기 위해서는 더 엄격한 조건식이 필요하다. 우리는 다음 단계에서 이 주제를 탐구할 것이다.
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Learned about the ```if``` and ```if```-```else``` conditionals
-* Tried out a few examples to see how they are used
+이번 단계에서는
+
+* ```if```와 ```if```-```else```조건문에 대해 배웠다.
+* 사용법을 알아보기 위해 몇 가지 예제를 시도했다.
 
 ### Step 02: The ```if```-```else if```-```else``` Conditional
 
