@@ -8010,13 +8010,12 @@ _i != 25 and i != 24_
 * ```if```와 ```if```-```else```조건문에 대해 배웠다.
 * 사용법을 알아보기 위해 몇 가지 예제를 시도했다.
 
-### Step 02: The ```if```-```else if```-```else``` Conditional
+### Step 02: The ```if```-```else if```-```else``` 조건문
 
-The ```if```-```else if```-```else``` statement solves the issue we faced, while trying to test more than two conditions.
+```if```-```else if```-```else``` 구문은 우리가 직면하고 있는 해결하는 동시에 두 가지 이상의 조건을 시험하려고 한다. 
+다음의 예를 보자.
 
-Let's see an example.
-
-##### Snippet-01 : Matching The ```if``` Clause
+##### Snippet-01 :  ```if```  조항에 일치하는 경우
 
 **_IfStatementRunner.java_**
 
@@ -8043,13 +8042,13 @@ Let's see an example.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _i = 25_
 
-Let's now try giving ```i``` a different value, say ```24```.
+이제 ```i```에 다른 값을 부여해보자.
 
-##### Snippet-02: Matching The ```else if``` Clause 
+##### Snippet-02: ```else if``` 조항에 일치하는 경우
 
 **_IfStatementRunner.java_**
 
@@ -8077,17 +8076,17 @@ Let's now try giving ```i``` a different value, say ```24```.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 **_i = 24_**
 
-##### Snippet-02 Explained
+##### Snippet-02 설명
 
-* With ```i``` holding ```24```, a different condition (the one coresponding to ```i == 24```) evaluates to ```true```.
+* ```i```가 ```24```를 가지고 있는 상황에서 다른 조건(```i == 24```와 일치하는 것)은 ```참```으로 평가된다.
 
-Let's now try to get a match with the ```else``` clause, the only one unexplored so far. 
+이제 지금까지 유일하게 미개척된 ```else```조항을 알아보자.
 
-##### Snippet-03: Matching The ```else``` Clause
+##### Snippet-03: ```else``` 조항에 일치하는 경우
 
 **_IfStatementRunner.java_**
 
@@ -8115,27 +8114,29 @@ Let's now try to get a match with the ```else``` clause, the only one unexplored
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 **_i != 25 and i != 24_**
 
-##### Snippet-03 Explained
+##### Snippet-03 설명
 
-When ```i``` is given a value of ```26```, the first two conditions are false. Hence, the code in the `else` gets executed. 
+```i```에게 ```26```이라는 값이 주어지면 처음의 두 조건은 거짓이다. 따라서, else의 코드가 실행된다.
 
-_**one, and only one** clause among those present in an  ```if```-```else if```-```else``` statement ever evaluates to ```true```. Also, the code block corresponding to the matched clause will get executed. This is ensured even if conditions are *duplicated*, or *overlap*. In that scenario, only the first such condition, downward from the ```if``` in sequence, will evaluate to ```true```. The remaining possible matches are not even checked._
+ ```if```-```else if```-```else``` 구문에서는  _**한번에 단 한개만** ```참```으로 평가된다. 또한 일치하는 조항에 해당하는 코드 블록이 실행된다. 이는 조건이 *복제* 또는 *오버랩* 되더라도 보장된다. 그런 시나리오에서는 ```if```에서 첫 번째 조건만이 ```참```으로 평가될 것이다. 나머지 가능한 시도들은 점검조차 하지 않고 있다._
+ 
 
-#### Summary
 
-In this step, we:
+#### 요약
 
-* Learned about the ```if```-```else if```-```else``` conditional
-* Found out how to test when each different clause gets executed
-* Understood the guarantees made by Java regarding the conditional's code execution
+이번 단계에서는
+
+* ```if```-```else if```-```else```조건문을 배웠다.
+* 각 절이 실행될 때 점검하는 방법을 알아보았다.
+* 조건부 코드 실행과 관련하여 Java에서 보장한 사항을 이해했다.
 
 ### Step 03:  Puzzles on ```if```
 
-Try and guess the outputs of the following puzzles.
+다음 퍼즐의 결과를 추측해보십시오.
 
 #### Programming Puzzle PP-01
 
@@ -8218,7 +8219,7 @@ Try and guess the outputs of the following puzzles.
 **Answer:**
  
 
-> Nothing is printed. Because the code is structured this way.
+> 아무것도 출력되지 않는다. 왜냐하면 코드는 이런 방식으로 구성되기 때문이다.
 
 ```java
 if(m > 20) {
@@ -8284,35 +8285,36 @@ _**Compiler Error**_
 
 **_6_**
 
-> In the absence of explicit blocks, Only the statement next to the if statement is considered to be part of the if statement block.
+> 명시적 블록이 없는 경우, if문 옆에 있는 구문만 if문 블록의 일부로 간주한다.
 
 ### Step 04: Reading User Input
 - - - 
 
-Look at the statement of *Menu-Challenge* once again:
+*Menu-Challenge*의 구문을 다시 한 번 살펴보자:
 
 #### *Menu-Challenge*
 
-* Ask the User for input:
-	* Enter two numbers
-	* Choose an Arithmetic Operation to perform on them:
-		* Add
-		* Subtract
-		* Multiply
-		* Divide
-* Perform the Operation
-* Publish the Result
+* 사용자에게 입력 요청:
+	* 두 개의 숫자를 입력하십시오.
+	* 산술 연산을 선택하여 다음 작업을 수행하십시오.
+		* 더하기
+		* 빼기
+		* 곱하기
+		* 나누기
+* 작업 수행
+* 결과 게시
 
-We have a good idea about how the ```if```-```else if```-```else``` conditional works.What we don't know, however, is how a such a conditional would behave when fed with random input. To test those scenarios out, the next step would be to learn how to take console input, from within our code.
+우리는 ```if```-```else if```-```else```라는 조건문이 어떻게 작동하는지 잘 알고 있다. 그러나 우리가 모르는 것은 그러한 조건부가 무작위 입력을 받았을 때 어떻게 행동할 것인가 하는 것이다. 이러한 시나리오를 테스트하기 위해 다음 단계는 코드 내에서 콘솔 입력을 수행하는 방법을 배우는 것이다.
 
-We will do just that, in our next example.
+다음 예에서 바로 해볼 것이다.
+
 
 ##### Snippet-01: Reading console input
 
-Java provides a built-in ```class``` named  ```Scanner```, to scan user input from the console. Roping in this utility would require you, the programmer, to do the following:
-* ```import``` the ```java.util.Scanner``` ```class``` within your code (here, we were writing code in the Eclipse IDE)
-* Create a ```scanner``` object which is of type ```Scanner```. This involves invoking the ```Scanner``` constructor through the ```new``` operator. You also need to pass  ```System.in``` as a constructor parameter, which ties ```scanner``` to the console input.
-* To read integer input from the console, call the method ```scanner.nextInt()```. The keyboard's <Enter> key needs to be pressed to complete user input. That number is passed on to your code, where it can be passed around.
+자바는 콘솔에서 사용자 입력을 스캔하기 위해 ```Scanner```라는 이름의 ```class```를 내장하고 있다. 이 유틸리티에서 프로그래머인 여러분은 다음을 해야 할 것이다:
+* ```java.util.Scanner``` ```class```를 ```import```하시오 (여기서 우리는 이클립스 IDE에 코드를 작성하고 있다)
+* ```Scanner```타입의 ```scanner```객체를 만드십시오. 여기에는 ```new```연산자를 통해 ```Scanner``` 생성자를 호출하는 것도 포함된다. ```scanner```를 콘솔 입력으로 묶어주는 ```System.in```도 생성자 매개변수로 전달해 주어야 한다.
+* 콘솔에서 정수 입력을 읽으려면 ```scanner.nextInt()```를 호출해야 한다. 사용자 입력을 완료하려면 키보드의 <Enter>키를 눌러야 한다. 그 숫자는 당신의 코드로 전달된다.
 
 **_MenuScanner.java_**
 
@@ -8332,25 +8334,25 @@ Java provides a built-in ```class``` named  ```Scanner```, to scan user input fr
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Enter Number1: 35_
 
 _The number you entered is: 35_
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이 단계에서는
 
-* Revisited our *Menu-Challenge* problem statement, and found we needed to read user input
-* Explored the basic usage of the ```Scanner``` utility to fulfill this need
+* *Menu-Challenge* 문제 구문을 다시 살펴본 결과, 사용자 입력을 읽어야 함을 알게 되었다.
+* 이러한 요구를 충족시키기 위한  ```Scanner``` 유틸리티의 기본적 용도에 대해 알아보았다.
 
-### Step 05: *Menu-Challenge* : Reading More Input
+### Step 05: *Menu-Challenge* : 더 많은 입력 읽기
 
-The *Menu-Challenge* does not stop at a single user input. It requires a total of three numbers to be typed in at the console. So how do we continue asking for input, and read them when they are given?
+*Menu-Challenge*는 단일 사용자 입력에서 중지되지 않는다. 콘솔에 입력하려면 총 3개의 숫자를 입력해야 한다. 그러면 우리는 어떻게 계속해서 입력을 요청하고, 입력이 주어졌을 때 그것을 읽을 수 있을까?
 
-##### Snippet-01 : Implementing *Menu-Challenge*
+##### Snippet-01 : *Menu-Challenge* 구현
 
 **_MenuScanner.java_**
 
@@ -8384,7 +8386,7 @@ The *Menu-Challenge* does not stop at a single user input. It requires a total o
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Enter Number1: 25_
 
@@ -8410,30 +8412,30 @@ _Number2: 50_
 
 _Choice: 4_
 
-##### Snippet-01 Explained
+##### Snippet-01 설명
 
-Repeatedly calling ```scanner.nextInt()``` will keep reading in any number the user may input. Also, the user needs to press the keyboard <Enter> key to send each input.
+```scanner.nextInt()```를 반복적으로 호출하는 것은 사용자가 입력하는 숫자를 계속 읽게 될 것이다. 또한 사용자는 키보드의 <Enter>키를 눌러 각 입력을 전송할 필요가 있다.
 
-We were not only able to read in all three values we need, but also wrote them out on the console. The user can now see that we got his data! 
+우리는 필요한 세 가지 값을 모두 읽을 수 있을 뿐만 아니라 콘솔에 써넣었다. 사용자들은 이제 우리가 그 데이터를 얻었음을 알 수 있다!
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Figured out how to read more than one input from the console
-* Demonstrated how values read in, can be preserved and used within the program
+* 콘솔에서 두 개 이상의 입력을 읽는 방법을 파악했다.
+* 프로그램 내에서 값이 어떻게 판독되고, 보존되고, 사용할 수 있는지 보여줬다.
 
-### Step 06: *Menu-Challenge* - Reading Input, Computing Result, Displaying Output
+### Step 06: *Menu-Challenge* - 입력 읽기, 결과 연산, 출력값 게시
 
-We don't think that after the previous step, anything can stop you from completing the *Menu-Challenge*. Here is one such way, from head-to-toe. 
+우리는 이전 단계를 지났으니 어떤 것도 당신이 *Menu-Challenge*를 완성하는 것을 막을 수 없다고 생각한다! 여기 한 가지 방법이 있다. 
 
-##### Snippet-01 : All computations
+##### Snippet-01 : 모든 연산
 
-Our solution above does a very simple thing. It combines the mechanisms we learned for reading input and testing conditions, to solve *Menu-Challenge*. 
+위의 해결책은 매우 간단한 것이다. 이것은 *Menu-Chanllenge*를 해결하기 위해 우리가 학습한 입력과 점검한 조건식을 결합한 메커니즘이다.
 
-The ```if```-```else```-```else if``` statement has a total of ```5``` clauses: 
-* To check for ```4``` favorable conditions (The ```choice``` values for the ```4``` supported operations). One ```if``` and three ```else```-```if``` clauses do the stuff for us.
-* the last default condition, which corresponds to a ```choice``` value not supported, is handled by an ```else``` clause.
+```if```-```else```_```else if```구문은 총 ```5```개의 조항을 포함한다:
+* ```4```개의 조건(```4```개의 연산을 지원하는 ```choice```)을 확인하기 위해, 한 개의```if```와 세 개의 ```else```-```if```항이 그러한 역할을 한다.
+*```choice```에 해당하는 마지막 기본 조건은 ```else```로 처리된다.
 
 **_MenuScanner.java_**
 
@@ -8479,7 +8481,7 @@ public class MenuRunner {
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Enter Number1: 23_
 
@@ -8507,7 +8509,7 @@ _Choice: 2_
 
 _Result = 13_
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Enter Number1: 25_
 
@@ -8536,12 +8538,12 @@ _Choice: 5_
 _Invalid Operation_
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는,
 
-* Combined our knowledge of conditionals, with our recent learning on taking multiple console inputs
-* Ultimately solved the *Menu-Challenge* problem
+* 조건식에 대한 지식과 최근에 배운 콘솔 입력 값 수집에 대한 것들을 결합했다.
+* 궁극적으로는 *Menu-Challenge*문제를 해결했다.
 
 ### Step 07: Introducing ```switch```
 
