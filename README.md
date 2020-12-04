@@ -9231,15 +9231,19 @@ TODO
 
 여러분들이 기억할지 모르겠지만 ```for```반복문의 구조는 다음과 같다
 
-```for(initialization; condition; update) {```
+```
+for(initialization; condition; update) {```
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```//<Statements Body>```
 
 ```}``` 
 
+```
+
 반복문 내부의 ```<Statements Body>```는 ```조건문```이 ```참```인 경우만 실행된다. 퍼즐을 어떻게 활용할 수 있는지 몇 가지 살펴봅시다.
 
 ##### Snippet 1 : 첫 번째 루프 퍼즐
+```
 
 **jshell>**```for(int i=0; i <= 10; i++) {```
 
@@ -9296,6 +9300,7 @@ __**...>>**```}```
 _21 22 23 24 25 26 27 28 29 30_
 
 **jshell>**
+```
 
 ##### Snippet-1 설명
 
