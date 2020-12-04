@@ -8545,9 +8545,9 @@ _Invalid Operation_
 * 조건식에 대한 지식과 최근에 배운 콘솔 입력 값 수집에 대한 것들을 결합했다.
 * 궁극적으로는 *Menu-Challenge*문제를 해결했다.
 
-### Step 07: Introducing ```switch```
+### Step 07: ```switch``` 소개
 
-If you remember, our initial list of conditionals to manage control-flow, also had a ```switch``` statement. A ```switch``` also tests multiple conditions, and just like an ```else``` clause, it can handle the default possibility. Conceptually, a ```switch``` statement looks like the following:
+우리의 초기 흐름 제어 관리 조건문 목록에도 ```switch```라는 구문이 적혀있던 것을 기억하는가. ```switch```도 여러 조건문을 시험하며 ```else```조건문처럼 디폴트 가능성을 다룰 수 있다. 개념적으로 ```switch문```은 다음과 같다.
 
 ```java
 
@@ -8567,17 +8567,17 @@ If you remember, our initial list of conditionals to manage control-flow, also h
 
 ```
 
-```default``` clause is executed when none of the cases match. 
+```default``` 구문은 어느 사례도 일치하지 않을 때 실행된다. 
 
- ```break;``` statement is used to break out of the switch after a successful match.
+ ```break;``` 구문은 성공적으로 일치한 후 스위치문을 벗어나기 위해 사용된다.
 
-Let's look at a few examples on how to use ```switch```.   
+```switch문```을 어떻게 사용하는지 예제를 통해 살펴보자.
 
-##### Snippet-01: The ```switch``` statement
+##### Snippet-01: ```switch```문
 
-Using a ```switch``` leads to code that is quite readable, doesn't it? Compare it with the chained ```if```-```else if```-```else``` statements we used in the previous step.
+```switch```를 사용하면 상당히 읽기 쉬운 코드로 연결될 수 있지 않은가? 우리가 이전 단계에서 사용한 ```if```-```else if```-```else```구문과 비교해 보자.
 
-Leaving out the ```break``` statement from every ```case``` clause is a very common error. It leads to a situation called **switch-fall-through**. Here, even if there is a match with a particular ```case``` clause, all clauses following this one are executed in sequence, until a ```break``` is encountered somewhere!
+모든 ```case```절에서 ```break```라는 구문을 뺴는 것은 매우 흔한 오류이다. 그것은 **switch-fall-through**라는 상황을 초래한다. 여기서는 특정 ```case```절과 일치하더라도 ```break```절이 어디선가 부딪힐 때 까지 이 절에 따른 모든 구문은 순차적으로 실행된다!
 
 ```java
 
@@ -8602,7 +8602,7 @@ Leaving out the ```break``` statement from every ```case``` clause is a very com
 	default
 ```
 
-Adding `break`s ensures that only the matching case is executed. 
+`break`를 추가하면 매칭된 케이스만이 실행된다.
 
 ```java
 	jshell> switch(i) {
@@ -8615,9 +8615,9 @@ Adding `break`s ensures that only the matching case is executed.
 	
 ```
 
-##### Snippet-02: refactoring MenuScanner
+##### Snippet-02: MenuScanner 리팩토링
 
-Let's now refactor the `MenuScanner` example to use `switch` statement.
+자, 이제 `MenuScanner`예제를 리팩토링하기 위해 `switch`구문을 사용해보자.
 
 **_MenuScanner.java_**
 
@@ -8678,7 +8678,7 @@ public class MenuRunner {
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Enter Number1: 23_
 
@@ -8706,7 +8706,7 @@ _Choice: 2_
 
 _Result = 13_
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Enter Number1: 25_
 
@@ -8734,17 +8734,18 @@ _Choice: 5_
 
 _Invalid Operation_
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Explored the ```switch``` conditional
-* Saw how it could implement the same control-flow as the ```if``` family of conditionals
-* Learned the importance of coding it correctly, to enjoy Java control-flow guarantees
+* ```switch```조건문을 탐색했다.
+* ```if문```과 동일한 제어 흐름을 어떻게 구현할 수 있는지 확인했다.
+* Java 제어 흐름 보증을 위해 올바른 코딩의 중요성을 학습했다.
 
-### Puzzles On ```switch```
+### ```switch```에 관한 퍼즐
 
-Let's now have some fun with the various conditionals. These puzzles will not only ensure you're still wide awake, they will also give you ample food for thought. 
+이제 다양한 조건문으로 즐거운 시간을 보내자. 이 퍼즐들은 여러분이 여전히 깨어 있다는 것을 보장할 뿐만 아니라, 생각할 충분한 양분을 줄 것이다.
+
 
 ##### Programming Puzzle PP-01
 
@@ -8925,13 +8926,13 @@ _default_
 
 **_Compiler Error_**
 
-### Step 09: Comparing The ```if``` Family, And ```switch```
+### Step 09: ```if문```들과 ```switch문``` 비교
 
-Let's compare and contrast these two approaches, to gain some experience on how to choose a conditional.
+조건문을 선택하는 방법에 대해 알기 위해 이 두 가지 접근법을 비교하고, 대조해 봅시다.
 
-First comes an example using the ```if```-```else if```-```else``` statement.  
+먼저 ```if```-```else if```-```else```구문을 사용한 예가 있다.
 
-##### Snippet-01 : Formatted Output Using ```if```
+##### Snippet-01 : ```if```를 사용한 포맷된 출력
 
 **_OperatorChoiceRunner.java_**
 
@@ -8987,7 +8988,7 @@ First comes an example using the ```if```-```else if```-```else``` statement.
 ```
 
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _number1 : 5_
 
@@ -8997,9 +8998,9 @@ _choice : 1_
 
 _result : 7_
 
-Next in line, is an example involving a ```switch```.
+다음으로 ```switch```를 포함한 예가 있다.
 
-##### Snippet-02 : Formatted Output Using ```switch```
+##### Snippet-02 : ```switch```를 사용한 포맷된 출력
 
 **_OperatorChoiceRunner.java_**
 
@@ -9055,7 +9056,7 @@ Next in line, is an example involving a ```switch```.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _number1 : 5_
 
@@ -9065,22 +9066,23 @@ _choice : 1_
 
 _result : 7_
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Observed that the same conditional code could be written using an ```if```-family conditional, or the ```switch```.
-* Learned that an ```if``` family conditional is difficult to get wrong, as the rules for it are very strict. It can be used to evaluate only ```boolean``` conditions. But it is verbose, and often less readable.
-* Came to know that a ```switch``` conditional can be used to check for only integer values. It is very compact, and very readable. However, the relative order of ```case``` clauses and ```default``` are not fixed, and the usage of ```break``` is optional. This can lead to subtle errors in your program. 
+* 동일한 조건문 코드가 ```if문``` 또는 ```switch문```을 사용하여 작성될 수 있다는 점에 주목했다.
+* ```if문```은 그 규칙이 매우 엄격하기 때문에 틀리기 어렵다는 것을 알게 되었다. 그것은 ```boolean```의 조건문만을 평가하는 데 사용될 수 있다. 그러나 그것은 장황하지 않고 종종 읽기 어렵다.
+* ```switch```조건문으로 정수 값만 확인할 수 있다는 사실을 알게 되었다. 이는 매우 간결하고 읽기 쉽다. 그러나 ```case```문과 ```default```라는 상대적인 순서는 정해져 있지 않고 ```break```라는 구문은 선택사항이다. 이는 여러분의 프로그램에 미묘한 오류로 이어질 수 있다.
 
-### Step 10: Programming Exercise PE-03
+### Step 10:  PE-03 프로그래밍 실습
 
-1. Write a Java ```class``` which has the following operations within it:
-	* Given a number between 0 (Sunday) and 6 (Saturday), return if the day is a Weekday
-	* Given a number between 1 (January) and 12 (December), return the corresponding English name for that month
-	* Given a number between 1 (January) and 12 (December), return the corresponding English name for that day of the week
-
-#### Solution to PE-03
+1. 다음과 같은 연산을 하는 자바 ```클래스```를 작성하시오:
+	* 0 (일요일)에서 6 (토요일) 사이의 숫자를 지정하여 평일인 경우 반환하여라.
+	* 1 (1월)에서 12 (12월) 사이의 숫자를 지정하여 해당 달의 영어 이름을 반환하여라.
+	* 1 (1월)에서 12 (12월) 사이의 숫자를 지정하면 해당 요일의 영어 이름을 반환하여라.
+	
+	
+####  PE-03 솔루션
 
 **_CalendarSwitchRunner.java_**
 
@@ -9150,18 +9152,23 @@ In this step, we:
 
 ```
 
-### Step 12: Introducing ```?:```, The Ternary Operator
+### Step 12: 삼항 연산자  ```?:``` 소개 
 - - - 
 
 The ternary operator ```?:``` is a logical operator, that works on three operands. Its functioning is similar to an ```if```-```else``` statement (Checking for just ```2``` conditions). Exactly one  of the two expressions is guaranteed to match.
+삼항 연산자는 ```?:```은 세 개의 피연산자에 적용하는 논리 연산자이다. 그 기능은 ```if```-```else```구문(```2```개의 조건을 확인하는 것)과 비슷하다. 두 수식 중 정확히 한 수식은 일치하도록 보장되어 있다.
 
-Conceptually, its syntax is this:
+개념적으로, 그것의 구문은 다음과 같다.
 
+*```결과 = ( 조건문 ? if문이 참일 경우 적용할 수식 : if문이 거짓일 경우 적용할 수식);```*
 *```result = (condition ? expression-if-condition-true : expression:if-condition-false);```* 
 
-##### Snippet-01 : ternary operator 
 
-`?:` is easy to use. A few examples below:
+개념적으로, 그것의 구문은 다음과 같다.
+
+##### Snippet-01 : 삼항 연산자
+
+`?:` 는 사용하기 쉽다. 아래에 몇 가지 예제를 살펴보자:
 
 ```java
 
@@ -9176,7 +9183,8 @@ Conceptually, its syntax is this:
 	isEven ==> false
 ```
 
-You can return non boolean values.
+boolean타입이 아닌 다른 값으로 반환할 수 있다.
+
 ```java
 	jshell> String ifEven = ( i%2==0 ? "YES" : "NO");
 	ifEven ==> "NO"
@@ -9186,7 +9194,7 @@ You can return non boolean values.
 	ifEven ==> "YES"
 ```
 
-Both the expressions should return value of same type.
+두 식 모두 같은 타입의 값을 반환해야 한다.
 
 ```java
 	jshell> ifEven = ( i%2==0 ? "YES" : 4 );
@@ -9206,20 +9214,22 @@ Both the expressions should return value of same type.
 ```
 
 
-#### Summary
+#### 요약
+
+이번 단계에서는
 
 In this step, we:
 
-* Discovered a more compact Java conditional, the ```?:``` operator
-* Saw that in most cases it behaves like an ```if```-```else``` construct
+* 좀 더 세밀한 자바 조건문인 ```?:```연산자를 발견했다.
+* 대부분의 경우 ```if```-```else```구조로 작동하는 것을 보았다.
 
-## Loops
+## 반복문
 
 TODO 
 
-### Revisiting Java loop constructs: ```for``` and ```while```
+### 자바 반복문 구조 복습: ```for``` and ```while```
 
-If you may recall, the structure of a ```for``` loop is:
+여러분들이 기억할지 모르겠지만 ```for```반복문의 구조는 다음과 같다
 
 ```for(initialization; condition; update) {```
 
@@ -9227,8 +9237,9 @@ If you may recall, the structure of a ```for``` loop is:
 
 ```}``` 
 
-The ```<Statements Body>``` inside the loop is executed so long as the ```condition``` is ```true```. Let's look at a few puzzles to explore how we can utilize them.
-##### Snippet 1 : First for loop puzzle
+반복문 내부의 ```<Statements Body>```는 ```조건문```이 ```참```인 경우만 실행된다. 퍼즐을 어떻게 활용할 수 있는지 몇 가지 살펴봅시다.
+
+##### Snippet 1 : 첫 번째 루프 퍼즐
 
 **jshell>**```for(int i=0; i <= 10; i++) {```
 
@@ -9286,20 +9297,20 @@ _21 22 23 24 25 26 27 28 29 30_
 
 **jshell>**
 
-##### Snippet-1 Explained
+##### Snippet-1 설명
 
-All the three control components of a ```for``` loop are dispensable
+```for```반복문의 세 가지 요소는 모두 없어도 되는 것들이다.
 
 * ```initialziation```
 * ```condition```
 * ```update```
 - - -
 
-## Reference Types
+## 참조형 타입
 
-### Step 01: Introducing Reference Types
+### Step 01: 참조형 타입 소개
 
-What happens in the background when we create objects?
+우리가 객체를 생성할 때 뒷부분에서는 어떤 일이 일어나는가?
 
 ```java
 
@@ -9310,19 +9321,18 @@ What happens in the background when we create objects?
 	jupiter ==> Planet@31a5c39e
 ```
 
-Where is the object `jupiter` stored?
+`jupiter`라는 객체는 어디에 저장되어 있는가?
 
-All Java objects are created on the `Heap` or `Heap Memory`. 
+모든 자바 객체는 `Heap` 또는 `Heap Memory`에 생성된다.
 
-When we create an new instance of `Planet', it is created on the Heap.
-
+Planet의 새로운 인스턴스를 만들면, 힙에 생성된다.
 
 ```java
 	jshell> new Planet()
 	$18 ==> Planet@3f49dace
 ```
 
-`new Planet()` creates an object on the Heap. In above example `Planet@3f49dace`, the object is stored on the Heap at address `3f49dace`.
+`new Planet()` 은 힙에 객채를 생성했다. 위 예제의 `Planet@3f49dace`를 보면 객체는 힙의 `3f49dace`주소에 저장된다.
 
 
 ```java
@@ -9330,11 +9340,11 @@ When we create an new instance of `Planet', it is created on the Heap.
 	jupiter ==> Planet@31a5c39e
 ```
 
-`Planet jupiter = new Planet()` does two things.
-- Creates an object on the Heap `new Planet()`. In above example, object is created at Heap location `31a5c39e`
-- Stores the reference of the object on the Heap in a variable `jupiter`. In above example, `31a5c39e` is the value stored in variable `jupiter`. That's the memory location where the new object was created.
+`Planet jupiter = new Planet()` 은 두 가지 역할을 한다.
+- 힙 `new Planet()`에 객체를 생성한다. 위의 예에서 객체는 힙 위치 `31a5c39e`에 생성된다.
+- 힙에 있는 객체의 참조를 변수 `jupiter`에 저장한다. 위의 예에서 `31a5c39e`는 변수 `jupiter`에 저장된 값이다. 그것이 새로운 객체가 만들어진 객체의 위치이다.
 
-Let's consider another example.
+다른 예를 들어보자.
 
 ```java
 	jshell> class Animal {
@@ -9352,22 +9362,24 @@ Let's consider another example.
 
 ```
 
-Two new `Animal` objects are created on the `Heap`. Their memory locations (`references`) are stored in the reference variables - `dog` and `cat`.
+`Heap`에 새로운 `Animal`객체 두 개가 만들어진다. 이들의 메모리 위치(`참조`)는 참조 변수인 `dog`과 `cat`에 저장되어 있다.
 
-In Java, all classes are also called Reference Types. Except for primitive variable instances, all the instances or objects are stored on the Heap. The references to the objects are stored in the reference variables like `jupiter`, `dog` and `cat`.
+자바에서는 모든 클래스를 참조형 타입이라고도 한다. 기본형 변수 인스턴스를 제외하고, 모든 인스턴스 또는 객체는 힙에 저장된다. 객체에 대한 참조는 `jupiter`,`dog`,`cat` 등의 참조 변수에 저장된다.
 
-#### Summary
+#### 요약
 
+이번 단계에서는
 In this step, we:
 
-* Looked at what references are
-* Had a look at what the contents of a reference variable look like
+* 참조가 무엇인지 알아보았다.
+* 참조 변수의 내용이 어떻게 생겼는지 살펴보았다.
 
-### Step 02: References: Usage And Puzzles
+### Step 02: 참조: 사용법 및 퍼즐
 
-Let's spend some time playing with reference variables.
+참조 변수를 가지고 놀아보자.
 
-References that are not initialized by the programmer, are initialized by the Java compiler to ```null```. ```null``` is a special value that stands for an **empty location**. In other words, the ```Animal``` ```nothing``` refers to nothing!
+프로그래머가 초기화하지 않은 참조는 자바 컴파일러가 ```null```로 초기화된다. ```null```은 **빈 공간**을 나타내는 특별한 변수이다. 다시 말해, ```Animal``` ```nothing```은 아무것도 의미하지 않는 것이다!
+
 
 ```java
 
@@ -9382,8 +9394,7 @@ References that are not initialized by the programmer, are initialized by the Ja
 	nothing ==> null
 
 ```
-
-Assigning the reference ```cat``` to ```nothing``` does what one would expect: it assigns the address of the object created with ```new Animal(15)``` (stored in ```cat```), to the variable ```nothing```.
+```cat```에 ```nothing```을 참조하는 것은 ```new animal(15)```(```cat```에 저장된)으로 만들어진 객체의 주소를 ```nothing```에 할당하는 것이다.
 
 ```java
 	jshell> Animal dog = new Animal(12);
@@ -9395,7 +9406,7 @@ Assigning the reference ```cat``` to ```nothing``` does what one would expect: i
 	nothing ==> 6e06451e
 ```
 
-`nothing` and `cat` are pointing to the same location on the 'Heap'. When we do `nothing.id = 10` we are changing the `id` of the object pointed to by both `nothing` and `cat`.
+`nothing`과 `cat`이 `heap`의 같은 위치를 가리키고 있다. `nothing.id=10`을 할 때 우리는 `nothing`과 `cat`이 가리키는 객체의 `id`를 모두 바꾼다.
 
 ```java
 	jshell> nothing.id = 10;
@@ -9404,7 +9415,7 @@ Assigning the reference ```cat``` to ```nothing``` does what one would expect: i
 	$2 => 10
 ```
 
-Let's change `nothing` to point to the same object referenced by `dog`.
+`nothing`을 `dog`이 참조하는 객체를 가리키도록 바꾸자.
 
 ```java
 	jshell> nothing = dog;
@@ -9414,19 +9425,18 @@ Let's change `nothing` to point to the same object referenced by `dog`.
 	jshell>
 
 ```
+`nothing.id`과 `dog`는 동일한 객체를 가리키기 때문에,`nothing.id`는 `dog`가 참조하는 객체의 값을 출력할 수 있다.
 
-You can `nothing.id` prints the value of the object referenced by `dog` because they are pointing to the same object.
+다음은 유의해야 할 몇 가지 중요한 사항이다.
 
-Here are couple of important things to note:
+* `nothing = dog` - 참조 간 할당은 참조된 객체 전체를 복사하지 않는다. 오직 참조만 복사한다. 할당 후 두 참조 변수는 동일한 객체를 가리킨다.
+* `nothing.id =10` - 참조를 사용하여 참조하는 객체를 수정할 수 있다.
 
-* `nothing = dog` - Assignment between references does not copy the entire referenced object. It only copies the reference. After an assignment, both reference variables point to the same object. 
-* `nothing.id = 10` - References can be used to modify the objects they reference.
+#### 참조 변수들 비교
 
-#### Comparing Reference Variables
+예를 보자.
 
-Let's look at an example.
-
-With primitive variables, assignment copies values.
+기본형 변수를 사용하여 할당은 값을 복사한다.
 
 ```java
 
@@ -9441,9 +9451,11 @@ With primitive variables, assignment copies values.
 	jshell> i;
 	i ==> 5
 ```
-`j = i` copies the value of `i` into `j`. Later, when value of `j` is changed, `i` is not affected.
 
-Comparing primitive variables compares their values.
+`j=i`는 `i`의 값을 `j`에 복사한다. 나중에 `j`의 값이 바뀌어도 `i`는 영향받지 않는다.
+
+
+기본형 타입의 변수를 비교하는 것은 그 값을 비교하는 것이다.
 
 ```java
 	jshell> i == j;
@@ -9455,7 +9467,7 @@ Comparing primitive variables compares their values.
 ```
 
 
-Let's create a few reference variables.
+몇 가지 참조형 변수를 만들어보자.
 
 ```java
 	jshell> Animal dog = new Animal(12);
@@ -9468,9 +9480,9 @@ Let's create a few reference variables.
 	dog ==> Animal@29ca901e_
 ```
 
-When we compare reference variables, we are still comparing values. But the values are references - the address of memory locations where objects are stored. The values stored inside the referenced objects are not used for comparison.
+참조형 변수를 비교할 때, 우리는 여전히 값을 비교하고 있다. 그러나, 이 값은 참조로, 객체가 저장되는 메모리 위치의 주소이다. 참조된 객체 내부에 저장된 값은 비교에 사용되지 않는다.
 
-Both ```cat``` and ```ref``` reference a single ```Animal``` object created using ```new Animal(10)```. `==` returns true
+```cat```과 ```ref```모두 ```new Animal(10)```을 사용하여 만든 ```Animal```의 단일 객체를 참조한다. `==`는 true를 반환한다.
 ```java
 	jshell> cat == dog;
 	$6 ==> false
@@ -9478,7 +9490,7 @@ Both ```cat``` and ```ref``` reference a single ```Animal``` object created usin
 	$7 ==> true
 ```
 
-The comparison ```dog == dog2``` evaluates to ```false``` since the references i.e. memory locations pointed by these variables are different. They have the same values for ```id``` field (```12```). But, that is not important!
+```dog=dog2```를 비교하는 것은 이 변수들이 가리킨 메모리 저장공간이 다르기 때문에 ```거짓```으로 평가한다. 이들은 ```id```필드(```12```)와 같은 값을 가지고 있다. 하지만 이는 중요하지 않다!
 
 ```java
 	jshell> dog == dog2;
@@ -9489,13 +9501,14 @@ The comparison ```dog == dog2``` evaluates to ```false``` since the references i
 
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계는
 
-* Understood the way reference variables behave during initialization and assignment
-* Saw the relevance of a ```null``` value for references
-* Observed how equality of references, is different from equality of values of primitive types
+* 초기화 및 할당하는 동안 참조 변수가 작동하는 방식을 이해했다.
+* 참조 변수에 대한 ```null```값의 관련성을 확인했다.
+* 참조가 기본형 타입의 값과 어떻게 다른지 관찰했다.
+
 
 ### Step 03: Introducing ```String```
 
