@@ -9304,7 +9304,7 @@ _21 22 23 24 25 26 27 28 29 30_
 
 ##### Snippet-1 설명
 
-```for```반복문의 세 가지 요소는 모두 없어도 되는 것들이다.
+```for```반복문의 세 가지 요소는 모두 선택적인 것들이다.
 
 * ```initialziation```
 * ```condition```
@@ -9515,26 +9515,27 @@ In this step, we:
 * 참조가 기본형 타입의 값과 어떻게 다른지 관찰했다.
 
 
-### Step 03: Introducing ```String```
+### Step 03: ```String``` 소개
 
-A sequence of characters, such as ```"Hello"```, ```"qwerty"``` and ```"PDF"``` is very different from other pieces of data. 
+```"Hello"```,```"qwerty"```,```"PDF"```와 같은 일련의 문자열들은 다른 자료형들과 매우 다르다.
 
-In Java, a sequence of characters is typically represented by ```String``` ```class```.
+자바에서 일반적으로 일련의 문자열들은 ```String``` ```class```로 표현된다.
 
-```String``` provides several built-in utility methods. 
+```String```은 여러 가지 내장된 유틸리티 메소드들을 제공한다. 
 
-Let's look at a few examples.
+몇 가지 예를 보자.
 
 ```java
 
 	jshell> "Test".length()
 	$1 ==> 4
 ```
-```"Test"``` is a string literal, so the compiler internally creates an object, gives it the type ```String``` and allocates memory for it. Since ```length()``` is a method of ```String```, it can be invoked on this ```"Test"``` object.
 
+```"Test"```는 문자열 리터럴이기 때문에 컴파일러는 내부적으로 객체를 들어 ```String```이라는 타입을 부여하고 메모리를 할당한다. ```length()```는 ```String```의 메소드이기 때문에 ```"Test"``` 객체에서 호출될 수 있다.
 
+아래의 예에서. ```str```은 ```"Test"``` 값을 포함하고 있는 ```String```을 참조한다. ```String```의 객체를 만드는 것은 자바에서 우리가 일반적으로 객체를 만드는 방법과는 다르다.
+```String```의 생성자를 만들 필요는 없다. 이를 ```BigDecimal```객체를 만드는 방법과 비교해 보자.
 
-In the example below, ```str``` is a reference to a ```String``` object, containing the value ```"Test"```. Creating a ```String``` object is an exception to how we typically create objects in Java. You don't need to make a ```String``` constructor call. Contrast this with how we would create a ```BigDecimal``` object.
 ```java
 	jshell> String str = "Test";
 	str ==> "Test"
@@ -9542,7 +9543,8 @@ In the example below, ```str``` is a reference to a ```String``` object, contain
 	bd ==> 1.0
 ```
 
-String indexes, like those of arrays, start at ```0```. The ```charAt(int)``` method takes an index value as its argument, and returns the character symbol present at that index.
+String의 인덱스는 배열과 마찬가지로 ```0```부터 시작한다. ```charAt(int)``` 메소드는 인자 값을 인덱스로 취하고, 그 자리에 존재하는 문자열 기호를 반환한다.
+
 
 ```java
 	jshell> str.charAt(0)
@@ -9552,9 +9554,11 @@ String indexes, like those of arrays, start at ```0```. The ```charAt(int)``` me
 	jshell> str.charAt(3)
 	$4 ==> 't'
 ```
-The ```substring()``` method returns a ```String``` reference, and has overloaded versions:
-* The ```substring(int, int)``` method returns the sequence of character symbols starting at the lower index, and ending just before the upper index. 
-* The ```substring(int)``` method returns the sequence of character symbols starting from the index to end of string.
+
+```substring()```메소드는 ```String```의 참조를 반환하고 있으며, 다음과 같은 오버로딩된 버전도 있다.
+* ```substring(int,int)```메소드는 낮은 인덱스에서 시작하여 상위 인덱스 바로 앞에서 끝나는 일련의 문자열을 반환한다.
+* ```substring(int)''' 메소드는 해당 인덱스에서 문자열 끝까지 일련의 문자열을 반환한다.
+
 
 ```java
 	jshell> String biggerString = "This is a lot of text";
@@ -9570,18 +9574,18 @@ The ```substring()``` method returns a ```String``` reference, and has overloade
 ```
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는:
 
-* Were introduced to the ```String``` class, that represents sequences of characters
-* Explored a few utility methods of the ```String``` class
+* 일련의 문자열을 나타내는 ```String```클래스가 소개되었다.
+* ```String```클래스의 몇몇 유틸리티 메소드를 탐색했다.
 
-### Step 04: Programming Exercise PE-01, And ```String``` Utilities
+### Step 04: PE-01 프로그래밍 실습과 ```String``` 유틸리티
 
-#### Exercise
+#### 실습
 
-1. Write a method to print the individual characters of a given text string, separately.
+1. 주어진 텍스트 문자열을 분리하여 개별의 문자들로 출력하는 메소드를 작성하라.
 
 #### Solution To PE-01
 
@@ -9605,9 +9609,9 @@ In this step, we:
 
 #### Common ```String``` Utilities
 
-The ```String``` class is part of the built-in ```java.lang``` package. It provides several methods for common text processing. Let's have a peek at some of them, shall we? 
+```String```클래스는 ```java.lang```패키지에 내장된 일부분이다. 그것은 일반적인 텍스트를 처리하기 위한 몇 가지 메소드를 제공한다. 그들 중 몇몇을 살짝 들여다볼까?
 
-##### Snippet-01: ```String``` Utilities 
+##### Snippet-01: ```String``` 유틸리티들
 
 
 Here are a few of the methods used in the examples below:
