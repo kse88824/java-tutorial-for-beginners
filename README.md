@@ -23,7 +23,7 @@
 * [Chapter 07 - 조건문 소개 - if, switch and more](#조건문-소개---if-switch-and-more)
 * [Chapter 08 - 반복문](#반복문)
 * [Chapter 09 - 참조형 타입](#참조형-타입)
-* [Chapter 10 - Array와 ArrayList](#array와-arraylist)
+* [Chapter 10 - Array(배열)와 ArrayList](#array와-arraylist)
 * [Chapter 11 - 객체 지향 프로그래밍 (*OOP*) - 복습](#객체-지향-프로그래밍-oop---복습)
 * [Chapter 12 - 컬렉션의 이해](#컬렉션의-이해)
 * [Chapter 13 - 제네릭의 이해](#제네릭의-이해)
@@ -5819,7 +5819,6 @@ _Bike started!_
 ```setSpeed()```는 if(speed > 0)을 체크하고 음의 값으로 속도를 업데이트하지 않는다.
 
 > `setSpeed`메소드의 호출자가 성공했다고 가정하기 떄문에 완벽한 해결책은 아니다. 이상적으로 검증 오류를 나타내는 예외를 적용해야 한다. 예외에 대해서는 나중에 이야기하겠다.
-> This is not perfect solution because the caller of the `setSpeed` method assumes that he was successful. Ideally, we should throw an Exception indicating validation error. We will talk about Exceptions later.
 
 
 #### 요약
@@ -9613,15 +9612,15 @@ String의 인덱스는 배열과 마찬가지로 ```0```부터 시작한다. ```
 
 ##### Snippet-01: ```String``` 유틸리티들
 
+다음은 아래 예에서 사용되는 몇 가지 메소드입니다.
+* ```indexOf()```: 두 가지 오버로딩된 버전이 있다. ```indexOf(char)```은 문자열에서 문자가 처음으로 생성되는 위치를 반환한다. ```indexOf(String)```은 문자열 내에서 처음으로 문자열이 시작하는 위치를 반환한다.
+* ```lastIndexOf()``` : ```indexOf()```와 비슷하지만, "*처음*"이 아닌 "**마지막으로**" 대체한다.
+* ```startsWith()``` : 문자열이 *특정한 문자*로 시작하는 경우 ```true```를 반환하고, 그렇지 않으면 ```false```를 반환한다.
+* ```endsWith()``` : 문자열이 *특정한 문자*로 끝나는 경우 ```true```를 반환하고, 그렇지 않으면 ```false```를 반환한다.
+* ```isEmpty()``` : 문자열이 비어 있으면 ```true```를, 그렇지 않으면 ```false```를 반환한다.
+* ```equals()``` : 문자열이 인자와 같으면 ```true```를 반환하고, 그렇지 않으면 ```false```를 반환한다.
+* ```equalsIgnoreCase()``` : 문자열이 인자와 같으면 ```true```를 반환하고 이 문자열은 무시한다. 그렇지 않으면 ```false```를 반환한다.
 
-Here are a few of the methods used in the examples below:
-* ```indexOf()``` : Has two overloaded versions. ```indexOf(char)``` returns the position where a character occurs in a string, the first time. ```indexOf(String)``` returns the starting position where a string occurs within our string, the first time.
-* ```lastIndexOf()``` : Similar in function to ```indexOf()```, but replace "*first time*" with "**final time**" in its description.
-* ```startsWith()``` : Returns ```true``` if our string starts with the given *prefix*, ```false``` otherwise.
-* ```endsWith()``` : Returns ```true``` if our string ends with the given *suffix*, ```false``` otherwise.
-* ```isEmpty()``` : Returns ```true``` if our string is empty, ```false``` otherwise.
-* ```equals()``` : Returns ```true``` if our string is identical to the argument, ```false``` otherwise.
-* ```equalsIgnoreCase()``` : Returns ```true``` if our string is identical to the argument, ignoring the case of its characters. Will return ```false``` otherwise.
 
 ```java
 
@@ -9668,24 +9667,25 @@ Here are a few of the methods used in the examples below:
 ```
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Used our ```String``` programming skills on a small challenge.
-* Explored a set of simple, yet useful ```String``` utilities.
+* 작은 챌린지를 통해 ```String```프로그래밍 기술을 사용했다.
+* 간단하면서도 유용한 ```String```유틸리티 집합을 살펴보았다.
 
-### Step 05: ```String``` Immutability
+### Step 05: ```String``` 의 불변
 
-What picture forms in your mind on hearing the word "**immutable**"? Someone whose voice cannot be muted out? Or is it the other way round? 
+"**불변(immutable)**"이라는 단어를 들으면 어떤 생각이 떠오르는가? 
 
-The word "immutable" is related to the concept of "mutability", or the possibility of "mutating" something. 
+"불변"이라는 단어는 "변환성"의 개념 혹은 "변환"의 가능성과 관련이 있다.
 
-"**mutate**" means "**to change**". "Immutable" refers to something that "**cannot be changed**". 
+"**변환**"은 "**바뀌는 것**"을 의미한다. 따라서 "불변"은 "**변경 불가**"를 의미한다.
 
-```String``` objects are immutable. You cannot change their value after they are created.
+```String``` 객체는 불변한다. 생성한 후에는 값을 변경할 수 없다.
 
-The method ```concat()```joins the contents of two ```String``` objects into one. 
+```concat()```메소드는 두 개의 ```String``` 객체를 하나로 합친다. 
+
 
 ```java
 
@@ -9695,14 +9695,15 @@ The method ```concat()```joins the contents of two ```String``` objects into one
 	$1 ==> "in28Minutes is awesome"
 ```
 
-However, the original value referred by `str` remains unchanged. The `concat` method create a new `String` object.
+그러나, `str`을 참조한 원래 값은 변경되지 않는다. `concat`메소드는 새로운 `String`객체를 만들어낸다.
+
 
 ```
 	jshell> str
 	str ==> "in28Minutes"
 ```
 
-Just like ```concat()```, other ```String``` methods such as ```toUpperCase()```, ```toLowerCase()``` and ```trim()``` return new ```String``` objects.
+```concat()```과 마찬가지로 ```toUpperCase()```, ```toLowerCase()```,```trim()``` 메소드는 새로운 ```String```객체를 반환한다.
 
 ```java
 
@@ -9730,26 +9731,26 @@ Just like ```concat()```, other ```String``` methods such as ```toUpperCase()```
 
 ```
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* We understood that ```String``` objects are immutable
-* Observed how common ```String``` utilities return a new String. 
+* ```String```객체가 불변임을 이해했습니다.
+* 새로운 객체를 반환하는 ```String```유틸리티들을 확인했습니다.
 
-### Step 06:  More ```String``` Utilities
+### Step 06:  더 많은 ```String``` 유틸리티들 
 
-The symbol ```+``` denotes addition, and addition only, right? Any school kid will tell you that, or laugh at you if you disagree. 
+```+```기호는 덧셈만을 의미한다고 생각하지 않았나? 어떤 학생이라도 그렇다고 할 것이고, 그렇지 않으면 비웃을 것이다.
 
-Heck, we even saw how to use it with the primitive numeric types, such as ```int```, ```double``` and others related to it.
+우리는 ```int```와 ```double```과 같은 기본형 숫자 타입들도 살펴보았다.
 
-Java does not strictly follow your arithmetic text book. 
+자바는 산수 교과서를 엄격하게 따르지 않는다.
 
-```+``` can also be used as a ```String``` concatenation operator.
+```+```는 ```String```연결 연산자로도 사용될 수 있다.
 
-Here is how ```+``` works
-* if both operands of ```+``` are numeric,  then arithmetic ```+``` (addition) is performed.
-* If any one of the operators is a ```String```, then string concatenation is performed.
+```+```의 동작들은 이렇다.
+* ```+```의 두 피연산자가 모두 숫자일 경우, 산술 연산 ```+```(덧셈)이 수행된다.
+* 만일 피연산자 중 하나라도 ```String```이라면, 문자열 연결이 이루어진다.
 
 
 ```java
@@ -9770,7 +9771,7 @@ Here is how ```+``` works
 	$7 ==> "33"
 ```
 
-In the example below, a different value is printed when parentheses are used around `i + 20`.
+아래의 예에서 `i + 20`을 출력할 때 다른 값들이 출력되는 것을 볼 수 있다.
 
 ```java
 	jshell> int i = 20;
@@ -9783,14 +9784,14 @@ In the example below, a different value is printed when parentheses are used aro
 	Value is 40
 ```
 
-```join()``` is used to join a set of `String` values.
+```join()```은 일련의 `String` 값을 결합하는 데 사용된다. 
 
 ```java
 	jshell> String.join(",", "2", "3", "4");
 	$8 ==> "2,3,4"
 ```
 
-```replace(String, String)```replaces all occurrences of the first sub-string with the second one. It also works with `char` data type.
+```replace(String, String)```은 첫 번째 서브 문자열(첫 번째 인자)을 두 번째 서브 문자열(두 번째 인자)로 대치한다. `char`데이터 타입과도 호환된다.
 
 ```java
 	jshell> "abcd".replace('a', 'z');
@@ -9802,17 +9803,17 @@ In the example below, a different value is printed when parentheses are used aro
 ```
 
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Learned that the ```+``` operator is overloaded for ```String``` concatenation
-* Observed how ```+``` interprets its operands, depending on the context
-* Noticed a few more ```String``` utility methods, such as ```join()``` and ```replace()```
+* ```+```연산자가 ```String``` 연결로 오버로딩될 수 있다는 것을 알았다.
+* 상황에 따라 ```+```가 피연산자를 어떻게 해석하는지 관찰한다.
+* ```join()```과 ```replace```와 같은 몇 가지 ```String```유틸리티 메소드를 알아보았다.
 
-### Step 07: Storing mutable text
+### Step 07: 변경 가능한 텍스트 저장
 
-```StringBuffer``` and ```StringBuilder``` allow you to modify a string literal in-place. 
+```StringBuffer``` 와 ```StringBuilder``` 는 문자열 리터럴을 수정할 수 있게 한다.
 
 ```java
 
@@ -9831,21 +9832,23 @@ In this step, we:
 	jshell>
 
 ```
-How do you choose which one to use?
-* `StringBuffer` is thread safe. If you are writing a multi threaded program(more on this in a later section), use ```StringBuffer```.
-* Otherwise, use ```StringBuilder```, since it offers better performance in both execution-time and memory usage.
 
-#### Summary
+어떤 것을 사용할지 어떻게 선택하나요?
+* `StringBuffer`은 스레드에 안전하다. 만약 멀티 스레드 프로그램을 작성하고 있다면 ```StringBuffer```를 사용하라. (스레드에 대해서는 나중에 나올 섹션에서 자세히 설명하겠다.)
+* 그렇지 않으면 실행 시간과 메모리 사용 모두에서 더 나은 성능을 제공하는 ```StringBuilder```를 사용해야한다.
 
-In this step, we:
+#### 요약
 
-* Learned about ```StringBuffer``` and ```StringBuilder```
+이번 단계에서는
 
-### Step 08: Introducing Wrapper Classes
+* ```StringBuffer```와 ```StringBuilder```에 대해 배웠다.
 
-Each primitive type in Java has a corresponding built-in **wrapper class**. Wrapper classes are also immutable (As well as ```final```, more on this a little later). 
 
-Following is a list of built-in Java wrapper classes and their corresponding primitive types:
+### Step 08: 래퍼 클래스 소개 
+
+자바의 각 기본형 타입에는 내장된 **래퍼 클래스**가 있다. 이 래퍼 클래스 도한 불변이다. (이와 비슷한 ```final```은 나중에)
+
+다음은 자바에 내장된 래퍼 클래스 및 해당하는 기본형 타입 목록이다.
 * ```byte``` : ```Byte```
 * ```short``` : ```Short```
 * ```int``` : ```Integer```
@@ -9855,25 +9858,27 @@ Following is a list of built-in Java wrapper classes and their corresponding pri
 * ```char``` : ```Character```
 * ```boolean``` : ```Boolean```
 
-The main incentives of using such wrappers in your code, are:
-* Accessing type information about the corresponding primitive type
+코드에서 이러한 래퍼를 사용하는 주된 동기는 다음과 같다:
+* 기본형 타입에 대응하는 타입 정보 접근
+* 기본형 데이터가 w자동으로 객체 참조 타입으로 승격되는 자동 박싱 (Auto-Boxing) 기능
+* 데이터 구조 (*컬렉션*이라고 함)를 중심으로 기본형 데이터 이동과 래퍼 스타일의 데이터 사용
 * Auto-Boxing feature, where a primitive data is automatically promoted to an object  reference type
 * Moving primitive type data around data structures (called *collections*), using their wrapper-style counterparts
 
-Let's look at these incentives in the next step.
+다음 단계에서 이러한 동기들을 살펴보자.
 
-#### Summary
+#### 요약
 
-In this step, we:
+이번 단계에서는
 
-* Were introduced to the wrapper classes available for the primitive types
-* Learned about the advantages of having them around
+* 기본형 타입에서 사용할 수 있는 래퍼 클래스에 대해 알아보았다.
+* 사용할 경우 이점에 대해 배웠다.
 
-### Step 09: Creating Wrapper Objects
+### Step 09: 래퍼 객체 생성하기
 
-Now that we know what wrapper classes are, and which ones correspond to each primitive Java type, let's try them out.
+이제 래퍼 클래스가 무엇인지, 그리고 각 기본형 타입에 해당하는 래퍼 클래스가 무엇인지 알게 되었으니, 시험해 보자.
 
-Creating instance of Wrapper Classes using `new` is simple. Examples below.
+`new`를 사용하여 래퍼 클래스의 인스턴스를 만드는 것은 간단하다. 아래의 예시를 보자.
 
 ```java
 
@@ -9885,8 +9890,7 @@ Creating instance of Wrapper Classes using `new` is simple. Examples below.
 	Boolean b1 = new Boolean("other arbitrary string"); //false
 
 ```
-
-You can also use ```valueOf()``` method within types such as ```Integer``` and ```Float``` to create a wrapper object. 
+또한 ```valueOf()```메소드를 ```Integer```와 ```Float```같은 타입 내에서 사용하여 래퍼 객체를 만들 수도 있다.
 
 ```java
 
@@ -9897,11 +9901,12 @@ You can also use ```valueOf()``` method within types such as ```Integer``` and `
 
 ```
 
-#### Difference between creating wrapper objects using valueOf and new
+#### valueOf와 new를 사용하여 래퍼 객체를 생성하는 것의 차이
 
-The ```Integer.valueOf()``` reuses existing ```Integer``` objects with same value on the heap. If an object with same value is present in the heap, it returns a reference to existing object. Otherwise, it returns a reference of a newly created ```Integer``` object.
+```Integer.valueOf()```는 힙에서 동일한 가치를 지닌 기존의 ```Integeer```객체를 재사용한다. 동일한 값의 객체가 힙에 있으면 기존 객체에 대한 참조가 반환된다. 그렇지 않으면 새로 만들어진 ```Integer```객체의 참조가 반환된다.
 
-Wrapper classes are immutable. Hence, above approach is efficient and accurate.
+래퍼 클래스는 불변하다. 따라서 위의 접근법이 효율적이고 명확하다.
+
 
 ```java
 
@@ -9920,20 +9925,20 @@ Wrapper classes are immutable. Hence, above approach is efficient and accurate.
 	jshell>
 
 ```
-#### Summary 
+#### 요약
+
+이번 단계에서는
 
 In this step, we:
 
-* Discovered that there are two ways to create a wrapper object for primitive data
-* Learned that ```valueOf()``` takes advantage of immutability, to improve efficiency
+* 기본형 데이터를 위한 래퍼 객체를 만드는 방법은 두 가지가 있다.
+* ```valueOf()```는 불변성을 이용하여 효율성을 향상시킨다는 것을 알게 되었습니다.
 
-### Step 10: Auto-Boxing, And Some Wrapper Constants
+### Step 10: Auto-Boxing과 일부 래퍼 상수
 
-**Auto-Boxing** is an example of **syntactic sugar** in the Java language. It does not provide new features but makes code more readable. 
+**자동 박싱(Auto-Boxing)** 은 자바 언어에서 **syntactic sugar**의 예이다. 이는 새로운 기능을 제공하지는 않지만 코드의 가독성을 향상시킨다.
 
-Auto-boxing reuses the mechanism provided by ```Integer.valueOf()``` for ```Integer```, ```Float``` and others.
-
-
+자동 박싱은 ```Integer.valueOf()```에서 ```Integer```나 ```Float```등을 위해 사용하는 메커니즘을 재사용한다.
 
 ```java
 
@@ -9947,9 +9952,9 @@ Auto-boxing reuses the mechanism provided by ```Integer.valueOf()``` for ```Inte
 	$1 ==> true
 ```
 
-In the above example, 	`Integer sevenToo = 7000` uses auto boxing. We are upgrading a `int` literal to a `Integer` value. This is done implicitly by using `Integer.valueOf` method.
+위의 예에서 `Integer sevenToo = 7000`은 자동박싱을 사용한다. `int`리터럴을 정수 값으로 업그레이드하고 있다. 이것은 `Integer.valueOf` 메소드를 사용하여 암묵적으로 이루어진다.
 
-There are constants available on Wrapper classes print the size of their variables and the range of values they can store.
+래퍼 클래스에서 사용할 수 있는 상수는 변수의 크기와 저장할 수 있는 값의 범위를 출력한다.
 
 ```
 	jshell> Integer.MAX_VALUE
@@ -9965,31 +9970,32 @@ There are constants available on Wrapper classes print the size of their variabl
 ```
 
 
-#### Summary
+#### 요약
 
+이번 단계에서는
 In this step, we:
 
-* Understood the mechanism of auto-boxing, which uses the assignment operator route
-* Understood how auto-boxing internally makes use of ```valueOf()``` method
+* 할당 연산자 경로를 사용하는 자동 박싱 메커니즘을 이해했다.
+* 자동 박싱이 내부적으로 ```valueOf()```메소드를 어떻게 활용하는지 이해했다.
 
-### Step 11: The Java ```Date``` API
+### Step 11: 자바의 ```Date``` API
 
-No  discussion on the built-in Java primitive and reference types is complete without an exploration of the Date API. 
+내장된 Java 기본형 및 참조형 타입에 대한 논의는 날짜 API에 대해 배우지 않고는 끝나지 않았다고 할 수 있다.
 
-Before Java SE 8, there were a lot of practical issues regarding the interface and implementation of the ```Date``` class.
+Java SE 8 이전에는 ```Date```클래스의 인터페이스와 구현에 관한 현실적인 문제들이 많았다.
 
-From Java 8, Java provided an API for `Date` classes based on the Joda Date Framework. 
+Java 8에서부터 Joda Date 프레임워크 기반의 ```Date```클래스를 위한 API를 제공하였다.
 
-The three most significant classes within this framework are : ```LocalDate```, ```LocalTime``` and ```LocalDateTime```. 
+이 프레임워크 내에서 가장 중요한 세 가지 클래스는 ```LocalDate```, ```LocalTime```, ```LocalDateTime``` 이다.
 
-##### Snippet-01 : java.time utilities
+##### Snippet-01 : java.time 유틸리티
 
-```java.time.*``` is not imported automatically by Jshell.  Let's import it in. 
+```java.time.*``` 는 Jshell에서 자동으로 가져오지 않는다. 가져와보자. 
 
-The commonly used utilities to access current values of date and time are:
-* ```LocalDate.now()``` : Returns the current date value in readable format
-* ```LocalTime.now()``` : Returns the current time value in a readable format
-* ```LocalDateTime.now()``` : Returns a combination of the current date and time values, in a readable format   
+현재 날짜 및 시간 값에 엑세스하는 데 일반적으로 사용되는 유틸리티는 다음과 같다.
+* ```LocalDate.now()``` : 현재 날짜 값을 읽을 수 있는 형식으로 반환한다. 
+* ```LocalTime.now()``` : 현재 시간 값을 읽을 수 있는 형식으로 반환한다.
+* ```LocalDateTime.now()``` : 현재 날짜와 시간 값을 조합하여 읽을 수 있는 형식으로 반환한다.
 
 ```java
 
@@ -10005,21 +10011,22 @@ The commonly used utilities to access current values of date and time are:
 
 ```
 
-#### Summary
+#### 요약
+
+이번 단계에서는
 
 In this step, we:
 
-* Were introduced to the Java Date API, available through the ```java.time``` package
-* Saw how to use the ```LocalDate```, ```LocalTime``` and ```LocalDateTime``` types
+* ```java.time```패키지를 통해 제공되는 Java Date API를 살펴보았다.
+* ```LocalDate```, ```LocalDate```, ```LocalTime```의 사용법을 알아보았다.
 
-### Step 12: Playing With ```java.time.LocalDate```
+### Step 12:  ```java.time.LocalDate``` 사용해보기
 
-We've been looking at calendars right from childhood, haven't we! How about playing around with a digital calendar? 
+우리는 어릴 때부터 달력을 봐왔다. 디지털 달력을 가지고 노는 건 어떤가?
 
-`LocalDate` provides a number of methods to retrieve 
-* Date information: Day/Month/Year and related attributes
-* Date meta-information: Classification-related information, such as whether a leap year, etc.
-
+`LocalDate`는 정보를 가져오는 메소드를 여러 가지 제공한다.
+* 날짜 정보: 일/월/년 및 관련된 속성들
+* 날짜 메타 데이터 정보: 윤년 여부 등 분류 관련 정보
 
 ```java
 
@@ -10046,8 +10053,7 @@ We've been looking at calendars right from childhood, haven't we! How about play
 	jshell> today.lengthOfMonth()
 	$9 ==> 28
 ```
-
-```LocalDate``` is also immutable. You can use different methods provided to add and subtract days, months and years. Each of these return a new instance of ```LocalDate```.
+```LocalDate``` 또한 불변이다. 제공된 여러 가지 메소드를 사용하여 일,월 및 연도를 더하고 뺄 수 있다. 이들 각각은 ```LocalDate```의 새로운 인스턴스를 반환한다.
 
 ```java
 	jshell> today.plusDays(100)
@@ -10066,18 +10072,20 @@ We've been looking at calendars right from childhood, haven't we! How about play
 
 ```
 
-```LocalDateTime``` extends ```LocalDate``` and provides time component as well. You can access, and perform arithmetic on the hours, minutes, seconds and nanoseconds values.
+```LocalDateTime```은 ```LocalDate```를 확장하고 시간 구성요소도 제공한다. 시간, 분, 초 및 나노초 값에 엑세스하여 계산을 수행할 수 있다.
 
-#### Summary
+#### 요약
+
+이번 단계에서는
 
 In this step, we:
 
-* Saw common utilities that the ```LocalDate``` ```class``` provides
-* Learned that ```LocalDate```, ```LocalTime``` and ```LocalDateTime``` are all immutable
+* ```LocalDate``` ```클래스```가 제공하는 공통 유틸리티들을 보았다.
+* ```LocalDate```,```LocalTime```, ```LocalDateTime```은 모두 불변이라는 것을 알게 되었다.
 
-### Step 13: Comparing ```LocalDate``` Objects
+### Step 13: ```LocalDate```객체 비교
 
-You can take a look at additional utility methods in ```LocalDate``` in examples below:
+아래의 예에서 ```LocalDate```의 추가적인 유틸리티 메소드들을 살펴볼 수 있습니다.
 
 ```java
 
@@ -10095,7 +10103,7 @@ You can take a look at additional utility methods in ```LocalDate``` in examples
 	$4 ==> 2018-04-30
 ```
 
-You can also compare dates using the methods shown below:
+아래에 보이는 메소드들을 사용하여 날짜를 비교할 수도 있다.
 
 ```java
 	jshell> today.isBefore(yesterday)
@@ -10106,14 +10114,15 @@ You can also compare dates using the methods shown below:
 	
 ```
 
-These methods are also available with ```LocalTime``` and ```LocalDateTime``` classes as well.
+이러한 메소드들은 ```LocalTime```과 ``LocalDateTime```클래스로도 이용할 수 있다.
 
-## Arrays and ArrayList
+## Array(배열)와 ArrayList
 
-We will use the following exercise to understand heavily used data structures of Java - Arrays and 
-`ArrayList`.
+이제 Java - Array의 많이 사용되는 자료 구조를 이해하기 위해 다음과 같은 연습을 할 것이다.
 
-We would like to model a student report card in a Java program, which allows the user to do stuff such as:
+`ArrayList`
+
+자바 프로그램에서 학생 성적표를 모델링하여 다음과 같은 작업을 수행할 수 있도록 한다.
 
 ```java
 
@@ -10128,14 +10137,14 @@ We would like to model a student report card in a Java program, which allows the
 
 ```
 
-A data structure like array and `ArrayList` allow you to store multiple object of the same kind. These are called **aggregates**. 
+배열(Array)과 `ArrayList`와 같은 데이터 구조를 통해 동일한 종류의 여러 객체를 저장할 수 있다. 이를 **집합체**라고 한다.
 
+### Step 01: ```배열```의 필요성
 
-### Step 01: The Need For ```Array```
+먼저 배열의 필요성에 대해 알아보자.
 
-Let's start with understanding the need for arrays.
+아래의 예를 생각해 보아라. 우리는 3개의 mark를 만들어 더하고 있다.
 
-Consider the example below. We are creating 3 marks and adding them.
 
 ```java
 
@@ -10157,26 +10166,25 @@ Consider the example below. We are creating 3 marks and adding them.
 
 ```
 
-If an additional mark component ```mark4``` is added to the existing list of marks ```mark1```, ```mark2``` and ```mark3```, the code for computing ```sum``` needs to change. 
+기존의 ```mark1```,```mark2```,```mark3```가 존재하는 mark 리스트에 ```mark4```라는 mark요소가 추가된다면, ```sum```은 계산하는 코드를 바꿀 필요가 있다.
 
-All these marks are similar. How about creating a group of marks and storing it as part of single variable?
+이 모든 마크들은 비슷하다. 마크 그룹을 만들어 단일 변수의 일부로 저장하는 것은 어떠한가?
 
-Let's create an array - `marks`
+`mark` 배열을 만들어보자
 
 ```java
 
 	jshell> int[] marks = {75, 60, 56};
 	marks ==> int[3]{ 75,60,56 }
 ```
-In above example
-* ```marks``` is an ```array```. 
-* `marks` stores multiple ```int``` values.
-* `marks` array has 3 values
+위의 예에서
+* ```marks```는 ```배열```이다.
+* `marks`는 여러 개의 ```int```값들을 저장한다.
+* `marks`배열의 값은 3개이다.
 
-In an array, the index runs from 0 to (length of array - 1). In above example, the index runs from 0 to 2. 
+배열에서 인덱스는 0에서 (배열의 길이 -1) 까지 실행된다. 위의 예제에서 인덱스는 0에서 2까지이다.
 
-You can use an index to find the specific element from the array. It is done by using the indexing operator, '```[]```'. The expression ```marks[0]``` maps to the first array element stored at index ```0``` of the array ```marks```.
-
+인덱스 연산자 '```[]```'를 사용하여 배열에서 특정 요소를 찾을 수 있다. ```marks[0]```라는 수식은 ```marks```라는 배열의 인덱스 ```0```에  저장된 첫 번째 배열 요소에 대한 매핑이다.
 
 ```java
 jshell> marks[0]
@@ -10188,8 +10196,7 @@ $21 ==> 60
 jshell> marks[2]
 $22 ==> 56
 ```
-
-How do we write code to sum all values in marks array?
+모든 값을 배열로 더하기 위해서 어떻게 코드를 작성해야 하는가?
 
 ```java
 
@@ -10204,17 +10211,18 @@ How do we write code to sum all values in marks array?
 
 ```
 
-Above construct is called Enhanced ```for``` loop.
+위의 구조는 강화된 ```for```반복문이라고 불린다.
 
-```mark``` is the loop control variable. Its type needs to match the type of an array elements, which is ```int```.
+```mark```는 루프 제어 변수이다. 그것의 타입은 ```int```인 배열 요소의 타입과 일치해야 한다.
 
-Above ```for``` loop can be used irrespective of the number of elements in `marks` array.
+위의 ```for```반복문은 `mark`배열의 요소 수에 관계없이 사용할 수 있다.
 
-### Step 02:  Storing And Accessing Array Values
+### Step 02:  배열의 값 저장 및 엑세스
 
-Let's dig deeper into arrays in this step.
+이 단계에서 배열에 대해 더 자세히 알아보자.
 
-An array can be used to store zero or more number of elements. 
+배열은 0개 이상의 요소를 저장하는 데 사용할 수 있다.
+
 
 ```java
 
@@ -10228,17 +10236,16 @@ An array can be used to store zero or more number of elements.
 	marks ==> int[0]{  }
 ```
 
+또한 new 연산자를 사용하여 배열을 생성할 수 있다. 이 때 배열의 크기를 지정해야 한다.
 
-An array can also be created with ```new``` operator. You've to specify the size of the array.
 ```java
 	jshell> int[] marks2 = new int[5];
 	marks2 ==> int[5]{ 0,0,0,0,0 }
 ```
 
-You can use array index to assign values. 
+배열ㅇ 인덱스를 사용하여 값을 할당할 수 있다.
 
-`marks2[0] = 10` stores `10` as first element in marks array.
-
+`marks2[0] = 10`은 mark배열의 첫 번째 요소로 10을 저장한다.
 
 ```java
 	jshell> marks2[0]
@@ -10251,7 +10258,7 @@ You can use array index to assign values.
 
 ```
   
-Snippet below shows more examples.
+스니펫은 더 많은 예들을 보여준다.
 
 ```java
 
@@ -10271,7 +10278,7 @@ Snippet below shows more examples.
 	marks2 ==> int[5]{ 1,2,3,4,5 }
 ```
 
-`length` can be used to find the number of elements in the array.
+`length`는 배열에서 요소의 수를 찾는데 사용될 수 있다.
 
 ```java
 	jshell> marks2.length
@@ -10284,9 +10291,9 @@ Snippet below shows more examples.
 ```
 #### Classroom Exercise CE-AA-01
 
-1. Write a program that creates an array ```marks``` to store 	```8``` ```int``` values, and code to iterate through ```marks``` using a ```for``` loop, printing out its values.
+1. ```8```개의 ```int```값을 저장하기 위해 배열 ```marks```를 생성하고 ```for문```을 이용하여 그 값을 출력하는 프로그램을 작성하라.
 
-Hint: Use the ```marks.length``` property
+Hint: ```mark.length```속성을 사용하라
 
 #### Solution To CE-AA-01
 
@@ -10311,11 +10318,12 @@ Hint: Use the ```marks.length``` property
 
 ```
 
-### Step 04: Array Initialization, Data Types And Exceptions
+### Step 04: 배열 초기화, 데이터 타입과 예외
 
-Below snippet shows how arrays with different types are initialized.
+아래 스니펫은 서로 다른 타입의 배열이 초기화 되는 방법을 보여준다.
 
-Summary - int - 0, double - 0.0, boolean - false, Any object - null
+요약: int - 0, double - 0.0, 부울 - false, 다른 객체 - null
+
 
 ```java
 
@@ -10334,12 +10342,12 @@ Summary - int - 0, double - 0.0, boolean - false, Any object - null
 
 ```
 
-Let's look at a few variations of array declarations.
+배열 선언의 몇 가지 변형을 살펴보자.
 
-Important things to Remember
-* The declaration part of an array definition must not include the dimension of the array
-* The assignment part of an array definition must include the dimension of the array
-* All the elements of an array must be of the same, homogeneous type
+기억해야 할 중요 사항
+* 배열 정의의 선언 부분에는 배열의 차원이 포함되지 않아야 한다.
+* 배열 정의의 할당 부분에는 배열의 차원이 포함되어야 한다.
+* 배열의 모든 요소는 동일한 타입이어야 한다.
 
 ```java
 
@@ -10366,8 +10374,8 @@ Important things to Remember
 	jshell>
 
 ```
+배열 이름은 힙에 배열이 생성되는 위치의 주소를 저장하는 참조 변수이다.
 
-The name of an array is a reference variable that stores the address of where the array is created on the heap.
 ```java
 
 	jshell> int[] marks4 = {1, 2, 3, 4, 5};
@@ -10375,8 +10383,8 @@ The name of an array is a reference variable that stores the address of where th
 	jshell> System.out.println(marks4);
 	I@6c49835d
 ```
+내장 메소드 ```Arrays.toString```은 배열의 요소를 출력하는 데 사용할 수 있다.
 
-The built-in method ```Arrays.toString``` can be used to print out elements of an array.
 ```java
 	jshell> System.out.println(Arrays.toString(marks));
 	[1, 2, 3, 4, 5]
@@ -10384,18 +10392,18 @@ The built-in method ```Arrays.toString``` can be used to print out elements of a
 
 ```
 
-### Step 05: Array Utilities
+### Step 05: 배열 유틸리티
 - - - 
 
-Let's look at a few examples for
-* Iterating through An Array
-* Bulk-modification of array elements
-* Comparing Arrays
-* Sorting Arrays
+다음의 몇 가지 예를 살펴보자.
+* 배열을 통한 반복
+* 배열 요소의 대량 수정
+* 배열 비교
+* 배열 정렬
 
-##### Snippet-01 : Iterating through an array
+##### Snippet-01 : 배열을 통한 반복
 
-Using an enhanced ```for``` loop is easy and intutive.
+강화된 ```for문```을 사용하는 것은 쉽고 직관적이다.
 
 ```java
 
@@ -10421,9 +10429,9 @@ Using an enhanced ```for``` loop is easy and intutive.
 
 ```
 
-##### Snippet-02 : Filling & Comparing Arrays
-
-```Array.fill``` fills the entire array with a specified value.
+##### Snippet-02 : 배열 비교하기 & 채우기
+ 
+```Array.fill```은 전체 배열을 지정된 값으로 채운다. 
 
 ```java
 
@@ -10434,10 +10442,9 @@ Using an enhanced ```for``` loop is easy and intutive.
 	marks ==> int[5]{ 100,100,100,100,100 }
 ```
 
-```Array.equals``` compares two given arrays, and returns a ```boolean``` value of```true``` only if
-* Both arrays are of same length and
-* Elements at each corresponding index are equal, for all indexes
-
+```Array.equals```는 주어진 두 개의 배열으 비교하고, 다음의 경우에만 ```true```인 ```boolean``` 값을 반환한다.
+* 두 배열의 길이가 동일함.
+* 모든 인덱스에 대해 각 해당 인덱스의 요소가 동일함.
 
 ```java
 	jshell> int[] array1 = {1, 2, 3};
@@ -10459,7 +10466,8 @@ Using an enhanced ```for``` loop is easy and intutive.
 	$3 ==> false
 ```
 
-```Array.sort```: Performs an in-position sorting of elements by comparing pairs of them at a time.
+```Array.sort```: 한 번에 한 쌍의 요소를 비교함으로써 요소들의 위치 정렬을 수행한다.
+
 ```java
 	jshell> Arrays.sort(array3);
 	jshell> array3
@@ -10472,7 +10480,7 @@ Using an enhanced ```for``` loop is easy and intutive.
 
 #### Exercise
 
-Armed with the knowledge of Java arrays and their in-built utility methods, let's now solve the challenge we started off with. 
+이제 Java 배열과 내장된 유틸리티 메소드에 대한 지식을 바탕으로 시작했던 과제를 해결해보자.
 
 ```java
 
@@ -10485,7 +10493,7 @@ Armed with the knowledge of Java arrays and their in-built utility methods, let'
 
 ```
 
-We can implement the aggregate ```list-of-marks``` as an array.
+우리는 집합체```list-of-makrs```를 배열로 구현할 수 있다. 
 
 #### Solution To CE-AA-02
 
@@ -10574,11 +10582,11 @@ We can implement the aggregate ```list-of-marks``` as an array.
 	}
 
 ```
-### Step 08:  Variable Arguments - The Basics
+### Step 08:  가변 인자 - 기본 사항
 
-What if you want to create a method which can accept variable number of arguments?
+변수 개수의 인자를 허용할 수 있는 방법을 만들려면 어떻게 해야할까?
 
-Let's look at an example. The critical part is the parameter `int... values`.
+예를 들어보자. 중요한 부분은 매개변수 `int... values` 이다.
 
 ```java
 
@@ -10590,9 +10598,9 @@ Let's look at an example. The critical part is the parameter `int... values`.
 	| created class Something
 ```
 
-A typical parameter would've been `int values`. This allows us to pass one parameter to the method.
+전형적인 매개변수는 `int values` 이었을 것이다. 이렇게 하면 매개변수 하나를 메소드에 전달할 수 있다.
 
-What difference does the three dots `...` make in `int... values`?
+`int ... values`에 있는 세 점 `...`은 무슨 차이가 있는가?
 
 ```java
 	jshell> Something thing = new Something();
@@ -10607,9 +10615,9 @@ What difference does the three dots `...` make in `int... values`?
 
 ```
 
-You can see that `doSomething` can be called with one, two and three parameters. 
+`doSomething`은 1개, 2개, 3개의 매개변수로 호출할 수 있다.
 
-Let's look at another example:
+다른 예도 살펴보자.
 
 ```java
 
@@ -10623,7 +10631,7 @@ Let's look at another example:
 	| created method sum(int...)
 ```
 
-We created a `sum` method with a variable argument. Let's look at how to use it.
+변수 인자로 `sum`메소드를 만들었다. 어떻게 사용하는지 보자.
 
 ```java
 	jshell> sum(1, 2)
@@ -10637,12 +10645,11 @@ We created a `sum` method with a variable argument. Let's look at how to use it.
 	jshell>
 
 ```
+이 단계에서, 우리는 처음으로 가변적인 인자를 살펴보았다. 변수 인자를 사용하면 변수 개수의 인자를 메소드에 전달할 수 있다.
 
-In this step, we took our first look at variable arguments. Variable arguments allow us to pass variable number of arguments to a method.
+### Step 09: ```Student```를 위한 가변 인자 메소드
 
-### Step 09: Variable Argument Methods For ```Student``` 
-
-Let's add a few methods to the `Student` class to accept variable arguments.
+`Student` 수업에 몇 가지 메소드를 추가하여 가변적인 인자를 받아들이도록 해보자.
 
 **_Student.java_**
 
@@ -10731,7 +10738,7 @@ Let's add a few methods to the `Student` class to accept variable arguments.
 
 #### Quick Tip
 
-The variable arguments list must always be at the end of the parameter list passed to a method. The following method definition **will not** be accepted by the Java compiler:
+변수 인자 목록은 항상 메소드에 전달된 매개변수 목록의 끝에 있어야 한다. 다음 메소드 정의는 자바 컴파이러에서 **허용되지 않는다**
 
 ```java
 
@@ -10744,9 +10751,9 @@ The variable arguments list must always be at the end of the parameter list pass
 - - - 
 ### Step 10: Arrays - Some Puzzles And Exercises 
 
-Let's look at a few puzzles and exercises with Arrays.
+몇 가지 퍼즐과 배열을 사용한 예제에 대해 설명한다.
 
-When creating arrays of objects, the array ends up holding references to the created objects.
+객체 배열을 만들 때, 배열은 생성된 객체에 대한 참조를 유지한다.
 
 ```java
 
@@ -10757,7 +10764,7 @@ When creating arrays of objects, the array ends up holding references to the cre
 	persons ==> Person[5]{ null,null,null,null,null }
 ```
 
-We can assign new `Person` objects to different elements of the array.
+우리는 새로운 `Person`객체를 배열의 다른 요소에 할당할 수 있다.
 
 ```java
 	jshell> persons[1] = new Person();
@@ -10770,14 +10777,15 @@ We can assign new `Person` objects to different elements of the array.
 	persons ==> Person[5]{ Person@1e965684,Person@394e1a0f, null,null,null }
 ```
 
-You can also initialize values when you create an array.
+배열 생성과 동시에 값을 초기화할 수도 있다. 
 
 ```java
 	jshell> Person[] persons2 = {new Person(), new Person()};
 	persons2 ==> Person[2]{ Person@3b088d51, Person@1786dec2 }
 ```
 
-Here's how you can initialize a `String` array.
+다음은 `String`배열을 초기화하는 방법이다.
+
 
 ```java
 	jshell> String[] textValues = {"Apple", "Ball", "Cat"};
@@ -10790,11 +10798,10 @@ Here's how you can initialize a `String` array.
 
 #### Exercises
 
-1. Create a ```String``` array with the names of days of the week:
-
+1. 요일이 적힌 ```String```배열을 만든다.
 ```Sunday```, ```Monday```, ```Tuesday```, ```Wednesday```, ```Thursday```, ```Friday```, ```Saturday```
-2. Find the day with the most number of letters in it
-3. Print days of the week backwards
+2. 글자 수가 가장 많은 날을 찾는다.
+3. 요일을 출력한다.
 
 #### Solutions To CE-AA-03
 
@@ -10832,9 +10839,9 @@ public class StringRunner {
 
 ### Step 11: Problems With Arrays
 
-Let's look at our implementation for our challenge. 
+우리의 과제에 대한 구현을 살펴보자.
 
-We've implemented most of the features except for ```addMark()``` and ```removeMarkAtIndex()```.
+우리는 ```addMark()```와 ```removeMarkAtIndex()```를 제외한 대부분의 기능을 구현했다.
 
 ```java
 
@@ -10849,24 +10856,24 @@ We've implemented most of the features except for ```addMark()``` and ```removeM
 
 ```
 
-We would want to add and remove from an array. Can we do this?
+배열에서 추가 및 제거를 하고자 한다. 할 수 있을까?
 
-The size of an array is fixed at its compile-time definition. Which means that once we define an array such as:
+배열의 크기는 컴파일 시간 정의에 따라 고정된다. 즉, 일단 배열을 정의하면 다음과 같다.
 
 ```String[] textValues = {"Apple", "Ball", "Cat"};```
 
-The size of the `textValues` array is fixed to 3. You an change values inside the array. But the size cannot be changed.
+textValues 배열의 크기는 3으로 고정되어 있다. 배열 내에서 값을 변경할 수 있다. 그러나 크기는 변경할 수 없다.
 
-How to add an element to an array?
+배열에 요소를 추가하는 방법
 
-One of the options is
-* Create a fresh array with a few extra element slots to accommodate the additional elements to be inserted
-* Copy the existing array elements to the beginning of this new array
-* Add the additional elements at the rear end of this array
+옵션 중 하나는
+* 삽입할 추가 요소를 수용할 수 있도록 몇 개의 추가 요소 슬롯이 있는 새 배열을 생성한다.
+* 기존 배열 오스를 이 새 배열의 시작 부분에 복사한다.
+* 이 배열의 후단에 추가할 요소를 추가한다.
 
-If elements need to be removed from an array:
-* Create a fresh array with correspondingly lesser element slots
-* Copy the existing array elements, excluding the ones to be removed, to the beginning of this new array
+요소를 배열에서 제거해야 하는 경우,
+* 그에 따라 요소 슬롯이 적은 새 배열 생성
+* 제거할 요소를 제외한 기존 배열의 요소를 이 새 배열의 시작 부분에 복사한다.
 
 ```java
 jshell> int[] marks = {12, 34, 45};
@@ -10888,13 +10895,13 @@ newMarks ==> int[4] { 12, 34, 45, 100 }
 
 ```
 
-As you can see, this can be very inefficient. How do we solve it?
+보다시피, 이는 매우 비효율적이다. 어떻게 해결해야 할까?
 
-### Step 12: Introducing ```ArrayList```
+### Step 12: ```ArrayList``` 소개
 
-`ArrayList` is more dynamic than an array. It provides operations to add and remove elements.
+`ArrayList`는 배열보다 동적이다. 이는 요소를 추가하고 제거하는 연산을 제공한다.
 
-Let's start with creating an `ArrayList` and add a few values.
+먼저 `ArrayList`를 만들고 값을 몇 가지 추가해 보자.
 
 ```java
 
@@ -10921,7 +10928,8 @@ Let's start with creating an `ArrayList` and add a few values.
 	jshell> arrayList
 	arrayList ==> ["Apple", "Ball", "Cat"]
 ```
-You can remove values using `remove` method.
+
+`remove`메소드를 이용하여 값을 삭제할 수 있다.
 
 ```java
 
@@ -10931,9 +10939,9 @@ You can remove values using `remove` method.
 	arrayList ==> ["Apple", "Ball"]
 ```
 
-The ```ArrayList``` instance ```arrayList``` can be used to store objects of pretty much any type, even primitive types. Also, non-homogeneous types! 
+```ArrayList```인스턴스인 ```arrayList```는 거의 모든 타입의, 심지어 기본형 타입의 객체를 저장하는 데 사용될 수 있다. 비동종 타입 또한!
 
-> The warning message displayed is a hint to the programmer to discourage this.
+> 표시되는 경고 메시지는 프로그래머에게 이를 막는 힌트이다.
 
 ```java
 	jshell> arrayList.add(1);
@@ -10948,9 +10956,9 @@ The ```ArrayList``` instance ```arrayList``` can be used to store objects of pre
 
 ```
 
-Let's say we want to store only `String` values in an `ArrayList`. How do we do it?
+`String`값만 `ArrayList`에 저장하려고 한다. 어떻게 해야 할까?
 
-We can specify the type of elements that an `ArrayList` can contain.
+우리는 `ArrayList`가 포함할 수 있는 요소의 타입을 지정할 수 있다.
 
 ```java
 
@@ -10958,9 +10966,9 @@ We can specify the type of elements that an `ArrayList` can contain.
 	items ==> []
 ```
 
-In above snippet, we are creating an `ArrayList` that can hold `String` values.
+위의 내용에서는 `String`값을 저장할 수 있는 `ArrayList`를 만들고 있다.
 
-You can add `String` value but not numbers.
+`String` 값은 추가할 수 있지만, 숫자는 추가할 수 없다.
 
 ```java	
 	jshell> items.add("Apple");
@@ -10979,7 +10987,7 @@ You can add `String` value but not numbers.
 	items ==> ["Apple", "Ball", "Cat"]
 ```
 
-Rest of operations are similar to a normal `ArrayList`.
+나머지 연산은 일반적인 `ArrayList`와 유사하다.
 ```java
 	jshell> items.remove("Cat");
 	$4 ==> true
@@ -10993,10 +11001,9 @@ Rest of operations are similar to a normal `ArrayList`.
 
 ```
 
-### Step 13: Refactoring ```Student``` To Use ```ArrayList```
+### Step 13: ```ArrayList```를 사용한 ```Student``` 리팩토링
 
-Let's now get to the ```Student``` challenge once again. Let's use an `ArrayList` this time.
-
+이제 다시 한 번 ```Student```문제를 해결해보자. 이번에는 `ArrayList`를 사용해보자.
 ```java
 
 	Student student = new Student(name, <list-of-marks>);
@@ -11008,7 +11015,7 @@ Let's now get to the ```Student``` challenge once again. Let's use an `ArrayList
 
 ```
 
-##### Snippet-01 : Refactoring ```Student```
+##### Snippet-01 : ```Student``` 리팩토링
 
 **_StudentRunner.java_**
 
@@ -11089,14 +11096,13 @@ Let's now get to the ```Student``` challenge once again. Let's use an `ArrayList
 
 ```
 
+강화된 ```for문```은 배열의 경우와 마찬가지로 ```ArrayList```에도 적용된다.
 
-The Enhanced ```for``` loop works for ```ArrayList```s as well, just like in the case of an array
+```Collections.max()```와 ```Collections.min()```메소드를 사용하여 배열의 최대값과 최소값을 찾을 수 있다.
 
-The ```Collections.max()``` and ```Collections.min()``` methods can be used to find the maximum and minimum value in an array.
+### Step 14: E ```Student``` 의 발전
 
-### Step 14: Enhancing ```Student``` Further
-
-Let's now add the features to add and remove a student.
+이제 학생을 추가 및 제거할 기능을 추가해보자.
 
 ```java
 
@@ -11188,7 +11194,7 @@ Let's now add the features to add and remove a student.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Number of marks : 3_
 
@@ -11206,29 +11212,28 @@ _Ranga[97,98,100,35]_
 
 _Ranga[97,100,35]_
 
-## Object Oriented Programming (*OOP*) - Revisited
+## 객체 지향 프로그래밍 (*OOP*) - 복습
 
-In this section, we revisit the principles of *OOP*, armed with the knowledge of
-* Arrays and their variants
-* Built-in Java classes and utilities, and 
-* Conditionals and loops (normal and enhanced). 
+이 섹션에서는 *OOP*의 원칙을 다시 살펴본다.
+* 배열 및 배열의 변형
+* 기본 제공 Java 클래스 및 유틸리티
+* 조건문과 반복문 (일반 및 향상된 버전)
 
-### Step 01: Objects Revisited - State And Behavior
+### Step 01: 객체 복습 - 상태와 행동
 
-The attributes of an object determine what it is made up of. At different points in an object's lifetime, the value of any of its attributes can change. 
+객체의 속성들은 객체의 구성 요소를 결정한다. 객체의 라이프타임 동안 서로 다른 지점에서 해당 속성의 값이 변경될 수 있다.
 
-At any given time, values of these attributes defines the object's **state**. 
+주어진 시간에 이러한 특성의 값은 객체의 **상태**를 정의한다.
 
-In The ```MotorBike``` example, the attribute ```speed``` defines a ```MotorBike```'s state. The ```speed``` of a ```ducati``` defines its state.
+```MotorBike```의 예에서 속성인 ```speed```는 ```MotorBike```의 상태를 의미한다. ```ducati```의 ```speed```는 이것의 상태를 정의한다.
 
-How an object responds to an external event, or a message sent to it, defines its **behavior**. 
+객체가 외부 이벤트 또는 해당 이벤트로 보낸 메시지에 응답하는 방법은 객체의 **행동**을 정의한다.
 
-Messages are delivered to an object using methods. Methods are used to implement an object's **behavior**. 
+메시지는 메소드를 사용하여 객체로 배달된다. 메소드는 객체의 **행동**을 구현하는 데 사용되는 것이다.
 
-The methods ```setSpeed```, ```increaseSpeed``` and ```decreaseSpeed``` have an effect on the observed speed of the ```MotorBike```s. The future `state` of a `MotorBike` depends on `behavior` and current `state`.
+```setSpeed```, ```increaseSpeed```, ```decreaseSpeed```메소드는 ````MotorBike```의 속도에 영향을 준다. `MotorBike`의 미래 `상태`는 행동과 현재의 상태에 달려있다.
 
-`behavior` affects `state`. And `state` affects `behavior`. 
-
+`상태`는 `상태`에 영향을 미친다. 그리고 `상태`는 `행동`에 영향을 미친다.
 
 **_MotorBikeRunner.java_**
 
@@ -11305,32 +11310,34 @@ The methods ```setSpeed```, ```increaseSpeed``` and ```decreaseSpeed``` have an 
 
 ```
 
-### Step 02: Managing ```class``` state
+### Step 02: ```class``` 의 상태 관리
 
-At a basic level, when we design a class, we decide:
-* `state` - member variables
-* `how to create objects` - Define constructors
-* `behavior` - What methods are exposed
+기본 수준에서 클래스를 설계할 때 다음을 결정한다.
+* `상태` - 멤버 변수
+* `객체 생성 방법` - 생성자 정의
+* `행동` - 노출되는 메소드
 
-Consider the example of a ```Fan``` ```class```.
+```Fan``` ```클래스```의 예를 들어보자.
 
-The above three major areas that correspond to its design could be as follows:
+설계에 해당하는 위의 세 가지 주요 영역은 다음과 같을 수 있다.
 
-* State
+* 상태
 	* make
-	* radius
-	* color
+	* radius (반지름)
+	* color (색상)
 	* isOn
-	* speed
-* Constructors
-	*  Fan(String make, double radius, String color)
-* Behavior
+	* speed (속도)
+	
+* 생성자
+	* Fan(String make, double radius, String color)
+	
+* 행동
 	* void switchOn()
 	* void SwitchOff()
 	* void changeSpeed(int change)
 	* String toString()
 
-Let's try to write a simple ```Fan``` ```class```, that covers all these aspects. 
+이 모든 측면을 포괄하는 간단한 ```Fan``` ```클래스```를 작성해보자.
 
 **_Fan.java_**
 
@@ -11381,22 +11388,22 @@ Let's try to write a simple ```Fan``` ```class```, that covers all these aspects
 	}
 
 ```
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Make : Fan-tastic, Radius : 0.45600, Color : GREEN, Is On : false, Speed : 0_
 
-The fields which were not set by the constructor, namely ```isOn``` and ```speed```, assumed the language default values for their data types, namely ```false``` (for ```booelan```) and ```0``` (for ```int```).
+```isOn```과 ```speed```라는 이름의 생성자가 설정하지 않은 분야는 ```false```(```boolean```인 경우)와 ```0```(```int```인 경우)이라는 데이터 타입의 기본 값을 가정한다.
 
-### Step 03: Augmenting ```Fan``` With Behavior
+### Step 03: 행동으로 ```Fan``` 증강
 - - - 
 
-We need to decide what kind of behavior should be provided by a `Fan` object.
+`Fan`객체가 어떤 행동을 해야 할지 결정해야 한다.
 
-The default state attributes of the ```Fan``` class objects, namely ```make```, ```color``` and ```radius``` are fixed at manufacturing time, and cannot be altered by a user of this ```class```'s instances. 
+```Fan```클래스 객체의 기본 상태 속성, 즉, ```make```,```color````,```radius```는 생성 시점에 고정되어 있으므로 이렇나 ```클래스```인스턴스의 사용자가 변경할 수 없다.
 
-The other two state attributes, ```isOn``` and ```speed``` need to be exposed to change by ```Fan``` object users. We will offer methods that change them.
+나머지 두 가지 상태 속성인 ```isOn```과 ```speed```는 ```Fan```객체 사용자들에 의해 변경될 필요가 있다. 우리는 이들을 바꿀 수 있는 메소드를 제공할 것이다.
 
-##### Snippet-01 : The ```Fan``` ```class``` - v4
+##### Snippet-01 : ```Fan``` `````` - v4
 
 **_FanRunner.java_**
 
@@ -11472,7 +11479,7 @@ The other two state attributes, ```isOn``` and ```speed``` need to be exposed to
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Make : Fan-Tastic, Radius : 0.45600, Color : GREEN, Is On : false, Speed : 0_
 
@@ -11482,31 +11489,30 @@ _Make : Fan-Tastic, Radius : 0.45600, Color : GREEN, Is On : true, Speed : 5_
 
 _Make : Fan-Tastic, Radius : 0.45600, Color : GREEN, Is On : false, Speed : 0_
 
-##### Snippet-01 Explained
+##### Snippet-01 설명
 
-* Regarding the state attribute ```isOn```:
-	* A state modifier method such as ```public void isOn(boolean)``` is not preferred, even though it does alter this attribute. This is because it is not intuitive from the ```class``` user's perspective.
-	* Alternatively, methods such as ```public void switchOn()``` and ```public void switchOff()``` not only toggle the attribute ```isOn```, but are also intuitive and useful to the ```Fan``` ```class``` users (Here, the ```FanRunner``` class).
+* 상태 속성 ```isOn```에 대해서는
+	* ```public void isOn(boolean)과 같은 상태 제한자가 이들의 속성을 바꾸긴 하지만 별로 선호되지 않는다. 이는 ```클래스```사용자 입장에서는 직관적이지 않기 때문이다.
+	* 또는 ```public void switchOn()```과 ```public void switchOff()```와 같은 메소드들은 ```isOn```의 속성을 전환시킬 뿐만 아니라 ```Fan``` ```클래스``` 사용자돌에게도 직관적이고 유용하다.(여기서는 ```FanRunner```클래스)
 
-* Regarding the state attribute ```speed```:
-	*  ```setSpeed``` is both intuitive as well as useful, so not much rethinking needed here
-	*  ```speed``` needs to be affected by the operations ```switchOn()``` and ```switchOff()```. We have added calls to ```setSpeed()``` in these method definitions.
+* 상태 속성 ```speed```에 대해서는
+	* ```setSpeed```는 직관적일 뿐만 아니라 유용하기 때문에 여기서 재고할 필요가 별로 없다.
+	* ```speed```는 ```switchOn()```과 ```switchOff()```연산의 영향을 받을 필요가 있다. 이러한 메소드 정의에서 ```setSpeed()```에 대한 호출을 추가했다.
 
+#### 요약
 
-#### Summary
-
-The best way to design a class is using an `Outside In` thought process:
-* Who all could possibly be using my ```class```?
-* What functionality would they absolutely require?
+클래스를 설계하는 가장 좋은 방법은 `Outside In(외부인)`사고 과정을 이용하는 것이다.
+* 누가 내 ```클래스```를 사용하게 될까?
+* 반드시 필요한 기능은 무엇일까?
 
 ### Step 04: Programming Exercise PE-OOP-01
 
-1. Write a simple ```Rectangle``` ```class``` , while covering the following constituents:
-* State
+1. 다음과 같은 구성 요소를 다루는 간단한 ```Rectangle``` ```클래스```를 작성하시오.
+* 상태
 	* length
 	* width
-* Constructors
-* Behavior or Methods
+* 생성자
+* 행동 또는 메소드
 
 #### Solution To PE-OOP-01
 
@@ -11582,7 +11588,7 @@ The best way to design a class is using an `Outside In` thought process:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Rectangle - length : 12, width : 23, area : 276, perimeter : 70_
 
@@ -11592,11 +11598,10 @@ _Rectangle - length : 20, width : 25, area : 500, perimeter : 90_
 
 #### Solution Explained
 
-* A ```Rectangle``` object created without a specified ```length``` and ```width``` makes no practical sense, therefore a default constructor is not provided.
+* ```length```와 ```width```를 명시하지 않고 만들어진 ```Rectangle```객체는 실용적이지 못하므로 기본 생성자가 제공되지 않는다.
+### Step 06: 객체의 구성 이해
 
-### Step 06: Understanding Object Composition
-
-Let's take a re-look at the state attributes of the ```Fan``` ```class```:
+```Fan``` ```클래스```의 상태 속성을 다시 한번 살펴보자.
 
 **_Fan.java_**
 
@@ -11617,10 +11622,9 @@ Let's take a re-look at the state attributes of the ```Fan``` ```class```:
 	}
 
 ```
+`Fan`클래스의 모든 멤버 변수는 기본형 타입이다. 우리가 그것들을 복잡하게 만들고 다른 클래스를 포함시킬 수 있을까?
 
-All member variables of 'Fan' class are primitive variables. Can we make it complex and include other classes?
-
-##### Snippet-01 : Object composition - State
+##### Snippet-01 : 객체 구성 -상태
 
 **_CustomerRunner.java_**
 
@@ -11675,20 +11679,20 @@ All member variables of 'Fan' class are primitive variables. Can we make it comp
 
 ##### Snippet-01 Explained
 
-```Customer customer``` is composed of:
-*  ```name```,
-*  ```homeAddress```, and
-*  ```workAddress```. 
+```Customer customer```은 다음과 같이 구성되어 있다.
+*  ```name```
+*  ```homeAddress```
+*  ```workAddress```
 
-```String``` is a built-in type, and is simple. ```Address``` is a user defined type, and is composed of:	
-* ```doorNo```,
-* ```streetInfo```,
-* ```city```, and
+```String```은 내장형으로 단순하다. ```Addresss```는 사용자 정의 타입이며 다음과 같이 구성되어 있다.
+* ```doorNo```
+* ```streetInfo```
+* ```city```
 * ```zipCode```
-	
-##### Snippet-02 : Object Composition v2 - Construction
 
-Let's now add constructors to allow easy creation of these objects.
+##### Snippet-02 : 객채의 구성 v2 - 생성자
+
+이제 이러한 객체를 쉽게 만들 수 있도록 생성자를 추가하자.
 
 **_CustomerRunner.java_**
 
@@ -11757,9 +11761,9 @@ Let's now add constructors to allow easy creation of these objects.
 
 ```
 
-##### Snippet-9 : Object Composition v3 : Behaviors
+##### Snippet-9 : 객체의 구성 v3 : 행동
 
-Let's add methods to provide behavior.
+행동을 제공하는 메소드를 추가해보자.
 
 **_CustomerRunner.java_**
 
@@ -11858,7 +11862,7 @@ Let's add methods to provide behavior.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Customer [Ashwin Tendulkar] lives at [Flat No. 51, Hiranandani Gardens, Mumbai - 400076], works at [null]_
 
@@ -11868,9 +11872,9 @@ _Customer [Ashwin Tendulkar] lives at [Flat No. 51, Hiranandani Gardens, Mumbai 
 
 #### Exercises
 
-Write a program that manages Books and their Reviews:
+책 리뷰를 관리하는 프로그램을 작성하시오.
 
-* Book:
+* Book
 	* Id
 	* Name
 	* Author
@@ -11960,14 +11964,13 @@ Write a program that manages Books and their Reviews:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Book-123, Object Oriented Programming With Java, Ranga, [(Review-10, Great Book", 4), (Review-101, Awesome, 5)]_
 
-### Step 07: The Need For Inheritance
+### Step 07: 상속의 필요성
 
-Let's look at two classes `Person` and `Student`.
-
+`Person`과 `Student` 두 클래스를 살펴보자.
 
 **_Person.java_**
 
@@ -12063,12 +12066,11 @@ Let's look at two classes `Person` and `Student`.
 
 ```
 
-In above code examples, you can see that there is a lot of 
-* The member fields of ```Person```, namely ```name```, ```email``` and ```phoneNumber```, are replicated in ```Student```.
-* The setter and getter methods pertaining to the above fields of ```Person``` get repliated in ```Student``` as well.
+위의 코드 예에서 볼 수 있듯이,
+* ```Person```의 멤버 변수인 ```name```,```email```,```phoneNumber```이 ```Student```의 것들과 중복된다.
+* 위의 ```Person```과 관련된 setter 및 getter 메소드도 ```Student```의 것들과 중복된다.
 
-
-Every `Student` is a `Person`. What if we could extend `Person` class instead of duplicating everything?
+모든 `Student`는 `Person`이다. 모든 것을 중복하는 대신 `Person` 클래스를 확장할 수 있다면 어떨까?
 
 #### Enter Inheritance
 
