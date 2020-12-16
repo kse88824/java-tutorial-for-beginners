@@ -12072,13 +12072,13 @@ _Book-123, Object Oriented Programming With Java, Ranga, [(Review-10, Great Book
 
 모든 `Student`는 `Person`이다. 모든 것을 중복하는 대신 `Person` 클래스를 확장할 수 있다면 어떨까?
 
-#### Enter Inheritance
+#### 상속 
 
-```Student``` **is a** ```Person```. Java supports one of the basic Object Oriented Programming Paradigms : **Inheritance**.  
+```Student```는 ```Person```이다. 자바는 기본적인 객체 지향 프로그래밍 패러다임인 **상속**을 지원한다.
 
-```Student``` can *inherit* from ```Person```, to model the fact that a ```Student``` *is a* ```Person```. 
+```Student```는 ```Person```에서 ```Student```는 ```Person```이라는 사실을 상속 받을 수 있다.
 
-This is accomplished by using the Java keyword ```extends```, during class definition of ```Student```. 
+이는 ```Student```의 클래스 정의에서 자바 키워드 ```extends```을 사용하여 이루어진다.
 
 ```java
 
@@ -12092,13 +12092,13 @@ This is accomplished by using the Java keyword ```extends```, during class defin
 
 ```
 
-Inheritance is a mechanism of code reuse. In this case, all the fields and methods previously defined in ```Person``` are available for ```Student``` as well.
+상속은 코드를 재사용하는 메커니즘이다. 이런 경우, 이전에 ```Person```에서 정의한 모든 멤버 변수와 메소드들은 ```Student```에서도 사용할 수 있다.
 
-In this Inheritance relationship, ```Person``` is called the **super-class** of ```Student```. Likewise, ```Student``` is the **sub-class** of ```Person```.
+이러한 상속 관계에서 ```Person```은 ```Student```의 **수퍼 클래스**(super-class)라고 불린다. 마찬가지로 ```Student```는 ```Person```의 **서브 클래스**(sub-class)이다.
 
-Let's now look at how we go about changing the ```Student``` ```class``` definition.
+이제 우리가 어떻게 ```Student``` ```클래스```의 정의를 바꿀 것인지 살펴보자.
 
-##### Snippet-02 : Student inherits from Person - v1
+##### Snippet-02 : Person으로부터 상속 받는 Student - v1
 
 **_Person.java_**
 
@@ -12184,13 +12184,13 @@ Let's now look at how we go about changing the ```Student``` ```class``` definit
 
 ```
 
-### Step 09:  Introducing ```Object``` class
+### Step 09:  ```Object``` 클래스 소개
 
-In the Java language, every class, whether an in-built Java library class, or a user-defined class, implicitly inherits from the class ```Object```. 
+Java 언어에서는 내장형 자바 라이브러리 클래스든, 사용자 정의 클래스든 모든 클래스가 암묵적으로 ```Object```클래스로부터 상속된다.
 
-This ```Object``` class is available in the Java system package ```java.lang```. This class is at the root of the Java class hierarchy. All classes, including arrays, implement/inherit the methods of this ```class```. 
+이 ```Object```클래스는 자바 시스템 패키지 ```java.lang```에서 얻을 수 있다. 이 클래스는 Java 클래스 계층구조의 루트이다. 배열을 포함한 모든 클래스는 이 ```클래스```의 메소드를 구현/상속한다.
 
-Let's take a look at the ```Person``` and ```Student``` classes.
+```Person```과 ```Student```클래스들을 살펴보자.
 
 ##### Snippet-01 : The Object class
 
@@ -12285,7 +12285,7 @@ Let's take a look at the ```Person``` and ```Student``` classes.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _com.in28minutes.oops.level2.inheritance.Person@7a46a697_
 
@@ -12293,21 +12293,21 @@ _com.in28minutes.oops.level2.inheritance.Person@7a46a697_
 
 ##### Snippet-01 Explained
 
-Methods of the ```Object``` ```class``` such as ```toString()```, ```hashCode()``` and ```notify()``` are available to objects of ```class``` ```Person``` as default implementations.
+```toString()```,```haschCode()```,```notify()```와 같은 ```Object``` ```클래스```의 메소드들은 ```class``` ```Person```의 객체를 기본 구현으로 사용할 수 있다.
 
-The statement ```System.out.println(person);``` actually gets translated to ```System.out.println(person.toString())```, as the Java system implicitly makes the call ```person.toString()``` as it is inherited from ```class``` ```Object``` for use in the ```String``` context.
+```System.out.println(person);``` 구문은 자바 시스템이 ```person.toString()```호출을 은연중에 ```class``` ```Object```에서 상속 받아```String```문맥으로 사용되기 때문에 ```System.out.println(Person.toString())```라는 호출로 번역된다.
 
-### Step 10: Inheritance And Method Overriding
+### Step 10: 상속과 메소드 오버라이딩
 
-Sub-class inherit features from super-class
-* state attributes : super-class member variables
-* behavior components  : super-class method definitions
+서브 클래스는 슈퍼 클래스로부터 기능을 상속받는다.
+* 상태 속성 : 슈퍼 클래스의 멤버 변수
+* 동작 구성 : 슈퍼 클래스의 메소드 정의
 
-These are of course, available for access (and modification), and invocation, respectively, within the sub-class. 
+물론 서브 클래스 내에서 엑세스(및 수정), 호출에 각각 사용할 수 있다.
 
-You can also override super class method implementations in a sub class - **method overriding**. 
+서브 클래스 **메소드 오버라이딩**에서 슈퍼 클래스의 메소드 구현을 재정의할 수도 있다.
 
-##### Snippet-01: Method Overriding
+##### Snippet-01: 메소드 오버라이딩
 
 **_Person.java_**
 
@@ -12371,7 +12371,7 @@ You can also override super class method implementations in a sub class - **meth
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Person Ranga , Email : in28minutes@gmail.com, Phone Number : 9898989898_
 
@@ -12379,19 +12379,20 @@ _Person Ranga , Email : in28minutes@gmail.com, Phone Number : 9898989898_
 
 ##### Snippet-01 Explained
 
-By defining the method ```toString()``` within the ```Person``` sub-```class```, we are overriding the default version provided by the ```Object``` super-```class```.
+우리는 ```Person```의 서브 ```클래스``` 내에서 ```toString()```이라는 메소드를 정의함으로써 ```Object```의 슈퍼 ```클래스```가 제공하는 디폴트 버전을 재정의하고 있다.
 
 ### Step 11: Classroom Exercise CE-OOP-01 
 
-Create an Employee class extending Student Class with following attributes:
+다음 속성을 지닌 Student 클래스를 확장하는 Employee 클래스를 생성하라
 * Title
 * Employer
 * EmployeeGrade
 * Salary
 
-Create a method toString() within Employee to print all state attribute values, including those of Person.
+Employee 내에서 toString() 메소드를 만들어 Person을 포함한 모든 상태 속성 값을 출력한다.
 
-##### Snippet-01 : Employee Inheritance
+
+##### Snippet-01 : Employee 상속
 
 **_Person.java_**
 
@@ -12513,17 +12514,18 @@ Create a method toString() within Employee to print all state attribute values, 
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Employee Title: Programmer Analyst, Employer: In28Minutes, Employee Grade: A, Salary: 50000.0000_
 
 ##### Snippet-01 Explained
 
-We have not printed the underlying ```Person``` object details in ```Employee.toString()``` method overriding. Let's look to do that next.
+```Person``` 이라는 객체의 세부 사항을 ```Employee.toString()```메소드 오버라이딩으로 출력하지 않았다. 다음에는 그렇게 하도록 해보자.
 
-### Step 12: Constructors, And Calling ```super()``` 
+### Step 12: 생성자와 ```super()```호출
 
-The ```super``` keyword allows an sub-class to access the attributes present in the super-class. 
+```super```키워드는 서브 클래스가 슈퍼 클래스에 존재하는 속성에 접근할 수 있게 해준다.
+
 
 ##### Snippet-01 : Calling Person.toString()
 
@@ -12572,7 +12574,7 @@ The ```super``` keyword allows an sub-class to access the attributes present in 
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Employee Name: Ranga, Email: in28minutes@gmail.com, Phone Number: 123-456-7890, Title: Programmer Analyst, Employer: In28Minutes, Employee Grade: A, Salary: 50000.0000_
 
@@ -12582,9 +12584,9 @@ The ```super``` keyword allows an sub-class to access the attributes present in 
 	* ```super.getPhoneNumber()```
 
 
-#### Sub-Class Contructor 
+#### 서브 클래스 생성자
 
-What happens when a sub class object is created? Does the super class constructor get called?
+서브 클래스의 객체가 생성되면 어떻게 할까? 슈퍼 클래스의 생성자가 호출되는 걸까?
 
 ##### Snippet-7 : Person class
 
@@ -12636,7 +12638,7 @@ What happens when a sub class object is created? Does the super class constructo
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Inside Person Constructor_
 
@@ -12644,12 +12646,12 @@ _Inside Employee Constructor_
 
 ##### Snippet-02 Explained
 
-When a sub-class object is created
-* sub-class constructor is called and it implicitly invokes its super-class constructor. 
+서브 클래스 객체가 생성될 때
+* 서브 클래스 생성자를 호출하고 해당 슈퍼 클래스 생성자를 암묵적으로 호출한다.
 
-The Java compiler inserts the code ```super();``` (if it is not explicitly added by the programmer) as the first statement in the body of the sub-class default constructor, here ```Employer()```. 
-* The statement ```super();``` is the invocation of the super-class default constructor. 
-* Hence, the body of the super-class constructor is always invoked before the body of the sub-class constructor.
+자바 컴파일러는 ```super();```코드를 (프로그래머가 명시적으로 추가하지 않은 경우) 서브 클래스의 디폴트 생성자의 본문에 첫 번째 문장으로 삽입한다.
+* ```super();```라는 구문은 슈퍼 클래스의 디폴트 생성자의 호출이다.
+* 따라서, 슈퍼 클래스 생성자의 본문은 항상 서브 클래스의 생성자 본문 앞에 호출된다.
 
 ##### Snippet-3 : ```Person``` - Non-Default Constructor
 
@@ -12678,18 +12680,22 @@ Let's remove the no argument constructor and add a one argument constructor to `
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Person Ranga , Email : in28minutes@gmail.com, Phone Number : 123-456-7890_
 
 ##### Snippet-03 Explained
 
+```class``` ```Employee```에 인자가 하나인 생성자를 추가했을 때, ``Person```의 디폴트 생성자가 더 이상 없기 때문에 기존 코드인 **_EmployeeRunner.java_**에 컴파일 오류가 발생할 것이다.
+
+```super()```는 ```Employee```라는 디폴트 생성자 내에서 호출될 수 없다.
+
+한 가지 옵션은 인수 생성자를 다시 배치하는 것이다.
 When we added the constructor with one argument for ```class``` ```Employee```, the existing code in **_EmployeeRunner.java_** will cause a compilation error, because there is no longer any default constructor for ```Person``` ! 
 
-```super()``` cannot be called from within the default constructor of ```Employee```.
 
+ ```super()``` cannot be called from within the default constructor of ```Employee```.
 One option is to put the no argument constructor back.
-
 ```java
 
 	public Person() {
