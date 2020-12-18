@@ -12655,7 +12655,7 @@ _Inside Employee Constructor_
 
 ##### Snippet-3 : ```Person``` - Non-Default Constructor
 
-Let's remove the no argument constructor and add a one argument constructor to `Person` class.
+인수가 없는 생성자를 제거하고 하나의 인수 생성자를 'Person' 클래스에 추가하자.
 
 ```
 		public Person(String name) {
@@ -12686,16 +12686,13 @@ _Person Ranga , Email : in28minutes@gmail.com, Phone Number : 123-456-7890_
 
 ##### Snippet-03 Explained
 
-```class``` ```Employee```에 인자가 하나인 생성자를 추가했을 때, ``Person```의 디폴트 생성자가 더 이상 없기 때문에 기존 코드인 **_EmployeeRunner.java_**에 컴파일 오류가 발생할 것이다.
+```class``` ```Employee```를 위한 인자가 하나인 생성자를 추가했을 때, ```Person```에 더 이상 기본 생성자가 없기 때문에 기존 코드인 **_EmployeeRunner.java_** 에 컴파일 오류가 발생할 것이다!
 
-```super()```는 ```Employee```라는 디폴트 생성자 내에서 호출될 수 없다.
+```super()```는 ```Employee```의 기본 생성자 내에서 호출할 수 없다.
 
-한 가지 옵션은 인수 생성자를 다시 배치하는 것이다.
-When we added the constructor with one argument for ```class``` ```Employee```, the existing code in **_EmployeeRunner.java_** will cause a compilation error, because there is no longer any default constructor for ```Person``` ! 
+여기서 선택할 수 있는 한 가지 옵션은 인수가 없는 생성자를 다시 배치하는 것이다.
 
 
- ```super()``` cannot be called from within the default constructor of ```Employee```.
-One option is to put the no argument constructor back.
 ```java
 
 	public Person() {
@@ -12704,9 +12701,10 @@ One option is to put the no argument constructor back.
 
 ```
 
-But, it doesn't really make sense to create a ```Person``` without a ```name```, does it? 
+그러나 ```name```이 없는 ```Person```을 만든다는 것은 정말 말이 안되는 일인가?
 
-The solution in this case would be to call the single-argument constructor ```Person(String)``` by an invocation such as ```super(name);```
+이 경우 해결책은 ```super(name);```과 같은 호출에 의해 인자가 하나인 생성자 ```Person(String)```를 호출하는 것이다.
+
 
 ```
 		public Employee(String name, String title, String employerName, char employeeGrade) {
@@ -12738,7 +12736,7 @@ _Employee Name: Ranga, Email: null, Phone Number: null, Title: Programmer Analys
 
 ##### Snippet-10 : EmployeeRunner complete
 
-Let's provide setters to set the non mandatory attributes.
+필수가 아닌 속성을 설정하기 위한 setter를 제공해보자.
 
 **_EmployeeRunner.java_**
 
@@ -12765,7 +12763,7 @@ _Employee Name: Ranga, Email: in28minutes@gmail.com, Phone Number: 123-456-7890,
 
 ##### Snippet-10: ```Student``` updated
 
-Let's add a two argument construtor to the `Student` class.
+`Student`클래스에 두 개의 인자를 가지는 생성자를 추가해보자.
 
 **_Student.java_**
 
@@ -12817,17 +12815,17 @@ Let's add a two argument construtor to the `Student` class.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Student : Ranga, College : IIT Bombay_
 
-### Step 13: Multiple Inheritance, Reference Variables And ```instanceof```
+### Step 13: 다중 상속, 참조 변수와 ```instanceof```
 
-In other programming languages, Multiple Inheritance is allowed. A class can directly inherit from two or more classes. 
+다른 프로그래밍 언어에서는 다중 상속이 허용된다. 클래스가 둘 이상의 클래스들로부터 직접 상속 받을 수 있다.
 
-However, in Java, direct Multiple Inheritance is not allowed.
+그러나 Java에서는 직접 다중 상속이 허용되지 않는다.
 
-##### Snippet-01 : Multiple Inheritance
+##### Snippet-01 : 다중 상속
 
 ```java
 
@@ -12848,19 +12846,19 @@ However, in Java, direct Multiple Inheritance is not allowed.
 
 ```
 
-`class Dog extends Animal, Pet {}` throws an error. You cannot extend two classes.
+두 개의 클래스를 extend 할 수 없기 때문에 `class Dog extends Animal, Pet {}` 에서는 에러가 발생한다.
 
 #### Inheritance Chains
 
-However you can create an inheritance chain.
+그러나 상속 체인은 만들 수 있다.
 *  ```class``` ```C``` **is a** ```class``` ```B```
 *  ```class``` ```B``` **is a** ```class``` ```A```
 
-Let's check out a small code snippet.
+작은 코드로 확인해보자.
 
-##### Snippet-02 : An Inheritance Chain
+##### Snippet-02 : 상속 체인
 
-`Dog``` **is a** ```Pet```, ```Pet``` **is a** ```Animal```. This is an example of what is called an **inheritance hierarchy**.
+`Dog``` **은 ** ```Pet```이다, ```Pet``` **은 ** ```Animal```이다. 이것이 **상속 계층 구조**라고 부르는 것의 예시이다.
 
 ```java
 
@@ -12878,30 +12876,30 @@ Let's check out a small code snippet.
 	| created class Dog
 ```
 
- If you want, you can visualize in your mind as :  *```Dog``` --> ```Pet``` --> ```Animal``` --> ```Object```* (Yes, ```Object``` is sitting at the top of *all* inheritance hierarchies in Java!)
+원한다면 마음속에 *```Dog``` --> ```Pet``` --> ```Animal``` --> ```Object```* 를 그려볼 수 있다. (그래! 자바의 *모든* 상속 계층의 최상위는 ```Object```이다!) 
 
+```Dog dog = new Dog();```라는 생성자 호출은 상속 계층 구조를 출발시킨다.
 The statement ```Dog dog = new Dog();``` sets off constructor invocations up the inheritance hierarchy:
-	*  ```Dog()``` invokes ```Pet()```
-		*  ```Pet()``` invokes ```Animal()```
-			*  ```Animal()``` invokes ```Object()```
-
+	*  ```Dog()``` 는 ```Pet()``` 을 호출함
+		*  ```Pet()```은 ```Animal()``` 를 호출함
+			*  ```Animal()```은 ```Object()```를 호출함
 
 ```java
 	jshell> Dog dog = new Dog();
 	dog ==> Dog@23a6e47f
 ```
 
-The expression ```dog.toString()``` does a traversal up the inheritance hierarchy as well:
-	* Since ```Dog.toString()``` is not defined, the compiler looks for ```Pet.toString()```
-	* Since ```Pet.toString()``` is not defined, the compiler looks for ```Animal.toString()```
-	* Since ```Animal.toString()``` is not defined, the compiler looks for ```Object.toString()```, which is always provided as the default implementation for all sub-classes of ```class``` ```Object``` in Java.
+```dog.toString()```이라는 표현은 상속 계층구조를 가로지른다
+	* ```Dog.toString()```이 정의되어 있지 않기 때문에 컴파일러는 ```Pet.toString()```을 찾는다.
+	* ```Pet.toString()```이 정의되어 있지 않기 때문에 컴파일러는 ```Animal.toString()```을 찾는다.
+	* ```Animal.toString()```이 정의 되어있지 않기 때문에 컴파일러는 자바의 ```Object``` ```class```의 모든 하위 클래스에 항상 기본 구현으로 제공되는 ```Object.toString()```을 찾고있다.
 
 ```java
 	jshell> dog.toString();
 	$1 ==> "Dog@23a6e47f"
 ```
 
-The invocation ```dog.groom();``` is also resolved by traversing up the inheritance hierarchy.
+```dog.groom();```이라는 호출도 상속 계급을 가로지르면서 해결된다.
 
 ```java
 	jshell> dog.groom();
@@ -12909,13 +12907,14 @@ The invocation ```dog.groom();``` is also resolved by traversing up the inherita
 ```
 
 
-The statement ```Pet pet = new Dog();``` is really interesting. In Java, it is permitted for a *super-class reference variable to reference a sub-class object instance*.
+```Pet pet = new Dog();```라는 구문은 정말 재미있다. 자바에서는 *슈퍼 클래스 참조 변수에서 하위 클래스 객체 인스턴스를 참조할 수 있다.*
 
-Through such a reference, method invocations are also permitted, and the correct thing gets done. Hence, ```pet.groom();``` causes the output "*```Pet Groom```*".
+이러한 참조를 통해 메소드 호출도 허용되고 , 옹바른 작업이 수행된다. 따라서 ```pet.groom();```은 "*```Pet Groom```*"이라는 출력을 발생시킨다.
 
-However, the converse assignment is not allowed. *A sub-class reference variable*  **_cannot_** *reference a super-class object instance*. 
-	* The statement ```Dog dog = new Pet();``` therefore, causes a compiler error. 
+그러나 역방향 할당은 허용되지 않는다. *하위 클래스 참조 변수*는 상위 클래스 객체의 인스턴스를 참조 **_할 수 없다_**.
+	* 따라서 ```Dog dog = new Pet();```이라는 구문은 컴파일러 오류를 일으킨다.
 
+	
 ```java
 	jshell> Pet pet = new Dog();
 	pet ==> Dog@22d37d54
@@ -12932,9 +12931,7 @@ However, the converse assignment is not allowed. *A sub-class reference variable
 ```
 
 
-
-The ```instanceof``` operator is to find the relationship between an object and a class. If the object is an instance of the class or its sub class, it returns true. 
-
+```instanceof``` 연산자는 객체와 클래스의 관계를 찾는 것이다. 객체가 클래스 또는 해당 하위 클래스의 인스턴스인 경우 참이 반환된다.
 
 ```java
 	jshell> pet instanceof Pet
@@ -12943,7 +12940,7 @@ The ```instanceof``` operator is to find the relationship between an object and 
 	$3 ==> true
 ```
 
-The ```instanceof``` operator throws an error if the object and class are unrelated.
+```instanceof```연산자는 객체와 클래스가 관련이 없는 경우 오류 메시지를 출력한다.
 
 ```java
 	jshell> pet instanceof String
@@ -12957,7 +12954,7 @@ The ```instanceof``` operator throws an error if the object and class are unrela
 	$5 ==> true
 ```
 
-The ```instanceof``` operator returns ```false``` if the object is an instance of a super class of the class provided.
+```instanceof```연산자는 만약 그 객체가 해당 클래스의 슈퍼클래스의 객체라면 ```false```를 반환한다.
 
 ```java
 	jshell> Animal animal  new Animal();
@@ -12972,13 +12969,13 @@ The ```instanceof``` operator returns ```false``` if the object is an instance o
 
 ```
 
-### Step 14: Introducing Abstract Classes
+### Step 14: 추상 클래스 소개
 
-An ```abstract class``` can contain ```abstract``` methods.
+```추상 클래스는``` ```추상적인```메소드를 포함할 수 있다.
 
-An abstract method does not have a method definition.
+추상 메소드는 메소드 정의를 가지고 있지 않다.
 
-Here's how a typical class looks like. You can create methods inside the class and you can create instances of the class.
+여기 전형적인 클래스가 있다. 클래스 내에 메소드를 만들고 클래스의 인스턴스들을 생성할 수 있다.
 
 ```java
 
@@ -12994,7 +12991,7 @@ Here's how a typical class looks like. You can create methods inside the class a
 	Animal Bark
 ```
 
-Let's see how to create an abstract class:
+추상 클래스를 만드는 방법을 살펴보자:
 
 ```java
 	jshell> abstract class AbstractAnimal {
@@ -13003,9 +13000,10 @@ Let's see how to create an abstract class:
 	| created class AbstractAnimal
 ```
 
-The syntax is simple: add `abstract` keyword before the class.
+구문은 간단하다. `abstract`키워드를 클래스 앞에 추가하면 된다.
 
-An ```abstract class``` cannot be instantiated.
+```추상 클래스```는 인스턴스를 가질수없다.
+.
 ```java
 	jshell> AbstractAnimal animal = new AbstractAnimal();
 	| Error:
@@ -13015,7 +13013,7 @@ An ```abstract class``` cannot be instantiated.
 	jshell>
 ```
 
-However, it can be sub-classed, creating inheritance hierarchies below it.  A sub-class of an abstract class (often called a **concrete class**) must override its ```abstract``` methods. 
+그러나 서브 클래스가 될 수 있으며 이를 포함하는 상속 계층을 만들 수 있다. 추상 클래스의 하위 클래스(**구상 클래스**라고도 함)는 ```추상```메소드를 오버라이딩해야 한다.
 
 
 ```java
@@ -13038,21 +13036,20 @@ However, it can be sub-classed, creating inheritance hierarchies below it.  A su
 	
 ```
 
-### Step 15: Abstract Classes - Design Aspects
+### Step 15: 추상 클래스 - 설계 측면
 
-Why do we need an abstract class?
+왜 우리는 추상 클래스가 필요한가?
 
-Consider a feast being prepared at a home, and several dishes are on the menu for the event. Obviously, each dish would have certain procedure for it to be prepared. Cooking any dish normally involves following a tried and tested recipe, and its preparation boils down to these basic steps:
-* Prepare the Ingredients
-* Cook the Recipe
-* Cleanup (the Mess created!)
+집에서 파티를 준비하고, 이벤트를 위한 메뉴에 여러 가지 음식이 있다고 생각해보자. 분명히, 각각의 요리는 특정한 준비 절차를 가지고 있을 것이다. 요리를 하는 것은 보통 시도부터 레시피를 따르는 것을 포함하며, 그 준비는 다음과 같은 기본적인 단계로 요약된다.
+* 재료 준비
+* 레시피대로 요리
+* 정리 
 
-These steps would be different for each dish but the order of steps remain the same.
-
+이 단계들은 각각의 요리마다 다를 수 있지만, 순서는 그대로이다.
 
 ##### Snippet-01 : The Recipe Hierarchy 
 
-Let's use abstract class to build the recipe.
+추상 클래스를 이용해 레시피를 작성해보자.
 
 **_AbstractRecipe.java_**
 
@@ -13074,9 +13071,9 @@ Let's use abstract class to build the recipe.
 
 ```
 
-We defined abstract methods for each of the steps and created an `execute` method calling them. `execute` method ensures that the order of method call is followed.
+각 단계에 대해 추상 메소드를 정의하고 이를 호출하는 `excute` 메소드를 만들었다. `execute`메소드는 호출이 뒤따라 오는 것을 보장한다
 
-You can define implementations implementing the abstract methods.
+추상 메소드를 구현하는 구현을 정의할 수 있다.
 
 **_CurryRecipe.java_**
 
@@ -13126,7 +13123,7 @@ You can define implementations implementing the abstract methods.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _[Curry Preparation Method]_
 
@@ -13146,11 +13143,11 @@ _Discard unused Spices_
 
 ##### Snippet-01 Explained
 
-`CurryRecipe` defines what needs to be done in each step. When we invoke the `execute` method, the steps are executed in order.
+`CurryRecipe`는 각 단계에서 무엇을 해야 하는지를 규정한다. `execute`메소드를 호출하면 단계가 순서대로 실행된다.
 
 ##### Snippet-02 : MicrowaveCurryRecipe
 
-We can easily create more recipes.
+많은 레시피를 더 쉽게 만들 수 있다.
 
 **_MicrowaveCurryRecipe.java_**
 
@@ -13200,7 +13197,7 @@ We can easily create more recipes.
 ```
 
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _[Curry Microwave Method]_
 
@@ -13218,17 +13215,17 @@ _Discard unused Vegetables_
 
 ##### Snippet-02 Explained
 
-`MicrowaveCurryRecipe` defines what needs to be done in each step. When we invoke the `execute` method, the steps are executed in order. 
+`MicrowaveCurryRecipe` 은 각 단계에서 무엇을 해야 하는지를 규정한다. `execute` 메소드를 호출하면 각 단계가 순서대로 실행된다.
 
-#### Summary
+#### 요약
 
-This pattern is called a `Template method` pattern. You define an abstract class with the order of steps defined. You leave the implementation of each of the steps to the sub classes.
+이 패턴을 `템플릿 메소드`패턴 이라고 한다. 각 단계의 순서가 정의된 추상 클래스를 정의한다. 각 단계의 구현은 하위 클래스에 맡긴다.
 
 ### Step 16: Abstract Classes - Puzzles
 
-Let's look a few FAQ regarding abstract classes.
+추상 클래스에 대한 몇 가지 FAQ를 살펴보자.
 
-An ```abstract class``` can be created, without any ```abstract``` member methods.
+```추상 클래스```는 어떠한 ```추상적인```멤버 함수 없이도 만들어질 수 있다.
 
 ```java
 
@@ -13237,7 +13234,7 @@ An ```abstract class``` can be created, without any ```abstract``` member method
 	| creates abstract class AbstractTest
 ```
 
-An ```abstract class``` can be a sub class to create another ```abstract class```, without overriding any of the super-class ```abstract``` methods.
+```추상 클래스```는 어떠한 슈퍼 클래스의 ```추상```메소드도 오버라이딩하지 않고 또 다른 ```추상 클래스```를 만드는 하위 클래스가 될 수 있다.
 
 ```java
 	jshell> abstract class AbstractAlgorithm {
@@ -13250,7 +13247,8 @@ An ```abstract class``` can be a sub class to create another ```abstract class``
 
 ```
 
-An ```abstract class``` can have member variables.
+```추상 클래스```는 멤버 변수를 가질 수 있다.
+
 ```java
 	jshell> abstract class AbstractAlgorithm {
 	   ...> private int stepCount;
@@ -13258,7 +13256,7 @@ An ```abstract class``` can have member variables.
 	| replaced abstract class AbstractAlgorithm
 ```
 
-An ```abstract class``` can have non-abstract methods.
+```추상 클래스```는 추상 메소드가 아닌 메소드를 가질 수 있다.
 ```java
 	jshell> abstract class AbstractAlgorithm {
 	   ...> private int stepCount;
@@ -13272,23 +13270,23 @@ An ```abstract class``` can have non-abstract methods.
 ```
 
 
-### Step 17: Introducing Interfaces
+### Step 17: 인터페이스 소개
 - - - 
 
-What does a "*gaming console*" mean to you?
+"*게임 콘솔*"이 무엇인가?
 
-A device that has buttons or other controls on it, that enable us to play video games.
+단추나 기타 컨트롤이 있는 장치로 비디오 게임을 할 수 있다.
 
-What are the typical buttons on it?
-- Arrows - up down left right
-- Select
+그 위에 있는 전형적인 버튼은 무엇인가?
+- 화살표 - 상,하,좌,우
+- 선택(select)
 - etc
 
-Gaming console offers an interface to play your games.
+게임 콘솔은 게임을 실행할 수 있는 인터페이스를 제공한다.
 
-Who provides the implementation of what happens when a button is clicked? The game implementor - for example, the implementor of Mario game or the Chess game.
+누가 단추를 클릭했을 때 발생하는 동작의 구현을 제공하는가? 예를 들면, 마리오 게임이나 체스 게임 등의 구현자이다.
 
-How do you represent this in Java program?
+자바에서는 이것을 어떻게 표현할까?
 
 
 **_GamingConsole.java_**
@@ -13306,12 +13304,12 @@ How do you represent this in Java program?
 
 ```
 
+```interface``` ```GamingConsole```은 정의가 없는 메소드들을 포함한다.
 
-```interface``` ```GamingConsole``` contains methods without definitions. 
+누가 구현을 제공할 것인가?
 
-Who provides the implementations?
+`MarioGame`을 살펴보자.
 
-Welcome `MarioGame`.
 
 **_MarioGame.java_**
 
@@ -13342,9 +13340,9 @@ Welcome `MarioGame`.
 
 ```
 
-`MarioGame` provides a definition for all the methods declared in the interface `GamingConsole`. Syntax is simple. `class MarioGame implements GamingConsole` and implement all the methods.
+`MarioGame`은 게임 콘솔이라는 인터페이스에 선언된 모든 메소드에 대한 정의를 제공한다. 구문은 간단하다. `class MarioGame implements GamingConsole`은 모든 메소드를 구현한다.
 
-Let's look at how you can run these games.
+이 게임을 어떻게 실행할 수 있는지 살펴보자.
 
 **_GameRunner.java_**
 
@@ -13365,7 +13363,7 @@ Let's look at how you can run these games.
 ```
 
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Jump_
 
@@ -13375,11 +13373,11 @@ _Go forward_
 
 ##### Snippet-01 Explained
 
-The main advantage of having an interface is that it can be used to enforce a contract for its implementors. 
+인터페이스가 가지는 주된 장점은 구현하는 사람의 계약을 강제하는 데 사용할 수 있다는 것이다.
 
-##### Snippet-02 : Code Reuse With Interfaces
+##### Snippet-02 : 인터페이스를 이용한 코드 재사용
 
-Let's look at another example - `ChessGame`.
+또 다른 예인 `ChessGame`을 보자.
 
 **_ChessGame.java_**
 
@@ -13412,7 +13410,7 @@ Let's look at another example - `ChessGame`.
 
 ```
 
-Running it is simple. All that you need to do is to comment out `MarioGame game = new MarioGame();` and replace it with an implementation of `ChessGame`.
+실행은 간단하다. `MarioGame game = new MarioGame();`을 코멘트 아웃하고 `ChessGame`의 구현으로 대체하기만 하면 된다.
 
 **_GameRunner.java_**
 
@@ -13433,7 +13431,7 @@ Running it is simple. All that you need to do is to comment out `MarioGame game 
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Move Piece Up_
 
@@ -13445,13 +13443,13 @@ _Move Piece Right_
 
 ##### Snippet-2 explained
 
-In the same ```GamerRunner``` ```class```, if we now instantiate a ```ChessGame``` object instead of a ```MarioGame``` one, none of the other code needs to change. This is because both ```MarioGame``` and ```ChessGame``` implement the same ```interface```, ```GamingConsole```. 
+같은 ```GamerRunner``` ```클래스```에서 ```MarioGame```이 아닌 ```ChessGame```의 객체를 인스턴스화한다면 다른 코드는 하나도 바꿀 필요가 없다. 이는 ```MarioGame```과 ```ChessGame```이 모두 동일한 ```interface``` ```GamingConsole```을 구현하고 있기 때문이다.
 
-#### Using Interface as type for reference variable
+#### 인터페이스를 참조 변수의 타입으로 사용
 
-```GamingConsole``` is an interface.```MarioGame``` and ```ChessGame``` are it's implementations.
+```GamingConsole```은 인터페이스이다. ```MarioGame```과 ```ChessGame```은 그 구현이다.
 
-Let's try this -  `GamingConsole game = new ChessGame();`
+`GamingConsole game = new ChessGame();`을 사용해보자.
 
 **_GameRunner.java_**
 
@@ -13471,7 +13469,7 @@ Let's try this -  `GamingConsole game = new ChessGame();`
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Move Piece Up_
 
@@ -13482,11 +13480,12 @@ _Move Piece Left_
 _Move Piece Right_
 
 #### Explained
-`GamingConsole game = new ChessGame();` - You can store an implementation of an interface into a reference variable of the type of the interface.
 
-How does this help?
+`GamingConsole game = new ChessGame();` - 인터페이스의 구현은 인터페이스 타입의 참조 변수에 저장할 수 있다.
 
-Let's look at the next example:
+이것이 어떻게 도움이 될까?
+
+다음의 예를 보자.
 
 ##### Snippet-4 : GameRunner Version 4
 
@@ -13508,7 +13507,7 @@ Let's look at the next example:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Jump_
 
@@ -13518,19 +13517,19 @@ _Go forward_
 
 ##### Snippet-04 Explained
 
-You can replace `GamingConsole game = new ChessGame()` with `GamingConsole game = new MarioGame()` and now the program runs the `MarioGame`. Isn't it awesome?
+`GamingConsole game = new ChessGame()`을 `GamingConsole game = new MarioGame()`으로 대체하면 이제 프로그램은 `MarioGame`을 실행한다. 멋지지 않은가?
 
-### Step 18: Using Interfaces To Design APIs
+### Step 18: 인터페이스를 이용한 API 설계
 
-Consider a Software Development project, which involves programming a fairly large and complex application.  Project team (Team A) decided to out-source part of this project to an external team (Team B). Let's say this external team needs to implement a farily complex algorithm to achieve a specific task, and which needs to interface with the rest of the application. Work on both parts of the application needs to proceed simultaneously.
+상당히 크고 복잡한 응용 프로그램을 프로그래밍하는 소프트웨어 개발 프로젝트를 생각해보자. 프로젝트 팀 (A팀)은 이 프로젝트의 일부를 외부 팀 (B팀)에게 아웃소싱하기로 결정했다. 이 외부 팀이 특정 작업을 달성하기 위해 상당히 복잡한 알고리즘을 구현해야 하며, 나머지 응용 프로그램과 상호 작용해야 한다고 가정하자. 응용 프로그램의 두 부분에 대한 작업을 동시에 진행해야 한다.
 
-Suppose the algorithm logic is implemented using a single method:
+알고리즘 논리가 단일 메소드를 사용하여 구현된다고 가정해보자.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;```int complexAlgorithm(int number1, int number2);```
 
-How do we ensure that the work done by both the teams remains compatible?
+두 팀이 수행한 작업이 양립할 수 있도록 하려면 어떻게 해야 하는가?
 
-They start with defining an interface.
+인터페이스를 정의하는 것부터 시작합시다.
 
 **_ComplexAlgorithm.java_**
 
@@ -13544,7 +13543,7 @@ They start with defining an interface.
 
 ```
 
-Now the teams can go on their merry way. Team A can create a stub for the interface `OneComplexAlgorithm` and start working on their project.
+이제 그 팀들은 즐겁게 일할 수 있다. A팀은 `OneComplexAlgorithm`이라는 인터페이스를 위한 부분을 만들고 그 프로젝트를 시작할 수 있다.
 
 **_OneComplexAlgorithm.java_**
 
@@ -13560,7 +13559,7 @@ Now the teams can go on their merry way. Team A can create a stub for the interf
 
 ```
 
-Team B can take time to implement the actual algorithm.
+B팀은 실제 알고리즘을 구현하는 데 시간이 걸릴 수 있다.
 
 **_ActualComplexAlgorithm.java_**
 
@@ -13577,13 +13576,12 @@ Team B can take time to implement the actual algorithm.
 
 ```
 
-### Step 19: Interfaces - Puzzles And Interesting Facts
+### Step 19: Interfaces - 퍼즐과 흥미로운 사실들
 - - -  
 
-Let's look at a few examples to understand interfaces further.
+인터페이스를 더 이해하기 위해 몇 가지 예를 살펴보도록 하자.
 
-
-An ```interface``` can be extended by another ```interface```. We can have an inheritance hierarchy purely consisting of interfaces.
+```interface```는 또 다른 ```interface```에 의해 확장될 수 있다. 인터페이스로만 구성된 상속 계층을 가질 수 있는 것이다.
 
 ```java
 
@@ -13598,8 +13596,8 @@ An ```interface``` can be extended by another ```interface```. We can have an in
 	| created interface InterfaceTwo
 ```
 
-An implementation of interface should implement all its methods including the methods in its super interfaces.
-
+인터페이스의 구현은 슈퍼 인터페이스의 메소드를 포함하여 모든 메소드를 구현해야 한다.
+.
 ```java
 	jshell> class Implementation implements InterfaceTwo {
 	   ...>}
@@ -13623,7 +13621,8 @@ An implementation of interface should implement all its methods including the me
 	| created class Implementation
 ```
 
-If a class is declared as abstract, it can skip providing implementations for all interface methods.
+클래스가 추상적으로 선언되면 모든 인터페이스 메소드에 대한 구현 제공을 건너뛸 수 있다.
+
 ```java
 	jshell> public abstract class AbstractImplementation implements InterfaceTwo {
 	   ...> public void methodOne() {}
@@ -13631,7 +13630,7 @@ If a class is declared as abstract, it can skip providing implementations for al
 	| created class AbstractImplementation
 ```
 
-```interfaces``` cannot have member variables. An ```interface``` can only have declared **constants**
+```인터페이스```는 멤버 변수를 가질 수 없다. ```인터페이스```는 **상수**를 선언할 수 밖에 없다.
 
 ```java
 	jshell> interface InterfaceThree {
@@ -13647,8 +13646,7 @@ If a class is declared as abstract, it can skip providing implementations for al
 	   ...> }
 	| created interface InterfaceThree
 ```
-
-Starting from Java SE 8, an interface can provide a default implementation of the methods it provides.  It can be done by including the keyword ```default``` in the signature of that method, and providing a body to that method in its definition.
+Java SE 8부터 인터페이스는 제공되는 메소드의 기본 구현을 제공할 수 있다. 그것은 그 메소드의 선언에 ```default```라는 키워드를 포함시키고 그 정의에 메소드를 제시함으로써 이루어질 수 있다. 
 
 
 ```java
@@ -13670,7 +13668,7 @@ Starting from Java SE 8, an interface can provide a default implementation of th
 	default print
 ```
 
-Implementations of ```interface``` can override the default method implementation.
+```인터페이스```의 구현은 기본 메소드 구현을 오버라이딩할 수 있다.
 
 ```java
 	jshell> class ParticularPrint implements InterfaceFour {
@@ -13689,12 +13687,11 @@ Implementations of ```interface``` can override the default method implementatio
 
 ```
 
-No method declared inside an ```interface``` can be qualified with the ```private``` access specifier. However, an ```abstract class``` can have ```private``` methods declared within.
+```interface```안에 선언된 어떤 메소드도 ```private```접근 지정자에는 접근할 수 없다. 그러나 ```추상 클래스```는 ```private```메소드를 내부에서도 선언할 수 있다.
 
+#### ```기본(default)``` 메소드 구현이 필요한 이유.
 
-#### Why do we need ```default``` method implementations.
-
-Let's consider a `Provider` interface with three implementations.
+세 가지 구현이 가능한 `Provider` 인터페이스를 고려해보자.
 
 ```java
 
@@ -13725,7 +13722,7 @@ Let's consider a `Provider` interface with three implementations.
 
 ```
 
-What happens if a new method is added to the `interface`?
+`interface`에 새 메소드가 추가되면 어떻게 될까?
 
 ```java
 
@@ -13736,9 +13733,9 @@ What happens if a new method is added to the `interface`?
 
 ```
 
-Compilation Error! All implementations classes ```ImplementationOne```, ```ImplementationTwo``` and ```ImplementationThree``` **must** me updated to implement ```doMore()``` in each case. 
+컴파일 에러! ```ImplementationOne```, ```ImplementationTwo````, ```ImplementationThree``` 이 모든 구현 클래스들은 각각 ```doMore()``` 을 구현하도록 업데이트 **되어야 한다.**
 
-Alternative : provide a default implementation for `doMore`.
+대안 : `doMore`의 기본 구현을 제공한다.
 
 ```java
 
@@ -13752,23 +13749,24 @@ Alternative : provide a default implementation for `doMore`.
 
 ```
 
-No other code needs to immediately change, and specific implementation classes can override this default version, as and when needed.
+다른 코드는 즉시 변경할 필요가 없으며, 특정 구현 클래스는 필요에 다라 이 기본 버전을 오버라이드할 수 있다.
 
-This is especially useful in building and extending frameworks. You are not breaking a user of your framework interface when you add new methods to the interface.
+이는 특히 프레임워크를 구축하고 확장하는 데 유용하다. 인터페이스에 새 메소드를 추가할 때 프레임워크 인터페이스의 사용자는 중단되지 않는다.
 
-### Step 20:  ```abstract class``` And ```interface``` : A Comparison
+### Step 20: ```추상 클래스```와 ```인터페이스``` 비교
 
-```abstract class``` and ```interface``` are very different, except that they have a very similar syntax. 
+```추상 클래스```와 ```인터페이스```는 구문이 유사하다는 점을 제외하면 매우 다르다.
 
-When would you want to use them in your application?
+그들을 언제 응용 프로그램에 사용하기를 원하는가?
 
-#### interface
+#### 인터페이스
 
-```interface``` is a **Contract**.
+```인터페이스```는 **계약**이다.
 
-An ```interface``` is primarily used when you have two software components that need to communicate with each other, and there is a need to establish a contract. 
+```인터페이스```는 주로 서로 통신해야 하는 두 개의 소프트웨어 구성 요소가 있고 계약을 체결할 필요가 있을 때 사용된다.
 
-Recall the following example: `ComplexAlgorithm` defines the interface which helps both the teams involved.
+다음 예제를 상기해보라: `ComplexAlgorithm`은 관련된 두 팀 모두에 도움이 되는 인터페이스를 정의한다.
+
 
 ```java
 
@@ -13779,11 +13777,12 @@ Recall the following example: `ComplexAlgorithm` defines the interface which hel
 
 ```
 
-#### abstract class
+#### 추상 클래스
 
-An ```abstract class``` is primarily used when you want to generalize behavior by creating a super class. 
 
-Recall the following example we had discussed:
+```추상 클래스```는 주로 슈퍼 클래스를 만들어 행동을 일반화하고 싶을 때 사용된다.
+
+앞서 논의한 다음 예를 기억해보라.
 
 ```java
 
@@ -13801,12 +13800,12 @@ Recall the following example we had discussed:
 
 ```
  
-#### Syntactical Comparison
+#### 구문 비교
 
-Here are important syntactical differences:
-* No method declared inside an ```interface``` can be qualified with a ```private``` access specifier. However, an ```abstract class``` can have ```private``` methods.
-* An ```interface``` cannot have declared member variables. An ```abstract class``` can have member variable declarations.
-* A ```class``` or an ```abstract class``` can implement multiple ```interface```s. But, an ```interface``` can extend only one ```interface```, and a ```class``` or an ```abstract class``` can extend only one ```class``` or ```abstract class```.
+다음은 중요한 구문 차이이다.
+* ```인터페이스```안에 선언된 어떤 메소드도 ```private``` 접근 지정자에 의해 접근할 수 없다. 그러나 ```추상 클래스```는 ```private```메소드를 가질 수 있다.
+* ```인터페이스```는 멤버 변수를 선언할 수 없다. ```추상 클래스```는 멤버 변수 선언을 할 수 있다.
+* ```클래스``` 또는 ```추상 클래스```는 복수의 ```인터페이스```를 구현할 수 있다. 그러나 ```인터페이스```는 한 개의 ```인터페이스```만 확장할 수 있고 ```, ```클래스``` 또는 ```추상 클래스```는 한 개의 ```클래스`` 또는 ```추상 클래스```만 확장할 수 있다.
 
 ### Step 21: Programming Exercise PE-OOP-03
 
