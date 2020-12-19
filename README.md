@@ -27,7 +27,7 @@
 * [Chapter 11 - 객체 지향 프로그래밍 (*OOP*) - 복습](#객체-지향-프로그래밍-oop---복습)
 * [Chapter 12 - 컬렉션의 이해](#컬렉션의-이해)
 * [Chapter 13 - 제네릭의 이해](#제네릭의-이해)
-* [Chapter 14 - Introduction to Functional Programming](#introduction-to-functional-programming)
+* [Chapter 14 - 함수형 프로그래밍 소개](#함수형-프로그래밍-소개)
 * [Chapter 15 - 스레드와 동시 실행](#스레드와-동시-실행)
 * [Chapter 16 - 예외처리의 이해](#예외처리의-이해)
 * [Chapter 17 - 파일 입출력](#파일-입출력)
@@ -13819,39 +13819,39 @@ TODO
 
 #### Solution - 2
 
-### Step 21: Introducing Polymorphism
+### Step 21: 다형성 소개
 
 TODO
 
-# Introducing Collections
+# 컬렉션의 이해
 
-Arrays are not dynamic data structures. They can store only a fixed maximum number of elements.
+배열은 동적 자료 구조가 아니다. 고정된 최대 개수의 요소만 저장할 수 있다.
 
-Inserting or removing elements into an array needs a lot of work.
+배열에 요소를 삽입하거나 제거할 때는 많은 작업이 필요하다.
 
-Collections are in-built implementations available to support dynamic data structures in Java programs. The commonly used collections are based on Lists, Trees and Hash Tables. 
+컬렉션은 Java 프로그램의 동적 자료 구조를 지원하는 내장형 구현이다. 일반적으로 사용되는 컬렉션은 리스트, 트리 및 해시 테이블을 기반으로 한다.
 
-Java provides very good collection implementations.
+Java는 매우 우수한 컬렉션 구현을 제공한다.
 
-To make it simple to understand all collections, we will start with the interfaces - such as ```List```, ```Set```, ```Queue```, ```Map``` and others. 
+모든 컬렉션을 쉽게 이해하기 위해 ```List```,```Set```,```Queue```,```Map``` 등의 인터페이스로 시작할 것이다.
 
-After that, we will look at implementations of these interfaces, such as ```LinkedList```, ```HashTable``` and  ```TreeMap```, among others.
+그 후에는 ```LinkedList```,```HashTable```,```TreeMap``` 등과 같은 인터페이스 구현에 대해 알아보자.
 
-#### The Collection Interfaces
+#### 컬렉션 인터페이스
 
-Let's start with the `List` interface
+`리스트` 인터페이스 먼저 시작하자.
 
-#### The ```List``` ```interface```
+#### ```리스트(List)``` ```인터페이스```
 
-The ```List``` ```interface``` is used to implement an **ordered collection** in Java programs. An ordered collection is one, where the programmer has control over the position where an element can be inserted into, or accessed from the collection.
+이 ```리스트``` ```인터페이스```는 자바 프로그램에서 **정렬된 컬렉션**을 구현하는 데 사용된다. 순서가 정렬된 컬렉션은 요소를 컬렉션에 삽입하거나 컬렉션에서 접근할 수 있는 위치를 프로그래머가 제어할 수 있는 컬렉션이다.
 
-If an element's insertion position is not specified, it is added at the end of the ```List```.
+요소의 삽입 위치가 지정되지 않은 경우 ```리스트```의 끝에 추가된다.
 
-A ```List``` typically allows *duplicate* elements. 
- 
-##### Snippet-1 : Creating a List
+```리스트```는 일반적으로 *중복* 요소를 허용한다.
 
-We can see examples of creating a list and accessing element data below:
+##### Snippet-1 : 리스트 생성
+
+아래에서는 리스트를 만들고 요소 데이터에 접근하는 예를 볼 수 있다.
 
 ```java
 
@@ -13877,13 +13877,13 @@ We can see examples of creating a list and accessing element data below:
 
 ```
 
-#### ```List``` Immutability
+#### ```리스트``` 불변성
 
-Consider the ```List``` ```words``` we created in the last snippet.
+지난 스니펫에서 우리가 만든 ```words``` ```리스트```를 생각해 보자.
 
 ```List<String> words = List.of("Apple", "Bat", "Cat");```
 
-Lists created using the ```static``` ```of``` method are *immutable*.
+```static``` ```of```메소드를 사용하여 만든 리스트는 *불변하다*.
 
 ```java
 
@@ -13898,15 +13898,15 @@ Lists created using the ```static``` ```of``` method are *immutable*.
 
 ```
 
-#### Creating A Mutable ```List```s
+#### 가변적인 ```리스트``` 생성
 
-The way to create ```List``` data structures that can be updated over time, is to instantiate built-in ```collection``` classes that implement the ```List``` interface. 
+시간이 지남에 따라 업데이트될 수 있는 ```List``` 데이터 구조를 만드느 방법인 ```List``` 인터페이스를 구현하는 내장 ```컬렉션``` 클래스를 인스턴스화하는 것이다.
 
-Examples are ```ArrayList```, ```LinkedList``` and ```Vector```.
+```ArrayList```, ```LinkedList```와 ```Vector```가 그 예이다.
 
-##### Snippet-3: Mutable Lists
+##### Snippet-3: 가변적인 리스트
 
-Let's look at a few examples:
+몇 가지 예를 보자.
 
 ```java
 
@@ -13934,36 +13934,37 @@ Let's look at a few examples:
 
 #### ```ArrayList``` vs ```LinkedList``` 
 
-```ArrayList``` uses an array to store elements.
-* Positional access and modification of elements is very efficient, with constant-time algorithmic complexity.
-* Insertion and deletion of elements are expensive. In a 20 element list, to insert an element at first position, all 20 elements should be moved.
+```어레이 리스트```는 요소를 저장하기 위해 어레이를 사용한다.
+* 위치 엑세스와 요소의 수정은 매우 효율적이며, 일정한 시간 복잡도를 가진다.
+* 요소를 삽입하고 삭제하는 데 비용이 많이 든다. 20개의 요소를 가진 리스트에서, 첫 번째 위치에 요소를 삽입하려면 20개 요소를 모두 이동시켜야 한다.
 
-The data structure used to implement a ```LinkedList``` is of the type linked-list, which is a chain of blocks of memory slots.
-* Inserting and Deleting values is easy. This is because in a chain of blocks, each link is nothing but a reference to the next block. Insertion only involves adjustment of these links to accommodate new values, and does not require extensive copying and shifting of existing elements.
-* Positional access and modification of elements is less efficient than in an ```ArrayList```, because access always involves traversal of links.
+```연결리스트```를 구현하는 데 사용되는 데이터 구조는 메모리 슬롯 블록의 체인인 연결 리스트 타입이다.
+* 값을 삽입하고 삭제한는 것은 쉽다. 블록 체인에서 각 링크는 다음 블록에 대한 참조에 불과하기 때문이다. 삽입에는 새로운 값을 수용하기 위해 이러한 링크의 조정만 필요하며, 기존 요소의 광범위한 복사 및 이동이 필요하지 않다.
+* 엑세스에는 항상 링크의 횡단을 수반하기 때문에 위치의 엑세스와 요소의 수정은 ```어레이 리스트```에 비해 효율성이 떨어진다.
 
-Optimization: the underlying data structure for a ```LinkedList``` is actually a doubly-linked list, with each element having both forward and backward links to elements around it. 
-
+최적화: ```연결리스트```의 기본 데이터 구조는 사실 이중 연결리스트로, 각 요소는 그 주변의 요소들과 앞뒤로 연결되어 있다.
+.
 #### ```Vector``` vs ```ArrayList```
 
-```Vector``` has been with Java since v1.0, whereas ```ArrayList``` was added later, in v1.2. Both of them use an array as the underlying data structure. 
+```벡터```는 자바 v1.0이후 사용되었고, ```어레이리스트```는 나중에 v1.2에서 추가되었다. 둘 다 배열을 기본 데이터 구조로 사용한다.
 
-```Vector``` is thread-safe. In ```Vector```, all methods are ```synchronized```. 
+```벡터```는 thread-safe하다. ```벡터```에서는 모든 메소드가 ```동기화```되어있다.
 
-> Look at other thread safe `List` implementations as `Vector` has poor concurrency.
+> `벡터`는 동시성이 낮으므로 다른 스레드 세이프한 `리스트`구현을 보라.
 
-#### ```List``` Operations
-We will examine common ```List``` operations on an ```ArrayList```. Similar operations can also be done on a ```LinkedList``` or a ```Vector```.
+#### ```List``` 연산
 
-##### Snippet-4 : List Insertions
+일반적인 ```리스트```연산을 ```어레이리스트```로 검토해볼 것이다. ```연결리스트``` 또는 ```벡터```에서도 유사한 연산이 수행될 수 있다.
 
-We look at examples for
-* Insertion at end (default)
-* Positional insertion
-* Inserting duplicate entries is allowed
-* Adding all elements of an external list, to the current list
-	* At the end
-	* Positional insertion is also available, as in single element insertion
+##### Snippet-4 : 리스트 삽입
+
+다음을 위한 예를 살펴보자.
+* 끝단 삽입(기본값)
+* 위치 삽입
+* 중복 입력이 허용됨
+* 현재 리스트에 외부 리스트의 모든 요소 추가
+	* 맨 뒤에
+	* 단일 요소 삽입과 같이 위치 삽입도 가능
 
 ```java
 
@@ -13996,11 +13997,11 @@ We look at examples for
 ```
 
 
-##### Snippet-5 : Element Modification
+##### Snippet-5 : 요소 수정
 
-Let's look at examples of
-* Modifying elements at a specific position.
-* Deleting elements
+다음의 예를 살펴보자
+* 특정 위치의 요소 수정
+* 요소 삭제
 
 ```java
 
@@ -14024,11 +14025,11 @@ Let's look at examples of
 
 ```
 
-##### Snippet-6 : Iterating within ArrayList
+##### Snippet-6 : 어레이 리스트 내에서 반복
 
-Let's now look at how to iterate around the contents of a `List`
+이제 `리스트`의 요소들을 반복하는 방법을 살펴보자.
 
-Basic for loop:
+기본 루프:
 
 ```java
 
@@ -14042,7 +14043,7 @@ Basic for loop:
 	Cat
 ```
 
-Using enhanced for loop:
+강화된 루프의 사용:
 ```java
 	jshell> for(String word:words) {
 	...> System.out.println(word);
@@ -14052,7 +14053,7 @@ Using enhanced for loop:
 	Cat
 ```
 
-Using iterators:
+반복기 사용:
 ```java
 	jshell> Iterator wordsIterator = words.iterator();
 	wordsIterator ==> java.util.AbstractList$Itr@3712b94
@@ -14066,11 +14067,10 @@ Using iterators:
 #### Choosing Between Iteration Modes
 - - - 
 
-* For non-mutating iterations, an enhanced ```for``` loop is the most convenient
-* For mutating iterations:
-* Deletions: An enhanced ```for``` loop is not recommended, as we saw in the example. ```"Bat"``` was removed, but ```"Cat"``` was not, because the iteration itself was affected.
-* Iterators can be used for such iterations.
-
+* 변경이 없는 반복의 경우 강화된 ```for```루프가 가장 편리하다.
+* 변하는 반복의 경우:
+* 삭제: 우리가 본 예에서 보듯이 강화된 ```for```루프는 권장되지 않는다. ```Bat```는 제거되었지만 ```Cat```은 반복 자체가 영향을 받았기 때문에 제거되지 않았다.
+* 이러한 반복에는 반복기(Iterator)를 사용할 수 있다.
 
 ##### Snippet-6
 
@@ -14107,16 +14107,16 @@ Using iterators:
 
 ```
 
-#### ```List``` : Type Safety
+#### ```List``` : 타입 안정성
 
-A ```List``` collection does not store primitives. It only stores object references. When we attempt to store primitive types, such as those of ```int```, ```char``` or ```double```, they get implicitly converted to their wrapper class types, namely ```Integer```, ```Character``` and ```Double``` respectively. Primitive data type elements get *auto-boxed*.
+```리스트``` 컬렉션은 기본형 타입을 저장하지 않는다. 오직 객체 참조만 저장한다. 우리가 ```int```,```char```혹은 ```double```과 같은 기본형 타입을 저장하력 하면 각각 ```Integer```,```Character```,```Double```의 래퍼 클래스로 암묵적으로 전환된다. 기본형 데이터 타입 요소는 *자동 박싱*을 사용해야 한다.
 
-##### Snippet-7 : Type safety
+##### Snippet-7 : 타입 안정성
 
-The ```ArrayList.indexOf()``` method is not overloaded, there is only one version. SO, when passed an ```int``` argument, it is auto-boxed to an ```Integer``` object, and the method gets executed. 
-* However, the ```ArrayList.remove()``` method has two overloaded versions:
-	* ```ArrayList.remove(int index)``` : attempts to delete an element at the specified index in the ```ArrayList```
-	* ```ArrayList.remove(Object o)``` : attempts to delete the specified element, if ti is present in the ```ArrayList	```.
+```ArrayList.indexOf()``` 메소드는 오버로드 되지 않고 한 가지 버전만 있다. 그래서 ```int```인자를 전달하면 그것은 ```Integer```라는 객체에 자동으로 박싱되고 해당 메소드가 실행된다.
+* 그러나 ```ArrayList.remove()``` 메소드는 두 가지 오버로드 버전이 있다.
+	* ```ArrayList.remove(int index)``` : ```ArrayList```의 특정 인덱스에서 요소를 삭제한다.
+	* ```ArrayList.remove(Object o)``` : 특정 요소가 ```ArrayList```에 있으면 삭제한다.
 
 ```java
 
@@ -14155,13 +14155,11 @@ The ```ArrayList.indexOf()``` method is not overloaded, there is only one versio
 
 #### Sorting a ```List```
 
-##### Snippet-8 : List sort
+##### Snippet-8 : 리스트 정렬
 
-The ```List``` obtained from ```List.of()``` is immutable, hence cannot be sorted itself. Hence, create a mutable ```ArrayList``` out of it.
+```List.of()```에서 얻은 ```List```는 불변의 것이므로 스스로 정렬할 수 없다. 그러므로 그것으로부터 변형 가능한 ```ArrayList```를 만들자.
 
-The ```ArrayList.sort()``` method requires the definition of a ```Comparator``` object. Easier option is to use ```Collections.sort()``` instead.
-
-
+```ArrayList.sort()```메소드는 ```Comparator(비교기)``` 객체의 정의를 필요로 한다. 더 쉬운 선택은 ```Collections.sort()```를 대신 사용하는 것이다.
 
 ```java
 
@@ -14185,8 +14183,7 @@ The ```ArrayList.sort()``` method requires the definition of a ```Comparator``` 
 
 ##### Snippet-9 : Sorting List
 
-Let's create a Student class and try to sort it using `Collections.sort`
-
+Student 클래스를 만들고 `Collections.sort`를 이용해 정렬해보자
 
 **_Student.java_**
 
@@ -14250,16 +14247,23 @@ Let's create a Student class and try to sort it using `Collections.sort`
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 **_COMPILER ERROR_**
 
 ##### Snippet-9 Explained
 
+```Collections.sort()``` 메소드에는 ```List```인 것만이 통과할 수 있는데 그 타입의 요소는 ```T```이며 ```Comparator<? super T>``` ```interface```를 구현하고 있다.
+
+```Student```는 인터페이스를 구현하지 않는다. 결과 
 To the method ```Collections.sort()```, only those ```List```s can be passed, the type of whose elements ```T```, implements the ```Comparator<? super T>``` ```interface```. 
 
-```Student``` does not implement the interface. Result - Compilatino error.
-##### Snippet-10 : Implementing Comparator Interface
+```Student``` does not implement the interface. Result - Compilation error.
+``컬렉션"이라는 방법에는 ``리스트"라는 것만이 통과할 수 있는데 그 유형의 요소는 ``"이다.T'sns는 ``비교자"를 구현하고 있다. 슈퍼T'''인터페이스''''' 
+
+"'학생'은 인터페이스를 구현하지 않는다. 결과적으로 - 실행 오류(Compilation error)이다.
+
+##### Snippet-10 : 비교기 인터페이스 구현
 
 **_StudentsCollection.java_**
 
@@ -14302,7 +14306,7 @@ To the method ```Collections.sort()```, only those ```List```s can be passed, th
 ```
 
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _[1 Ranga, 100 Adam, 2 Eve]_
 
@@ -14310,9 +14314,9 @@ _[1 Ranga, 2 Eve, 100 Adam]_
 
 ##### Snippet-10 Explained
 
-`Integer.compare(x, y)`  returns the value 0 if x == y; a value less than 0 if x < y; and a value greater than 0 if x > y. 
+`Integer.compare(x, y)`는 x == y 인 경우 0을, x < y 인 경우 0보다 작은 값을 , x > y 인 경우 0보다 큰 값을 반환한다.
 
-If you change the order of parameters:
+매개변수의 순서를 변경하는 경우:
 
 ```java
 
@@ -14323,15 +14327,15 @@ If you change the order of parameters:
 
 ``` 
 
-Output changes to:
+출력이 이렇게 바뀐다:
 
 _[100 Adam, 2 Eve, 1 Ranga]_
 
-#### The ```Comparator``` ```interface```
+#### ```비교기(Comparator)``` ```인터페이스```
 
-What if there is a need for sorting Student's in multiple ways? What if we want to sort Students in ascending order of id's in some situations and in descending order of id's in some other situations?
+여러 가지 방법으로 학생을 정렬해아 한다면 어떻게 할까? 어떤 상황에서는 ID의 오름차순으로, 다른 상황에서는 ID의 내림차순으로 정렬하려면 어떻게 해야하는 걸까?
 
-```Collections.sort``` has an overloaded version that has a signature that looks like:
+```Collections.sort```는 다음과 같은 특징을 가지는 오버로드된 버전이 있다.
 
 ```java
 
@@ -14342,9 +14346,9 @@ What if there is a need for sorting Student's in multiple ways? What if we want 
 
 ``` 
 
-To be able to invoke this version of ```Collections.sort```, we will need to define a suitable ```Comparator``` implementation, that works with ```Student``` objects.
+이 버전의 ```Collections.sort```를 호출할 수 있게 된다. 우리는 ```Student``` 객체와 동작하는 ```비교기```의 적절한 구현을 정의할 필요가 있을 것이다.
 
-As you may have already guessed, we would need to define two different ```Comparator``` implementations: one for ascending sort, and another for descending sort.
+이미 짐작했겠지만 ```비교기```의 두 가지 실행, 즉, 하나는 오름차순, 다른 하나는 내림차순을 정의해야 한다.
 
 ##### Snippet-11 : Implementing Student Comparators
 
@@ -14383,7 +14387,7 @@ As you may have already guessed, we would need to define two different ```Compar
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _[1 Ranga, 100 Adam, 2 Eve]_
 
@@ -14391,9 +14395,9 @@ _Ascending : [1 Ranga, 2 Eve, 100 Adam]_
 
 _Descending : [100 Adam, 2 Eve, 1 Ranga]_
 
-#### ```sort``` method Of ```List```
+#### ```리스트```의 ```sort```메소드
 
-You can call `sort` method on the `List` by passing it a `Comparator` implementation - `studentsAl.sort(new AscStudentComparator())`.
+`리스트`에서 `sort`메소드는 `비교기(Comparator)`를 전달하여 호출할 수 있다 - `studentsAl.sort(new AscStudentComparator())`
 
 ##### Snippet-12 : Comparator for ArrayList.sort()
 
@@ -14425,7 +14429,7 @@ You can call `sort` method on the `List` by passing it a `Comparator` implementa
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _[1 Ranga, 100 Adam, 2 Eve]_
 
@@ -14433,18 +14437,16 @@ _Asc : [1 Ranga, 2 Eve, 100 Adam]_
 
 _Desc : [100 Adam, 2 Eve, 1 Ranga]_
 
-### The ```Set``` ```interface```
+### The ```Set``` ```인터페이스```
 
-Mathematically, a set is a collection of unique items. Similarly, the Java ```Set``` ```interface``` also specifies a contract for collections having unique elements.
-* If ```object1.equals(object2)``` returns ```true```, then only one of ```object1``` and ```object2``` have a place in a ```Set``` implementation.
-
-There is no positional element access provided by the ```Set``` implementations.
+수학적으로 Set(집합)는 고유한 항목의 모음이다. 마찬가지로 자바의 ```Set``` ```인터페이스``` 또한 고유한 요소를 가진 컬렉션에 대한 계약을 명시하고 있다.
+* 만약 ```object1.equals(object2)```가 ```true```를 반환 한다면, 그 후 ```object1```과 ```object2```중 하나만이 ```Set``` 구현에 자리한다. 
 
 ##### Snippet-13 : Set
 
-Let's look at a few examples:
+몇 가지 예를 살펴보자.
 
-The collection returned by ```Set.of()``` is immutable, hence does not support the ```add()```  method. 
+```Set.of()```에 의해 반환된 컬렉션은 불변이므로 ```add()``` 메소드를 지원하지 않는다.
 
 ```java
 
@@ -14452,9 +14454,7 @@ The collection returned by ```Set.of()``` is immutable, hence does not support t
 	set ==> [Banana, Apple, Cat]
 ```
 
-
-Create a ```HashSet``` collection instead, which supports the ```add()```, in order to test the uniqueness property of a ```Set```.
-
+대신 ```add()```를 지원하는 컬렉션을 만들어 ```Set```의 교유성을 시험해보자.
 
 
 ```java
@@ -14464,7 +14464,7 @@ Create a ```HashSet``` collection instead, which supports the ```add()```, in or
 	hashSet ==> [Apple, Cat, Banana]
 ```
 
-The ```HashSet.add()``` operation returns a ```false``` value, indicating that inserting a duplicate "Apple" entry has failed.
+```HashSet.add()```연산은 ```false``` 값을 반환하며 이는 중복인 "Apple" 입력에 실패했음을 나타낸다.
 
 ```java
 	jshell> hashSet.add("Apple");
@@ -14473,8 +14473,7 @@ The ```HashSet.add()``` operation returns a ```false``` value, indicating that i
 	hashSet ==> [Apple, Cat, Banana]
 ```
 
-
-Note that when the ```hashSet``` was constructed using the ```set```, the order of the elements got permuted/changed. Also originally, when we created the ```set``` from the ```Set.of()``` method, the order printed was different from the order of initialization. This confirms the fact that a ```Set``` collection does not give any importance to element order, and therefore, does not support positional access. Hence, the compiler error on call to ```hashSet.add(int, String)```.
+```hashSet```이 ```set```을 사용하여 만들어졌을 때 요소의 순서는 순열로 배치/변경된다는 점에 유의한다. 또한 원래 우리가 ```Set.of()```메소드에서 ```set```를 만들었을 때, 출력된 순서는 초기화 순서와 달랐따. 이는 ```Set```컬렉션은 요소의 순서를 중요시하지 않으므로 위치 접근을 지원하지 않는다는 사실을 확인시켜 준다. 따라서 ```HashSet.add(int, String)``` 호출 시 컴파일러 오류가 발생한다.
 
 
 ```java
@@ -14487,23 +14486,23 @@ Note that when the ```hashSet``` was constructed using the ```set```, the order 
 
 ```
 
-#### Understanding Data Structures
+#### 데이터 구조의 이해
 
 ##### Hash Table
-* Hash Table: A data structure that attempts to combine the best of both worlds:	
-	* Very efficient element access
-	* Very efficient element insertion and deletion 
-* Buckets : They are the slots in the hash table, into which elements are inserted and chained together. As you can see, a hash table is effectively a large array of buckets, each containing a small linked list.
-* Hashing: A procedure called **hashing** used in the construction of the Hash Table. The term **hash** generally means *mix up the order of elements*.
-* Hashing Function: A formula to determine/compute which bucket a particular element gets inserted into. For illustration: ```hash(elem)``` could compute ```elem mod 13``` mathematically, and uses that value to index into the table, to locate the bucket insertion. The ```Object.hashCode()``` could be used as a hashing function.
-* Collisions: Leads to chaining within a bucket, where a linked list grows. The larger the table, and the cleverer the hashing function, the lesser the chance for collisions.
+* 해시 테이블(Hash Table) : 두 가지 장점을 결합하려는 데이터 구조
+	* 요소에 대한 접근이 매우 효율적임
+	* 요소 삽입 및 삭제가 매우 효율적임
+* 버킷(Buckets) : 해시 테이블의 슬롯으로, 요소를 삽입하고 서로를 체인으로 연결한다. 보다시피 해시 테이블은 사실상 버킷의 커다란 배열로, 각각에 작은 연결 리스트가 포함되어 있다.
+* 해싱(Hashing) : 해시 테이블을 만들 때 사용되는 **해싱**이라는 절차이다. **해시(Hash)** 라는 용어는 일반적으로 *요소의 순서를 섞음* 을 의미한다.
+* 해시 함수 : 특정 요소가 삽입되는 버킷을 결정/계산하는 공식이다. 예를 들어 ```hash(elem)```은 ```elem mod 13```을 수학적으로 계산할 수 있으며, 이 값을 사용하여 테이블로 인덱스하여 버킷 삽입 위치를 찾을 수 있다. ```Object.hashCode()```는 해싱 함수로 사용할 수 있다.
+* 충돌: 연결 리스트가 늘어나는 버킷 내의 체인으로 이어진다. 테이블이 클수록, 해시 함수가 똑똑해질수록 충돌 확률은 더 낮아진다.
 
 ##### Tree
-* Tree: Stores elements in sorted order. For every node in the tree, elements of all nodes in its left sub-tree are lesser than its contained element. Conversely, elements of all nodes in its right sub-tree are greater than its contained element.
-* Insertions: Given any node, we know by comparing the new element with the node's element, where to go about inserting it, to maintain sorted order.
-* Access : More efficient than linked lists.
+* 트리: 정렬된 순서에 요소를 저장한다.트리 내의 모든 노드의 왼쪽 서브트리는 해당 노드의 요소보다 작다. 반대로 모든 노드의 그 오른쪽 서브 트리에 있는 요소는 해당 노드의 요소보다 크다.
+* 삽입: 어떤 노드가 주어져도 정렬된 순서를 유지하기 위해 기존의 노드와 비교하여 새 노드가 삽입될 자리를 찾는다.
+* 접근: 연결 리스트보다 효율적
 
-#### ```Set``` Implementations
+#### ```Set``` 구현
 
 * HashSet
 * LinkedHashSet
@@ -14511,7 +14510,7 @@ Note that when the ```hashSet``` was constructed using the ```set```, the order 
 
 ##### Snippet-14 : HashSet
 
-In a ```HashSet```, elements are neither stored in the order of insertion, nor in sorted order.
+```HashSet```에서는 요소들이 삽입 순서나 정렬 순서에 따라 저장되지 않는다.
 
 ```java
 
@@ -14534,7 +14533,7 @@ In a ```HashSet```, elements are neither stored in the order of insertion, nor i
 ```
 ##### Snippet-15 : LinkedHashSet
 
-In a ```LinkedHashSet```, elements are stored in the order of insertion.
+```LinkedHashSet```에서는 요소들이 삽입된 순서대로 저장된다.
 
 ```java
 
@@ -14563,7 +14562,7 @@ In a ```LinkedHashSet```, elements are stored in the order of insertion.
 ##### Snippet-16 : TreeSet
 - - - 
 
-In a ```TreeSet```, elements are stored in sorted order.
+```TreeSet```에서는 요소들이 정렬된 순서로 저장된다.
 
 ```java
 
@@ -14588,16 +14587,16 @@ In a ```TreeSet```, elements are stored in sorted order.
 	jshell>
 
 ```
-#### Exercise Set
+#### Set 예제
 
 - - - 
-1. Create a ```List`` of characters, such as:
+1. 다음과 같은 ```List```를 만든다.
 
 	```List<Character> list = List.of('A', 'Z', 'A', 'B', 'Z, 'F);```
-
-* Write a procedure to list out the unique characters in this list
-* Write a procedure to list out these unique characters in sorted order
-* Write a procedure to list out these unique characters in the order in which they were present in the original list 
+	
+* 이 리스트에서 고유 문자를 나열하는 절차를 작성하라
+* 이러한 고유 문자를 정렬된 순서대로 나열하는 절차를 작성하라
+* 이러한 고유한 문자를 원래 리스트에 있는 순서대로 나열하는 절차를 작성하라
 
 #### Solution
 
@@ -14626,7 +14625,7 @@ In a ```TreeSet```, elements are stored in sorted order.
 
 ``` 
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Unique Characters: [A, B, F, Z]_
 
@@ -14636,17 +14635,17 @@ _Inserted Order: [A, Z, B, F]_
 
 #### Solution Explained
 
-In this example, the order to elements traversed in ```hashSetChars``` happened to be the same as that in ```treeSetChars```. Such an order is not always guaranteed, as we saw in the earlier examples.
+이 예시에서 ```hashSetChars```로 정리한 원소의 순서는 ```treeSetChars```에서와 같다. 앞의 예에서 보았던 바와 같이 이러한 순서가 항상 보장되는 것은 아니다.
 
 #### ```TreeSet``` In Depth
 
-* Super-Interfaces
+* 슈퍼 인터페이스
 	* Set
 	* NavigableSet
 
-##### Snippet-16 : NavigableSet Operations
+##### Snippet-16 : NavigableSet 연산
 
-Let's look at few operations:
+몇 가지 연산을 살펴보자
 
 ```java
 
@@ -14655,7 +14654,7 @@ Let's look at few operations:
 	jshell> numbers.floor(40);
 	$1 ==> 34
 ```
-```floor()``` method is inclusive, ```lower()``` is exclusive
+```floor()``` 메소드는 포괄적이고, ```lower()``` 는 배타적이다.
 
 ```java
 	jshell> numbers.floor(34);
@@ -14664,7 +14663,7 @@ Let's look at few operations:
 	$3 ==> 12
 ```
 
-```ceiling()``` method is inclusive, ```higher()``` is exclusive
+```ceiling()``` 메소드는 포괄적이고 , ```higher()```는 배타적이다. 
 
 ```java
 	jshell> numbers.ceiling(36);
@@ -14675,7 +14674,7 @@ Let's look at few operations:
 	$6 ==> 54
 ```
 
-```subSet(Object, Object)``` method is only lower-inclusive. So, the left bound is like ```lower()```, and right bound is like ```higher()```. The overloaded version ```subSet(Object, boolean, Object, boolean)``` can be used to configure lower- and upper inclusiveness of the returned subset.
+```subSet(Object, Object)``` 메소드는 하한 포함이다. 그래서 왼쪽 경계는 ```lower()```과 같고, 오른쪽 경계는 ```higher()```과 같다. 오버로딩된 버전 ```subSet(Object, boolean, Object, boolean)```은 반환된 서브 집합의 하위 집합과 상위 집합을 구성하는 데 사용될 수 있다.
 
 ```java
 	jshell> numbers.subSet(20, 80);
@@ -14690,7 +14689,8 @@ Let's look at few operations:
 	$11 ==> [54]
 ```
 
-```headSet()``` returns the subset of elements preceding the given element value. ```tailsSet()``` returns the subset of elements succeeding the given element value
+```headSet()```은 주어진 요소 값 앞에 있는 요소의 하위 집합을, ```tailSet()```은 주어진 요소 값 뒤에 있는 요소의 하위 집합을 반환한다.
+
 ```java
 	jshell> numbers.headSet(50);
 	$12 ==> [12, 34]
@@ -14700,20 +14700,21 @@ Let's look at few operations:
 
 ```
 
-#### The ```Queue``` Interface
+####  ```큐(Queue)``` 인터페이스
 
-```Queue``` ```interface``` : ```extends``` the ```Collection``` ```interface```. 
-* Elements are arranged in order of processing, such as in a To-Do List.
+```Queue``` ```인터페이스``` : ```컬렉션``` ```인터페이스```를 ```확장함.
+* 구성 요소는 작업 관리 목록과 같은 처리 순서로 배열된다.
 
-#### The ```PriorityQueue``` Collection
 
-The ```PriorityQueue``` collection is a built-in Java ```class```, that ```implements``` the ```Queue``` ```interface```. Elements are stored in a sorted natural order, by default. We can also specify a different custom order, called the *order of priority* (customized by the programmer).
+#### ```우선 순위 큐(PriorityQueue)``` 컬렉션
 
-##### Snippet-17 : PriorityQueue
+```우선 순위 큐``` 컬렉션은 자바의 내장 ```클래스```로, ```큐``` ```인터페이스```를 ```구현```하고 있다. 요소는 기본적으로 정렬된 자연 순서로 저장된다. 또한 *우선 순위*(프로그래머에 의해 지정됨)라고 하는 사용자 지정 순서를 정할 수 있다. 
 
-The ```PriorityQueue``` ```queue``` stores the strings in ascending alphabetic order by default. 
+##### Snippet-17 : 우선 순위 큐(PriorityQueue)
 
-* ```queue.poll()``` de-queue's the element at the beginning of the natural order 
+```우선 순위 큐```는 기본적으로 오름차순 알파벳 순서로 문자열을 저장한다.
+
+* ```queue.poll()``` 큐의 요소들을 자연 발생 순서부터 내보낸다.
 
 
 ```java
@@ -14744,11 +14745,11 @@ The ```PriorityQueue``` ```queue``` stores the strings in ascending alphabetic o
 
 ```
 
-##### Snippet-18 : Custom Priority PriorityQueue
+##### Snippet-18 : 사용자 지정 우선 순위 큐
 
-A custom priority order on the elements in a PriorityQueue can be specified by passing an implementation of ```Comparator<? super T>``` ```interface``` to the ```PriorityQueue<T>``` constructor. 
+우선 순위의 구성 요소에 대한 사용자 정의 우선 순위 순서는 ```PriorityQueue<T>```에 ```Comparator<? super T>``` ```인터페이스```의 구현을 전달하면 순서를 지정할 수 있다.
 
-Let's implement a `StringLengthComparator`.
+`StringLengthComparator`를 구현해 보자.
 
 **_QueueRunner.java_**
 
@@ -14780,7 +14781,7 @@ Let's implement a `StringLengthComparator`.
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Cat_
 
@@ -14791,16 +14792,17 @@ _Monkey_
 _null_
 
 
-#### The ```Map``` ```interface```
-The ```Map``` ```interface``` specifies a contract to implement collections of elements, that are in the form of ```(key, value)``` pairs.  
+#### ```Map``` ```인터페이스```
 
-Let's say you want to store how many times a character is repeated in a sequence of characters.
-* If the sequence inserted is: ```{'A', 'C', 'A', 'C', 'E', 'C', 'M', 'D', 'H', 'A'}```
-* The map contents would end up being: ```{('A', 3), ('C', 3), ('E', 1), ('M', 1), ('D', 1), ('H', 1)}```.
+```Map``` ```인터페이스```는 ```(key, value)```의 한 쌍으로 이루어진 원소의 컬렉션을 구현하기 위한 계약을 명시하고 있다.
 
-Since the kind of elements stored in a map (```(key, value)``` pairs)  are different from any other collection categories in Java, the ```Map``` ```interface``` is unique. So unique, that it even does not extend the ```Collection``` ```interface```! 
+문자열이 일련의 문자로 반복되는 횟수를 저장한다고 가정해보자.
+* ```{'A', 'C', 'A', 'C', 'E', 'C', 'M', 'D', 'H', 'A'}``` 순으로 삽입된다.
+* Map 내용은  ```{('A', 3), ('C', 3), ('E', 1), ('M', 1), ('D', 1), ('H', 1)}```으로 끝난다.
 
-The ```interface``` definition looks something like:
+Map에 저장된 요소의 종류 (```(key, value)```쌍)은 자바의 다른 컬렉션들과 달라 ```Map``` ```인터페이스```는 독특하다. 너무 독특해서 ```Collection``` ```인터페이스```를 확장하지 못한다!
+
+```인터페이스```의 정의는 다음과 같다.
 
 ```java
 
@@ -14812,7 +14814,7 @@ The ```interface``` definition looks something like:
 
 ```
 
-* The Java collection classes that ```implement``` the ```Map``` ```interface``` are:
+* ```Map``` ```인터페이스```를 ```구현```하는 자바 컬렉션 클래스들은 다음과 같다.
 	* ```HashMap```
 	* ```HashTable```
 	* ```LinkedHashMap```
@@ -14821,36 +14823,37 @@ The ```interface``` definition looks something like:
 #### ```Map``` Collections : Concepts
 
 * ```HashMap```
-	* Unordered
-	* Unsorted
-	* Key's ```hashCode()``` value is used in the hashing function
+	* 무질서
+	* 정렬되지 않음
+	* 해시 함수는 키의 ```hashCode()``` 값이 사용됨
+	* ```null```값 허용
 	* Allows a key with a ```null``` value.
 
 * ```HashTable```
-	* Thread-safe version of ```HashMap```. Has ```synchronized``` methods where required.
-	* Unordered
-	* Unsorted
-	* Key's ```hashCode()``` value is used in the hashing function
-	* Does not allow a ```null``` key.
-
+	* ```HashMap```의 Thread-safe 버전. 필요한 경우 ```synchorized```메소드를 사용한다.
+	* 무질서
+	* 정렬되지 않음
+	* 해시 함수는 키의 ```hashCode()``` 값이 사용됨
+	
 * ```LinkedHashMap```
-	* Insertion order of elements is maintained (which is optional as well)
-	* Unsorted
-	* Iteration is faster
-	* Insertion and Deletion are slower
+	* 요소의 삽입 순서가 유지됨
+	* 정렬되지 않음
+	* 반복 속도가 빠름
+	* 삽입과 삭제가 느림
 
 * ```TreeMap```
-	* Additionally implements the ```NavigableMap``` ```interface```
+	* 추가적으로 ```NavigableMap``` ```인터페이스```를 구현함
+	* 구성 요소는 정렬된 키 순서로 유지
 	* Elements are maintained in sorted order of keys
 
 #### ```Map``` ```interface``` : Basic Operations
 
-##### Snippet-19 : Basic Map Operations
+##### Snippet-19 : 기본적인 Map 연산
 
-The ```Map.of()``` method takes a sequence of objects, which are interpreted as being key and value entries in alternation. 
-* The total number of arguments is expected to be an even number. 
-* This method creates an immutable ```Map```, with the ```(key, value)``` pairs in no specific order.
+```Map.of()``` 메소드는 일련의 객체들을 취하는데 이는 번갈아 가면서 key와 value 엔트리로 해석된다.
 
+* 인자의 총 개수는 짝수일 것ㅅ이다.
+* 이 메소드는 구체적인 순서가 없는 ```(key, value)```의 짝으로 불변의 ```Map```을 만들어낸다. 
 
 ```java
 
@@ -14882,9 +14885,9 @@ The ```Map.of()``` method takes a sequence of objects, which are interpreted as 
 
 ```
 
-##### Snippet-20 : Mutable Maps
+##### Snippet-20 : 가변적인 Maps
 
-To be able to add values to a map, let's create a `HashMap`.
+Map에 값을 추가하려면 `HashMap`을 생성해보자.
 
 ```java
 
@@ -14904,10 +14907,10 @@ To be able to add values to a map, let's create a `HashMap`.
 
 ```
 
-#### ```Map``` Collections: Comparing Operations
-##### Snippet-21 : ```Map``` Implementations
+#### ```Map``` 컬렉션: 비교 연산
+##### Snippet-21 : ```Map``` 구현
 
-```HashMap``` elements are not guaranteed to be stored either in inserted order, or in the sorted order of keys.
+```HashMap``` 요소는 삽입된 순서대로나 정렬된 순서로 저장된다고 보장되지 않는다.
 
 ```java
 
@@ -14925,7 +14928,8 @@ To be able to add values to a map, let's create a `HashMap`.
 	hashMap ==> {A=15, F=25, Z=5, L=250}
 ```
 
-```LinkedHashMap``` elements are stored in inserted order.
+```LinkedHashMap``` 요소는 삽입된 순서대로 저장된다.
+
 ```java
 	jshell> LinkedHashMap<String, Integer> linkedHashMap = new LinkedHashMap<>();
 	linkedHashMap ==> {}
@@ -14941,7 +14945,7 @@ To be able to add values to a map, let's create a `HashMap`.
 	hashMap ==> {Z=5, A=15, F=25, L=250}
 ```
 
-```TreeMap``` elements are stored in the natural sorted order of the keys.
+```TreeMap``` 요소들은 자연적인 키 값의 순서대로 저장된다.
 
 
 ```java	
@@ -14962,9 +14966,10 @@ To be able to add values to a map, let's create a `HashMap`.
 ```
 
 #### Exercise Set
-1. Given the string:  ```"This is an awesome occassion. This has never happened before."```, do the following processing on it:
-	* Find the number of occurrences of each unique character in this string
-	* Find the number of occurrences of each unique word in this string
+1. ```"This is an awesome occassion. This has never happend before."```라는 문자열이 주어졌을 때, 다음과 같은 절차를 수행하시오.
+	* 이 문자열에서 각 고유 문자(character)의 발생 횟수를 찾아라
+	* 이 문자열에서 각 고유 단어(word)의 발생 횟수를 찾아라
+
 #### Solution
 
 **_MapRunner.java_**
@@ -15005,11 +15010,13 @@ To be able to add values to a map, let's create a `HashMap`.
 
 ```
 
-#### Revisiting ```TreeMap```
-Let's look at some more interesting operations of Data Structures based on ```TreeMap```.
-##### Snippet-13 : Treemap Operations
+####  ```TreeMap``` 복습
 
-Entries in a ```TreeMap``` are always sorted. 
+```TreeMap```을 기반으로 한 데이터 구조의 흥미로운 연산들을 더 알아보자.
+
+##### Snippet-13 : Treemap 연산
+
+```TreeMap``` 내의 엔트리들은 항상 정렬된다.
 
 ```java
 
@@ -15031,7 +15038,7 @@ jshell> treeMap
 treeMap ==> {A=15, B=25, F=25, G=25, L=250, Z=5}
 ```
 
-`TreeMap` implements ```NavigableMap``` ```interface``` as well.
+`TreeMap`은 ```NaviagbleMap``` ```인터페이스```도 구현한다. 
 
 ```java
 jshell> treeMap.higherKey("B");
@@ -15060,27 +15067,28 @@ jshell>
 
 ```
 
-#### Java Collections : Conclusions With Tips
+#### 자바 컬렉션: 결론 With Tips
 
-The collection interfaces we have explored, as well as their implementation classes, are:
+지금까지 살펴본 컬렉션 인터페이스와 구현 클래스는 다음과 같다.
 * ```List```
 * ```Set```
 * ```Queue```
 * ```Map```
 
-Let's quickly review what we've learnt:
-* When you use a "Hashed" Java collection (hash table based), such as ```HashMap``` or ```HashSet```, it will be unordered, unsorted and will iterate over its elements in no particular order.
-* When you encounter a "Linked" Java collection (linked list based), such as a ```LinkedHashSet``` or a ```LinkedHashMap```, it will maintain insertion order, but will be unsorted. 
-* When we make use of a "Tree"-based Java collection (stored in a tree data structure), such as ```TreeSet``` or ```TreeMap``` it always maintains natural sorted order. It would implement one of the navigable category of interfaces, such as ```NavigableSet``` or ```NavigableMap```.
+학습한 내용을 빠르게 살펴보도록 하자.
+* ```HashMap```이나 ```HashSet```과 같은 "해싱된" 자바 컬렉션(해시 테이블 기반)을 사용하면 순서가 뒤바뀌고 정렬되지 않으며 어떤 순서로도 반복할 수 있다.
+* ```LinkedHashSet``` 또는 ```LinkedHashMap```과 같은 "연결된" 자바 컬렉션(연결 리스트 기반)을 사용하면 삽입 순서는 유지되지만 정렬되지 않는다.
+* ```TreeSet```혹은 ```TreeMap```과 같은 트리를 기반으로 한 자바 컬렉션을 활용하면 항상 자연 정렬 순서를 유지할 수 있다. 그것은 ```Navigable```, ```NavigableMap```과 같은 탐색 가능한 인터페이스 범주 중 하나를 실행할 것ㅅ이다. 
 
-## Introducing Generics
 
-Recommended Videos
+## 제네릭의 이해
+
+추천 영상
 - Generics - https://www.youtube.com/watch?v=v4o0wyFPwEs
 
-Why do we need Generics? 
+제네릭이 필요한 이유는 무엇일까?
 
-Let's look at a scenario where want to write a wrapper class around the ```ArrayList``` data structure, maybe to do some better custom error-checking and stuff. For now, we will just look at basic wrapper functionality, the error checking intent is just an excuse!
+```ArrayList```데이터 구조를 중심으로 래퍼 클래스를 만들고자 하는 시나리오와 error-checking 등을 더 잘 할 수 있는 시나리오를 보자. 
 
 ##### Snippet-1
 
@@ -15125,13 +15133,13 @@ Let's look at a scenario where want to write a wrapper class around the ```Array
 
 ##### Snippet-1 Explained
 
-The ```MyCustomList``` ```class``` is a wrapper for ```ArrayList``` of ```String```s. Insertion and deletion of elements into this data structure is straightforward. 
+```MyCustomList``` ```클래스```는 ```String```의 ```ArrayList```를 위한 래퍼이다. 이 데이터 구조에 요소를 삽입하고 삭제하는 것은 간단하다.
 
-Let's sy I would want to create `MyCustomList` for other types. Should we write additional wrapper classes ```MyCustomList``` and so on?
+다른 타입의 `MyCustomList`를 만들어보자. ```MyCustomList``` 등 추가적인 래퍼 클래스를 써야할까?
 
-Let's look at an example:
+예를 들어보자.
 
-##### Snippet-2 : Implementing a Generic
+##### Snippet-2 : 제네릭 구현
 
 **_MyCustomList.java_**
 
@@ -15180,7 +15188,7 @@ Let's look at an example:
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _[Element-1, Element-2]_
 
@@ -15188,18 +15196,20 @@ _[5, 9]_
 
 ##### Snippet-2 Explained
 
-The identifier ```T``` in the definition of the Generic ```class``` ```MyCustomList<T>``` is a placeholder for the actual type of the container. It is this placeholder that truly converts the ```MyCustomList``` ```class``` into a template.
+제네릭 ```클래스```의 ```T``` 식별자는 ```MyCustomList<T>``` 컨테이너의 실제 타입에 대한 플레이스 홀더이다. ```MyCustomList``` ```클래스```를 템플릿으로 전환하는 것은 바로 이 플레이스 홀더이다.
 
-The naming convention for these type placeholders is:
-	* Always use UpperCase letters of the alphabet (such as ```T```, or ```S```), or
-	* intuitive words such as ```TYPE```
-
-At the time of actual instantiation of ```MyCustomList``` inside ```GenericsRunner.main```, this placeholder is substituted by the actual type:
-* When ```MyCustomList<String> list``` is created, ```T``` is substituted by ```String```
-* When ```MyCustomList<Integer> list2``` is created, ```T``` is substituted by ```Integer```
+이러한 타입의 플레이스 홀더에 대한 명명 규칙은 다음과 같다.
+	* 항상 알파벳 대문자를 사용한다 (```T``` 혹은 ```S``` 등)
+	* ```TYPE```과 같은 직관적인 단어를 사용한다
+	
+```GenericsRunner.main``` 내부의 ```MyCustomList```가 실제로 인스턴스화되었을 때 이 플레이스 홀더는 실제 타입으로 대채된다.
+	* ```MyCustomList<String> list```가 만들어지면 ```T```는 ```String```으로 대체된다.
+	* ```MyCustomList<String> list2```가 만들어지면 ```T```는 ```Integer```로 대체된다.
 
 #### Exercise Set - 18
-1. Write a method ```get``` inside the generic class ```MyCustomList```, which returns the element at a particular index (passed as argument) in its list storage.
+
+1. 리스트 저장소의 특정 인덱스에 요소를 반환하는 ```MyCustomList``` 제네릭 클래스 안에 ```get```메소드를 작성하라
+
 #### Solution
 
 **_MyCustomList.java_**
@@ -15255,7 +15265,7 @@ At the time of actual instantiation of ```MyCustomList``` inside ```GenericsRunn
 
 ```
 
-**_Console Output_**
+**_콘솔창 출력_**
 
 _Element-1_
 
@@ -15263,16 +15273,17 @@ _9_
 
 #### Solution Explained
 
-We have defined a method ```MyCustomList<T>.get``` whose return type is generic as well. The return type has the same placeholder ```T``` as the template in the definition of ```MyCustomList<T>```.
-* For ```MyCustomList<String> list```, ```list.get``` returns a ```String```
-* For ```MyCustomList<Integer> list2```, ```list2.get``` returns an ```Integer```
+우리는 반환형이 제네릭인 ```MyCustomList<T>.get``` 메소드를 정의했다. 반환형은 ```MyCustomList<T>```의 정의에서 템플릿과 동일한 플레이스 홀더 ```T```를 가진다.
+* ```MyCustomList<String> list```,```list.get```은 ```String```을 반환한다.
+* ```MyCustomList<Integer> list2```, ```list2.get```은 ```Integer```를 반환한다.
 
-#### Implementing Type Restrictions on Generics
+#### 타입이 제한된 제네릭 구현
 
-We saw above that we could use ```MyCustomList<T>``` to be instantiated into data structures for storing ```String```s as well as for ```Integer```s. 
+우리는 위에서 ```MyCustomList<T>```를 ```String```과 ```Integer```의 저장을 위한 데이터 구조로 인스턴스화 될 수 있다는 것을 보았다.
 
-What if we wanted to to use ```MyCustomList<T>``` purely for storing numeric values?	
-##### Snippet-3 : Generic Type Restrictions	
+만약  ```MyCustomList<T>```를 순전히 숫자 값을 저장하기 위해서만 사용한다면 어떨까?
+
+##### Snippet-3 : 제네릭의 타입 제한
 **_MyCustomList.java_**	
 ```java	
 	package com.in28minutes.generics;	
@@ -15313,13 +15324,17 @@ What if we wanted to to use ```MyCustomList<T>``` purely for storing numeric val
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _5_	
 _9_	
-When we specify `T extends Number` as the type, we can use all the methods in the API of ```class``` ```Number``` are available for use. 	
-#### Generic Methods	
-We can create generic methods as well. Let's look at a few examples:	
-##### Snippet-4 : Generic Method	
+
+`T extends Number`를 타입으로 지정할 때, ```Number``` ```클래스````의 API 내에 있는 모든 메소드가 사용 가능하다.
+
+#### 제네릭 메소드
+
+제네릭 메소드들도 만들 수 있따. 몇 가지 예를 살펴보자.
+
+##### Snippet-4 : 제네릭 메소드	
 **_GenericsRunner.java_**	
 ```java	
 	package com.in28minutes.generics;	
@@ -15343,12 +15358,16 @@ We can create generic methods as well. Let's look at a few examples:
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _[A, B, C, A, B, C]_	
 _[1, 2, 3, 1, 2, 3]_	
-#### Generics And Wild-Cards 	
-You can use wild card with generics too - `? extends Number`	
+
+#### 제네릭과 와일드 카드
+
+제네릭과 함께 와일드 카드도 사용할 수 있다. - `? extends Number`	
+
 ##### Snippet-5	
+
 **_GenericsRunner.java_**	
 ```java	
 	package com.in28minutes.generics;	
@@ -15368,18 +15387,24 @@ You can use wild card with generics too - `? extends Number`
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _15.0_	
 _15.5_	
 _15.0_	
+
 ##### Snippet-5 Explained	
-The symbol ```?``` in the definition of the method ```static double sumOfNumberList(List<? extends Number> numbers)``` is the **wild-card** symbol. It denotes the fact that in order to be a valid argument to ```sumOfNumberList```, ```numbers``` can be a ```List``` of any elements, so long as all of them are of type sub-classed from ```Number```. 	
-* This includes ```Integer```, ```Long```, ```Short```, ```Byte```, ```Float``` and ```Double```. 	
-* It also includes their primitive type counterparts, since they can be converted implicitly to their Wrapper class counterparts. 	
-* Of course, all these elements of ```List``` ```numbers``` need to be of a homogeneous type.	
-#### Restricted Heterogeneous Lists	
-The generic wildcard we saw in the previous section is referred to as a **Upper-Bounded Wild-Card**. It can be used to specify homogeneous types with a restriction. There is another category of wild-cards called **Lower-Bounded Wild-Card**, which can be used with create **Heterogeneous** types of elements , within the restriction. Here is an example.	
-##### Snippet-6 : More wild-cards	
+
+```static double sumOfNumberList(List<? extends Number> numbers)``` 메소드의 정의 내에 있는 ```?```기호는 **와일드 카드** 기호이다. 그것은 ```sumOfNumberList```,```numbers```의 어떤 요소이든지 유효한 인자가 되기 위해서는 모든 요소가 ```Number```의 서브 클래스가 될 수 있다는 사실을 의미한다.
+* 여기에는 ```Integer```, ```Long```, ```Short```, ```Byte```, ```Float``` 그리고 ```Double```이 포함된다.	
+* 또한 래퍼 클래스로 암묵적으로 변환할 수 있기 때문에 기본형 타입의 상대도 포함된다.
+* 물론 ```numbers``` ```리스트```의 모든 요소들은 동일한 타입일 필요가 있다.
+
+#### 제한된 동종의 리스트
+
+이전 섹션에서 살펴본 제네릭 와일드 카드를 **상한 제한 와일드 카드**라고 한다. 제한이 있는 동종 타입을 지정하는 데 사용할 수 있따. **하한 제한 와일드 카드**라고 하는 또 다른 와일드 카드 범주가 있으며, 이 범주는 제한 범위 내에서 **다른** 타입의 요소 생성과 함께 사용할 수 있다. 여기 예시가 있다.
+
+##### Snippet-6 : More wild-cards
+
 **_GenericsRunner.java_**	
 ```java	
 	package com.in28minutes.generics;	
@@ -15398,17 +15423,24 @@ The generic wildcard we saw in the previous section is referred to as a **Upper-
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _[1, 1, 1.0. 1.0]_	
-## Introduction to Functional Programming	
-What's all the fuss around Functional Programming about?	
-Let's find out.	
-Functional Programming Videos	
+
+## 함수형 프로그래밍 소개
+
+함수형 프로그래밍에 대해 왜 그렇게 야단인가?
+알아보자.
+	
+함수형 프로그래밍 동영상
 - Part 1 - https://www.youtube.com/watch?v=aFCNPHfvqEU 	
 - Part 2 - https://www.youtube.com/watch?v=5Xw1_IREXQs	
-### Step 01: Introducing Functional Programming	
-Let's look at a typical program to loop around a list and print its content.	
-##### Snippet-01 : OOP List Traversal 	
+
+### Step 01: 함수형 프로그래밍 소개
+
+리스트 내에서 루프하고 내용을 출력하는 일반적인 프로그램을 살펴보자.
+
+##### Snippet-01 : OOP List 순회
 **_FunctionalProgrammingRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -15422,16 +15454,21 @@ Let's look at a typical program to loop around a list and print its content.
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _Apple_	
 _Banana_	
 _Cat_	
 _Dog_	
+
 ##### Snippet-01 Explained	
-Above approach focuses on the **how**.	
-We looped around the list, accessed individual elements of a ```List``` and did  ```System.out.println()``` to print each element. 	
-Functional Programming allows us to focus on the **what**.	
-##### Snippet-02 : ```printBasic()``` And ```printFunctional()``` 	
+
+위의 접근 방식은 **어떻게**에 초점을 맞춘다.
+우리는 리스트를 이리저리 돌려 ```List```의 개별 요소에 접근하고 ```System.out.println()```을 수행하여 각 요소를 출력한다.
+함수형 프로그래밍을 통해 **무엇을** 에도 집중할 수 있다.
+
+##### Snippet-02 : ```printBasic()```과 ```printFunctional()``` 	
+
 **_FunctionalProgrammingRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -15454,18 +15491,24 @@ Functional Programming allows us to focus on the **what**.
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _Apple_	
 _Banana_Cat_	
-_Dog_	
+_Dog_
+
 ##### Snippet-02 Explained	
-`list.stream().forEach(element -> System.out.println(element))` - for each element in list stream, print it.	
-```element -> System.out.println(element)``` is called a **lambda expression**.	
+
+`list.stream().forEach(element -> System.out.println(element))` - 리스트 스트림의 각 요소를 출력한다.
+```element -> System.out.println(element)```는 **람다식**이라고 불린다.
+
 ### Step 02: Looping Through A ```List```	
-In the previous step , we use this snippet of code - `list.stream().forEach(element -> System.out.println(element))`	
-We are **"Passing a function as a method argument"**. 	
-Let's use JShell to explore this further.	
-Let's try to print a list of numbers. 	
+
+앞 단계에서는 각 `list.stream().forEach(element -> System.out.println(element))` 코드 조각을 사용한다
+**함수를 메소드 인자로 전달**한다.
+JShell을 사용하여 이 문제를 더 자세히 살펴보자.
+숫자 리스트를 출력해 봅시다.
+
 ##### Snippet-01 : Loop Using FP	
 ```java	
 	jshell> List<Integer> list = List.of(1, 4, 7, 9);	
@@ -15478,13 +15521,19 @@ Let's try to print a list of numbers.
 	jshell>	
 		
 ```	
+
 ##### Snippet-01 Explained	
-`elem -> System.out.println(elem)` is a lambda expression. For each element in list stream, execute the lambda expression.	
-### Step 03:  Filtering Results	
-A ```Stream``` is a sequence of values. The ```filter()``` method can be used to filter the ```Stream``` elements based on some logic.	
-  	
-##### Snippet-01 : Using ```filter()```	
-`printBasicWithFiltering` shows the usual approach of filtering.  `printFPWithFiltering` shows the functional approach.	
+
+`elem -> System.out.println(elem)` 는 람다식이다. 리스트 스트림의 각 요소에 대해 람다식을 수행한다.
+
+### Step 03:  결과 필터링
+
+```스트림(Stream)```은 값의 연속이다. ```filter()```메소드는 어떤 논리에 입각하여 ```스트림```요소를 걸러내는 데 사용될 수 있다.	
+
+##### Snippet-01 : ```filter()```	
+
+`printBasicWithFiltering` 은 필터링의 일반적인 접근을, `printFPWithFiltering`은 함수적 접근을 보여준다.
+
 ```java	
 	package com.in28minutes.functionalprogramming;	
 	import java.util.List;	
@@ -15508,11 +15557,13 @@ A ```Stream``` is a sequence of values. The ```filter()``` method can be used to
 		}		
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _Bat_	
 _Cat_	
-##### Snippet-02 : Printing even/odd numbers	
-Let's look at how to filter numbers.	
+
+##### Snippet-02 : 짝/홀수 출력	
+숫자를 필터링하는 방법을 살펴보자.
+
 ```java	
 	jshell> List<Integer> list = List.of(1, 4, 7, 9);	
 	list ==> [1, 4, 7, 9]	
@@ -15529,17 +15580,21 @@ Let's look at how to filter numbers.
 	4	
 	jshell>	
 ```	
+
 ##### Snippet-02 Explained	
-Typically, these are the conditions we write	
-* ```num``` is odd : ```if(num % 2 == 1) { /*  */ }```	
-* ```num``` is even : ```if(num % 2 == 0){ /*  */ }```	
-In the above example, we are using lambda expression to define the same conditions. 	
-* ```num``` is odd: ```num -> num%2 == 1```	
-* ```num``` is even: ```num -> num%2 == 0```	
-### Step 05: Streams - Aggregated Results	
-Sometimes we want to aggregate data into a single result. For example, we might want to add all the numbers between ```1``` and ```10```. Or we may want to calculate the average maximum temperature in our city over a month's time. 	
-##### Snippet-01 : Sum Of A Sequence	
-Let's look at how to use `reduce` method to calculation the sum.	
+일반적으로 이러한 조건은 다음과 같습니다.
+* ```num```이 홀수: ```if(num % 2 == 1) { /*  */ }```	
+* ```num```이 짝수: ```if(num % 2 == 0){ /*  */ }```	
+
+위의 예제에서는 람다 식을 사용하여 동일한 조건을 정의합니다.
+* ```num```이 홀수: ```num -> num%2 == 1```	
+* ```num```이 짝수: ```num -> num%2 == 0```	
+
+### Step 05: Streams - 집계 결과
+때로는 ㄷ이터를 하나의 결과로 집계하려고 한다. 예를 들어 ```1```과 ```10```사이의 모든 숫자를 더하고 싶을 수도 있다. 또한 한 달 동안 우리 도시의 최대 온도의 평균을 계산해 볼 수도 있다.
+
+##### Snippet-01 : 순서의 합
+
 **_FPNumberRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -15564,16 +15619,22 @@ Let's look at how to use `reduce` method to calculation the sum.
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _49_	
-##### Snippet-01 Explained	
-The ```reduce()``` method acts on a pair of elements at a time. The *initial-value* is  ```0```. The lambda expression `(num1, num2) -> num1 + num2` is executed on the elements of the list, a pair at a time.	
- 	
+
+##### Snippet-01 Explained
+```reduce()```메소드는 한 번에 한 쌍의 요소에 작용한다. *초기 값*은 ```0```이다. 리스트 요소에서 한 번에 한 쌍씩 `(num1, num2) -> num1 + num2` 람다식이 실행된다.
+
 #### Classroom Exercise CE-01	
-1. Given the list ```(4, 6, 8, 13, 3, 15)```, compute:	
-	* The sum of even numbers in the list.	
-	* The sum of odd numbers in the list.	
+
+1.  ```(4, 6, 8, 13, 3, 15)``` 리스트가 주어졌을 때, 다음을 연산하라
+	* 리스트 내의 짝수의 합 
+	* 리스트 내의 홀수의 합
+	
+	
 #### Solution To CE-01	
+
 **_FPNumberRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -15598,15 +15659,21 @@ The ```reduce()``` method acts on a pair of elements at a time. The *initial-val
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
+
 _Even Numbers Sum: 18_	
 _Odd Numbers Sum: 31_	
-### Step 06: Functional Programming v Structured Programming	
-Let's have a re-look at the **_FPNumberRunner.java_** program from the previous step. We wrote two variants of the same task that computed the sum of a list of numbers:	
-* ```basicSum()```: that used the traditional approach	
-* ```fpSum()``: which followed the *FP* scheme of things	
-Let's use them as benchmarks, to illustrate the core differences between *SP* and *FP*. 	
-1. **Structured Programming** (**SP**)	
+
+### Step 06: 함수형 프로그래밍 VS 구조적 프로그래밍
+
+이전 단계의 **_FPNumberRunner.java_** 프로그램을 다시 살펴보자. 우리는 숫자 리스트의 합계를 계산하는 동일한 작업의 두 가지 변형을 작성했다.
+* ```basicSum()```: 기존의 접근법 사용	
+* ```fpSum()``: *FP* 방식을 따름
+
+*SP*와 *FP*의 핵심적인 차이점을 벤치마크로 살펴보자
+
+1. **구조적 프로그래밍** (**SP**)	
 ```java	
 	public int basicSum(List<Integer> numbers) {	
 		int sum=0;	
@@ -15616,7 +15683,8 @@ Let's use them as benchmarks, to illustrate the core differences between *SP* an
 		return sum;	
 	}	
 ```	
-2. **Functional Programming** (**FP**)	
+
+2. **함수형 프로그래밍** (**FP**)
 ```java	
 	public int  fpSum(List<Integer> numbers) {	
 		int sum = numbers.stream()	
@@ -15624,34 +15692,43 @@ Let's use them as benchmarks, to illustrate the core differences between *SP* an
 		return sum;	
 	}	
 ```	
-How are these different?	
-* **Mutations** (changes to program data):	
-	1. *SP*: Within ```basicSum()```, the variable ```sum``` (a sort of worker variable) is initialized to ```0```, and undergoes *mutations* across iterations of the ```for``` loop. 	
-	2. *FP*: We just set up an initial value for ```reduce()``` to work with. We don't have any mutation.	
-* The **what** and **how** of computation:	
-	1. *SP*: We specify both *what* to do, and *how* to do it. The code loops through the list elements using a ```for```, while also updating the aggregate value in ```sum```.	
-	2. *FP*: We are focused on *what* to do, and very little on the *how* part. ```reduce()``` takes care of what numbers from the *stream* to add up, and you don't bother about how to select them from the *stream*. 	
-### Step 07: Some FP Terminology 	
-Let's look at some *FP* terminology a little more formally.	
-#### Lambda Expression	
+무엇이 다른가?
+* **변형** (프로그램 데이터 변경):
+	1.*SP*: ```basicSum()``` 내에서 변수 ```sum```은 0으로 초기화되고, ```for문```을 반복하며 **변형**을 겪는다.
+	2.*FP*: 단지 함께 일할 ```reduce()```의 초기 값을 설정했을 뿐이다. 변경은 없다.
+	
+* **어떤**연산을 **어떻게**하는가:
+	* *SP*:  *해야하는 작업*과 처리할 *방법*을 모두 지정합니다. 이 코드는 ```for```를 사용하여 리스트 요소를 순환하는 동시에 ```sum```의 합계 값을 갱신한다.
+	* *FP*: *해야하는 작업*에 초점을 맞추고 있으며 *방법*에는 거의 집중하지 않는다. ```reduce()```는 *스트림*에서 어떤 숫자를 더해야 하는지 신경 쓰는데, 당신은 *스트림*에서 어떤 숫자를 선택하느냐에 대해 신경쓰지 않아도 된다. 
+
+### Step 07: FP 용어	
+
+*FP*용어에 대해 좀 더 살펴보자.
+
+
+#### 람다식
 ```java	
 	(num1, num2) -> num1 + num2	
 ```	
-is equivalent of this method	
+이는 다음 메소드와 동일하다
+
 ```java	
 	int basicSum(int num1, int num2) {		
 		return num1 + num2;	
 	}	
 ``` 	
-A lambda expression can have multiple lines of Java code as well:	
+람다식에는 다음과 같이 여러 줄의 Java 코드도 포함될 수 있다
+
 ```java	
 	(num1, num2) -> {	
 		System.out.println(num1 + " " + num2);	
 		return num1 + num2;	
 	}	
 ```	
-Why take our word for all this? Let's put this code into an IDE, and then run it, to see for ourselves.	
-##### Snippet-01 : Lambda Expression	
+이 코드를 IDE에 넣은 다음 실행해 확인해봅시다.
+
+##### Snippet-01 : 람다식
+
 **_FPNumberRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -15673,7 +15750,8 @@ Why take our word for all this? Let's put this code into an IDE, and then run it
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _[4, 6, 8, 13, 3, 15]_	
 _0 4_	
 _4 6_	
@@ -15682,19 +15760,26 @@ _18 13_
 _31 3_	
 _34 15_	
 _49_	
-#### Stream	
-A Stream is a sequence of elements. You can perform different kinds of operations on a stream. 	
-* **Intermediate Operations**: An operation that *takes a stream* - for example, applies a lambda expression - and produces *another stream* of elements as its result.	
-* **Terminal Operations**: A stream operation that takes a stream - for example, applies a lambda expression -  and returns a single result (A single primitive-value/object, or a single collection-of-objects). ```reduce()``` and ```forEach()``` are a couple of such operations.	
-### Step 08: Intermediate Stream Operations	
+
+#### 스트림
+
+스트림은 일련의 요소들이다. 스트림에서는 다양한 종류의 연산을 수행할 수 있다.
+* **중간 연산(Intermediate Operations)**: 스트림을 다루는 연산 - 예를 들어, 람다식을 적용하고 결과로 *또 다른 스트림*을 생성
+* **최종 연산(Terminal Operations)**: 스트림이 스트림을 다루는 연산 - 예를 들어, 람다식을 적용하고 단일 결과(하나의 기본형 값/객체나 단일 객체의 컬렉션)를 반환한다. ```reduce()```와 ```forEach()```는 그런 연산의 두 가지다.
+
+### Step 08: 중간 스트림 연산	
+중간 스트림 연산의 출력은 또 다른 스트림이다.
+가장 널리 사용되는 중간 스트림 연산은 다음과 같다.
 Output of an intermediate stream operation is another stream. 	
 The most popular intermediate stream operations are: 	
 * ```sorted()```	
 * ```distinct()```	
 * ```filter()```	
 * ```map()```	
-In this step, let's check them out one by one.	
-##### Snippet-01 : ```sorted()``` and other operations	
+이 단계에서, 하나씩 확인해 보자.
+
+##### Snippet-01 : ```sorted()``` 와 다른 연산들
+
 ```java	
 	jshell> List<Integer> numbers = List.of(3, 5, 8, 213, 45, 4, 7);	
 	numbers ==> [3, 5, 8, 213, 45, 4, 7]	
@@ -15730,15 +15815,19 @@ In this step, let's check them out one by one.
 	jshell>	
 ```	
 ##### Snippet-01 Explained	
-* ```sorted()``` preserves the elements of the consumed stream in the result, but also puts them in natural sorted order (Increasing order for numbers, alphabetical order for strings).	
-* ```distinct()``` returns a stream retaining only the unique elements of the input stream. This method maintains the relative order of retained elements.	
-* You can chain together more than one intermediate operation, such as ```sorted()``` followed by ```distinct()``` above. Such code is sometimes called a *pipeline*.	
-*  ```map()``` : Applies a lambda expression to compute new results from the input stream elements. It then returns a stream of these results as output. In our example, ```map()``` takes each element in the ```Stream``` object created by ```number.stream()``,` to its square value.	
+
+* ```sorted()```는 사용된 스트림의 요소를 결과에서 보존하지만, 자연 정렬 순서(숫자의 순서 증가,문자열의 알파벳 순)로 표시하기도 한다.
+* ```distinct()```는 입력 스트림의 고유 요소만을 포함하는 스트림을 반환한다. 이 메소드는 보존 요소의 상대적 순서를 유지한다.
+* 위의 ```sorted()```에 이어 ```distinct()```와 같은 두 가지 이상의 중간 연산을 연결할 수 있다. 이러한 코드를 *파이프라인*이라고 한다.
+* ```map()```: 람다식을 적용하여 입력 스트림 요소에서 새로운 결과를 계싼한다. 그런 다음 이러한 결과를 스트림의 출력으로 반환한다. 우리의 예에서 ```map()```은 ```number.stream()```이 만든 ```Stream```객체의 각 요소를 제곱 값으로 한다.
+
 ### Step 09: Programming Exercise FP-PE-01	
 #### Exercises	
-1. Write a program to print the squares of the first 10 positive integers.	
-2. Create a list of the character strings "Apple", "Banana" and "Cat". Print all of them in lower-case.	
-3. Create a list of the character strings "Apple", "Banana" and "Cat". Print the length of each string.	
+
+1. 처음 10개의 양의 정수의 제곱을 출력하는 프로그램을 작성하시오.
+2. "Apple", "Banana", "Cat" 문자열 리스트를 작성하시오. 모두 소문자로 출력하여라.
+3. "Apple", "Banana", "Cat" 문자열 리스트를 작성하시오. 각 문자열의 길이를 출력하여라.
+
 #### Solutions To FP-PE-01	
 **_FPNumberRunner.java_**	
 ```java	
@@ -15764,7 +15853,7 @@ In this step, let's check them out one by one.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _1_	
 _4_	
 _9_	
@@ -15781,26 +15870,27 @@ _cat_
 _5_	
 _6_	
 _3_	
+
 #### Solution Explained	
-* The ```map()``` method accepts a lambda expression.	
-### Step 10:  Terminal Operations	
-A terminal operation returns a single result (A single object/data-unit, or a single collection). It does not return an output stream.	
-Commonly used instances of this are:	
-* ```reduce()```	
-* ```max()``` and ```min()```	
+* ```map()```메소드는 람다식을 수용한다.
+
+### Step 10:  최종 연산
+최종 연산은 단일 결과(단일 객체/데이터 단위 또는 단일 컬렉션)를 반환한다. 출력 스트림을 반환하지 않는다.
+일반적으로 사용되는 예는 다음과 같다.
+
 ```java	
 	jshell> IntStream.range(1, 11).reduce(0, (n1, n2) -> n1 + n2);	
 	$1 ==> 55	
 ```	
-```max()``` expects a lambda expression providing a ```Comparator<T>``` implementation.  ```Integer.compare(n1,n2)``` is an implementation of the ```Comparator<T>``` interface for comparing integers. 	
 
-What if there are no numbers in the Stream? What should be returned? As a Java programmer, we grew up to hate `null`. You don't want to return `null` back.	
+```max()```는 람다식이 ```Comparator<T>``` 구현을 제공할 것으로 기대한다. ```Integer.compare(n1,n2)```는 ```Comparator<T>```의 구현이다.
 
-The ```Optional``` type provides an alternative: 	
+스트림에 숫자가 없으면 어떡하지? 무엇을 반환해야 할까? 자바 프로그래머로서 우리는 `null`을 싫어하게 되었다. 여러분은 `null`을 반환하고 싶지는 않을 것이다.
 
-* You can query an ```Optional``` object to check if it contains a valid result, by invoking ```isPresent()``` on it. 	
-* You can get that result by calling ```get()``` on the same object.	
+```선택형(Optional)```타입이 대안이 될 수 있다.
 
+* ```선택형``` 객체에서 ```isPresent()```를 호출하여 유효한 결과가 포함되어 있는지 확인할 수 있다.
+* 같은 객체로 ```get()```을 호출하면 그 결과를 얻을 수 있다.
 
 ```java	
 	jshell> List.of(23, 12, 34, 53).stream().max();	
@@ -15819,13 +15909,13 @@ The ```Optional``` type provides an alternative:
 	jshell>	
 ```	
 - - - 	
-### Step 11: More Stream Operations	
+### Step 11: 더 많은 스트림 연산	
 
-Let's now play around with a few more terminal operations, such as ```min()``` (terminal operation), and ```filter()``` (intermediate operation). 
+이제 ```min()``` (최종 연산)이나 ```filter()``` (중간 연산)과 같은 몇 가지 연산들을 더 가지고 놀아보자. 
 
 ##### Snippet-01 : min() and max()	
 
-Using ```min()``` is similar to ```max()```.	
+ ```min()``` 의 사용법은 ```max()```와 비슷하다.	
 
 ```java	
 	jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2)).get()	
@@ -15835,9 +15925,9 @@ Using ```min()``` is similar to ```max()```.
 	jshell>	
 		
 ```	
-##### Snippet-02 : Odd and Even Numbers	
+##### Snippet-02 : 짝수와 홀수
 
-```collect()``` method can be called to collect the result of ```filter()``` into a list. `Collectors.toList()` is the utility method used.
+```collect()``` 메소드는 ```filter()```의 결과를 리스트로 모으기 위해 호출할 수 있다. `Collectors.toList()`는 사용되는 유틸리티 메소드이다.
 
 ```java	
 	jshell> List.of(23, 12, 34, 53).stream().filter(e -> e%2==1).forEach(e -> 	System.out.println(e))	
@@ -15850,8 +15940,8 @@ Using ```min()``` is similar to ```max()```.
 
 #### Classroom Exercise FP-CE-02
 
-1. From a list of 23, 12, 34, 53, create a list of the even numbers in it.	
-2. Create a list of squares of the first 10 positive integers.	
+1. 23, 12, 34, 53의 리스트에서 짝수 리스트를 작성하시오.
+2. 처음 10개의 양의 정수의 제곱 리스트를 만드시오.
 
 #### Solutions To FP-CE-02	
 
@@ -15872,23 +15962,29 @@ Using ```min()``` is similar to ```max()```.
 	}	
 ```	
 #### Solution Explained	
-* Solution to #1 is straightforward, given that we already know how to use ```filter()```.	
-* Solution #2 uses ```boxed()``` method to convert an ```IntPipeline``` to a ```Stream```. After that, what follows is routine stuff.	
-### Step 12: The ```Optional<T>``` ```class```	
-In an earlier section, we wrote and ran the following code:	
+
+* 이미 ```filter()```를 사용할 줄 안다는 점에서 1번에 대한 해결책은 간단하다.
+* 2번의 솔루션은 ```boxed()```메소드를 사용하여 ```IntPipeline```을 ```Stream```으로 변환한다. 그 다음은 일상적인 일이다.
+
+### Step 12:  ```Optional<T>``` ```클래스```	
+이전 섹션에서는 다음 코드를 작성하고 실행했다.
+
 ```java	
 	jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2));	
 	Optional[53]	
 	jshell>	
 ```	
-In order to get the result in a form you would appreciate, we modified this code to look like:	
+여러분이 원하는 형태로 결과를 얻기 위해 다음과 같이 코드를 수정했다.
+
 ```java	
 jshell> List.of(23, 12, 34, 53).stream().max((n1, n2) -> Integer.compare(n1, n2)).get();	
 53	
 jshell>	
 ```	
-```max()``` is a stream operation, that needs to consume a stream. It is possible that the input stream is empty. In that case, the maximum value would be ```null```. It is undesirable in *FP* to encounter an exception during a stream operation. It is extremely inelegant if we are asked to handle an exception in an *FP* code pipeline. 	
-The ```Optional<T>``` ```class``` was introduced in Java SE 8, as a lifeline in such situations. It covers the possibility of absence of (or ```null```) result from a terminal stream operation. The following example illustrates how you can query, and access the result from, an ```Optional<T>``` object. 	
+
+```max()```는 스트림을 사용하는 스트림 연산이다. 입력 스트림은 비어있을 수도 있다. 그럴 경우 최대값은 ```null```이 된다. 스트림 연산 중 예외가 발생하는 것은 *FP*에서는 바람직하지 않다. *FP* 코드 파이프라인에서 예외를 처리하라는 요청을 받는다면 이는 정말 보고싶지 않은 일이다.
+```Optional<T>``` ```클래스```는 Java SE 8에서 이러한 상황의 생명줄로 소개되었다. 그것은 최종 스트림 연산으로 인한 결과의 부재(혹은 ```null``)를 포함한다. 다음 예는 ```Optional<T>```객체에 쿼리하고 접근하는 방법을 보여준다.
+
 ```java	
 	jshell> List.of(23, 45, 67, 12).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) )	
 	$1 ==> Optional[12]	
@@ -15897,7 +15993,9 @@ The ```Optional<T>``` ```class``` was introduced in Java SE 8, as a lifeline in 
 	jshell> $1.isPresent()	
 	$3 ==> true	
 ```	
-In case the result is empty, then the value stored in the result is not ```null```, it is ```Optional.empty```.	
+
+결과가 비어있는 경우 그 결과에 저장된 값은 ```null```이 아니라 ```Optional.empty```이다.
+
 ```java	
 	jshell> List.of(23, 45, 67).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) )	
 	$4 ==> Optional.empty	
@@ -15906,7 +16004,8 @@ In case the result is empty, then the value stored in the result is not ```null`
 	jshell> $4.orElse(0)	
 	$6 ==> 0	
 ```	
-You can provide a default value for the result using the method ```orElse()```.	
+여러분은 ```orElse()```메소드를 사용하여 결과의 기본 값을 제공할 수 있다.
+
 ```java	
 	jshell> List.of(23, 45, 67).stream().filter(num -> num % 2 == 0).max( (n1, n2) -> 	Integer.compare(n1, n2) ).orElse(0)	
 	$7 ==> 0	
@@ -15914,11 +16013,13 @@ You can provide a default value for the result using the method ```orElse()```.
 	$8 ==> 34	
 	jshell>	
 ```	
-### Step 13: Functional Interfaces : ```Predicate```	
-When we define a lambda expression , a lot of things happen behind the scenes. 	
-An important concept is a *functional interface*.	
-Let's explain this term using an example. 	
-The following code takes a behind-the-scenes look at ```filter()```.	
+### Step 13: 함수형 인터페이스 : ```Predicate```
+
+람다식을 정의할 때, 뒤에서는 많은 일들이 일어난다.
+중요한 개념은 *함수형 인터페이스*이다.
+예를 들어 이 용어를 설명하겠다.
+다음 코드는 ```filter()```를 뒤에서 바라보는 것이다.
+
 ##### Snippet-01: Lambda behind-the-scenes - v1	
 **_LambdaBehindTheScenesRunner.java_**	
 ```java	
@@ -15932,17 +16033,20 @@ The following code takes a behind-the-scenes look at ```filter()```.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _34_	
 _36_	
 _48_	
+
 ##### Snippet-01 Explained	
-The signature of ```filter()``` reads is `Stream<T> java.util.stream.Stream.filter(Predicate<? super T> predicate)`.  In this case, ```T``` is ```java.lang.Integer```. 	
-```filter()``` accepts an  object implementing the ```Predicate``` interface, as its argument. It returns a stream, consisting of those elements from the input stream, that match this predicate. 	
-Conventionally speaking, a predicate is a logical condition. This predicate is applied to each element, to determine if it should be included in the output stream.	
-The ```Predicate<T>``` ```interface is``` an example of a  *Functional Interface*. This interface has one method ```boolean test(T t)```. 	
-		
-Instead of `num -> num%2 == 0`, let's implement a `EvenNumberPredicate`.	
+```filter()````의 표기는  `Stream<T> java.util.stream.Stream.filter(Predicate<? super T> predicate)`이다. 이 경우, ```T```는 ```java.lang.Integer```이다.
+
+```filter()```는 ```Predicate```인터페이스를 구현한 객체를 인자로 받아들인다. 이 Predicate와 일치하는 입력 스트림의 요소로 구성된 스트림을 반환한다.
+일반적으로 Predicate는 논리적 조건식이다. 이는 출력 스트림에 포함되어야 하는지 여부를 결정하기 위해 각 요소에 적용된다.
+```Predicate<T>``` ```인터페이스```는 *함수형 인터페이스*의 한 예이다. 이 인터페이스는 ```boolean test(T t)```라는 한 가지 메소드를 가진다.
+
+`num -> num%2 ==0` 대신 `EvenNumberPredicate`를 구현해보자.
+
 ```java	
 	@FunctionalInterface	
 	public interface Predicate<? super T> {	
@@ -15952,6 +16056,7 @@ Instead of `num -> num%2 == 0`, let's implement a `EvenNumberPredicate`.
 	}	
 		
 ```	
+
 ##### Snippet-02: lambda behind the scenes - v2	
 **_LambdaBehindTheScenesRunner.java_**	
 ```java	
@@ -15972,17 +16077,21 @@ Instead of `num -> num%2 == 0`, let's implement a `EvenNumberPredicate`.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _34_	
 _36_	
 _48_	
-##### Snippet-02 Explained	
-```EvenNumberPredicate``` implements the ```Predicate<Integer>``` interface, and overrides the ```test()``` method.	
-Something similar to ```EvenNumberPredicate``` is created when we use lambda expressions ```num -> num%2 == 0```.	
-### Step 14: Functional Interfaces : ```Consumer```	
-Let's look at another Functional Interface - ```Consumer<S>```.	
-```forEach()``` on a stream is actually defined as - ```forEach(Consumer<? super S> action)```	
-The ```Consumer<S>``` interface has the following definition:	
+
+##### Snippet-02 Explained
+
+```EvenNumberPredicate```는 ```Predicate<Integer>```인터페이스를 구현하고 ```test()```메소드를 오버라이드한다.
+람다식인 ```num -> num%2 ==0```를 사용하면 ```EvenNumberPredicate```와 유사한 것이 만들어진다.
+
+### Step 14: 함수형 인터페이스 : ```Consumer```	
+또 다른 함수형 인터페이스인 ```Consumer<S>```를 살펴보자.
+스트림의 ```forEach()```는 실제로 ```forEach(Consumer<? super S> action)```으로 정의된다.
+```Consumer<S>``` 인터페이스는 다음과 같은 정의를 가지고 있다.
+
 ```java	
 	@FunctionalInterface	
 	public interface Consumer<? super S> {	
@@ -15992,9 +16101,11 @@ The ```Consumer<S>``` interface has the following definition:
 		
 	}	
 ```	
-The lambda expression used inside ```forEach()``` and other such stream operations, actually represent a `Consumer` implementation. 	
+각각에 대한 람다식과 그 밖의 스트림 연산에서 사용되는 람다식은 사실상 `Consumer`로 구현된다.
+
 ##### Snippet-01	
-Let's implement a `SysOutConsumer`.	
+`SysOutConsumer`를 구현해보자.	
+
 **_FunctionalProgrammingRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -16029,16 +16140,19 @@ Let's implement a `SysOutConsumer`.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _12_	
 _34_	
 _36_	
 _48_	
+
 ##### Snippet-01 Explained	
-* The code actually speaks for itself. The steps to customize a ```Consumer<S>``` implementation are quote simple, and straightforward.	
-* The final code that involves both a custom ```Predicate<T>```, and a custom ```Consumer<S>``` is still quite compact and elegant! 	
-### Step 15: More Functional Interfaces	
-Let's now look at what happens behind the scenes, for the stream operation ```map()```. Suppose we wanted to print out the squares of all even numbers in a given list.	
+* 코드는 실제로 그 자신을 나타낸다. ```Consumer<S>```를 사용자 지정하기 위한 단계의 구현은 단순하고 간단하다.
+* 사용자가 정의한 ```Predicate<T>```와 ```Consumer<S>```를 둘다 포함하는 마지막 코드는 여전히 작고 우아하다!
+	
+### Step 15: 더 많은 함수형 인터페이스
+이제 스트림 연산 ```map()```을 위해 뒤에서 무슨 일이 벌어지는지 살펴보자. 주어진 리스트에서 모든 짝수 숫자의 제곱을 출력한다고 가정하자.
+
 ##### Snippet-01 : ```map()``` Behind The Scenes - v1	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -16068,12 +16182,13 @@ Let's now look at what happens behind the scenes, for the stream operation ```ma
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _1156_	
 _1296_	
 _2304_	
-##### Snippet-01 Explained 	
-The signature of the ```map()``` intermediate stream operation is :	
+
+#### Snippet-01 Explained
+중간 스트림연산 ```map()```의 특징은 다음과 같다.
 ```java	
 	<R> Stream<R> map(Function<?super T, ? extends R> mapper){}	
 ```	
@@ -16084,9 +16199,12 @@ The signature of the ```map()``` intermediate stream operation is :
 		R apply(T t);	
 	}	
 ```	
-The method ```apply()``` accepts a ```T``` object as argument, and returns another object of type ```R```. In effect, any ```Function``` implementation can map object of one type to another.	
+```apply()```메소드는 ```T```라는 객체를 인자로 받아들이고, 또 다른 ```R```타입의 객체를 반환한다. 사실상 어떤 ```함수```구현이든 한 타입의 객체를 다른 타입의 객체로 매핑할 수 있다.
+
 ##### Snippet-02 : ```map()``` Behind The Scenes - v2	
-Let's implement a `NumberSquareMapper`.	
+
+`NumberSquareMapper`를 구현해보자.
+
 ```java	
 	package com.in28minutes.functionalprogramming;		
 	import java.util.List;	
@@ -16126,17 +16244,20 @@ Let's implement a `NumberSquareMapper`.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _1156_	
 _1296_	
 _2304_	
 **_1156_**	
 **_1296_**	
 **_2304_**	
-### Step 16: Introducing Method References	
-What is a method reference?	
-Let's look at an example.	
-##### Snippet-01: Method References - v1	
+
+### Step 16: 메소드 참조의 소개	
+메소드 참조란 무엇인가?
+여기 예를 한 번 보자.
+
+##### Snippet-01: 메소드 참조- v1	
+
 **_MethodReferencesRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -16149,15 +16270,17 @@ Let's look at an example.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _3_	
 _3_	
 _3_	
 _3_	
 _8_	
-##### Snippet-02 : Method References - v2 	
-Method references make it easy to create lambda expressions.	
-`l -> System.out.println(l)` can be replaced with `System.out::println`.	
+
+##### Snippet-02 : 메소드 참조 - v2 	
+메소드를 참조하면 람다식을 쉽게 만들 수 있다.
+`l -> System.out.println(l)`은 `System.out::println`로 대체될 수 있다.	
+
 **_MethodReferencesRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -16173,9 +16296,13 @@ Method references make it easy to create lambda expressions.
 		}	
 	}	
 ```	
-##### Snippet-03: Method References - v3	
+
+##### Snippet-03: 메소드 참조 - v3	
+
+정적 메소드 `print`를 정의하고 이를 메소드 참조로 사용해보자.
 Let's define a static method `print` and use it using a method reference.	
-`MethodReferencesRunner::print` is same as `l -> MethodReferencesRunner.print(l)`	
+`MethodReferencesRunner::print``는 `l -> MethodReferencesRunner.print(l)` 와 같다.
+
 **_MethodReferencesRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -16194,9 +16321,10 @@ Let's define a static method `print` and use it using a method reference.
 		}	
 	}	
 ```	
-##### Snippet-04 : Method References - v4	
-Instance method calls can also be replaced with their method references.	
-On a `String`, `String::length` is the same as `s -> s.length()`.	
+
+##### Snippet-04 : 메소드 참조 - v4	
+인스턴스 메소드 호출을 해당 메소드 참조로 대체할 수도 있다.
+`String`의 경우, `String::length`는 `s -> s.length()`와 같다.	
 **_MethodReferencesRunner.java_**	
 ```java	
 	package com.in28minutes.functionalprogramming;	
@@ -16215,8 +16343,11 @@ On a `String`, `String::length` is the same as `s -> s.length()`.
 		}	
 	}	
 ```	
+
 #### Classroom Exercise FP-CE-03	
-1. Using method references, write java functional code to determine the maximum even number,  in a given list of integers.	
+
+1. 메소드 참조를 이용하여, 주어진 정수 리스트에 최대 짝수를 결정하는 자바 함수형 코드를 작성하라.
+
 #### Solution To FP-CE-03	
 **_MethodReferencesRunner.java_**	
 ```java	
@@ -16243,31 +16374,37 @@ On a `String`, `String::length` is the same as `s -> s.length()`.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _34_	
-**_34_**	
-#### Summary	
-In this step, we:	
-* Understood what is a method reference	
-* Learned that both built-in, and user defined class methods can be invoked using method references	
-* Observed that method references work for static and non-static methods	
-### Step 17: FP - Functions As First-Class Citizens 	
-Are functions first class citizens in Java?	
-Here are few questions to think about?	
-* Can you pass a function as an argument to a method?	
-* Can you assign a function to a variable?	
-* Can you obtain a function as a return value, from a method invocation?	
-#### Passing function as method argument	
-We looked at several examples of this earlier.	
-In the example below, `num -> num % 2 == 0` is passed to `filter` method.	
+**_34_**
+
+#### 요약	
+
+이번 단계에서는
+* 메소드 참조가 무엇인지 이해했다.
+* 메소드 참조를 사용하여 내장 및 사용자 정의 클래스 메소드를 호출할 수 있다는 것을 배웠다.
+* 정적 및 비정적 메소드에서 메소드 참조가 동작하는 것으로 관찰되었다.
+
+### Step 17: FP - 일급 객체(First-Class Citizens)로서의 함수	
+
+함수는 자바에서 일급 객체인가?
+* 한 메소드의 인자로 함수를 전달할 수 있는가?
+* 변수에 함수를 할당할 수 있는가?
+* 메소드 호출에서 반환 값 함수를 얻을 수 있는가?
+
+#### 메소드 인자로서의 함수 전달	
+
+우리는 이에 대한 몇 가지 예를 앞에서 이미 보았다.
+아래 예에서는 `num -> num %2 x 0`이 `filter`메소드로 전달된다.
 ```	
 int max = List.of(23, 45, 67, 34).stream()			
 								 .filter(num -> num % 2 == 0)	
 								 .max( (n1, n2) -> Integer.compare(n1, n2) )	
 								 .orElse(0);	
 ```	
-#### Storing functions in reference variables	
-`evenPredicate` and `oddPredicate` represent functions.	
+#### 참조 변수에 함수 저장
+`evenPredicate` 와 `oddPredicate`는 함수다.
+
 ```java	
 	package com.in28minutes.functionalprogramming;	
 	import java.util.List;	
@@ -16284,12 +16421,14 @@ int max = List.of(23, 45, 67, 34).stream()
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _1156_	
 _1296_	
 _2304_	
-#### Returning functions from methods	
-`createEvenPredicate` and `createOddPredicate` are examples of methods returning functions.	
+
+#### 메소드로부터 함수 반환	
+`createEvenPredicate`와 `createOddPredicate`는 함수를 반환하는 메소드의 예이다.
+
 ```java	
 	import java.util.stream.Stream;	
 	import java.util.function.Predicate;	
@@ -16312,22 +16451,27 @@ _2304_
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _1156_	
 _1296_	
 _2304_	
-#### Summary	
-In this step, we observed that the following is true for a function:	
-* It can be passed as a method argument	
-* It can be stored in a reference variable	
-* It can be  returned from a method	
-## Threads and Concurrency	
-So far, we've only seen programs that run like a single horse, running round a race course. 	
-However, it often makes sense for a program's *main task* to be split into smaller ones (let's call them *sub-tasks*).  	
-Imagine an ant-colony, where a large number of worker ants toil together, to complete what the Queen Ant tells them to do. Groups of ants that are part of separately tasks, work with a free hand.	
-The concept of **concurrency** in programming is very similar to what an ant colony is in nature. 	
-### Step 01: Concurrent Tasks: Extending ```Thread```	
-In Java, you can run tasks in parallel using threads.  Let's first write a simple program.	
+
+#### 요약	
+이번 단계에서는, 함수에 대해 다음이 참임을 확인했습니다.
+* 메소드 인수로 전달 가능함
+* 참조 변수에 저장 가능함
+* 메소드에서 반환 가능함
+
+## 스레드와 동시 실행	
+지금까지 경주 코스를 홀로 달리는 것처럼 실행되는 프로그램만 보아왔따.
+그러나 프로그램의 *주 작업*은 작은 작업으로 나누는 것이 이치에 맞는 경우가 많다.(이를 *하위 작업*이라고 하자)
+많은 일개미들이 함께 일하며 여왕 개미가 시키는 일을 완수하는 개미 군락을 상상해 보라. 개별 과제의 일부인 개미 집단은 자유자재로 일한다.	
+프로그래밍에서 **동시 실행**의 개념은 개미 군집이 자연에서 존재하는 것과 매우 유사합니다.
+
+### Step 01: 동시 실행 작업: ```Thread``` 확장
+
+Java에서는 스레드를 사용하여 작업들을 병렬로 실행할 수 있다. 먼저 간단한 프로그램을 작성해보자.
+
 ##### Snippet-1	
 **_ThreadBasicsRunner.java_**	
 ```java	
@@ -16353,7 +16497,7 @@ In Java, you can run tasks in parallel using threads.  Let's first write a simpl
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199_	
 _Task1 Done_	
 _201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299_	
@@ -16361,14 +16505,19 @@ _Task2 Done_
 _301 302 303 304 305 306 307 308 309 310 311 312 313 314 315 316 317 318 319 320 321 322 323 324 325 326 327 328 329 330 331 332 333 334 335 336 337 338 339 340 341 342 343 344 345 346 347 348 349 350 351 352 353 354 355 356 357 358 359 360 361 362 363 364 365 366 367 368 369 370 371 372 373 374 375 376 377 378 379 380 381 382 383 384 385 386 387 388 389 390 391 392 393 394 395 396 397 398 399_	
 _Task3 Done_	
 _Main Done_	
+
 ##### Snippet-1 Explained	
-As you can see, the execution of all three ```for``` loops (that really are independent tasks) is sequential. This is how all our code so far has been running!	
-### Thread Creation	
-There are two ways in which you can create a thread to represent a sub-task, within a program. They are:	
-* Define your own thread ```class``` to sub-class the **```Thread```** ```class```.	
-* Define your own thread ```class``` to implement the **```Runnable```** ```interface```.	
-In this step, we will focus on the first alternative.	
-##### Snippet-01 : A simple Java thread class	
+보다시피, 세 개의 ```for문```(독립적인 작업들)을 모두 실행하는 것은 순차적이다. 지금까지의 모든 코드가 이렇게 실행되었다!
+
+### 스레드 생성	
+여러분이 프로그램 내에서 하위 작업을 나타내는 스레드를 만드는 방법이 두 가지 있다. 
+*  자체적인 스레드 ```클래스```를 정의하여 **```Thread```** ```클래스```를 하위 클래스화 한다.
+* **```Runnable```** ```인터페이스```를 구현하는 자체적인 스레드 ```클래스```를 정의한다.
+
+이 단계에서, 우리는 첫번째 대안에 주력할 예정이다.
+
+##### Snippet-01 : 간단한 자바 스레드 클래스
+
 **_ThreadBasicsRunner.java_**	
 ```java	
 	class Task1 extends Thread {	
@@ -16399,7 +16548,7 @@ In this step, we will focus on the first alternative.
 		}		
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 ```	
 Task1 Started 	
 201 101 202 102 203 103 204 104 105 205 206 106 207 107 208 108 209 109 210 110 211 111 212 112 213 113 214 114 215 115 216 116 217 218 117 219 118 220 119 221 120 222 121 122 223 123 224 124 225 125 226 126 227 127 228 128 229 129 230 130 231 131 232 132 233 133 234 134 235 135 236 136 237 137 238 138 239 139 240 140 241 141 242 142 243 143 244 144 245 145 246 247 146 248 147 249 148 250 149 251 150 252 151 253 152 254 153 255 154 256 155 257 156 258 157 259 158 260 159 261 160 262 161 263 162 264 163 265 164 266 165 267 166 268 167 269 168 270 169 271 170 272 171 273 172 274 173 275 174 276 175 277 278 279 176 280 177 281 178 179 282 180 181 182 283 183 284 184 285 185 286 186 287 187 288 289 188 290 189 291 190 292 191 293 192 294 193 194 295 195 196 296 197 297 298 299 198 	
@@ -16410,14 +16559,17 @@ Task1 Done
 Task3 Done	
 Main Done	
 ```	
-##### Snippet-01 Explained	
+##### Snippet-01 Explained
+
 We defined a ```Task1``` ```class``` to denote our sub-task, with a ```run()``` method definition. However,  when we create such a thread within our ```main()``` method, we don't seem to be invoking ```run()``` in any way! What's happening here? 	
 A thread can be created and launched, by calling a generic method named ```start()```. method. Calling ```start()``` will invoke the individual thread’s ```run()``` method.	
-From the console output, we see that the output of *Task1* overlaps with those of tasks labeled *Task2* and *Task3*. *Task1* is running in parallel with main which is running (*Task2*, *Task3*).	
+From the console output, we see that the output of *Task1* overlaps with those of tasks labeled *Task2* and *Task3*. *Task1* is running in parallel with main which is running (*Task2*, *Task3*).
+
 #### Summary	
 In this step, we:	
 * Discovered how to define a thread by sub-classing ```Thread```	
 * Demonstrated how to run a Thread	
+
 ### Step 02: Concurrent Tasks - Implementing Runnable	
 ##### Snippet-01 : Implementing Runnable	
 In **Step 01**, we told you that there are two ways a thread could represent a sub-task, in a Java program. One was by sub-classing a ```Thread```, and the other way is to implement ```Runnable```. We saw the first way a short while ago, and it's time now to explore the second. The following example will show you how it's done.	
