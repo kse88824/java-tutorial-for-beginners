@@ -29,7 +29,7 @@
 * [Chapter 13 - 제네릭의 이해](#제네릭의-이해)
 * [Chapter 14 - 함수형 프로그래밍 소개](#함수형-프로그래밍-소개)
 * [Chapter 15 - 스레드와 동시 실행](#스레드와-동시-실행)
-* [Chapter 16 - 예외처리의 이해](#예외처리의-이해)
+* [Chapter 16 - 예외 처리의 이해](#예외-처리의-이해)
 * [Chapter 17 - 파일 입출력](#파일-입출력)
 * [Chapter 18 - 동시 실행 : 더 나아가기](#동시-실행--더-나아가기)
 
@@ -16561,18 +16561,21 @@ Main Done
 ```	
 ##### Snippet-01 Explained
 
-We defined a ```Task1``` ```class``` to denote our sub-task, with a ```run()``` method definition. However,  when we create such a thread within our ```main()``` method, we don't seem to be invoking ```run()``` in any way! What's happening here? 	
-A thread can be created and launched, by calling a generic method named ```start()```. method. Calling ```start()``` will invoke the individual thread’s ```run()``` method.	
-From the console output, we see that the output of *Task1* overlaps with those of tasks labeled *Task2* and *Task3*. *Task1* is running in parallel with main which is running (*Task2*, *Task3*).
+우리는 ```Task1``` ```클래스```를 정의하여  하위 작업을 ```run()``` 메소드 정의를 표시하였다. 그러나 우리의 ```main()```메소드 내에서 그런 스레드를 만들어 낼 때 우리는 어떤 식으로든 ```run()```을 호출하지 않은 것 같다. 여기서 무슨 일이 일어나는가?
+```start()``` 메소드라고 하는 제네릭 메소드를 통해 스레드를 만들고 시작할 수 있따. ```start()```를 호출하면 각각 스레드의 ```run()```메소드를 호출할 것이다.
 
-#### Summary	
-In this step, we:	
-* Discovered how to define a thread by sub-classing ```Thread```	
-* Demonstrated how to run a Thread	
+콘솔 출력에서 *Task1*의 출력이 *Task2* 및 *Task3*으로 표시된 작업의 출력과 중복되는 것을 알 수 있다. *Task1*은 실행 중인 main과 병렬로 실행된다.(*Task2*,*Task3*)
 
-### Step 02: Concurrent Tasks - Implementing Runnable	
+#### 요약
+
+이번 단계에서는
+* ```Thread```를 하위 클래스로 하여 스레드를 정의하는 방법을 발견했다.
+* 스레드를 실행하는 방법을 보였다.
+
+### Step 02: 동시 실행 작업 - Runnable 구현
 ##### Snippet-01 : Implementing Runnable	
-In **Step 01**, we told you that there are two ways a thread could represent a sub-task, in a Java program. One was by sub-classing a ```Thread```, and the other way is to implement ```Runnable```. We saw the first way a short while ago, and it's time now to explore the second. The following example will show you how it's done.	
+**Step 01**에서는 Java 프로그램에서 스레드가 하위 작업을 나타낼 수 있는 두 가지 방법이 있다고 알려줬다. 하나는 ```Thread```를 하위 클래스로 두는 것이고, 다른 하나는 ```Runnable```을 구현하는 것이다. 우리는 조금 전에 첫 번째 방법을 보았고, 이제 두 번째 방법을 탐험할 때이다. 다음 예에서는 이 작업으 수행 방법을 보여 준다.
+
 **_ThreadBasicsRunner.java_**	
 ```java	
 	class Task1 extends Thread {	
@@ -16612,7 +16615,7 @@ In **Step 01**, we told you that there are two ways a thread could represent a s
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 ```	
 Task1 Kicked Off	
 Task1 Started 	
@@ -16628,23 +16631,32 @@ Task2 Done
 Task3 Done	
 Main Done	
 ```	
+
+
 ##### Snippet-01 Explained	
-In this example, we implemented ```Runnable``` by implementing the ```run()``` method from ```Runnable``` interface.	
-To run Task2 which is implementing `Runnable` interface, we used this code. We are using the `Thread` constructor passing an instance of `Task2`.	
+이번 예에서 우리는 ```Runnable```인터페이스에서 ```run()```메소드를 구현하여 ```Runnable```을 구현했다.
+Runnable 인터페이스를 구현하는 Task2를 실행하기 위해 이 코드를 사용했다. `Task2`의 인스턴스를 전달하여 `스레드`생성자를 사용하고 있다.
+
 ```java	
 Task2 task2 = new Task2();	
 Thread task2Thread = new Thread(task2);	
 task2Thread.start();	
 ```	
-You can see from the output that all three tasks are running in parallel.	
-#### Summary	
-In this step, we:	
-* Explored another way to create threads, by implementing the ```Runnable``` ```interface```	
-* Learned to run a thread created using ```Runnable``` ```interface```	
- 	
-### Step 03: The Thread Life-cycle  	
-A Java Thread goes through a sequence of **states** during its lifetime. The term **life-cycle** is used to describe this fact, and clearly defines what specific state a thread could be in, at various points of time. 	
-Let's consider the following example we explored recently, in _**Step 02**_:	
+
+출력을 통해 세 가지 작업이 모두 병려로 실행되고 있음을 알 수 있다.
+
+#### 요약
+
+이번 단계에서는
+* ```Ruannable``` ```인터페이스```를 구현하여 스레드를 만드는 또 다른 방법을 모색했다.
+* ```Runnable``` ```인터페이스```로 만든 스레드를 실행하는 법을 배웠다.
+
+### Step 03: 스레드 생명 주기
+
+Java 스레드는 살아있는 동안 일련의 **상태**를 거친다. **생명 주기**라는 용어는 이 사실을 설명하는 데 사용되며, 다양한 시점에서 스레드가 어떤 특정 상태에 있을 수 있는지를 명확하게 정의한다.
+최근에 살펴본 _**Step 02**_의 다음 예를 살펴보자.
+
+
 ```java	
 	class Task1 extends Thread {	
 		public void run() {	
@@ -16674,27 +16686,36 @@ Let's consider the following example we explored recently, in _**Step 02**_:
 		}	
 	}	
 ```	
-Different states of a thread are:	
-* **NEW**: A thread is in this state as soon as it's been created, but its ```start()``` method hasn't yet been invoked.	
- 	
-	* For *Task1* : After the execution of ```Task1 task1 = new Task1();```	
-	* For *Task2* : After the execution of ```Task2 task2 = new Task2();  task2Thread = new Thread(task2);```	
-* **TERMINATED/DEAD**: When all the statements inside a thread's ```run()``` method have been been completed, that thread is said to have terminated.	
-A thread can be in any one of the remaining three states, after its ```start()``` method has been invoked.	
- 	
-* **RUNNING**: If the thread is currently running.	
-* **RUNNABLE**: If the thread is not currently running, but is ready to do so at any time.	
-* **BLOCKED/WAITING**: If the thread is not currently running on the processor, but is not ready to execute either. This may be the case if it's waiting for an external resource (such as a user's input) or another thread.	
-#### Summary	
+
+스레드의 상태는 다음과 같다.
+* **NEW**: 스레드가 만들어진 직후의 상태, ```start()```메소드는 아직 호출되지 않았다.
+
+	* *Task1*의 경우: ```Task1 task1 = new Task1();```의 실행 후
+	* *Task2*의 경우:  ```Task2 task2 = new Task2();  task2Thread = new Thread(task2);```의 실행 후
+* **TERMINATED/DEAD**: 한 스레드의 ```run()```메소드에 포함된 모든 구문이 완료되면, 그 스레드는 종료되었다고 한다.
+```start()```메소드가 호출된 후, 나머지 세 개의 상태 중 어느 것에도 스레드가 있을 수 있다.
+* **RUNNING88: 스레드가 현재 실행 중인 경우.
+* **RUNNABLE**: 스레드가 현재 실행되고 있지 않지만 언제든지 실행할 수 있는 경우.
+* **BLOCKED/WATING**: 스레드가 현재 프로세서에서 실행되고 있지 않고, 실행할 준비도 되지 않은 경우. 외부 리소스(예: 사용자 입력) 또는 다른 스레드를 기다리는 경우일 수 있다.
+
+#### 요약	
+
+이번 단계에서는
+
 In this step, we:	
-* Discussed different states of a Thread with an example	
-### Step 04: Thread Priorities	
-Java allows you to *request* the thread scheduler, to change the priority of a thread. The priority of any thread always lies in a fixed range - ```MIN_PRIORITY = 1``` to ```MAX_PRIORITY = 10```.  The default priority that's assigned to any thread, is ```NORM_PRIORITY = 5```. 	
-A request to change this priority is done by invoking the static ```setPriority(int)``` method, available in the ```Thread``` ```class```. This request may or may not be honored in response, so be prepared for that! 	
-### Step 05: Communicating Threads	
-Any program where threads are not explicitly created is a single-threaded application. The thread that we refer to here is the *main thread*, executing the program's ```main()``` method.	
-Sometimes, threads might depend on one another. 	
-Let consider the example from **Step 02**. We want to add a condition - *Task3* should execute only after *Task1* terminates.	
+* 여러 가지 스레드 상태에 대해 예시와 함께 설명했다.
+
+### Step 04: 스레드 우선 순위
+
+Java에서는 스레드 스케줄러를 *요청*하여 스레드 우선 순위를 변경할 수 있따. 어떤 스레드의 우선 순위는 항상 ```MIN_Priority = 1```에서 ```MAX_Priority = 10```까지 고정된 범위에 있다. 모든 스레드에 할당된 기본 우선 순위는 ```NORM_Priority = 5```이다.
+이러한 우선 순위 변경 요쳥은 ```Thread``` ```클래스```에서 사용 가능한 정적 메소드인 ```setPriority(int)```를 호출함으로써 이루어진다. 이 요청은 이에 응할 수도 있고 그렇지 않을 수도 있으므로 이에 대비하여야 한다!
+
+### Step 05: 스레드 간의 통신
+스레드가 명시적으로 생성되지 않은 프로그램은 단일 스레드 응용 프로그램이다. 여기서 우리가 언급하는 스레드는 프로그램의 ```main()```메소드를 실행하는 *메인 스레드*이다.
+경우에 따라 스레드는 서로 종속될 수 있다.
+**Step 02**의 예를 살펴보자.
+여기에 조건을 추가하려고 한다. *Task3*는 *Task1*이 종료된 후에만 실행된다.
+
 **_ThreadBasicsRunner.java_**	
 ```java	
 	class Task1 extends Thread {	
@@ -16737,8 +16758,10 @@ Let consider the example from **Step 02**. We want to add a condition - *Task3* 
 	}	
 ```	
 ##### Snippet-5 Explained	
-```task1.join()``` waits until task1 completes. So, the code after ```task1.join()``` will executed only on completion of `task1`.	
-If we want *Task3* to be executed only after both *Task1* and *Task2* are done, the code in ```main()``` needs to look as follows:	
+
+```task1.join()```은 task1이 끝나기를 기다린다. 따라서 ```task1.join()```이후의 코드는 `task1`의 완료되어야만 실행된다.
+*Task1*과 *Task2*를 모두 실행한 후에만 *Task3*를 실행하려면 ```main()```의 코드는 다음과 같이 표시되어야 한다.
+
 ##### Snippet-6 : Task3 after Task1 and Task2	
 **_ThreadBasicsRunner.java_**	
 ```java	
@@ -16761,44 +16784,57 @@ If we want *Task3* to be executed only after both *Task1* and *Task2* are done, 
 			
 	}	
 ```	
-##### Snippet-6 Explained	
-It is important to note that *Task1* and *Task2* are still independent sub-tasks. The thread scheduler is free to interleave their executions. However, *Task3* is kicked off only after both of them terminate.	
-#### Summary	
-In this step, we:	
-* Understood the need for thread communication	
-* Learned that Java provides mechanisms for threads to wait for each other	
-* Observed how the ```join()``` method can be used to sequence thread execution	
-  	
-### Step 07: ```synchronized``` Methods, And ```Thread``` Utilities	
-When a thread gets tired, you can put it to bed. Heck, you can do it even when it's fresh and raring to go! It's under your control, remember? 	
-The ```Thread``` class provides a couple of methods:	
-* ```public static native void sleep(int millis)``` : Calling this method will cause the thread in question, to go into a *blocked* / *waiting* state for **at least** ```millis``` milliseconds.	
-* ```public static native void yield()``` : Request thread scheduler to execute some other thread. The scheduler is free to ignore such requests.	
-##### Snippet-01 : Thread utilities	
+
+##### Snippet-6 Explained
+
+*Task1*과 *Task2*는 여전히 독립적인 하위 작업이다. 스레드 스케줄러는 자유롭게 교차 실행할 수 있다. 그러나 *Task3*는 두 작업이 모두 종료된 후에만 시작된다.
+
+#### 요약	
+
+이번 단계에서는
+* 스레드 간의 통신의 필요성을 이해했다.
+* Java가 스레드가 서로 대기할 수 있는 메커니즘을 제공한다는 것을 알게 되었다.
+* ```join()```메소드를 사용하여 스레드 실행이 순서를 정하는 방법을 관찰했다.
+
+### Step 07: ```synchronized``` 메소드와 ```Thread``` 유틸리티
+
+스레드가 피곤해지면, 여러분은 그것을 재울 수 있다. 여러분이 지정하는 것이다. 기억나지 않는가?
+```Theread```클래스는 두 가지 메소드를 제공한다.
+* ```public static native void sleep(int millis)``` : 이 메소드를 호출하면 요청한 스레드가 ```millis``` 밀리초 동안 *blocked* / *wating* 상태가 될 것이다.
+* ```public static native void yield()``` : 스레드 스케줄러에게 다른 스레드 실행을 요청한다. 스케줄러는 이러한 요청을 무시할 수도 있다.
+
+##### Snippet-01 : 스레드 유틸리티	
 **jshell>** ```Thread.sleep(1000)```	
 **jshell>** ```Thread.sleep(10000)```	
 **jshell>**	
-##### Snippet-7 Explained	
-* ```Thread.sleep(1000)``` causes the ```JShell``` prompt to appear after a delay of *at least* 1 second. This delay is even more visible, when we execute ```Thread.sleep(10000)```.	
-### Step 08: Drawbacks of earlier approaches	
-We saw few of the methods for synchronization in the `Thread` class	
+
+##### Snippet-7 Explained
+
+* ```Thread.sleep(10000)```은 ```JShell```프롬프트가 *최소* 1초 이상 지연된 후에 나타나게 한다. 이러한 지연은 우리가 ```Thread.sleep(1000)```을 실행할 때 더욱 두드러진다. 
+
+### Step 08: 이전 접근법의 단점
+`Thread`클래스에서 동기화하는 방법 중 몇 가지를 살펴보았다.
 * ```start()```	
 * ```join()```	
 * ```sleep()```	
 * ```wait()```	
-Above approaches have a few drawbacks:	
-* **No Fine-Grained Control**: Suppose, for instance , we want *Task3* to run after *any one* of *Task1* or *Task2* is done. How do we do it?	
-* **Difficult to maintain**: Imagine managing 5-10 threads with code written in earlier examples. It would become very difficult to maintain. 	
-* **NO Sub-Task Return Mechanism**: With the ```Thread``` ```class``` or the ```Runnable``` ```interface```, there is no way to get the result from a sub-task.	
-### Step 09: Introducing ```ExecutorService```	
-In order to address the serious limitations of the ```Thread``` API, a new ```Executor Service``` was added in **Java SE 5**. 	
-The ```ExecutorService``` is a framework you can use to manage threads in your code, better.  It has built-in ways to:	
-* Create and launch threads more intuitively	
-* Manage thread state and its life-cycle more easily	
-* Synchronize between threads with more control, and	
-* Handle groups of threads neatly	
-The ```ExecutorService``` provides utilities to achieve each one of these. Let's start with thread creation, which the next example takes care of.	
-##### Snippet-01 : Creating a Thread	
+
+위의 방법에는 몇 가지 단점이 있다.
+* **세부 제어 없음**: 예를 들어, *Task1* 또는 *Task2* 중 어느 *하나*가 완료된 후 *Task3*를 실행하려고 한다. 할 수 있을까?
+* **유지 및 관리 어려움**: 앞으 예에서 설명한 코드로 5~10개의 스레드를 관리한다고 가정해 보자. 매우 어려울 것이다.
+* **하위 작업 반환 메커니즘이 없음**: ```Thread``` ```클래스```나 ```Runnable``` ```인터페이스```가 있으면 하위 작업에서 결과를 얻을 방법이 없다.
+
+### Step 09: ```ExecutorService```소개
+```Thread``` API의 심각한 한계를 해결하기 위해 **Java SE 5**에 새로운 ```Executor Service```가 추가되었다.
+```Executor Service```는 코드 내의 스레드를 더 잘 관리하기 위해 사용할 수 있는 프레임워크이다. 다음과 같은 기본 제공 방법이 있다.
+* 보다 직관적인 스레드 생성 및 실행
+* 스레드 상태 및 생명주기를 보다 쉽게 관리
+* 제어력이 향상된 스레드 간 동기화
+* 스레드 그룹을 깔끔하게 처리
+
+```Executor Service```는 이러한 각각의 목적을 달성하기 위한 유틸리티를 제공한다. 다음 예에서 다룰 스레드 생성부터 시작해보자.
+
+##### Snippet-01 : 스레드 생성	
 **_ExecutorServiceRunner.java_**	
 ```java	
 	import java.util.concurrent.ExecutorService;	
@@ -16831,16 +16867,18 @@ The ```ExecutorService``` provides utilities to achieve each one of these. Let's
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _Task1 Started_	
 _101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194 195 196 197 198 199_	
 _Task1 Done_	
 _Task2 Started_	
 _201 202 203 204 205 206 207 208 209 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254 255 256 257 258 259 260 261 262 263 264 265 266 267 268 269 270 271 272 273 274 275 276 277 278 279 280 281 282 283 284 285 286 287 288 289 290 291 292 293 294 295 296 297 298 299_	
 _Task2 Done_	
+
 ##### Snippet-01 Explained	
-`ExecutorService executorService = Executors.newSingleThreadExecutor()` creates a single threaded executor service. That's why the tasks ran serially, one after the other.	
-##### Snippet-02 : main runs in parallel	
+`ExecutorService executorService = Executors.newSingleThreadExecutor()` 는 단일 스레드 Executor Service를 생성한다. 그것이 이 작업이 차례로 연속된 이유이다.
+
+##### Snippet-02 : main은 병행하게 실행됨	
 Let's update the main method to do more things:	
 ```java	
 	public class ExecutorServiceRunner {	
@@ -16858,7 +16896,7 @@ Let's update the main method to do more things:
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 ```	
 Task1 Started 	
 101 	
@@ -16872,12 +16910,16 @@ Main Done
 292 293 294 295 296 297 298 299 	
 Task2 Done	
 ```	
+
 ##### Snippet-02 Explained	
-The only order that we see in the resulting chaos is: *Task2* starts execution only after *Task1* is done.	
-Threads managed by `ExecutorService` run in parallel with `main` method.	
-### Step 10: Executor -  Customizing Number Of Threads	
-With the ```ExecutorService```, it is possible to create a *pool* of threads.	
-The following examples will show you how you can create thread pools of varying kinds, and of course, of different sizes. 	
+
+그 결과로 발생하는 혼돈에서 볼 수 있는 유일한 순서는 *Task2*는 *Task1*이 완료된 후에만 실행을 시작한다는 것이다.
+Executor Service에서 관리하는 스레드는 `main`메소드와 병행한다.
+
+### Step 10: Executor -  스레드의 개수를 사용자 지정함
+```ExecutorService```를 통해 스레드 *풀*을 만들 수 있다.
+다음 예에서는 다양한 종류와 다양한 크기의 스레드 풀을 만드느 방법을 보여준다.
+
 ##### Snippet-03 : Executors for Concurrent threads	
 **_ExecutorServiceRunner.java_**	
 ```java	
@@ -16896,7 +16938,7 @@ The following examples will show you how you can create thread pools of varying 
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 ```	
 Task1 Started 	
 Task3 Kicked Off	
@@ -16909,12 +16951,14 @@ Task2 Done
 197 198 199 	
 Task1 Done	
 ```	
+
 ##### Snippet-03 Explained	
-We created `ExecutorService` by using `Executors.newFixedThreadPool(2)`. So, 'ExecutorService` uses two parallel threads at a maximum.	
-* *Task1* and *Task2* execute concurrently as part of the ```ExecutorService```, and	
-* The thread running ```main()``` executes concurrently with this thread pool, created by ```ExecutorService```.	
+`Executors.newFixedThreadPool(2)`을 사용하여 `ExecutorService`를 만들었다. 그래서 `ExecutorService`는 최대 두 개의 병렬 스레드를 사용한다.
+* *Task1*과 *Task2*는 ```ExecutorService```의 일부로 동시에 실행되며,
+* ```main()```을 실행하는 스레드는 ```ExecutorService```가 만든 이 스레드 풀과 동시에 실행된다.
+
 ##### Snippet-04 : All-Executor Task Execution	
-Let's create a simple example to allow to play with 'ExecutorService'.	
+이제 `ExecutorService`를 사용할 수 있는 간단한 예를 만들어 보자.
 **_ExecutorServiceRunner.java_**	
 ```java	
 	import java.util.concurrent.ExecutorService;	
@@ -16944,8 +16988,9 @@ Let's create a simple example to allow to play with 'ExecutorService'.
 	}	
 ```	
 ##### Snippet-04 Explained	
-`Executors.newFixedThreadPool(2)` - Two threads in parallel. The thread ```new Task(3)``` is executed only after any one of ```new Task(1)``` and ```new Task(2)``` have completed their execution.	
-##### Snippet-04 : Larger Thread Pool Size	
+`Executors.newFixedThreadPool(2)` - 두 개의 스레드가 병렬로 연결된다. ```new Task(3)```라는 스레드는 ```new Task(1)```과 ```new Task(2)```중 어느 하나라도 실행을 마친 후에야 실행된다.
+
+##### Snippet-04 : 더 큰 사이즈의 스레드 풀	
 ```java	
 	public class ExecutorServiceRunner {	
 		public static void main(String[] args) {	
@@ -16961,19 +17006,26 @@ Let's create a simple example to allow to play with 'ExecutorService'.
 		}	
 	}	
 ```	
+
 ##### Snippet-04 Explained	
-We made the pool larger to 3:	
-* Initially Tasks ```1```, ```2```, ```3``` are added to the ```ExecutorService``` and are started.	
-* As soon as any one of them is terminated, another task from the thread pool is picked up for execution, and so on. A classic case of musical chairs, with regard to the slots available in the ```ExecutorService``` thread pool, is played out here!	
-#### Summary	
-In this step, we:	
-* Explored how one can create pools of threads of the same kind, using the ```ExecutorService```	
-* Noted how one could specify the size of a thread pool	
-### Step 11:  ```ExecutorService```: Returning Values From Tasks	
+
+풀을 더 크게 세 개로 만들어보자
+* 처음에는 ```1```,```2```,```3``` 작업이 ```ExecutorService```에 추가되어 시작된다.
+* 두 작업 중 하나가 종료되는 즉시 스레드 풀에서 다른 작업을 선택하여 실행할 수 있다. 
+
+#### 요약
+이번 단계에서는
+* ```ExecutorService```를 이용해 같은 종류의 스레드드 풀을 어떻게 만들 수 있는지 알아봤다.
+* 스레드 풀의 크기를 지정하는 방법을 설명했다.
+
+
+### Step 11:  ```ExecutorService```: 작업에서 값 반환	
 ##### Snippet-01: Returning a Future Object	
-So far, we have only seen sub-tasks that are largely independent, and which don't return any result to the main program that launched them.	
-To be able to return a value from a Thread, Java provides a ```Callable<T>``` interface.	
-The next example tells you how to implement ```Callable<T>```, and use it with ```ExecutorService```.	
+
+지금까지, 우리는 대부분 독립적이고, 어떤 결과도 그것들을 시작한 메인 프로그램으로 반환하지 않는 하위 작업들만을 보아왔다.
+스레드에서 값을 반환할 수 있도록 Java는 ```Callable<T>```인터페이스를 제공한다.
+다음 예는 ```Callable<T>```를 실행하는 방법을 알려주며, ```ExecutorService```와 사용한다.
+
 **_ExecutorServiceRunner.java_**	
 ```java	
 	import java.util.concurrent.ExecutorService;	
@@ -17001,21 +17053,27 @@ The next example tells you how to implement ```Callable<T>```, and use it with `
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _CallableTask in28Minutes Submitted_	
 _Hello in28Minutes_	
+
 ##### Snippet-01 Explained	
-- `class CallableTask implements Callable<String>` - Implement `Callable`. Return type is `String`	
-- `public String call() throws Exception {` - Implement `call` method and return a `String` value back.	
--  ```executorService.submit(new CallableTask(String))``` adds a callable task to its thread pool. This puts the task thread in a **RUNNABLE** state. Subsequently, the program goes ahead to invoke its ```call()``` method.	
-- `welcomeFuture.get()` - Ensures that the `main` thread waits for the result of the operation. 	
-#### Summary	
-In this step, we:	
-* Understood the need for a mechanism, to create sub-tasks that return values	
-* Discovered that Java has a ```Callable<T>``` interface to do exactly this	
-* Saw that the ```ExecutorService``` is capable of managing ```Callable``` threads	
-### Step 11: Executors - Waiting For Many Callable Tasks To Complete	
-```ExecutorService``` framework also allows you to create a pool of ```Callable``` threads. Not only that, you can collect their return values together.	
+- `class CallableTask implements Callable<String>` - 반환 타입이 `String`인 `Callable`을 구현한다.
+- `public String call() throws Exception ` - `call`메소드를 구현하고 `String` 값을 다시 반환한다.
+- ```executorService.submit(new CallableTask(String))``` 은 스레드 풀에 Callable작업을 추가한다. 그러면 작업 스레드가 **RUNNABLE** 상태가 된다. 그 후 이 프로그램은 ```call()``메소드를 계속 한다.
+- `welcomeFuture.get()` - `main`스레드가 작업 결과를 기다리게 한다.
+
+#### 요약
+
+이번 단계에서는
+
+* 값을 반환하는 하위 작업을 생성하는 메커니즘의 필요성을 이해했다.
+* 자바에 ```Caalable<T>``` 인터페이스가 있다는 것을 발견했다.
+* ```ExecutorService```가 ```Callable```스레드를 관리할 수 있는 능력이 있는 것을 보았다.
+
+### Step 11: Executors - Callable 작업이 완료될 때까지 기다리기
+```ExecutorService``` 프레임워크는 또한 당신이 ```Callable```스레드 풀을 만들 수 있게 해준다. 뿐만 아니라 반환 값도 함께 수집할 수 있다.
+
 ##### Snippet-01 : Waiting for Multiple ```Callable``` Threads 	
 **_MultipleCallableRunner.java_**	
 ```java	
@@ -17047,15 +17105,18 @@ In this step, we:
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _Hello in28Minutes_	
 _Hello Ranga_	
 _Hello Adam_	
+
+
 ##### Snippet-01 Explained	
-The ```invokeAll()``` method of  ```ExecutorService``` allows for a list of ```Callable``` tasks to be launched in the thread pool. Also, a ```List``` of ```Future``` objects can be used to hold return values, one for each such ```Callable``` thread.	
-The list of return values can be accessed only after **all** the threads are done, and have returned their results. 	
-This can be verified from the console output. all the planned welcome messages are printed in one go, but only after a wait of at least ```3000``` milliseconds has been completed.	
-Let's now see what scenario would pan out with a larger thread pool size. 	
+```ExecutorService```의 ```invokeAll()```메소드는 ```Callable``` 작업의 리스트를 스레드 풀에서 시작할 수 있게 해준다. 또한 ```List```라는 ```Future```객체들은 이러한 ```Callable```스레드 하나 하나에 해당하는 반환값을 보유하는 데 사용될 수 있다.
+반환 값 목록은 **모든** 스레드가 완료되고 결과가 반환된 후에만 접근할 수 있다.
+이는 콘솔창 출력에서 확인할 수 있다. 계획된 모든 환영 메시지는 단번에 출력되지만, 최소한 ```3000```밀리초의 기다림이 끝난 뒤에야 출력된다.
+이제 더 큰 스레드 풀 크기를 사용하는 시나리오가 무엇인지 알아보자.
+
 ##### Snippet-02 : List of Callable tasks with larger thread pool	
 ```java	
 	public class MultipleCallableRunner {	
@@ -17072,21 +17133,28 @@ Let's now see what scenario would pan out with a larger thread pool size.
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _Hello in28Minutes_	
 _Hello Ranga_	
 _Hello Adam_	
+
 ##### Snippet-02 Explained	
-The welcome messages all get printed in a batch again, but their collective wait gets shorter. This is because:	
-* The thread pool size is now ```3```, not ```2``` as earlier. This means all the three tasks can be put in the **RUNNABLE** state at once. 	
-* Then, they go into their **BLOCKED** state also almost simultaneously, which means their collective wait time is much less than ```3000``` milliseconds. That's one advantage of a larger thread pool!	
-#### Summary 	
-In this step, we:	
-* Learned that it's possible to collect the return values of a pool of ```Callable``` threads, at one go.	
-* This is done using the ```invokeAll()``` method for their launch, and specifying a ```List``` of ```Future``` objects to hold these results	
-* Changing the thread pool size for such scenarios can change response time dramatically	
+환영 메시지는 모두 한 묶음으로 다시 출력되지만, 전체 대기 시간을 짧아진다. 그 이유는 다음과 같다.
+* 스레드 풀이 사이즈는 이제 ```2```가 아니라 ```3```이다. 즉, 세 가지 작업을 모두 한 번에 ```RUNNABLE```상태로 전환할 수 있다.
+* 그런 다음 이들은 **BLOCKED** 상태로 거의 동시에 진입하는데 이는 전체 대기 시간이 ```3000```밀리초보다 훨씬 짧다는 것을 의미한다. 이는 더 큰 스레드 풀의 장점이다!
+
+#### 요약
+
+이번 단계에서는
+
+* ```Callable``` 스레드 풀의 반환 값을 한 번에 수집할  수 있다는 것을 알게 되었다.
+* 이는 ```invokeAll()```메소드를 사용하여 실행되며, 이러한 결과를 저장할 ```Future```객체의 ```List```를 지정한다.
+* 이러한 시나리오의 스레드 풀 크기를 변경하면 응답 시간도 크게 변경될 수 있다.
+
 ### Step 12:  Executor - Wait Only For The Fastest Task	
-Let's look at how you can wait for any of the three tasks to complete.	
+다음 세 가지 작업 중 하나가 완료될 때까지 기다릴 수 있는 방법에 대해 알아보자.
+
 ##### Snippet-01 : Wait only for fastest	
 ```java	
 	public class MultipleAnyCallableRunner {	
@@ -17101,39 +17169,53 @@ Let's look at how you can wait for any of the three tasks to complete.
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _Hello Ranga_	
-**_Console Output_**	
-_Hello in28Minutes_	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
+_Hello in28Minutes_
+
+**_콘솔창 출력_**	
 _Hello Ranga_	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _Hello Adam_	
+
 ##### Snippet-01 Explained	
-The method ```invokeAny()``` returns when the first of the sub-tasks is done. Also, the returned value is not a ```Future``` object. It's the return value of the ```call()``` method.	
-We can see that over different executions, the order of console output changes. This is because: 	
-* All three tasks are created together, in a thread pool of size ```3```. 	
-* Therefore, these are independent threads, going into their **RUNNABLE** states almost at once. 	
-#### Summary	
-In this step, we:	
-* Learned that ```ExecutorService``` has a way to return the first result, from a poll of ```Callable``` threads	
-## Introduction To Exception handling	
-Recommended Exception handling Videos	
+첫 번째 하위 작업이 끝나면 ```invokeAny()```라는 메소드가 반환된다. 또한 반환된 값은 ```Future```의 객체가 아니다. 그것은 ```call()```메소드의 반환 값이다.
+여러 번의 실행에서 콘솔 출력의 순서가 변경되는 것을 볼 수 있다. 그 이유는 다음과 같다.
+* 세 가지 작업 모두 크기가 ```3```인 스레드 풀로 같이 만들어졌다.
+* 따라서 이 스레드들은 **RUNNABLE**상태로 거의 동시에 이동하는 독립적인 스레드이다.
+
+#### 요약	
+
+이번 단계에서는
+* ```ExecutorService```가 ```Callable``` 스레드에서 첫 번째 결과를 반환할 수 있는 방법이 있다는 것을 알게되었따.
+
+## 예외 처리의 이해
+
+예외 처리 관련 추천 동영상
 - https://www.youtube.com/watch?v=34ttwuxHtAE	
-There are two kinds of errors a programmer faces:	
-* **Compile-time** Errors: Flagged by the compiler when it detects syntax or semantic errors.	
-* **Run-time** Errors: Detected by the run-time environment when executing code	
-Example runtime errors include:	
-* Running out of *heap-memory* for objects, or space for the method *call stack*	
-* Dividing a number by ```0```	
-* Trying to *read* from an *unopened* file	
-Exceptions are *unexpected* conditions; their occurrence does not make a programmer bad (or good, for that matter). It is a programmer's responsibility to be *aware* of potential exceptional conditions in her program, and use a mechanism to *handle* them effectively.	
-Handling an exception generally involves two important aims:	
-1. Provide a useful message to the end user.	
-2. Log enough information to help a programmer identify root cause.	
-### Step 01: Introducing Exceptions	
-In the previous step, we gave you a few instances of exceptions, such as your program running out of memory, or your code trying to divide a number by ```0```. 	
-Want to see a live example of the Java run-time throwing an exception? The next example will satisfy your thirst.	
+
+프로그래머가 직면하는 오류는 두 가지 이다.
+* **컴파일 타임** 오류: 구문 또는 의미 오류를 탐지할 때 컴파일러가 플래그를 지정함.
+* **런타임** 오류: 코드를 실행할 때 런타임 환경에서 오류가 감지됨.
+
+런타임 오류의 예는 다음과 같다.
+* 객체에 대한 *힙 메모리*가 부족하거나, *호출 스택* 메소드에 대한 공간 부족 
+* 숫자를 ```0```으로 나눔
+* *열리지 않은* 파일 *읽기* 시도
+예외는 *예상하지 않은* 상황이며, 이러한 상황이 발생하더라도 프로그래머에게 나쁜(혹은 좋은) 것은 아니다. 프로그램의 잠재적 예외 조건을 *인식*하고, 이를 효과적으로 *처리*하기 위한 메커니즘을 사용하는 것은 프로그래머의 책임이다.
+
+예외 처리는 일반적으로 두 가지 중요한 목적을 가진다.
+1. 최종 사용자에게 유용한 메시지를 제공한다.
+2. 프로그래머가 근본 원인을 식별하는 데 도움이 되는 충분한 정보를 기록한다.
+	
+### Step 01: 예외 소개
+이전 단계에서 프로그램 메모리가 부족하거나 숫자를 ```0```로 나누려고 하는 코드와 같이 몇 가지 예외 사례를 제시했다.
+Java 런타임에 예외를 적용하는 실제 예를 보고 싶지는 않은가? 
+
 ##### Snippet-1 : Exception Condition	
 **_ExceptionHandlingRunner.java_**	
 ```java	
@@ -17151,16 +17233,20 @@ Want to see a live example of the Java run-time throwing an exception? The next 
 		}			
 	}		
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 **_java.lang.NullPointerException_**	
 _Exception in thread "main" java.lang.NullPointerException_	
 _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.callMethod (ExceptionHandlingRunner.java:8)_	
 _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.main (ExceptionHandlingRunner.java:4)_	
+
 ##### Snippet-01 Explained	
-A ```java.lang.NullPointerException``` is **thrown** by the Java run-time when we called ```length()``` on the `null` reference.	
-If an exception is not handled in the entire call chain, including `main`, the exception is thrown out and the program terminates. ```System.out.println()``` statements after the exception are never executed. 	
-The runtime prints the **call stack trace** onto the console. 	
-For instance, consider this simple ```class``` ```Test```:	
+```java.lang.NullPointerException```은 자바 런타임에 `null` 참조로 ```length()```를 호출할 때 *던져진다*.
+메인 등 전체 콜 체인에서 예외를 처리하지 않으면 해당 예외는 던져지고 프로그램은 종료된다. ```System.out.println()```구문은 예외 이후 절대 실행되지 않는다
+런타임에서 **호출 스택 추적**을 콘솔에 출력한다.
+
+예를 들어, 간단한```Test``` ```클래스```를 생각해보자.
+
 ```java	
 	public class Test {	
 		public static void main(String[] args) {	
@@ -17178,22 +17264,28 @@ For instance, consider this simple ```class``` ```Test```:
 		}	
 	}	
 ``` 	
-However, the code name.length() used in ```callThree()``` caused a ```NullPointerException``` to be thrown. However, this is  not handled, and the console coughs up the following display:	
-			
+
+그러나, ```callThree()```에 사용된 코드 name.length()는 ```NullPointerException```을 유발했다. 그러나 이 작업은 처리되지 않으며, 콘솔이 다음과 같은 디스플레이를 가져온다.
 _Exception in thread "main" java.lang.NullPointerException_	
 _at Test.callThree(Test.java:13)_	
 _at Test.callTwo(Test.java:9)_	
 _at Test.callOne(Test.java:6)_	
 _at Test.main(Test.java:3)_	
-This is nothing but a call trace of the stack, *frozen in time*.	
-#### Summary	
-In this step, we:	
-* Saw a live example of an exception being thrown	
-* Understood how a call trace on the stack appears when a exception occurs	
-* Reinforced this understanding with another example	
-### Step 02: Handling An Exception	
-In Java, exception handling is achieved through a **```try```-```catch```** *block*. 	
-##### Snippet-01 : Handling An Exception	
+
+이것은 *시간 내에 동결*된 스택의 호출 추적에 불과하다.
+
+
+#### 요약
+
+이번 단계에서는
+* 예외가 발생하는 생생한 예를 보았다.
+* 예외 발생 시 스택의 호출 추적을 표시하는 방법을 이해했다.
+* 이 이해를 다른 예와 함께 보강했다.
+
+### Step 02: 예외 처리	
+자바에서는 예외 처리가 **```try```-```catch```** *블록*을 통해 이루어진다.
+
+##### Snippet-01 : Handling an Exception	
 **_ExceptionHandlingRunner.java_**	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17218,9 +17310,10 @@ In Java, exception handling is achieved through a **```try```-```catch```** *blo
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _method1() Done_	
 _main() Done_	
+
 ##### Snippet-01 Explained	
 We have handled an exception here with a ```try```-```catch``` block. Its syntax resembles this:	
 ```java	
@@ -17230,12 +17323,15 @@ We have handled an exception here with a ```try```-```catch``` block. Its syntax
 		//< exception-handling code block >	
 	}	
 ```	
-The exception (the ```NullPointerException```) still occurs after adding this block, but now it's actually **caught**. Although we did nothing with the caught exception, we did avoid a sudden end of the program.	
-The statements following  ```int len = str.length()``` in `method2` are not executed. 	
-However, all of ```method1()```'s code was run (with the ```"method1 Done"``` message getting printed). ```main()``` method also completed execution successfully.	
-The program thus terminated gracefully. ```method1()``` and ```main()``` are both unaware of the ```NullPointerException``` occurring within ```method2()```.	
-##### Snippet-02: Print Debug Information	
-Let's add `ex.printStackTrace();`.	
+
+예외 (```NullPointeException```)는 이 블록을 추가한 후에도 계속 발생하지만 지금은 실제로 **catch**되었다. 비록 우리가 예외를 잡아내기 위해 한 것은 없지만, 우리는 그 프로그램이 갑자기 끝나는 것을 피했다.
+`method2`의 ```int len = str.length()``` 뒤의 구문들은 실행되지 않는다.
+그러나 ```method1()```의 코드는 모두 실행되었다 (```"method1 Done```메시지가 출력되었다.) ```main()```메소드 또한 성공적으로 실행을 마쳤다.
+그래서 그 프로그램은 우아하게 종료되었따. ```method1()```과 ```main()```은 둘 다 ```mathod2()```에서 발생하는 ```NullPointerException```에 대해 모르고 있다.
+
+##### Snippet-02: Print Debug Information
+ `ex.printStackTrace();`를 추가해보자.
+ 
 **_ExceptionHandlingRunner.java_**	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17259,7 +17355,7 @@ Let's add `ex.printStackTrace();`.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 **_java.lang.NullPointerException_**	
 _Exception in thread "main" java.lang.NullPointerException_	
 _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method2 (ExceptionHandlingRunner.java:14)_	
@@ -17267,22 +17363,30 @@ _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method1 (Exception
 _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.main (ExceptionHandlingRunner.java:4)_	
 _method1() Done_	
 _main() Done_	
-```printStackTrace()``` is provided by the ```Exception``` ```class```, which every exception inherits from. This method prints the frozen call trace of the program when the exception occurred, but without terminating the program. The code next continues to run.	
-The stack trace provides useful information to you, the programmer,to debug the exception scenario.	
-#### Summary	
-In this step, we:	
-* Were introduced to Java's basic mechanism to handle exceptions, the ```try```-```catch``` block	
-* Saw how a program runs and ends gracefully, when an exception is handled	
-* Observed how the ```printStackTrace``` method gives debug information to the programmer	
-### Step 03: The ```Exception``` Hierarchy 	
-The code in the ```try```-```catch``` block above does not work by black magic. From the call trace, it's clear that this program encounters a ```NullPointerException``` in ```method1()```. What's surprising, is that it was caught by a ```catch``` clause meant for an ```Exception```! The reason this worked is because ```NullPointerException``` **is-a** ```Exception```.	
-You heard right! Java has a hierarchy of exception types, rooted at ```class``` ```Exception```. For instance, 	
-* ```NullPointerException``` **is-a** ```RuntimeException```, and 	
-* ```RuntimeException``` **is-a** ```Exception```. 	
-* So effectively, ```NullPointerException``` **is-a** ```Exception```!	
-Different branches of this inheritance-tree actually denote different exception categories. We'll dwell on this topic a little later.  	
+
+```printStackTrace()```는 모든 예외가 상속하는 ```Exception``` ```클래스```가 제공한다. 이 메소드는 예외 발생 시 프로그램의 중지된 호출 추적을 출력하지만 프로그램을 종료하지는 않습니다. 그 다음 코드는 계속 실행된다.
+스택 추적은 예외 시나리오를 디버깅하는 데 유용한 정보를 프로그래머에게 제공한다.
+
+#### 요약	
+
+이번 단계에서는
+* 자바의 예외를 처리하는 기본 메커니즘인 ```try```-```catch``` 블록을 도입했다.
+* 예외를 처리할 때 프로그램이 어떻게 실행되고 정상적으로 종료되는지 확인했다.
+
+### Step 03: ```Exception``` 계층 구조 	
+
+위의 ```try```-``catch``` 블록의 코드는 마술처럼 작동하지 않는다. 호출 내역을 보면 이 프로그램이 ```method1()```에서 ```NullPointerException```을 만난다는 것은 분명하다.
+놀라운 것은 그것이 ```Exception```을 의미하는 ```catch```절에 잡혔다는 점이다. 이것이 작동하는 이유는 ```NullPointerException```이 ```Exception```이기 때문이다. 
+자바의 경우 ```Exception``` ```클래스```에 루트를 둔 예외 유형 계층구조가 있다. 예를 들면,
+* ```NullPointerException```은 ```RuntimeException```이다.
+* ```RuntimeException```은 ```Exception```이다.
+* 그래서 효과적으로, ```NullPointerException```은 ```Exception```이다!
+
+이 상속 트리의 서로 다른 분기는 실제로 다른 예외 범주를 나타낸다. 잠시 후에 이 주제에 대해 자세히 알아보도록 하자.
+
 ##### Snippet-01 : Catching NullPointerException	
-Let's add an additional catch for `NullPointerException` in method2.	
+method2에 추가적인 `NullPointerCatch` 캐치를 추가해보자.
+
 **_ExceptionHandlingRunner.java_**	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17309,14 +17413,16 @@ Let's add an additional catch for `NullPointerException` in method2.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 **_NullPointerException_**	
 _method1() Done_	
 _main() Done_	
+
 ##### Snippet-01 Explained	
-_Among all the ```catch``` clauses following the ```try```, **one and only one** of them, may get executed. The **first** ```catch``` clause to **match**, **in serial order** after the ```try```, always gets executed. If **none** match, the exception is **not handled**._	
-We placed an additional ```catch``` block within ```method2()```, to handle ```NullPointerException``` . Typically, the most specific exception class is matched. Hence the catch block for `NullPointerException` matches.	
-You need to order the ```catch``` blocks after a ```try```, from more-specific to less-specific matches.   	
+_```try```에 이은 ```catch```구문들 중 **단 한 개만이** 실행될 수도 있다. ```try```후 (일련의 순서로)**일치하는** **first** ```catch```절은 항상 실행된다. **아무것도** 일치하지 않는 경우 예외는 **처리되지 않는다**._ 
+우리는 ```NullPointerException```을 다루기 위해 ```method2()```안에 ```catch```블록을 추가했다. 일반적으로 가장 구체적인 예외 클래스는 일치한다. 따라서 `NullPointerException`의 캐치 블록 예외가 일치한다.
+보다 구체적인 일치부터 덜 구체적인 일치까지 ```try```를 한 후에 ```catch```블록을 두어야 한다.
+
 ##### Snippet-02 : Catching another exception	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17342,7 +17448,7 @@ You need to order the ```catch``` blocks after a ```try```, from more-specific t
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 **_ArrayIndexOutOfBoundsException : 3_**	
 _Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException_	
 _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method2 (ExceptionHandlingRunner.java:14)_	
@@ -17350,19 +17456,24 @@ _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.method1 (Exception
 _at com.in28minutes.exceptionhandling.ExceptionHandlingRunner.main (ExceptionHandlingRunner.java:4)_	
 _method1() Done_	
 _main() Done_	
+
 ##### Snippet-02 Explained	
-```ArrayIndexOutOfBoundsException``` **is-a** ```IndexOutOfBoundsException```, which **is-a** ```RuntimeException```, which in turn **is-a** ```Exception```.  	
-```ArrayIndexOutOfBoundsException``` is not a sub class of ```NullPointerException```. Hence, it does not match with the first catch block. ```ArrayIndexOutOfBoundsException``` is a sub class of  ```Exception```. Hence, that ```catch``` block matched, and the statement ```ex.printStackTrace();``` within it ran.	
-If we omit the handler for ```Exception```, the ```ArrayIndexOutOfBoundsException``` is not caught by this ```try```-```catch``` block. Since it is not handled in ```method1()```, or even later in ```main()```, our program would have to stop suddenly. 	
- 	
-#### Summary	
-In this step, we:	
-* Learned that there is an exception hierarchy in Java, rooted at ```Exception```	
-* Looked at an example that could cause multiple exceptions to occur	
-* Observed how a handler for ```Exception``` could match any exception	
+```ArrayIndexOutOfBoundsException``` 은 ** ```IndexOutOfBoundsException```이고, ** ```IndexOutOfBoundsException```는 ```RuntimeException```이기 때문에 최종적으로```Exception```이다.	
+```ArrayIndexOutOfBoundsException``` 눈 ```NullPointerException```의 하위 클래스가 아니다. 따라서 이는 첫 번째 캐치 블록과 일치하지 않는다.
+```ArrayIndexOutOfBoundsException``` is a sub class of  ```Exception```. Hence, that ```catch``` block matched, and the statement ```ex.printStackTrace();``` within it ran.	```ArrayIndexOutOfBoundsException```은 ```Exception```의 하위 클래스이다. 따라서 ```catch```블록은 매치되고, ``ex.printStackTrace();```는 실행된다.
+```Exception```의 핸들러를 생략하면 ```ArrayIndexOutOfBoundsException```은 이 ```try```-```catch```블록에 잡히지 않는다. ```method1()```에서 다루지 못하거나, 심지어 ```main()```에서 다루지 못하기 때문에 우리의 프로그램은 갑자기 중단되어야 할 것이다.
+
+#### 요약	
+
+이번 단계에서는
+* 자바에는 ```Exception```에 뿌리를 둔 예외 계층구조가 있다는 것을 알게 되었다.
+* 여러 예외가 발생할 수 있는 예제를 살펴보았다.
+* ```Exception```의 핸들러가 어떤 예외와 어떻게 일치하는지 관찰했다.
+
 - - - 	
-### Step 04:  The Need For ```finally```	
-When an exception occurs, the programmer's world can turn upside-down in a matter of moments. If not handled, the program terminates all of a sudden, with no light at the end of the tunnel.	
+### Step 04:  ```finally```의 필요성	
+예외가 발생하면 프로그래머의 세계는 순식간에 뒤집힐 수 있다. 처리되지 않으면 터널 끝에 불이 들어오지 않고 프로그램이 갑자기 종료된다.
+
 ##### Snippet-01 : Unreleased Resources	
 **_FinallyRunner.java_**	
 ```java	
@@ -17378,14 +17489,16 @@ When an exception occurs, the programmer's world can turn upside-down in a matte
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException_	
-_at com.in28minutes.exceptionhandling.FinallyRunner.main (FinallyRunner.java:8)_	
+_at com.in28minutes.exceptionhandling.FinallyRunner.main (FinallyRunner.java:8)_
+
 ##### Snippet-01 Explained	
-This example makes use of `Scanner` object to read from console. Ideally a `Scanner` object should be closed using ```scanner.close();```. 	
-However, in our example, it is not called because a line before it threw an exception. (```int num = numbers[5];``` tries to access the 5th element of a 4-element array). 	
-What this means, is a system resource that has been acquired, is never released. 	
-It's important to ensure that any acquired resource is always released; whether on normal or abrupt termination. Let's see how you do this while handling an exception.	
+이 예에서는 `Scanner` 객체를 사용하여 콘솔에서부터 읽어온다. 이상적으로 `Scanner`객체는 ```scanner.close();```를 사용하여 닫아야한다.
+그러나, 이 예에서는 예외를 만들기 전의 행이 있기 때문에 이 값을 호출하지 않는다.(```int num = numbers[5];```는 4차원 배열의 다섯 번째 요소에 접근하려 한다)
+즉, 획득된 시스템 리소스는 절대 놓아주지 않는다.
+수집된 리소스는 정상 종료든, 갑작스러운 종료든 항상 놓아주도록 하는 것이 중요하다. 예외를 처리하는 동안 이 작업을 수행하는 방법을 알아보자.
+
 ##### Snippet-02 : Releasing Resources	
 **_FinallyRunner.java_**	
 ```java	
@@ -17411,15 +17524,17 @@ It's important to ensure that any acquired resource is always released; whether 
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 **_ArrayIndexOutOfBoundsException_**	
 _Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException_	
 _at com.in28minutes.exceptionhandling.FinallyRunner.main (FinallyRunner.java:10)_	
 _Before scanner close_	
 _Before exiting main_	
+
 ##### Snippet-02 Explained	
-Code in ```finally``` is almost always executed - even when there are exceptions. 	
-We added a null check on `scanner` since ```scanner = new Scanner(System.in);``` could also result in an exception.	
+```finally```의 코드는 예외가 있더라도 거의 항상 실행된다.
+```scanner =new Scanner(System.in);``` 또한 예외로 귀결될 수 있기 때문에 우리는 `scanner`에 null 검사를 추가했다.
+.
 ```java	
 	} finally {	
 		if(scanner != null) {	
@@ -17428,15 +17543,18 @@ We added a null check on `scanner` since ```scanner = new Scanner(System.in);```
 		}	
 	}	
 ```	
-#### Summary	
-In this step, we:	
-* Observed how exceptional conditions could result in resource leaks	
-* Learned about the ```finally``` clause in a ```try```-```catch``` block	
+#### 요약	
+
+이번 단계에서는
+* 예외적인 조건으로 인해 리소스 누출이 어떻게 발생하는지 관찰했다.
+* ```try``` - ```catch```블록의 ```finally```절에 대해 알게 되었다.
+
 ### Step 05: Programming Puzzles -  PP-01	
 #### Puzzle-01	
-* Would the ```finally``` clause be executed if	
-	* The statement ```//str = "Hello";``` remains as-is	
-	* The statement ```//str = "Hello";``` has its comments removed? 	
+* ```finally```절은 다음과 같은 경우에 실행될 것인가?
+	* ```///str = "Hello";``` 구문이 그대로 유지된다
+	* ```///str = "Hello";``` 구문이 삭제되었는가?
+
 ```java	
  	
 	public static void method3() {	
@@ -17455,13 +17573,14 @@ In this step, we:
 ```	
 * **_Answer_**	
 	* Yes	
-	* Yes	
+	* Yes
+	
 #### Puzzle-02	
-* When will code in a ```finally``` clause not get executed?	
-* **_Answer_**	
-	* In case of statements within the same ```finally``` clause, preceding this code, throwing an exception 	
-	* In case of a JVM crash. This can be simulated in some scenarios by calling ```System.exit``` with an appropriate ```int``` argument, within an appropriate ```catch``` clause of the same ```try```-```catch```-```finally``` clause.	
- 	
+* ```finally``` 절의 코드는 언제 실행되지 않는가?
+* **_Answer_**
+	* 해당 코드에 앞서 동일한 ```finally```절 내에서의 구문은 예외로 한다.
+	* JVM이 고장난 경우. 이는 ```System.exit```으로 호출한 일부 시나리오에서 시뮬레이션할 수 있다. 적절한 ```int```인자를 가지고, 같은 ```try```-```catch```구문의 적절한 ```catch```절에 있다.
+	
 #### Puzzle-03	
 * Will the following code, a ```try```-```finally``` without a ```catch```?	
 ```java	
@@ -17479,8 +17598,10 @@ In this step, we:
 	}	
 ```	
 * **_Answer_** : Yes	
+
 #### Puzzle-04	
-* Will the following code, a ```try``` without a ```catch``` or a ```finally```?	
+* 다음 코드는 ```catch```없는 ```try```일까, 아니면 ```finally```일까?
+
 ```java	
 	public static void method5() {	
 		Connection connection = new Connection();	
@@ -17494,8 +17615,10 @@ In this step, we:
 	}	
 ```	
 * **_Answer_** : No	
+
 ### Step 06: Handling Exceptions: Do We Have A Choice?	
-Sometimes, in Java you are forced to handle exceptions.	
+때때로 Java에서는 예외를 처리하도록 강제한다.
+
 ##### Snippet-02: Checked Exceptions - v1	
 **_CheckedExceptionRunner.java_**	
 ```java	
@@ -17508,18 +17631,20 @@ Sometimes, in Java you are forced to handle exceptions.
 	}	
 ```	
 ##### Snippet-02 Explained 	
-**_This program will not compile!_**	
-The reason we get flagged by a compiler error, lies in the signature of the ```sleep()``` method. Here is its definition within the ```Thread``` ```class```:	
+**_이 프로그램은 컴파일되지 않는다!_**	
+우리가 컴파일러 오류로 플래그를 얻은 이유는 ```sleep()```메소드의 표기에 있다. 이것은 ```Thread``` ```클래스```안에 그 정의가 있다.
+
 ```java	
 	public static native void sleep(long millis) throws InterruptedException {	
 		//...	
 	}	
 ```	
-This declaration is a bit different from what you normally expect for a method, isn't it!  It contains a **```throws``` specification**. 	
-When a method `throws` an Exception, the calling method should:	
-* Handle it using ```try```-```catch``` block	
-* Or declare `throws` in its signature	
-Let's use ```try```-```catch``` block to start off.	
+이 선언은 여러분이 보통 어떤 메소드에 기대하는 것과는 좀 다르다. 그렇지 않은가? 여기에는 **```throws``` **를 포함한다.
+메소드가 예외를 `던지는` 경우 호출하는 메소드는 다음을 수행해야 한다.
+* ```try``` -```catch``` 블록으로 처리
+* 혹은 `throws`를 선언
+```try```-```catch``` 블록을 이용해 시작해보자.
+
 ##### Snippet-03: Checked Exceptions - v2	
 **_CheckedExceptionRunner.java_**	
 ```java	
@@ -17535,9 +17660,12 @@ Let's use ```try```-```catch``` block to start off.
 	}	
 ```	
 ##### Snippet-03 Explained	
-* ```main()```, which is the caller of ```sleep()```, chooses the option of handling ```InterruptedException``` with a ```try```-```catch``` block.	
-#### The ```throws``` keyword	
+* ```sleep()```를 호출하는 ```main()```은  ```try```-```catch```블록으로 ```InterrutedException```을 다루는 것을 선택한다.
+
+#### ```throws``` 키워드
+```throws```는 어떤 메소드가 예외를 줄 수 있다고 선언할 때 사용된다. 여기에는 ```throws``` 키워드가 포함되며 이 다음에 예외 유형 목록이 나온다.
 ```throws``` is used to declare that a method might throw exceptions. This involves a ```throws``` keyword, followed by a list of exception types. 	
+
 ##### Snippet-04 : Method with risky code #1	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17556,16 +17684,18 @@ Let's use ```try```-```catch``` block to start off.
 	}	
 ```	
 ##### Snippet-04 Explained	
-Here, we have removed the ```try```-```catch``` block within ```riskyMethod()```, because we want to follow another way of managing the exception. As an alternative, we added a ```throws``` specification to ```riskyMethod()``` to make the code compile. 	
-We made `main` method handle the exception.	
-#### Summary	
-In this step, we:	
-* Discovered that certain exceptions in Java do not force you to handle them	
-* Learned that all the rest must be managed/handled	
-* Observed that there are two ways to manage those "Checked" exceptions:	
-	* Handling with a ```try```-```catch``` block	
-	* Using a ```throws``` specification 	
-### Step 08: The Java Exception Hierarchy	
+여기서 ```riskyMethod()``` 내의 ```try```-```catch```블록을 제거한 것은 예외를 관리하는 방법을 따르고 싶기 때문이다. 대안으로 코드를 컴파일하기 위해 ```riskyMethod()```에 ```throws```를 추가했다.
+우리는 예외를 다루는 `main`메소드를 만들어 보았다.
+
+#### 요약
+이번 단계에서는
+* Java에서 특정 예외는 강제로 처리하지 않는다는 것을 발견했다.
+* 나머지는 모두 관리/처리해야 한다는 것을 알게 되었다.
+* 이러한 "Checked" 예외를 관리하는 방법에는 두 가지가 있다.
+	* ```try```-```catch``` 블록으로 처리
+	* ```throws``` 사용
+	
+### Step 08: 자바 예외 계층구조	
 Right at the root (top, we mean), the Java exception hierarchy looks like this:	
 ```java	
 	class Error extends Throwable{}	
@@ -17575,26 +17705,33 @@ Right at the root (top, we mean), the Java exception hierarchy looks like this:
 	class NullPointerException extends RuntimeException{}	
 	...	
 ```	
-Once an ```Error``` occurs, there is nothing a programmer could do. Examples include: 	
-*  The JVM running out of heap memory space	
-An `Exception` can be handled. There are two types of Exceptions.	
-* ```RuntimeException``` and its sub-classes. These come under the category of **unchecked exceptions**. Another example we've seen is ```NullPointerException```, which inherits from ```RuntimeException```.	
-* All other sub-classes of ```Exception```, excluding the sub-tree rooted at ```RuntimeException```, are called **checked exceptions**. An instance we've encountered is ```InterruptedException```.	
-If a method throws a **checked exception** is called, then either:	
-* The method call must be enclosed in a ```try```-```catch``` block for proper handling, or 	
-* The caller must throw this exception out, to its own caller. Its signature must also be enhanced using a ```throws``` specification. 	
-If an **unchecked exception** is involved, then:	
-*  You have the options of handling with  ```try```-```catch``` block.	
-*  It is not mandatory to handle it.	
-A **checked** exception **must** be handled, whereas as **unchecked** exception **may or may not** be handled.	
-#### Summary	
-In this step, we:	
-* Discovered that within the Java exception hierarchy, there are two categories:	
-	* Checked exceptions	
-	* Unchecked exceptions	
-* There are different strategies to manage these two categories	
+한번 ```Error```가 발생하면, 프로그래머가 할 수 있는 일은 아무것도 없다. 그 예는 다음과 같다.
+* 힙 메모리 공간이 부족한 JVM
+
+`예외`는 처리될 수 있따. 예외에는 두 가지 유형이 있다.
+* ```RuntimeException``과 그 하위 클래스. 이는 **Unchecked Exception** 범주에 속한다. 우리가 본 또 다른 예는 ```RuntimeExcepton```을 상속받는 ```NullPointerException```이다.
+* ```RuntimeException```에 뿌리를 둔 서브 트리를 제외한 다른 모든 ```Exception```의 서브 클래스를 **checked exception**이라고 한다. 우리가 마주친 예는 ```InterruptedException```이다.
+메소드에서 **checked exception**이 호출되는 경우 다음 중 하나를 수행한다.
+* 메소드 호출은 적절한 처리를 위해 ```try```-```catch```블록으로 묶어야 한다.
+* caller는 이 예외를 자신의 caller에게 알려야 한다. ```throws```를 사용해 표기를 강화해야 한다.
+
+**unchecked exception**이 포함되는 경우
+* ```try```-```catch``` 블록으로 처리할 수 있는 옵션이 있다.
+* 처리할 의무는 없다.
+
+**checked exception**은 반드시 처리해야 하는 반면, **unchecked exception**은 처리되지 **않을 수 있다**.
+
+#### 요약
+
+이번 단계에서는
+* Java 예외 계층에는 두 가지 범주가 있다는 것을 발견했다. 이는 다음과 같다
+	* Checked exception
+	* Unchecked exception
+이 두 가지를 관리하기 위한 다양한 전략이 있다.
+
 ### Step 09: Throwing an Exception	
-So far, we have seen how to handle an exception, that is thrown by a built-in Java method. Now, let's explore how we can alert a user about exceptional conditions in our own code, by **throwing** exceptions. 	
+지금까지 우리는 자바에서 기본 제공하는 메소드에서 발생하는 예외를 처리하는 방법을 살펴보았다. 이제 **예외를 발생시켜** 사용자에게 자체 코드의 예외 상황을 알리는 방법에 대해 알아보자.
+
 ##### Snippet-01 : Throwing An Exception	
 **_ThrowingExceptionRunner.java_**	
 ```java	
@@ -17627,14 +17764,17 @@ So far, we have seen how to handle an exception, that is thrown by a built-in Ja
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _Exception in thread "main" java.lang.RuntimeException:Currencies Don't Match_	
 _at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExceptionRunner.java:26)_	
+
 ##### Snippet-01 Explained	
-Since adding ```10 USD``` and ```20 EUR``` does not make sense in the real world, it's important to tell the user that ```add()``` won't work for different currencies. The most direct way is to throw an exception, which the code ```throw new RuntimeException("Currencies Don't Match");``` does. 	
-This thrown exception object can be handled inside ```main()```. By calling ```printStackTrace()``` on the caught exception reference,  you get debug information like before.	
+```10 USD```와 ```20 EUR```을 더한다는 것은 현실에서는 말이 되지 앟기 때문에 사용자에게 ```add()```는 서로 다른 통화에는 동작하지 않을 것이라고 말하는 것이 중요하다. 가장 직접적인 방법은 ```throw new RuntimeException("Currencies Don't Match");```코드로 예외를 두는 것이다.
+이러한 예외 객체는 ```main()```안에서 처리될 수 있다. 찾아낸 예외 참조에서 ```printStackTrace()```를 호출하면 이전과 같은 디버깅 정보를 얻을 수 있다.
+
 ##### Snippet-02 : Throwing a Checked Exception	
-`Exception` is a Checked Exception. If a method throws an instance of `Exception` class, it needs to declare it -  `public void add(Amount that) throws Exception {`.	
+`예외`는 Checked Exception이다. 어떤 메소드가 `Exception` 클래스의 인스턴스를 던지면 `public void add(Amount that) throws Exception` 선언이 필요하다.
+
 **_ThrowingExceptionRunner.java_**	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17671,20 +17811,26 @@ This thrown exception object can be handled inside ```main()```. By calling ```p
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 **_java.lang.RuntimeException:Currencies Don't Match : USD & EUR_**	
 _Exception in thread "main" java.lang.RuntimeException:Currencies Don't Match_	
 _at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExceptionRunner.java:26)_	
-```Exception``` is not a ```RuntimeException``` or one of its sub-classes, it is a checked exception. So, it needs to be declared when it is thrown - `public void add(Amount that) throws Exception`. 	
-#### Summary	
-In this step, we:	
-* Learned that it is possible to throw an exception from code inside any method we write	
-* When a method throws checked exception, it should declare it.	
+
+```Exception```은 ```RuntimeException```이나 그의 하위 클래스가 아니고 checked exception이다. 따라서 , 이는 던져질 때 `public void add(Amount that) throws Exception` 선언이 필요하다.	
+_ 
+#### 요약
+
+이번 단계에서는
+* 여러분이 작성하는 모든 메소드의 코드에서 예외를 적용할 수 있다는 것을 알게 되었다.
+* 메소드에서 checked exception이 발생할 때 선언해야 한다.
+
 ### Step 10: Throwing A Custom Exception	
-It is also possible for you to throw a custom exception. You can do this by defining your own exception ```class```, only that it must inherit from one of the built-in exception classes. Note that:	
-* If you sub-class a checked exception, your exception also becomes checked.	
-* If you sub-class an unchecked exception, your exception would be unchecked. 	
-##### Snippet-01 : Throw a custom exception	
+또한 사용자 정의 예외를 적용할 수도 있따. 기본 제공되는 예외 클래스 중 하나에서 상속해야 하는 ```클래스```만 정의하면 이러한 작업을 수행할 수 있따.
+참고
+* Checked exception을 서브 클래스로 두면, 상위 예외도 checked 된다.
+* Unchecked exception을 서브 클래스로 두면, 상위 예외는 unchecked 된다.
+
+##### Snippet-01 : 사용자 정의 예외	
 **_ThrowingExceptionRunner.java_**	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17725,19 +17871,22 @@ It is also possible for you to throw a custom exception. You can do this by defi
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 **_com.in28minutes.exceptionhandling.CurrenciesDoNotMatchException : Currencies Don't Match : USD & EUR_**	
 _Exception in thread "main" com.in28minutes.exceptionhandling.CurrenciesDoNotMatchException : Currencies Don't Match : USD & EUR_	
 _at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExceptionRunner.java:26)_	
-##### Snippet-01 Explained	
-The class ```CurrenciesDoNotMatchException``` clearly is a checked exception. Hence, rules that apply for throwing and handling checked applications, apply to it as well.	
-If instead, ```CurrenciesDoNotMatchException``` were to sub-class ```RuntimeException```, it would be an unchecked exception. Adding the ```throws``` specification to the ```add()``` definition would not be needed. Also, no method in the call sequence of ```add()``` is required to handle it.	
-#### Summary	
-In this step, we:	
-* Discovered that Java allows you to define your own custom exception classes	
-* Whether a custom exception is checked or unchecked, depends on which exception it sub-classes.	
-* Saw an example of how to raise and handle a custom exception	
-### Step 11: Introducing ```try```-With-Resources 	
+
+##### Snippet-01 Explained
+```CurrenciesDoNotMatchException``` 클래스는 분명히 checked exception이다. 따라서 checked 응용 프로그램 다루기에 적용되는 규칙도 적용된다.
+그 대신 ```CurrenciesDoNotException```이 ```RuntimeException```의 하위 클래스인 경우, unchecked exception이 될 것이다. ```throws```표기를 ```add()``` 정의에 추가할 필요는 없을 것이다. 또한 ```add()```의 호출 순서에서 이를 처리할 메소드가 필요 없다.
+
+#### 요약
+이번 단계에서는
+* Java에서는 사용자  예외 클래스를 정의할 수 있다.
+* 사용자 정의 예외의 checked나 unchecked는 해당 예외의 하위 클래스의 예외에 따라 달라진다.
+* 사용자 정의 예외를 생성하고 처리하는 방법을 보았다.
+
+### Step 11:  ```try``` 소개 -With-Resources 	
 ```try```-with-resources makes managing resource in a ```try```-```catch```-```finally``` block. Let's look at an example.	
 ##### Snippet-01: try-with-resources	
 ```java	
