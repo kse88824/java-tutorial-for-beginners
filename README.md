@@ -1,5 +1,7 @@
 # Java Tutorial For Beginners
  
+ 본 저장소는 [java-tutorials-for-beginners](https://github.com/in28minutes/java-tutorial-for-beginners)을 한글로 번역합니다.
+ 
 **"Learning Java In 150 Steps"** 책에 오신것을 환영합니다.
 
 저는 **Ranga Karanam** 이고, 20년 이상의 프로그래밍 경력을 가지고 있습니다.
