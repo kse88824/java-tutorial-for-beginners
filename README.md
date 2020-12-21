@@ -30,7 +30,7 @@
 * [Chapter 14 - 함수형 프로그래밍 소개](#함수형-프로그래밍-소개)
 * [Chapter 15 - 스레드와 동시 실행](#스레드와-동시-실행)
 * [Chapter 16 - 예외 처리의 이해](#예외-처리의-이해)
-* [Chapter 17 - 파일 입출력](#파일-입출력)
+* [Chapter 17 - 파일 다루기](#파일-다루기)
 * [Chapter 18 - 동시 실행 : 더 나아가기](#동시-실행--더-나아가기)
 
 ## 우리의 접근법
@@ -17886,8 +17886,8 @@ _at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExce
 * 사용자 정의 예외의 checked나 unchecked는 해당 예외의 하위 클래스의 예외에 따라 달라진다.
 * 사용자 정의 예외를 생성하고 처리하는 방법을 보았다.
 
-### Step 11:  ```try``` 소개 -With-Resources 	
-```try```-with-resources makes managing resource in a ```try```-```catch```-```finally``` block. Let's look at an example.	
+### Step 11:  ```try```-With-Resources 소개 	
+```try```-with-resouces는 자원 관리를 ```try```-```catch```-```finally``` 블록으로 만든다. 예를 들어 보자.
 ##### Snippet-01: try-with-resources	
 ```java	
 	package com.in28minutes.exceptionhandling;	
@@ -17903,22 +17903,25 @@ _at com.in28minutes.exceptionhandling.ThrowingExceptionRunner.main (ThrowingExce
 		}	
 	}	
 ```	
-##### Snippet-01 Explained	
-The ```try```-with-resources version was introduced in Java SE 7. It encloses the resource to be managed within parentheses, along with the ```try``` keyword. 	
-In this case, ```Scanner``` is compatible with such resource management, because it's defined to implement the ```Closeable``` ```interface```. This interface in turn, is a sub-class of the ```abstract class``` ```AutoCloseable```.	
+##### Snippet-01 Explained
+```Try``` with resources 버전은 JAVA SE 7에 도입되었다. 관리할 리소스를 괄호 안에 ```try```키워드와 함께 묶는다.
+이 경우, ```Scanner```은 ```Closeable``` ```인터페이스```를 구현하도록 정의되기 때문에 이러한 리소스 관리와 호환된다. 이 인터페이스는 ```추상 클래스```인 ```AutoCloseable```의 하위 클래스이다.
 ```Closeable extends AutoCloseable{};```	
 ```Scanner implements Closeable{};```	
- 	
-For ```try```-with-resources, a ```catch``` and/or a ```finally``` clause are not mandatory.	
-Also, the call to ```scanner.close``` is no longer required.	
-#### Summary	
-In this step, we:	
-* Discovered a veriant of the ```try```-```catch```-```finally``` block, called ```try```-with-resources	
-* Saw that it can be used to manage resource cleanly, provided the resource implements the ```AutoCloseable``` ```interface```.	
+ 
+```try```-with-resources를 위해서는, ```catch```나 ```finally```절이 의무적인 것은 아니다.
+또한 ```scanner.close```라는 호출도 더 이상 필요하지 않다.
+
+#### 요약	
+
+이번 단계에서는
+* ```try```-```catch```-```finally``` 블록, 즉 ```try```-with-resources를 발견했다.
+* 리소스가 ```AutoCloseable``` ```인터페이스```로 구현되다면 리소스를 깨끗하게 관리하는 데 사용될 수 있을 것으로 보았다.
+
 ### Step 12: Programming Puzzle Set PP_02 	
 #### Puzzle-01	
-* Does the following program handle the exception thrown?	
-```java	
+* 다음 프로그램에서 발생하는 예외를 처리하는가?
+
 	try {		
 			AmountAdder.addAmounts(new Amount("RUPEE", 5), new Amount("RUPEE", 5);	
 			String str = null;	
@@ -17928,8 +17931,10 @@ In this step, we:
 		}	
 ```	
 * **_Answer : No_**	
+
 #### Puzzle-01 Explained	
-The exception thrown is a ```NullPointerException```, whereas the one we are trying to catch is a ```CurrenciesDoNotMatchException```. 	
+예외는 ```NullPointerExcepton```이다. 반면 우리가 잡으려고 하는 것은 ```CurrenciesDoNotMatchException```이다.
+
 #### Puzzle-02	
 * Does the following code compile?	
 ```java	
@@ -17944,10 +17949,13 @@ The exception thrown is a ```NullPointerException```, whereas the one we are try
 		}	
 ```	
 **_Answer : No_**	
+
 #### Puzzle-02 explained	
-The order of ```catch``` clauses for exceptions needs to be from less specific to more specific.  ```CurrenciesDoNotMatchException``` is a sub-class of ```Exception```. Hence, error.	
+예외의 ```catch```절의 순서는 보다 구체적이지 않은 것에서 더 구체적일 필요가 있따. ```CurrenciesDoNotMatchException```은 ```Exception```의 하위 클래스이다. 따라서 오류다.
+
 #### Puzzle-03	
-* Does the following code compile?	
+* 다음 코드가 컴파일되는가? 
+
 ```java	
 	try {	
 	} catch (IOException | SQLException ex) {	
@@ -17955,17 +17963,21 @@ The order of ```catch``` clauses for exceptions needs to be from less specific t
 	}	
 ```	
 * **_Answer : Yes_**	
+
 #### Puzzle-03 Explained	
-This feature was added in Java SE 7.	
-## File Operations	
-We would be aware that any computer has a hard disk, on which information is stored. This information is stored in units called **files**. For ease of access, file are grouped together and organized into **directories**. The operating system has a sub-system called the **file-system**, which  has the responsibility of interfacing system and user programs, with files and directories on disk. 	
-The Java Runtime System also communicates with the native file-system, and makes use of its services to provide a file programming interface to Java programmers. 	
-In this section, we will explore a few basic ways in which programmers can interact with the native file-system, through the platform independent Java file API. 	
+이 기능은 Java SE 7에 추가되었다.
+
+## 파일 다루기	
+우리는 모든 컴퓨터에 정보가 저장되는 하드 디스크가 있다는 사실을 알고 있다. 이 정보는 **files**라는 단위로 저장된다. 쉽게 엑세스 할 수 있도록 파일들이 함께 그룹화되고, **디렉토리**로 구성된다. 운영 체제에는 **file-system**이라는 하위 시스템이 있으며, 이 하위 시스템은 디스크 상의 파일 및 디렉토리와, 시스템 및 사용자 프로그램을 연결하는 역할을 한다.
+Java Runtime System은 또한 네이티브 파일 시스템과 통신하며 서비스를 사용하여 Java 프로그래메어게 파일 프로그래밍 인터페이스를 제공한다.
+이 섹션에서는 플랫폼 독립적인 Java 파일 APPI를 통해 프로그래머가 기본 파일 시스템과 상호 작용할 수 있는 몇 가지 기본적인 방법에 대해 알아보자.
+
 #### Listing Directory Contents	
-When we develop a Java software project in the Eclipse IDE environment, the root folder of the project has several interesting file and sub-folders contained within it. From now on, we use the terms "folder" and "directory" interchangeably, as they have equivalent meanings. 	
-Let's write a simple Java program to list the contents of one such project folder. 	
+Eclipse IDE 환경에서 Java 소프트웨어 프로젝트를 개발하면 프로젝트의 루트 폴더에 여러 개의 흥미로운 파일들과 하위 폴더가 포함되어 있다. 이제부터 "폴더"와 "디렉토리"라는 용어는 동일한 의미를 가지기 때문에 서로 바꾸어 사용할 수 있다.
+이러한 프로젝트 폴더 중 하나의 내용을 나열하는 간단한 Java 프로그램을 작성해보자.
+
 ##### Snippet-1 : Listing Directory Contents	
-The ```java.nio.file``` system package has a bunch of utility ```class```es and ```interface```s to help us navigate the native file system.	
+```java.nio.file```시스템 패키지에는 네이티브 파일 시스템을 탐색하는 데 도움이 되는 유틸리팉 ```클래스```와 ```인터페이스```가 많이 포함되어 있다.
 **_DirectoryScanRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -17978,24 +17990,27 @@ The ```java.nio.file``` system package has a bunch of utility ```class```es and 
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _./.classpath_	
 _./.project_	
 _./.DS_Store_	
 _./bin_	
 _./resources_	
 _./src_	
+
 ##### Snippet-1 Explained	
-A ```Path``` ```class``` is the entity used to denote a **pathname** in Java NIO Library. NIO stands for "New I/O", which was introduced in Java SE, replacing the earlier, very awkward File I/O Library. It is no longer new though, but that's another issue! 	
-"```.```" denotes the current directory in the file-system. 	
-The ```Paths.get()``` method returns the path-name of the specified directory in a format that the ```Files.get()``` method understands.	
-The ```Files.get()``` method does a **lazy traversal** of the directory it is provided with, in the sense that:	
-* It lists regular files it encounters.	
-* When faced with directory files, it merely lists them, without recursively traversing them.	
-The contents of the root directory are listed as path-names, with each path-name being relative to the root directory.	
-   	
+Java NIO Library에서 **path name**을 나타낼 때 ```Path``` ```클래스```가 사용된다. NIO는 java SE에 도입된 "New I/O"의 약자로, 초기에는 매우 어색한 File I/O Library를 대체했다.
+하지만 더 이상 새로운 것은 아니지만, 그것은 또 다른 문제다!
+"```.```"는 현재 디렉토리를 의미한다.
+```Paths.get()``` 메소드는 ```Files.get()```메소드가 이해하는 형식으로 지정된 디렉토리의 경로 이름을 반환한다.
+```Files.get()``` 메소드는 다음과 같은 의미에서 제공되는 디렉토리의 **게으른 순회**를 수행한다.
+* 이 파일에는 정기적으로 발생하는 파일이 나열된다.
+*  디렉토리 파일과 충돌할 경우, 해당 파일은 반복하지 않고 목록만 표시한다.
+루트 디렉토리의 내용은 경로 잉름으로 나열되고 각 경로 이름은 루트 디렉토리에 상대적이다.
+
 ##### Snippet-2 : Recursive Directory Traversal	
-We can specify level 2 in `Files.walk(currentDirectory, 2)`. So, folders until level 2 are scanned.	
+`File.walk(currentDirectory, 2)`에서 레벨 2를 지정할 수 있다. 따라서 레벨 2까지 폴더가 검색된다.
+
 **_DirectoryScanRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18011,7 +18026,7 @@ We can specify level 2 in `Files.walk(currentDirectory, 2)`. So, folders until l
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _./.classpath_	
 _./.project_	
 _./.DS_Store_	
@@ -18020,6 +18035,7 @@ _./bin/files_
 _./resources_	
 _./src_	
 _./src/files_	
+
 ##### Snippet-3 : Level-4 Traversal	
 **_DirectoryScanRunner.java_**	
 ```java	
@@ -18035,7 +18051,7 @@ _./src/files_
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _./.classpath_	
 _./.project_	
 _./.DS_Store_	
@@ -18046,8 +18062,9 @@ _./resources_
 _./src_	
 _./src/files_	
 _./src/files/DirectoryScanRunner.java_	
-##### Snippet-4 : Only list .java files during traversal	
-We use a predicate `Files.walk(currentDirectory, 4).filter(predicate)` to filter only Java files.	
+
+##### Snippet-4 : Only list .java files during traversal
+Java 파일만 필터링하기 위해 `Files.walk(currentDirectory, 4.filter(predicate)`를 사용한다. 
 **_DirectoryScanRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18066,10 +18083,12 @@ We use a predicate `Files.walk(currentDirectory, 4).filter(predicate)` to filter
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _./src/files/DirectoryScanRunner.java_	
+
 ##### Snippet-5 : Filtered Traversal with find()	
-We can use a matcher - `Files.find(currentDirectory, 4, matcher)` which is configured to check the path attribute for .java extension - `(path, attributes) -> String.valueOf(path).contains(".java")`	
+.java extension - `(path, attributes) -> String.valueOf(path).contains(".java")`의 경로 특성을 확인하도록 구성된 `Files.find(currentDirectory, 4, matcher)`를 사용할 수 있다.
+
 **_DirectoryScanRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18091,8 +18110,9 @@ We can use a matcher - `Files.find(currentDirectory, 4, matcher)` which is confi
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _./src/files/DirectoryScanRunner.java_	
+
 ##### Snippet-6 : Filtering directories	
 **_DirectoryScanRunner.java_**	
 ```java	
@@ -18116,13 +18136,14 @@ _./src/files/DirectoryScanRunner.java_
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _./bin_	
 _./bin/files_	
 _./resources/_	
 _./src/_	
 _./src/files_	
 We are making use of a matcher checking `attributes.isDirectory()`.	
+
 ##### Snippet-7 : Reading a File	
 **_./resources/data.txt_**	
 ```123.122```	
@@ -18144,17 +18165,21 @@ We are making use of a matcher checking `attributes.isDirectory()`.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _[123.122, asdfghjkl, Apple, Bat, Cat]_	
-`Files.readAllLines(pathFileToRead)` makes it easy to read content of a file to list of String values.	
+
+`Files.readAllLines(pathFileToRead)` 는 파일의 내용을 문자열 값 목록으로 쉽게 읽을 수 있게 해준다.
+
 ##### Snippet-8 : Streamed File Read	
-`Files.readAllLines(pathFileToRead)` makes it easy to read content of a file. However, streaming is a better options when reading large files or when less memory is available.	
+`Files.readAllLines(pathFileToRead)`는 파일의 내용을 쉽게 읽을 수 있게 한다. 그러나 대용량 파일을 읽거나 메모리를 적게 사용해야 하는 경우에는 스트리밍이 더 좋은 선택이다.
+
 **_./resources/data.txt_**	
 ```123.122```	
 ```asdfghjkl```	
 ```Apple```	
 ```Bat```	
 ```Cat```	
+
 **_FileReadRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18170,15 +18195,17 @@ _[123.122, asdfghjkl, Apple, Bat, Cat]_
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _123.122_	
 _asdfghjkl_	
 _Apple_	
 _Bat_	
 _Cat_	
-`Files.lines(pathFileToRead)` returns a stream which can be consumed as needed.	
+`Files.lines(pathFileToRead)` returns a stream which can be consumed as needed.
+
 ##### Snippet-9 : Printing file contents in lower-case	
-We can use `map` function to map to `String::toLowerCase`	
+`map` 함수를 사용하여 `String::toLowerCase`에 매핑할 수 있다.
+
 **_./resources/data.txt_**	
 ```	
 123.122	
@@ -18187,6 +18214,7 @@ Apple
 Bat	
 Cat	
 ```	
+
 **_FileReadRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18203,14 +18231,16 @@ Cat
 		}	
 	}	
 ```	
-**_Console Output_**	
+
+**_콘솔창 출력_**	
 _123.122_	
 _asdfghjkl_	
 _apple_	
 _bat_	
 _cat_	
+
 ##### Snippet-9 : Filtering file contents	
-You can also filter file content using the `filter` method.	
+`filter` 메소드를 사용하여 파일 내용을 필터링할 수도 있다.	
 **_FileReadRunner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18229,13 +18259,14 @@ You can also filter file content using the `filter` method.
 		}	
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 출력_**	
 _asdfghjkl_	
 _apple_	
 _bat_	
 _cat_	
+
 ##### Snippet-10 : Writing to a file	
-`Files.write` can be used to write to a file.	
+`Files.write` 는 파일을 작성할 때 사용할 수 있다.
 **_FileWriteScanner.java_**	
 ```java	
 	package com.in28minutes.files;	
@@ -18258,8 +18289,9 @@ Cat
 Dog	
 Elephant	
 ```	
-## Concurrency : Advanced Topics	
-Let's create a simple counter.	
+## 동시 실행 : 더 나아가기	
+간단한 카운터를 만들어보자.
+
 ##### Snippet-1: Atomic Operations : Counter	
 **_Counter.java_**	
 ```java	
@@ -18287,52 +18319,50 @@ Let's create a simple counter.
 		}	
 	}	
 ```	
+
 ##### Snippet-1 Explained	
 
-Quite straightforward!	
+아주 간단하다!
 
-#### Counter ```increment()``` method is NOT Atomic!	
+### 카운터 ```increment()```메소드는 Atomic이 아니다!
 
-Let's look at the code. It seemingly involves just one operation.	
+코드를 보자. 이는 겉보기에는 단지 하나의 연산만을 포함한다.
 
 ```java	
 	public void increment() {	
 		i++;	
 	}	
 ```	
-The operation ```i++``` actually involves the following steps:	
-- Step 1. Read the value of ```i``` from memory into the CPU registers	
-- Step 2. Increment the value in the CPU registers	
-- Step 3. Store the incremented value back into the memory location of ```i```	
-```i++``` is not an atomic operation. 	
+```i++```연산은 실제로 다음과 같은 단계를 포함한다.
+- Step 1. 메모리에서 CPU 레지스터로 ```i```값을 읽어온다
+- Step 2. CPU 레지스터 내의 값을 증가한다.
+- Step 3. 증가된 값을 ```i```의 메모리 위치에 다시 저장한다.
+```i++```는 atomic 연산이 아니다.
 
-##### What if `increment` is not atomic?	
+##### `increment`이 atomic이 아니라면?	
 
-Let's take an example of two Threads, ```T1``` and ```T2``` running in ```ConcurrencyRunner``` access a single ```Counter``` object instance. 	
+```ConcurrencyRunner```에서 실행되어 하나의 ```Counter```객체 인스턴스에 접속하는  ```T1```과 ```T2```, 두 개의 스레드를 예를 들어 보자.
 
-Let's say the threads concurrently invoke the `increment` and `getI`.	
+그 스레드가 `increment`와 `getI`를 동시에 호출한다고 하자.
 
-Assume the initial value of ```i``` is ```15```. Let's take a closer look at a possible scenario:	
--  ```T1``` calls ```increment()``` first, and successfully completes Step 1 of ```i++```. Gets a value of 15.	
--  The scheduler switches threads to ```T2```.	
--  ```T2``` calls ```increment()``` first, and successfully completes Step 1 of ```i++```.Gets a value of 15.	
-- The scheduler switches to ```T1```.  ```T1``` resumes execution of ```increment()```, and completes steps 2 and 3 of ```i++```. Completes execution of ```increment()```. Value of ```i``` is over-written with ```16```.	
-- The scheduler switches to ```T2```. In it's CPU register context, i is ```15```, not ```16```. ```T2``` resumes execution of ```increment()```, and completes steps 2 and 3 of ```i++```. Completes execution of ```increment()```.Value of ```i``` in the ```Counter``` instance is over-written with ```16```.	
+```i```의 초기값은 ```15```라고 가정한다. 가능한 시날이오에 대해 자세히 살펴보자.
+- ```T1```은 ```increment```를 호출하고 ```i++```의 첫 단계를 성공적으로 완료한다. 15의 값을 가져온다.
+- ```스케줄러가 ```T2```로 스레드 전환
+- ```T2```는 ```increment()```를 먼저 호출하고 ```i++```의 첫 단계를 성공적으로 완료한다. 15의 값을 가져온다.
+- 스케줄러는 ```T1```로 전환한다. ```T1```은 ```increment()```의 실행을 재개하고, ```i++```의 두 번째와 세 번째 단계를 완료한다. ```i```값이 16으로 덮어 씌워지면서 ```increment()```의 실행을 완료한다.
+- 스케줄러가 ```T2```로 전환한다. CPU 레지스터의 측면에서 I는 ```16```이 아니라 ```15```이다. ```T2``는 `Increment()```의 실행을 재개하고 ```i++```의 두 번째와 세 번째 단계를 완료한다. ```increment()```의 실행을 완료한다. ```Counter``` 객체의 ```i```의 값은 ```16```으로 덮어 씌워진다.
 
-Ideally, the final value of ```i``` after two ```increment```s should have been ```17```. This would result when the operations run serially one after the other.
+이상적으로 두 번의 ```increment```후에 ```i```의 최종 값읜 ```17```이었어야 했다. 이 오류는 작업이 차례로 연속적으로 실행될 때 발생한다.
 
-This scenario, where the result of a concurrent computation (involving a sequence of operations) depends on the relative order of execution of those operations by the threads involved, is called a **race condition**.	
+동시 연산(연산 순서 포함)의 결과가 관련 스레드에 의한 해당 연산의 상대적 실행 순서에 따라 달라지는 이 시나리오를 *경합 조건(race-conditions)*이라고 한다.
 
-There is a popular English saying: "There is many a slip, between the cup and the lip". This refers to the fact that anything can happen between the time when we hold a cup of tea in our hands, and the time when we actually get to take a sip of the tea.	
+"컵과 입술 사이에는 많은 미끄러짐이 있다(There is many a slip, between the cup and the lip)"라는 유명한 영어 속담이 있다. 이것은 우리가 차 한잔을 손에 들고 있는 시간과 실제로 차를 한 모금 마시는 시간 사이에 어떤 일이든 일어날 수 있따는 사실을 말한다.
 
-This definitely rings true here. 	
+이것은 확실히 사실처럼 들린다.
 
-The increment operation is not actually not as smooth as it seems. because it is not atomic, slip-ups can and will often occur. This brings us to the concept of **Thread-Safety**. 	
+증가 연산은 실제로 보이는 것만큼 매끄럽지 않다. 왜냐하면 그것은 atomic이 아니기 때문에, 미끄러짐이 종종 발생할 수 있다. 따라서, **Thread-Safety** 의 개념을 소개한다.
 
-A method is said to be thread-safe, if it can be run in a concurrent environment (involving several concurrent invocations by independent threads) without *race-conditions*. 	
-#### Revisited : The ```synchronized``` Keyword	
-
-Adding the keyword ```synchronized``` to the signature of a ```class``` method makes it thread safe.	
+*경합 조건* 없이 (독립 스레드에 의한 여러 개의 동시 호출을 포함하는) 동시 환경에서 실행 할 수 있는 메소드는 Thread Safety하다고 한다.	
 
 ##### Snippet-2	
 
@@ -18350,9 +18380,11 @@ Adding the keyword ```synchronized``` to the signature of a ```class``` method m
 	}	
 ```	
 ##### Snippet-2 Explained	
-After adding `synchronized` keyword to the method `increment`, only one thread will be able to execute the method, at a time. Hence, race condition is avoided.	
+`synchronized`키워드를 `increment` 메소드에 추가한 후에는 한 번에 한 스레드만 메소드를 실행할 수 있게 된다. 따라서 경합 조건을 피한다.
+
 ##### Snippet-3 : less concurrency	
-`synchronized` keyword make the code thread safe. However, it causes all other threads to wait. This can result in performance issues. Let's look at an example:	
+`synchronized` 키워드는 코드를 thread safe하게 만든다. 그러나, 다른 모든 스레드가 대기하게 한다. 이로 인해 성능 문제가 발생할 수 있다. 예를 들어 보자.
+
 **_BiCounter.java_**	
 ```java	
 	package com.in28minutes.concurrency;	
@@ -18387,10 +18419,12 @@ After adding `synchronized` keyword to the method `increment`, only one thread w
 	}	
 ```	
 ##### Snippet-3 Explained	
-Both ```incrementI()``` and ```incrementJ()``` of ```class``` ```BiCounter``` are ```synchronized```. Therefore, at any given time, at most one thread can execute either of these methods! Which means that, while a thread  ```T1``` is executing ```counter.incrementI()``` within ```ConcurrencyRunner.main()```, another thread ```T2``` **is not allowed to execute** ```counter.incrementJ()```!	
-Just imagine, if there are a total of ```12``` threads wanting to increment ```counter```. When one thread is running, the other ```11``` have to wait! 	
+```BiCounter``` ```클래스```의 ```incrementI()```와 ```incrementJ()```는 ```sychronized```, 즉 동기화 되었다. 따라서, 지정된 시간에 최대 하나의 스레드가 이러한 메소드 중 하나를 실행 할 수 있다! 즉, 스레드 ```T1```이 ```CocurrencyRunner.main()```내의 ```counter.incrementI()```를 실행하는 동안에는 또 다른 스레드 ```T2```이 ```counter.incrementJ```를 실행하는 것이 *허용되지 않는다*!
+```counter```를 증가시키기를 원하는 ```12```개의 스레드가 있다고 상상해보라. 한 스레드가 실행 중일 때, 나머지 ```11```개의 스레드는 대기해야 한다!
+
 #### Synchronization With Locks	
-Let's look at another synchronization option - `Locks`	
+다른 동기화 옵션인 'Locks'를 살펴보자.
+
 ##### Snippet-4: BiCounter With Locks	
 
 **_BiCounterWithLocks.java_**	
@@ -18424,17 +18458,18 @@ Let's look at another synchronization option - `Locks`
 
 ##### Snippet-4 Explained	
 
-`i++` and `j++` are the pieces of code to protect. We use two locks lockForI and lockForJ. If a thread wants to execute `i++`, it needs to first get a lock to it - implemented using `lockForI.lock()`. Once it performs the operation, it can release the lock `lockForI.unlock()`. 	
-The ```Lock```s ```lockForI``` and ```lockForJ``` are totally independent of each other. Therefore, a thread ```T2``` can execute ```j++``` within ```incrementJ()```, at the same time that thread ```T1``` is executing ```i++``` within ```incrementI()```.	
-  	
+`i++`과 `j++`은 지켜야 할 코드 조각이다. 두 개의 lockForI와 lockForJ를 사용한다. 만약 스레드가 `i++`를 실행할면, 먼저 lock을 가져와야 한다. 이는 `lockForI.lock()`을 사용하여 구현된다. 연산을 수행한 후에는 `lockForI.unlock()`으로 해제할 수 있다.
+```lockForI```와 ```lockForJ```는 서로 완전히 독립적이다. 따라서  ```T1```이 ```incrementI()```에서 ```i++```을 실행하는 동시에 ```T2``` 스레드는 ```incrementJ()```에서 ```j++```을 실행할 수 있다.
+	
 #### Atomic Classes	
 
-The operation ```i++```, small though it might seem, gave us quite a bit headache! 	
+```i++``` 연산은 작아 보이지만 이는 우리에게 상당한 골칫거리였다!
 
-If a seemingly minute operation might need so much worrying about, imagine writing concurrent data structures that manipulate linked lists with multiple link operations! 	
-It would be really nice if someone could take care of these tiny operations for us, otherwise we would have  hard time finding out what code to definitely lock, and what code need not be!	
+겉보기에 몇 분내로 수행할 연산에 많은 걱정이 필요한 경우, 연결 리스트를 여러개의 연결 리스트로 다루는 동시 데이터 구조를 작성한다고 상상해 보라!
 
-Java addresses this issue for basic data types, by providing a few classes that are inherently thread-safe. A good example is ```AtomicInteger```, which is a wrapper around the ```int``` primitive type.	
+누군가가 우리를 위해 이 작업을 처리해줄 수 있다면 정말 좋을텐데, 그렇지 않으면 우리는 어떤 코드를 확실히 잠글지, 그리고 어떤 코드가 필요하지 않은지 알아내는데 어려움을 겪을 것이다!
+
+Java는 기본적으로 thread safety한 몇 가지 클래스를 클래스를 제공하여 기본 데이터 타입에 대해 이 문제를 해결한다. 좋은 예가 ```int```의 기본형 타입을 감싸고 있는 ```Atomic Interger```이다.
 
 ##### Snippet-5 : AtomicInteger	
 
@@ -18462,23 +18497,27 @@ Java addresses this issue for basic data types, by providing a few classes that 
 ```	
 ##### Snippet-5 Explained	
 
-`incrementAndGet` is atomic. So, `BiCounterWithAtomicInteger` does not need to worry about synchronization.
+`incrementAndGet`는 atomic이다. 따라서, `BiCounterWithAtomicInteger`는 동기화에 대해 걱정할 필요가 없다. 
 
-#### Concurrent Collections	
+#### 동시 컬렉션
 
-Java gave us a ready-made solution for thread-safe primitive data, with wrappers such as ```AtomicInteger```. The reasons this approach worked for ```int``` were:	
-* Simple, small-sized underlying type	
-* Wide-spread potential usage	
+자바는 우리에게 ```AtomicInteger```와 같은 래퍼를 사용하여 thread safety 기본형 타입을 위한 기성 솔루션을 제공했다. 이러한 접근 방식이 ```int```로 작동하는 이유는 다음과 같다.
+* 간단하고 작은 기본 타입
+* 광범위한 잠재적 사용
 
-How about collections? 	
+컬렉션은 어떤가?
 
-Java provides classes like `Vector` (synchronized version of `ArrayList`) which can provide thread safety. But, these inherit the problems with using synchronized. 	
-What are other options?	
+자바에서 thread safety를 제공하는 벡터(어레이리스트의 동기화 버전)와 같은 클래스를 제공한다. 그러나 동기화 사용시 발생하는 문제 또한 상속한다.
 
+수집품들은 어때? 	
+
+자바에서는 나사산 안전성을 제공하는 벡터(어레이리스트의 동기식 버전)와 같은 클래스를 제공한다. 그러나 동기화 사용 시 발생하는 문제를 상속합니다. 	
+
+다른 옵션은 무엇이 있는가?
 
 ##### Snippet-6 : Need For ConcurrentMap	
 
-The code within the ```for``` loop does a `get` and then a `put`. It is not thread safe.	
+```for문```내의 코드는 `get`을 한 다음 `put`을 한다. 이는 스레드 안정하지 않다.
 
 **_MapRunner.java_**	
 ```java	
@@ -18502,14 +18541,14 @@ The code within the ```for``` loop does a `get` and then a `put`. It is not thre
 ```	
 
 
-Concurrent Collections provide atomic versions of operations such as those encountered above:	
-* If entry does not exist, then create and initialize	
-* If entry exists, then update	
+동시 실행 컬렉션은 위에서 설명한 것과 같은 연산의 atomic 버전을 제공한다.
+* 엔트리가 존재하지 않는 경우 생성 및 초기화
+* 엔트리가 존재하는 경우 업데이트
 
 
-#### The ```ConcurrentMap``` ```interface```	
-
-The ```interface``` ```ConcurrentMap``` has methods to implement compound operations. Such operations include:	
+#### ```ConcurrentMap``` ```인터페이스```	
+``인터페이스" ``커런트 맵"은 복합 운영을 구현하는 방법이 있다. 이러한 작업은 다음과 같습니다.
+```ConcurrentMap``` ```인터페이스```는 복합 연산을 구현하는 메소드이다. 이러한 연산은 다음과 같다.	
 ```	
 V putIfAbsent(K key, V value);	
 V computeIfPresent(K key,	
@@ -18518,8 +18557,7 @@ V computeIfPresent(K key,
 
 ##### Snippet-7 : ConcurrentHashMap Logic - Stage 1	
 
-
-```LongAdder``` provides an atomic `increment` method, which we are making use of to make the code a little more thread safe. However, different threads could be executing ```occurrences.get()``` and ```occurrences.put()``` in parallel. A race condition can still occur.	
+```LongAdder```는 atomic `increment`메소드를 제공하는데, 이 메소드는 코드를 좀 더 안전하게 만들기 위해 사용한다. 그러나 서로 다른 스레드가 ```occurrences.get()```과 ```occurrences.put()```을 병렬적으로 실행할 수 있어 경합 조건은 여전히 발생할 수 있다.
 
 
 **_ConcurrentMapRunner.java_**	
@@ -18545,14 +18583,14 @@ V computeIfPresent(K key,
 	
 ```	
 
-**_Console Output_**	
+**_콘솔창 출력_**	
 
 _[ =2, A=3, B=3, C=3, D=2]_	
 
 
 ##### Snippet-8 : ConcurrentHashMap Logic - Stage 2	
 
-We can use the method ```computeIfAbsent()``` from the ```collection``` ```ConcurrentHashMap``` to reduce the code to a single, atomic operation.	
+우리는 ```CocurrentHashMap``` ```컬렉션```으로부터 ```computeIfAbsent()```라는 메소드를 사용하여 코드를 단일 atomic 연산으로 줄일 수 있다.
 
 **_ConcurrentMapRunner.java_**	
 
@@ -18575,7 +18613,7 @@ We can use the method ```computeIfAbsent()``` from the ```collection``` ```Concu
 	  
 	}	
 ```	
-**_Console Output_**	
+**_콘솔창 _**	
 
 
 _[ =2, A=3, B=3, C=3, D=2]_	
@@ -18585,19 +18623,21 @@ _[ =2, A=3, B=3, C=3, D=2]_
 #### ```ConcurrentHashMap```	
 
 
-In ```HashTable```, all methods are synchronized. 	
+```HashTable```에서, 모든 메스다가 동기화된다.
 
-In ```ConcurrentHashMap```, data structure is organized into disjoint regions. Access methods use different ```Locks``` for different regions, reducing performance impact during concurrent access. 	
+```ConcurrentHashMap```에서는 데이터 구조가 분리된 지역으로 구성되어 있따. 접근 메소드는 지역마다 다른 ```Locks```를 사용하므로 동시 접근 시 성능에 미치는 영향은 줄어든다.
 
-#### Concurrent Collections : Copy-On-Write Optimization	
-All values in Copy-On-Write collections are stored in an internal immutable (not-changeable) array. A new array is created if there is any modification to the collection.	
-Read operations are not synchronized. Only write operations are synchronized.	
+#### 동시 실행 컬렉션 : Copy-On-Write 최적화
 
-Copy on Write approach is used in scenarios where reads greatly out number write’s on a collection. 	
+Copy-On-Write 컬렉션의 모든 값은 내부 불변 배열에 저장된다. 컬렉션을 수정할 경우 새 배열이 만들어진다.
 
-`CopyOnWriteArrayList` & `CopyOnWriteArraySet` are implementations of this approach. 	
+읽기 작업은 동기화되지 않는다. 오직 쓰기 작업만 동기화된다.
 
-Copy on Write collections are typically used in Subject – Observer scenarios, where the observers very rarely change. Most frequent operations would be iterating around the observers and notifying them.	
+Copy on write 접근 방식은 컬렉션에서 숫자를 쓰는 것보다 읽기가 훨씬 많은 시나리오에서 사용된다.
+
+`CopyOnWriteArrayList` & `CopyOnWriteArraySet`은 이러한 접근 방식을 구현한 것이다.
+
+Copy On Write 컬렉션은 일반적으로 관찰자가 거의 변경되지 않는 대상-관찰자 시나리오에서 사용된다. 가장 빈번한 작업은 관찰자 주위에서 반복하여 알리는 것이다.
 
 ##### Snippet-9 : CopyOnWriteArrayList	
 
@@ -18625,8 +18665,8 @@ Copy on Write collections are typically used in Subject – Observer scenarios, 
 
 ##### Snippet-9 Explained	
 
-```CopyOnWriteArrayList.add()``` method is a ```synchronized``` method. And the copy-on-write algorithm ensures that the copying is performed in a thread-safe manner, after which the write is done on a separate copy, while the ```get()```'s continue on the original array. Once the ```add()``` is done, the collection starts using the new array, and discards the old one. This strategy continues for the lifetime of the program.	
+```CopyOnWriteArrayList.add()```메소드는 ```동기화된``` 메소드이다. 그리고 copy-on-write 알고리즘을 사용하면 복사(copy)작업이 별도의 복사본에서 실행되는 반면, ```get()```은 원래의 배열에서 계속 실행되는 스레드 세이프 방식으로 실행될 수 있다. ```add()```가 완료되면, 컬렉션은 새 배열을 사용하기 시작하여 이전의 배열은 버린다. 이 전략은 프로그램 수명 동안 계속된다.
 
-The ```CopyOnWriteArrayList.get``` method is NOT ```synchronized```, since on the array that the reads work, there will be no direct write through an ```add()```.
+```CopyWriteArrayList.get```메소드는 ```동기화된```메소드가 아니며, 읽기가 작동하기 때문에 ```add()```를 통한 직접적인 쓰기는 없을 것이다.
 
-Copy-On-Write collections should only be used for the specific usage scenarios, viz., very large number of data structure traversals (data element reads only), compared to mutations (data element insertions/deletions/modifications). In this way, high concurrency is achieved for traversals.
+Copy-On-Write 컬렉션은 변화(데이터 요소 삽입/삭제/수정)에 비해 매우 많은 수의 데이터 구조 탐색(데이터 요소 읽기 전용)과 같은 특정 사용 시나리오에서만 사용해야 한다. 이러한 방식으로, 탐색에서 높은 동시성을 보인다.
